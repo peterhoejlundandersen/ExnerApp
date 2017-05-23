@@ -1,0 +1,2 @@
+class ImageCategory < ApplicationRecord
+end

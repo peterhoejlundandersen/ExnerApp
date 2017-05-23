@@ -56,3 +56,5 @@ gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
 gem 'foundation-rails'
 gem 'fog-aws'
+# For at gemme oplysninger sikkert før de bliver loadet op til git
+gem 'figaro'
