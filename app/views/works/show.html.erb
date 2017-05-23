@@ -1,0 +1,119 @@
+<% provide(:title, @work.name) %>
+
+<style type="text/css">
+	/*FJERNER DET ØVERSTE 'Arkitekterne' I HEADEREN*/
+	.header h4 { display: none; }
+</style>
+<div class="row ">
+	<%= link_to "Rediger værk", edit_work_path(@work), class: "rediger-vaerk" %>
+	<div class="fixed top-bar-work">
+		<nav class="top-bar top-bar-zoom" data-topbar role="navigation">
+			<div class="clearfix">
+				<h2 class="float-left workheadline"><span class="underline"></span><%= @work.name %></h2>
+			</div>
+		</nav>
+	</div>
+
+	<% unless @work.image_categories.empty? %> <!-- Hvis der er nogle billeder, så gør det her, hvis ikke, så vis noget tekst -->
+
+	<div class="workimagelarge">	
+		<%= image_tag(@work.images[0].image.url, id: "zoom-work",  class: "large-image-work") %>
+		<!-- INFO BOX -->
+		<div class="informations-box" id="information-work">
+			<button class="close-button">&times;</button>
+			<div class="info-left float-left">
+				<h6><%= @work.first_line %></h6>
+				<p><%= "Sagsnr: " + @work.sagsnr.to_s if @work.sagsnr %></p>
+				<!-- Flere linjer info -->
+				<p>
+<% if @work.address %>
+<% unless @work.address.empty? %>
+<p>
+	<%= "Adresse: " + @work.address %>
+	<p>
+		<% end %>
+
+		<% end %>
+	</div>
+	<div class="info-right float-left">
+		<p><%= @work.description if @work.description %></p>
+	</div>
+</div>
+</div>
+
+<nav class="top-bar kategory-nav" data-topbar role="navigation">
+	<table class="clearfix table-navbar">
+		<tr> 
+			<% @work.image_categories.each_with_index do |img_cat, index| %>
+			<td class="kategory-knap <%= 'aktiv' if index == 0 %>" divId="<%= img_cat.id %>">
+				<%= img_cat.name %>
+			</td>
+<!--  			<button class="button float-right" id="zoom-button">ZOOM</button>
+-->			
+<% end %>			
+<td class="float-right information-work-button">INFO</td>
+</table>
+</tr>
+
+</nav>
+<div class="thumbnailwrapper">	
+	<% @work.image_categories.each do |img_cat| %>
+	<div class="thumbnail-container <%= img_cat.name.parameterize %>" id="<%= img_cat.id %>">
+		<% img_cat.images.each do |image_array| %>
+		<div class="thumbnaildiv float-left large-2 medium-3 small-6">
+			<%= image_tag(image_array.image.thumb.url, id: image_array.id, data: { largeimage: image_array.image.url }) %> <!-- URL for det store billede bliver gemt i largeimage -->
+		</div>
+		<% end %>
+	</div> <!-- img_cat.name -->
+	<% end %>
+</div> -->
+
+<% else %>
+<p><%= @work.description if @work.description? %></p>
+<% @work.info.each do |i| %>
+<p><%= i %></p>
+<% end %>
+<p><%= @work.sagsnr if @work.sagsnr? %></p>
+<p><%= @work.address if @work.address? %></p>
+<%= image_tag(@work.image_categories[0].images[0].image.url) %>
+
+<% end %>
+<!-- SKAL LAVES OM  -->
+<script>
+	$(document).ready(function() {
+
+			// INFOKNAP OG KRYDS
+			$(".kategory-knap").bind("click", function() {
+				$(this).addClass('aktiv').siblings().removeClass('aktiv');
+				$(".thumbnail-container").hide();
+				var divId= $(this).attr("divId");
+
+
+				$("#" + divId).show();
+				
+			});
+
+			$(".information-work-button, #information-work .close-button").click(function() {
+				$("#information-work").fadeToggle(350);
+			});
+
+			$(".thumbnaildiv img").click(function() {
+				var thumbsrc = $(this).data("largeimage");
+				$("#zoom-work").attr("src", thumbsrc);
+			});
+			 // ZOOM
+			 $("#zoom-button").on('click', function() { 
+			 	zoom();
+			 	$("#zoom-button").off('click', zoom() );
+			 });
+			 function zoom() {
+
+			 	$("#zoom-work").elevateZoom({
+			 		zoomType				: "lens",
+			 		lensShape : "square",
+			 		lensSize    : 400
+			 	});	
+			 };
+			});
+		</script>
+

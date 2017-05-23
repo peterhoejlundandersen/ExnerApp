@@ -1,6 +1,7 @@
 class WorksController < ApplicationController
   include WorksHelper
 
+
   def new
     @work = Work.new(info: [""])
     2.times {
@@ -58,6 +59,11 @@ class WorksController < ApplicationController
 
  def index
    @works = Work.all
+ end
+
+ def category_show
+ 	# Dette kunne gøres for at lave et kategory each field som menu
+ 	# @work = Category.find(category_slug: params[:category]).works 
  end
 
 

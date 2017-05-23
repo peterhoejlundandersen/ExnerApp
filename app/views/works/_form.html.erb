@@ -1,0 +1,156 @@
+<div class="row">
+<div class="large-10 large-offset-1 medium-10 medium-offset-1 columns">
+<h2 class="text-center">Opret Værk</h2>
+
+		<%= form_for(@work, :html => { :multipart => true }, url: works_path) do |f| %>
+
+		<%= f.label "Navn:" %>
+		<%= f.text_field :name %>
+
+		<%= f.label "Sagsnr:" %>
+		<%= f.number_field :sagsnr %>
+
+		<%= f.label "Adresse:" %>
+		<%= f.text_field :address %>
+		
+		<%= f.label :info, "Info" %>
+		<small>De linjer, der står under adresse og sagsnr i info f.eks. konkurrence, samarbejde mm.</small>
+
+		<div class="info-area">
+
+		<% @work.info.each_with_index do |i, index| %>
+	
+			<div class="info-felt row collapse" id="InfoFelt">
+
+				<% if index != 0 %>
+				<div class="info-area-field small-9 columns">
+				<%= f.text_field :info, multiple: true, value: i, id: "InfoArea" %>
+				</div>
+				
+					<div class="button delete-info-button small-3 columns" id="DeleteInfo">
+					Slet felt
+					
+				</div>
+					
+				<% else %>
+				<div class="small-12 columns">
+					<%= f.text_field :info, multiple: true, value: i, id: "InfoArea", class: "info-area-field small-12 columns" %>
+				</div>
+				<% end %>
+
+			
+			</div>
+
+		<% end %>
+
+		</div>
+
+		<div class="button" id="AddInfo">Tilføj et info-felt mere</div>
+		<%= f.label :description, "Beskrivelse" %>
+		<%= f.text_area :description, height: 400 %>
+
+
+		<%= f.fields_for :image_categories do |img_cat| %>
+
+		<%= img_cat.label :name, "Navn på billedekategori" %>
+		<%= img_cat.text_field :name %>
+		
+		<%= img_cat.fields_for :images do |img| %>
+
+		<div class="large-12 column image-area">
+
+			<div class="small-4 column image-box float-left">
+			<%= img.label :image, "Billede "%>
+			<%= img.file_field :image %>
+
+			<%= img.label :image_description, "Billedebeskrivelse" %>
+			<%= img.text_area :image_description %>
+
+			<%= img.label :photographer, "Fotograf" %>
+			<%= img.text_field :photographer %>
+			<div class="button delete-info-button small-12 columns" id="DeleteImage">
+				Slet billede
+			</div>
+			</div>
+
+		</div>	
+		<% end %>
+
+		<div class="button add-new-image small-6" id="AddImage">Opret billede</div> 
+		
+		<% end %>
+		<p>
+		</p>
+
+
+		<div class="actions small-12 columns">
+			<%= f.submit "Gem værk", class: "button primary" %>
+		</div>
+		<% end %>
+
+		
+	</div>
+</div>
+
+<script type="text/javascript">
+// Tilføj og fjern info
+	$('#AddInfo').on('click', function(e) {
+	e.preventDefault();
+	// Fjern dataen i inputfeltet
+	$(".info-area").append('<div class="info-felt row collapse" id="InfoFelt"><div class="small-9 columns"><input multiple="multiple" value="" id="InfoArea" class="info-area-field small-9 columns" type="text" name="work[info][]"></div><div class="button delete-info-button small-3 columns" id="DeleteInfo">Slet felt</div></div>');
+	});
+
+	$('body').on('click', '.delete-info-button', function(e) {
+		e.preventDefault();
+		$(this).closest("#InfoFelt").remove();
+	});
+
+// Udskifter data, når man trykker "nyt billede"
+ 	function change_input_data(div, number, after_this_div="", add_box_after=false) {
+
+	  $(div).find('label').each(function() {
+	  	$(this).val("");
+	    oldLabel = $(this).attr('for');
+	    newLabel = oldLabel.replace(new RegExp(/_[0-9]+(?!.*[0-9])_/), "_" + number + "_");
+	    $(this).attr('for', newLabel);
+
+	  $(div).find('textarea, input').each(function() {
+	  	$(this).val("");
+	    oldId = $(this).attr('id');
+	    newId = oldId.replace(new RegExp(/_[0-9]+(?!.*[0-9])_/), "_" + number + "_");
+	    $(this).attr('id', newId);
+	    
+	    oldName = $(this).attr('name');
+	    newName = oldName.replace(new RegExp(/\[[0-9]+\](?!.*\[[0-9]\])/), "[" + number + "]");
+	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
+	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
+	    $(this).attr('name', newName);
+	    if (add_box_after == true) { 
+  			$( div ).insertAfter( after_this_div );
+  		}
+	    	
+	  
+	});
+	});
+}
+
+$("body").on("click", "#DeleteImage", function(e){
+	e.preventDefault();
+	$(this).parent().remove();
+	$(".image-box").each(function(index) {
+		  change_input_data(this, index);
+	});
+})
+
+$('#AddImage').click(function(e) {
+  e.preventDefault();
+
+  lastNestedForm = $('.image-box').last();
+  newNestedForm  = lastNestedForm.clone();
+  formsOnPage    = $('.image-box').length;
+
+  change_input_data(newNestedForm, formsOnPage, lastNestedForm, true)
+});
+
+
+</script>
