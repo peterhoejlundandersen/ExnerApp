@@ -17,12 +17,12 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    # image_category = ImageCategory.find(model.image_category_id)
-    # work = Work.find(image_category.work_id)
-    # work_name = work.name.parameterize(" ")
-    # work_category = Category.find(work.category_id).name.parameterize(" ")
-    # image_category_name = image_category.name.parameterize(" ")
-    "uploads/"
+    image_category = ImageCategory.find(model.image_category_id)
+    work = Work.find(image_category.work_id)
+    work_name = work.name.parameterize
+    work_category = Category.find(work.category_id).name.parameterize
+    image_category_name = image_category.name.parameterize
+    "exner/#{work_name}/#{work_category}/#{image_category_name}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -69,7 +69,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def scale
 
   # process :scale_width [1200, nil] if
-  version :medium, if: :er_oversigt_bil? do
+  version :medium do
     process resize_to_fill: [270, 162]
   end
 
@@ -78,11 +78,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
 
-  def er_oversigt_bil?(file)
-    if file.original_filename.include? "START" #scope in image.rb
-      return true
-    end
-  end 
+  # def er_oversigt_bil?(file)
+  #   if file.original_filename.include? "START" #scope in image.rb
+  #     return true
+  #   end
+  # end 
 
   #   if file && model
   #   if image_width > image_height
@@ -109,9 +109,9 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png tif tiff gif)
   end
 
-  def filename
-    "#{file.original_filename.split(".").shift}.jpg"
-  end
+  # def filename
+  #   "#{file.original_filename.split(".").shift}.jpg"
+  # end
 
   process :optimize
 end
