@@ -54,8 +54,8 @@
 		<div class="large-12 column background-color-light-blue">
 		<%= f.fields_for :image_categories do |img_cat| %>
 
-			<%= img_cat.label "Navn på billedekategori" %>
-			<%= img_cat.text_field :name %>
+			<h3 class="text-center">Navn på billedekategorien</h3>
+				<%= img_cat.text_field :name %>
 
 		
 
@@ -63,8 +63,12 @@
 
 		<div class="large-12 column image-area">
 			<div class="small-4 column image-box float-left">
-			<%= img.label :image, "Billede "%>
-			<%= img.file_field :image %>
+			<% if !img.object.image.url.nil?  %>
+				<%= image_tag img.object.image.thumb.url %>
+			<% else %>
+				<%= img.label :image, "Billede "%>
+				<%= img.file_field :image %>
+			<% end %>
 
 			<%= img.label :image_description, "Billedebeskrivelse" %>
 			<%= img.text_area :image_description %>
@@ -76,7 +80,7 @@
 			</div>
 			</div>
 		</div>	
-		<div class="button add-new-image large-3" id="AddImage">Opret billede</div> 
+		<div class="button add-new-image large-3" id="AddImage">Opret nyt billede</div> 
 		<% end %> <!-- img -->
 
 		</div>
