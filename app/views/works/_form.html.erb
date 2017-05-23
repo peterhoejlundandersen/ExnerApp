@@ -2,7 +2,8 @@
 <div class="large-10 large-offset-1 medium-10 medium-offset-1 columns">
 <h2 class="text-center">Opret Værk</h2>
 
-		<%= form_for(@work, :html => { :multipart => true }, url: works_path) do |f| %>
+		<%# form_for(@work, :html => { :multipart => true }, url: works_path) do |f| %>
+		<%= form_for(@work, :html => { :multipart => true }) do |f| %>
 
 		<%= f.label "Navn:" %>
 		<%= f.text_field :name %>
@@ -63,11 +64,12 @@
 
 		<div class="large-12 column image-area">
 			<div class="small-4 column image-box float-left">
-			<% if !img.object.image.url.nil?  %>
+
+			<%= img.label :image, "Billede "%>
+			<%= img.file_field :image %>
+
+			<% if img.object.image? %>
 				<%= image_tag img.object.image.thumb.url %>
-			<% else %>
-				<%= img.label :image, "Billede "%>
-				<%= img.file_field :image %>
 			<% end %>
 
 			<%= img.label :image_description, "Billedebeskrivelse" %>
@@ -80,10 +82,10 @@
 			</div>
 			</div>
 		</div>	
-		<div class="button add-new-image large-3" id="AddImage">Opret nyt billede</div> 
 		<% end %> <!-- img -->
 
 		</div>
+		<div style="margin-bottom: 100px;" class="button add-new-image large-3" id="AddImage">Opret nyt billede</div> 
 		
 		<% end %> <!-- img_cat -->
 
@@ -109,7 +111,7 @@
 
 // Udskifter data, når man trykker "nyt billede"
  	function change_input_data(div, number, after_this_div="", add_box_after=false) {
-
+// Tilføjer det add_image felt, som skal til. 
 	  $(div).find('label').each(function() {
 	  	$(this).val("");
 	    oldLabel = $(this).attr('for');
@@ -127,13 +129,19 @@
 	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
 	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
 	    $(this).attr('name', newName);
-	    if (add_box_after == true) { 
-  			$( div ).insertAfter( after_this_div );
-  		}
+
 	    	
 	  
 	});
+
 	});
+	    if (add_box_after == true) {
+	    	// Fjern src værdien fra img
+	    	$(div).find('img').each(function() {
+	    		$(this).hide();
+	    	});
+  			$( div ).insertAfter( after_this_div );
+  		}
 }
 
 $("body").on("click", "#DeleteImage", function(e){
@@ -146,9 +154,12 @@ $("body").on("click", "#DeleteImage", function(e){
 
 $('#AddImage').click(function(e) {
   e.preventDefault();
-
+  this_image_category = $(this).closest('.image-box');
+  // Dette gør sådan at man kan tilføje en billede boks
   lastNestedForm = $('.image-box').last();
   newNestedForm  = lastNestedForm.clone();
+  // newNestedForm  = this_div;
+
   formsOnPage    = $('.image-box').length;
 
   change_input_data(newNestedForm, formsOnPage, lastNestedForm, true)

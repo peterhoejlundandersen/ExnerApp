@@ -16,11 +16,15 @@ class WorksController < ApplicationController
   end
 
   def update
-    work = Work.find(params[:id])
-    if work.update_attributes(work_params)
-      flash[:success] = "Værket #{work.name} er nu blevet opdateret."  
+    @work = Work.find(params[:id])
+
+    if @work.update(work_params)
+      byebug
+      flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
+      redirect_to @work
     end
-    redirect_to work
+
+
   end
   
   def create
@@ -29,6 +33,7 @@ class WorksController < ApplicationController
    @work.category_id = Category.find(1).id
 
 	  if @work.save
+      byebug
 	    flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
 	    redirect_to @work
 	  else
@@ -71,7 +76,7 @@ class WorksController < ApplicationController
    params.require(:work).permit(:name, :sagsnr, :category_id,
     :description, :address,
     {info: []}, {image_categories_attributes: 
-      [:work_id, :name, images_attributes: 
-        [:image, :photographer, :image_description]]}) 
+      [:id, :work_id, :name, images_attributes: 
+        [:id, :image, :photographer, :image_description]]}) 
  end
 end

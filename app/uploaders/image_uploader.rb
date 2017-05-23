@@ -46,26 +46,26 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   
-  process :optimize_image
+  # process :optimize_image
 
-  def optimize_image
-    manipulate! do |img|
-      img.format("jpg") do |c|
-        c.trim
-        c.auto_orient
-        # c.rotate      "#{options[:rotate]}" if options.has_key?(:rotate)
-        # c.resize      "#{options[:resolution]}>" if options.has_key?(:resolution)
-        # c.resize      "#{options[:resolution]}<" if options.has_key?(:resolution)
-        # c.push        '+profile'
-        # c.+           "!xmp,*"
-        # c.profile     "#{Rails.root}/lib/color_profiles/sRGB_v4_ICC_preference_displayclass.icc"
-        # c.colorspace  "sRGB"
-      end
-      img
-    end
+  # def optimize_image
+  #   manipulate! do |img|
+  #     img.format("jpg") do |c|
+  #       c.trim
+  #       c.auto_orient
+  #       # c.rotate      "#{options[:rotate]}" if options.has_key?(:rotate)
+  #       # c.resize      "#{options[:resolution]}>" if options.has_key?(:resolution)
+  #       # c.resize      "#{options[:resolution]}<" if options.has_key?(:resolution)
+  #       # c.push        '+profile'
+  #       # c.+           "!xmp,*"
+  #       # c.profile     "#{Rails.root}/lib/color_profiles/sRGB_v4_ICC_preference_displayclass.icc"
+  #       # c.colorspace  "sRGB"
+  #     end
+  #     img
+  #   end
 
     
-  end
+  # end
   # def scale
 
   # process :scale_width [1200, nil] if
@@ -106,7 +106,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png tif tiff gif)
+    %w(jpg jpeg gif png tif tiff gif JPEG JPG GIF PNG TIF TIFF)
   end
 
   # def filename

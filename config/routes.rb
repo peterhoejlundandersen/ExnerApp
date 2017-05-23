@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+root 'works#index'
   resources :works
   #For at vise den kategory
   # Kan måske bruges
