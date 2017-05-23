@@ -18,7 +18,7 @@
 
 		<div class="info-area">
 
-		<% @work.info.each_with_index do |i, index| %>
+		<% @work.info.each_with_index do |information, index| %>
 	
 			<div class="info-felt row collapse" id="InfoFelt">
 
@@ -34,7 +34,7 @@
 					
 				<% else %>
 				<div class="small-12 columns">
-					<%= f.text_field :info, multiple: true, value: i, id: "InfoArea", class: "info-area-field small-12 columns" %>
+					<%= f.text_field :info, multiple: true, value: information, id: "InfoArea", class: "info-area-field small-12 columns" %>
 				</div>
 				<% end %>
 
@@ -46,19 +46,22 @@
 		</div>
 
 		<div class="button" id="AddInfo">Tilføj et info-felt mere</div>
+
 		<%= f.label :description, "Beskrivelse" %>
 		<%= f.text_area :description, height: 400 %>
 
 
+		<div class="large-12 column background-color-light-blue">
 		<%= f.fields_for :image_categories do |img_cat| %>
 
-		<%= img_cat.label :name, "Navn på billedekategori" %>
-		<%= img_cat.text_field :name %>
+			<%= img_cat.label "Navn på billedekategori" %>
+			<%= img_cat.text_field :name %>
+
 		
+
 		<%= img_cat.fields_for :images do |img| %>
 
 		<div class="large-12 column image-area">
-
 			<div class="small-4 column image-box float-left">
 			<%= img.label :image, "Billede "%>
 			<%= img.file_field :image %>
@@ -72,23 +75,18 @@
 				Slet billede
 			</div>
 			</div>
-
 		</div>	
-		<% end %>
+		<div class="button add-new-image large-3" id="AddImage">Opret billede</div> 
+		<% end %> <!-- img -->
 
-		<div class="button add-new-image small-6" id="AddImage">Opret billede</div> 
+		</div>
 		
-		<% end %>
-		<p>
-		</p>
-
+		<% end %> <!-- img_cat -->
 
 		<div class="actions small-12 columns">
 			<%= f.submit "Gem værk", class: "button primary" %>
 		</div>
-		<% end %>
-
-		
+		<% end %> <!-- form -->
 	</div>
 </div>
 

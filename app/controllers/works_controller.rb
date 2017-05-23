@@ -4,7 +4,7 @@ class WorksController < ApplicationController
 
   def new
     @work = Work.new(info: [""])
-    2.times {
+    1.times {
     @work.image_categories.build
     @work.image_categories.last.images.build
   }
@@ -26,28 +26,15 @@ class WorksController < ApplicationController
   def create
 
    @work = Work.new(work_params)
-   binding.pry
-   # @work.save
-  #  params["work"]["images_attributes"].each do |img|
-  #   image_object = Image.new
-  #   binding.pry
-  #   image_object.image = img
-  #   @work.images << image_object
-  # end
-  #   binding.pry
+   @work.category_id = Category.find(1).id
 
-  if @work.save
-   binding.pry
-    flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
-    redirect_to @work
-  else
-    redirect_to :back
-  end
+	  if @work.save
+	    flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
+	    redirect_to @work
+	  else
+	    render 'new'
+	  end
 
-    # else
-    #   flash[:error] = "Det kunne desværre ikke lade sig gøre, at gemme værket."
-    #   redirect_to :back
-    # end
   end
 
   def show 
