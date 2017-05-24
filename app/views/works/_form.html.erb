@@ -199,7 +199,22 @@ function change_img_cat_data(number, field) {
 	  newLabel = oldLabel.replace(new RegExp(/_([0-9]+)_/), "_" + number + "_");	  
 	  $(this).attr('for', newLabel);
 	});
-	
+	  $(field).find('textarea, input').each(function() {
+	  	$(this).val("");
+	    oldId = $(this).attr('id');
+	    newId = oldId.replace(new RegExp(/_([0-9]+)_/), "_" + number + "_");
+	    $(this).attr('id', newId);
+	    
+	    oldName = $(this).attr('name');
+	    newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
+	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
+	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
+	    $(this).attr('name', newName);
+
+	    	
+	  
+	});
+
 };
 
 $("body").on("click", "#DeleteImage", function(e){
