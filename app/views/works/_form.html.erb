@@ -1,3 +1,47 @@
+<div class="form-hided">
+<div class="large-12 column background-color-light-blue img-cat-field">
+		
+
+			<h3 class="text-center">Navn på billedekategorien</h3>
+				<input type="text" value="" name="work[image_categories_attributes][0][name]" id="work_image_categories_attributes_0_name">
+
+		
+
+		<div class="large-12 column image-area">
+		
+
+			<div class="small-4 column image-box float-left">
+
+			<label for="work_image_categories_attributes_0_images_attributes_0_image">Billede </label>
+			<input type="file" name="work[image_categories_attributes][0][images_attributes][0][image]" id="work_image_categories_attributes_0_images_attributes_0_image">
+
+			<label for="work_image_categories_attributes_0_images_attributes_0_image_description">Billedebeskrivelse</label>
+			<textarea name="work[image_categories_attributes][0][images_attributes][0][image_description]" id="work_image_categories_attributes_0_images_attributes_0_image_description">asdad</textarea>
+
+			<label for="work_image_categories_attributes_0_images_attributes_0_photographer">Fotograf</label>
+			<input type="text" value="asdas" name="work[image_categories_attributes][0][images_attributes][0][photographer]" id="work_image_categories_attributes_0_images_attributes_0_photographer">
+			<div class="button delete-info-button small-12 columns" id="DeleteImage">
+				Slet billede
+			</div>
+			</div>
+		<input type="hidden" value="1" name="work[image_categories_attributes][0][images_attributes][0][id]" id="work_image_categories_attributes_0_images_attributes_0_id">
+
+			
+		<input type="hidden" value="2" name="work[image_categories_attributes][0][images_attributes][1][id]" id="work_image_categories_attributes_0_images_attributes_1_id">
+
+			
+		<input type="hidden" value="3" name="work[image_categories_attributes][0][images_attributes][2][id]" id="work_image_categories_attributes_0_images_attributes_2_id"> <!-- img -->
+		</div><!-- large-12 column -->	
+
+		<div style="margin-bottom: 10px;" class="button add-new-image large-12" id="AddImage">Opret nyt billede</div> 
+
+		</div><!-- img-cat-field -->
+		
+
+</div>
+
+
+
 <div class="row">
 <div class="large-10 large-offset-1 medium-10 medium-offset-1 columns">
 <h2 class="text-center">Opret Værk</h2>
@@ -49,10 +93,10 @@
 		<div class="button" id="AddInfo">Tilføj et info-felt mere</div>
 
 		<%= f.label :description, "Beskrivelse" %>
-		<%= f.text_area :description, height: 400 %>
+		<%= f.text_area :description, height: 250 %>
 
 
-		<div class="large-12 column background-color-light-blue">
+		<div class="large-12 column background-color-light-blue img-cat-field">
 		<%= f.fields_for :image_categories do |img_cat| %>
 
 			<h3 class="text-center">Navn på billedekategorien</h3>
@@ -60,9 +104,9 @@
 
 		
 
+		<div class="large-12 column image-area">
 		<%= img_cat.fields_for :images do |img| %>
 
-		<div class="large-12 column image-area">
 			<div class="small-4 column image-box float-left">
 
 			<%= img.label :image, "Billede "%>
@@ -81,20 +125,24 @@
 				Slet billede
 			</div>
 			</div>
-		</div>	
 		<% end %> <!-- img -->
+		<div style="margin-bottom: 10px;" class="button add-new-image large-12" id="AddImage">Opret nyt billede</div> 
+		</div><!-- large-12 img-cat-field column -->	
 
 		</div>
-		<div style="margin-bottom: 100px;" class="button add-new-image large-3" id="AddImage">Opret nyt billede</div> 
+		<hr>
 		
 		<% end %> <!-- img_cat -->
 
+		<div style="margin-bottom: 100px;" class="button add-new-image-category large-3" id="CategoryAdd">Opret ny billedekategori</div> 
+
 		<div class="actions small-12 columns">
-			<%= f.submit "Gem værk", class: "button primary" %>
+			<%= f.submit "Gem værk", class: "button success" %>
 		</div>
 		<% end %> <!-- form -->
 	</div>
 </div>
+
 
 <script type="text/javascript">
 // Tilføj og fjern info
@@ -152,17 +200,24 @@ $("body").on("click", "#DeleteImage", function(e){
 	});
 })
 
-$('#AddImage').click(function(e) {
+$("#CategoryAdd").click(function(e) {
+	e.preventDefault();
+	newImageCatField = $(".form-hided .img-cat-field").clone();
+	lastCatField = $(".img-cat-field").last();
+	$( newImageCatField ).insertAfter( lastCatField );
+});
+
+$('.add-new-image').click(function(e) {
   e.preventDefault();
-  this_image_category = $(this).closest('.image-box');
+  this_image_category = $(this).closest('.img-cat-field');
   // Dette gør sådan at man kan tilføje en billede boks
-  lastNestedForm = $('.image-box').last();
+  lastNestedForm = $('.image-box', this_image_category).last();
   newNestedForm  = lastNestedForm.clone();
   // newNestedForm  = this_div;
 
-  formsOnPage    = $('.image-box').length;
-
+  formsOnPage    = $('.image-box', this_image_category).length;
   change_input_data(newNestedForm, formsOnPage, lastNestedForm, true)
+  // debugger;
 });
 
 

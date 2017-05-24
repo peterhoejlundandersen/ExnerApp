@@ -17,6 +17,12 @@ $graybackground: lighten(gray, 39%);
 	transition: $args;
 }
 
+
+// For at fjerne en del af formen, som man så kan bruge
+.form-hided {
+	display: none;
+}
+
 .top-bar, .top-bar ul {
 	background-color: white;
 	padding-top:1px;
