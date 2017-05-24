@@ -190,7 +190,17 @@
 	    	});
   			$( div ).insertAfter( after_this_div );
   		}
-}
+};
+
+function change_img_cat_data(number, field) {
+	$(field).find('label').each(function() {
+		$(this).val("");
+	  oldLabel = $(this).attr('for');
+	  newLabel = oldLabel.replace(new RegExp(/_([0-9]+)_/), "_" + number + "_");	  
+	  $(this).attr('for', newLabel);
+	});
+	
+};
 
 $("body").on("click", "#DeleteImage", function(e){
 	e.preventDefault();
@@ -198,13 +208,17 @@ $("body").on("click", "#DeleteImage", function(e){
 	$(".image-box").each(function(index) {
 		  change_input_data(this, index);
 	});
-})
+});
 
 $("#CategoryAdd").click(function(e) {
 	e.preventDefault();
 	newImageCatField = $(".form-hided .img-cat-field").clone();
 	lastCatField = $(".img-cat-field").last();
 	$( newImageCatField ).insertAfter( lastCatField );
+	imageBoxField = newImageCatField.find(".image-box");
+	// Minus det gemte felt i starten
+	numOfFields = $(".img-cat-field").length - 2;
+	change_img_cat_data(numOfFields, imageBoxField)
 });
 
 $('.add-new-image').click(function(e) {

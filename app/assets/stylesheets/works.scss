@@ -7,6 +7,9 @@
 	border: dotted 2px gray;
 }
 
+.img-cat-field {
+	margin-top: 20px;
+}
 $graybackground: lighten(gray, 39%);
 
 @mixin transition($args...) {
