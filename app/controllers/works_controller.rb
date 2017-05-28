@@ -30,6 +30,7 @@ class WorksController < ApplicationController
   def create
 
    @work = Work.new(work_params)
+   byebug
    @work.category_id = Category.find(1).id
 
 	  if @work.save

@@ -1,9 +1,10 @@
 <div class="form-hided">
 <div class="large-12 column background-color-light-blue img-cat-field">
 	
-
+	<div class="image-cat-name">
 	<h3 class="text-center">Navn på billedekategorien</h3>
 	<input type="text" name="work[image_categories_attributes][0][name]" id="work_image_categories_attributes_0_name">
+	</div>
 
 	
 
@@ -11,6 +12,7 @@
 		
 
 		<div class="small-4 column image-box float-left">
+
 
 			<label for="work_image_categories_attributes_0_images_attributes_0_image">Billede </label>
 			<input type="file" name="work[image_categories_attributes][0][images_attributes][0][image]" id="work_image_categories_attributes_0_images_attributes_0_image">
@@ -91,9 +93,10 @@
 
 		<div class="large-12 column background-color-light-blue img-cat-field">
 		<%= f.fields_for :image_categories do |img_cat| %>
-
+		<div class="image-cat-name">
 			<h3 class="text-center">Navn på billedekategorien</h3>
 				<%= img_cat.text_field :name %>
+		</div>
 
 		
 
@@ -125,43 +128,7 @@
 		</div>
 		<hr>
 		
-		<% end %><div class="large-12 column background-color-light-blue img-cat-field">
-		<%= f.fields_for :image_categories do |img_cat| %>
-
-			<h3 class="text-center">Navn på billedekategorien</h3>
-				<%= img_cat.text_field :name %>
-
-		
-
-		<div class="large-12 column image-area">
-		<%= img_cat.fields_for :images do |img| %>
-
-			<div class="small-4 column image-box float-left">
-
-			<%= img.label :image, "Billede "%>
-			<%= img.file_field :image %>
-
-			<% if img.object.image? %>
-				<%= image_tag img.object.image.thumb.url %>
-			<% end %>
-
-			<%= img.label :image_description, "Billedebeskrivelse" %>
-			<%= img.text_area :image_description %>
-
-			<%= img.label :photographer, "Fotograf" %>
-			<%= img.text_field :photographer %>
-			<div class="button delete-info-button small-12 columns" id="DeleteImage">
-				Slet billede
-			</div>
-			</div>
-		<% end %> <!-- img -->
-		<div style="margin-bottom: 10px;" class="button add-new-image large-12" id="AddImage">Opret nyt billede</div> 
-		</div><!-- large-12 img-cat-field column -->	
-
-		</div>
-		<hr>
-		
-		<% end %> <!-- img_cat -->
+		<% end %>
 
 		<div style="margin-bottom: 100px;" class="button add-new-image-category large-3" id="CategoryAdd">Opret ny billedekategori</div> 
 
@@ -227,7 +194,16 @@
   		}
 };
 
-function change_img_cat_data(number, field) {
+function change_img_cat_data(number, field, imagecatname) {
+	// Ændrer imagecat navnets id- og name-værdi
+	$(imagecatname).find("input").each(function() {
+		oldId = $(this).attr("id");
+		newId = oldId.replace(new RegExp(/_([0-9]+)_/), "_" + number + "_");
+		$(this).attr('id', newId);
+		oldName = $(this).attr('name');
+		newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
+		$(this).attr('name', newName);
+	});
 	$(field).find('label').each(function() {
 		$(this).val("");
 	  oldLabel = $(this).attr('for');
@@ -266,11 +242,12 @@ $("#CategoryAdd").on("click", function(e) {
 	newImageCatField = $(".form-hided .img-cat-field").clone();
 	// newImageCatField = $(".img-cat-field").last().clone();
 	lastCatField = $(".img-cat-field").last();
+	imageCatName = newImageCatField.find(".image-cat-name");
 	$( newImageCatField ).insertAfter( lastCatField );
 	imageBoxField = newImageCatField.find(".image-box");
 	// Minus det gemte felt i starten
 	numOfFields = $(".img-cat-field").length - 2;
-	change_img_cat_data(numOfFields, imageBoxField)
+	change_img_cat_data(numOfFields, imageBoxField, imageCatName)
 	// Fjerner "Tilføj billedekategori"-knappen, hvis der er 5 billedekategorier
 	if (numOfFields == 4) {
 		$("#CategoryAdd").hide();
@@ -279,7 +256,7 @@ $("#CategoryAdd").on("click", function(e) {
 });
 
 // Add image
-$('.new_work').on("click", ".add-new-image", function(e) {
+$('.new_work, .edit_work').on("click", ".add-new-image", function(e) {
   e.preventDefault();
 
   this_image_category = $(this).closest('.img-cat-field');
