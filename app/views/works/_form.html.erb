@@ -261,7 +261,7 @@ $("body").on("click", "#DeleteImage", function(e){
 });
 
 // Det er ikke muligt at trykke på nyt billede fordi at DOM-tree ikke kan se knappen, når siden loader. Derfor har jeg lavet event-delegation, som gør, at handler kigger efter om der er nogen #CategoryAdd under den, når man trykker. Men den reloader IKKE add-image?
-$(".new_work").on("click", "#CategoryAdd", function(e) {
+$("#CategoryAdd").on("click", function(e) {
 	e.preventDefault();
 	newImageCatField = $(".form-hided .img-cat-field").clone();
 	// newImageCatField = $(".img-cat-field").last().clone();
@@ -278,7 +278,8 @@ $(".new_work").on("click", "#CategoryAdd", function(e) {
 	} 
 });
 
-$('.add-new-image').on("click", function(e) {
+// Add image
+$('.new_work').on("click", ".add-new-image", function(e) {
   e.preventDefault();
 
   this_image_category = $(this).closest('.img-cat-field');
