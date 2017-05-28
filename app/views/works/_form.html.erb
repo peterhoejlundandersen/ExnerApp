@@ -91,8 +91,8 @@
 		<%= f.text_area :description, height: 250 %>
 
 
-		<div class="large-12 column background-color-light-blue img-cat-field">
 		<%= f.fields_for :image_categories do |img_cat| %>
+		<div class="large-12 column background-color-light-blue img-cat-field">
 		<div class="image-cat-name">
 			<h3 class="text-center">Navn på billedekategorien</h3>
 				<%= img_cat.text_field :name %>
@@ -123,11 +123,12 @@
 			</div>
 		<% end %> <!-- img -->
 		<div style="margin-bottom: 10px;" class="button add-new-image large-12" id="AddImage">Opret nyt billede</div> 
-		</div><!-- large-12 img-cat-field column -->	
 
-		</div>
 		<hr>
+		</div>
 		
+
+		</div><!-- large-12 img-cat-field column -->	
 		<% end %>
 
 		<div style="margin-bottom: 100px;" class="button add-new-image-category large-3" id="CategoryAdd">Opret ny billedekategori</div> 
