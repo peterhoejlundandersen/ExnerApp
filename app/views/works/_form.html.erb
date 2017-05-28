@@ -1,42 +1,35 @@
 <div class="form-hided">
 <div class="large-12 column background-color-light-blue img-cat-field">
+	
+
+	<h3 class="text-center">Navn på billedekategorien</h3>
+	<input type="text" name="work[image_categories_attributes][0][name]" id="work_image_categories_attributes_0_name">
+
+	
+
+	<div class="large-12 column image-area">
 		
 
-			<h3 class="text-center">Navn på billedekategorien</h3>
-				<input type="text" value="" name="work[image_categories_attributes][0][name]" id="work_image_categories_attributes_0_name">
-
-		
-
-		<div class="large-12 column image-area">
-		
-
-			<div class="small-4 column image-box float-left">
+		<div class="small-4 column image-box float-left">
 
 			<label for="work_image_categories_attributes_0_images_attributes_0_image">Billede </label>
 			<input type="file" name="work[image_categories_attributes][0][images_attributes][0][image]" id="work_image_categories_attributes_0_images_attributes_0_image">
 
+
 			<label for="work_image_categories_attributes_0_images_attributes_0_image_description">Billedebeskrivelse</label>
-			<textarea name="work[image_categories_attributes][0][images_attributes][0][image_description]" id="work_image_categories_attributes_0_images_attributes_0_image_description">asdad</textarea>
+			<textarea name="work[image_categories_attributes][0][images_attributes][0][image_description]" id="work_image_categories_attributes_0_images_attributes_0_image_description"></textarea>
 
 			<label for="work_image_categories_attributes_0_images_attributes_0_photographer">Fotograf</label>
-			<input type="text" value="asdas" name="work[image_categories_attributes][0][images_attributes][0][photographer]" id="work_image_categories_attributes_0_images_attributes_0_photographer">
+			<input type="text" name="work[image_categories_attributes][0][images_attributes][0][photographer]" id="work_image_categories_attributes_0_images_attributes_0_photographer">
 			<div class="button delete-info-button small-12 columns" id="DeleteImage">
 				Slet billede
 			</div>
-			</div>
-		<input type="hidden" value="1" name="work[image_categories_attributes][0][images_attributes][0][id]" id="work_image_categories_attributes_0_images_attributes_0_id">
+		</div>
 
-			
-		<input type="hidden" value="2" name="work[image_categories_attributes][0][images_attributes][1][id]" id="work_image_categories_attributes_0_images_attributes_1_id">
+		<div style="margin-bottom: 10px;" class="button add-new-image large-12" id="AddImage">Opret nyt billede</div> 
+	</div><!-- large-12 img-cat-field column	-->
 
-			
-		<input type="hidden" value="3" name="work[image_categories_attributes][0][images_attributes][2][id]" id="work_image_categories_attributes_0_images_attributes_2_id"> <!-- img -->
-		</div><!-- large-12 column -->	
-
-		<div style="margin-bottom: 10px;" class="button add-new-image this-is-cool large-12" id="AddImage">Opret nyt billede</div> 
-
-		</div><!-- img-cat-field -->
-		
+</div>
 
 </div>
 
@@ -171,6 +164,7 @@
 		<% end %> <!-- img_cat -->
 
 		<div style="margin-bottom: 100px;" class="button add-new-image-category large-3" id="CategoryAdd">Opret ny billedekategori</div> 
+
 		<div class="large-12 column callout warning" id="max-categories" style="display: none;">Det maksimale antal billedekategorier er 5</div>
 
 		<div class="actions small-12 columns">
@@ -266,25 +260,27 @@ $("body").on("click", "#DeleteImage", function(e){
 	});
 });
 
-$("#CategoryAdd").click(function(e) {
+// Det er ikke muligt at trykke på nyt billede fordi at DOM-tree ikke kan se knappen, når siden loader. Derfor har jeg lavet event-delegation, som gør, at handler kigger efter om der er nogen #CategoryAdd under den, når man trykker. Men den reloader IKKE add-image?
+$(".new_work").on("click", "#CategoryAdd", function(e) {
 	e.preventDefault();
 	newImageCatField = $(".form-hided .img-cat-field").clone();
+	// newImageCatField = $(".img-cat-field").last().clone();
 	lastCatField = $(".img-cat-field").last();
 	$( newImageCatField ).insertAfter( lastCatField );
 	imageBoxField = newImageCatField.find(".image-box");
 	// Minus det gemte felt i starten
 	numOfFields = $(".img-cat-field").length - 2;
 	change_img_cat_data(numOfFields, imageBoxField)
-	// Fjerner knappen, hvis der er 5 billedekategorier
+	// Fjerner "Tilføj billedekategori"-knappen, hvis der er 5 billedekategorier
 	if (numOfFields == 4) {
 		$("#CategoryAdd").hide();
 		$("#max-categories").show();
 	} 
 });
 
-$('.add-new-image').click(function(e) {
+$('.add-new-image').on("click", function(e) {
   e.preventDefault();
-  
+
   this_image_category = $(this).closest('.img-cat-field');
   // Dette gør sådan at man kan tilføje en billede boks
   lastNestedForm = $('.image-box', this_image_category).last();
