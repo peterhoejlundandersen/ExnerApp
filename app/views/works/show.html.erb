@@ -47,27 +47,26 @@
 			<td class="kategory-knap <%= 'aktiv' if index == 0 %>" divId="<%= img_cat.id %>">
 				<%= img_cat.name %>
 			</td>
-<!--  			<button class="button float-right" id="zoom-button">ZOOM</button>
--->			
-<% end %>			
-<td class="float-right information-work-button">INFO</td>
-</table>
-</tr>
-
+			<% end %>			
+			<td class="float-right information-work-button">INFO</td>
+		</tr>
+	</table>
 </nav>
+
 <div class="thumbnailwrapper">	
 	<% @work.image_categories.each do |img_cat| %>
 	<div class="thumbnail-container <%= img_cat.name.parameterize %>" id="<%= img_cat.id %>">
-		<% img_cat.images.each do |image_array| %>
+		<% img_cat.images.each do |image_array|  %>
 		<div class="thumbnaildiv float-left large-2 medium-3 small-6">
-			<%= image_tag(image_array.image.thumb.url, id: image_array.id, data: { largeimage: image_array.image.url }) %> <!-- URL for det store billede bliver gemt i largeimage -->
+			<%= image_tag(image_array.image.thumb.url, id: image_array.id, data: { largeimage: image_array.image.url }) %>
+			<!-- URL for det store billede bliver gemt i largeimage -->
 		</div>
 		<% end %>
 	</div> <!-- img_cat.name -->
 	<% end %>
-</div> -->
+</div>
 
-<% else %>
+<% else %> <!-- Hvis der ikke er nogle billeder -->
 <p><%= @work.description if @work.description? %></p>
 <% @work.info.each do |i| %>
 <p><%= i %></p>
@@ -82,11 +81,11 @@
 	$(document).ready(function() {
 
 			// INFOKNAP OG KRYDS
-			$(".kategory-knap").bind("click", function() {
+			$(".kategory-knap").on("click", function() {
 				$(this).addClass('aktiv').siblings().removeClass('aktiv');
 				$(".thumbnail-container").hide();
 				var divId= $(this).attr("divId");
-
+				// debugger;
 
 				$("#" + divId).show();
 				
