@@ -17,9 +17,9 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.friendly.find(params[:id])
-    byebug
+  
     if @work.update(work_params)
-      byebug
+  
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
       redirect_to @work
     end
@@ -30,11 +30,11 @@ class WorksController < ApplicationController
   def create
 
    @work = Work.new(work_params)
-   byebug
+
    @work.category_id = Category.find(1).id
 
 	  if @work.save
-      byebug
+  
 	    flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
 	    redirect_to @work
 	  else
