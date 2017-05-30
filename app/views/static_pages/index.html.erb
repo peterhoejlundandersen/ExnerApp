@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>I&J EXNER</title>
+
+	<%= stylesheet_link_tag    "application" %>
+	<%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+</head>
+
+<body>
+	<div class="indexwrapper">
+		<div class="indexbackground">
+		</div>
+		<div class="indexareatext">
+			<div class="left leftindex">
+				<h4 class="text-center">Arkitekterne</h4>
+				<h1 class="text-center">Inger og Johannes Exner</h1>
+			</div>
+			<div class="left middleindex">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia quo pariatur ipsa culpa deserunt, obcaecati alias eveniet molestiae dolorem est ad repudiandae atque sunt optio aliquid. Quam vero ipsam fugit!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime voluptas amet culpa, dolorem facere autem veniam, odit id vel, velit quidem architecto nisi, illum esse magnam consequuntur maiores dolorum nihil.</div>
+				<div class="left rightindex">
+					<%= link_to works_path do %>
+					<div data-toggler data-animate="fade-in fade-out" class="button"><span class="kunpaamobilskaerm">Gå videre til oversigt</span></div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</body>
+</body>
+</html>

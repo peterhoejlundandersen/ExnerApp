@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-root 'works#index'
+  devise_for :users, path: "", path_names: { sign_in: "inger", sign_up: "opret-bruger" } 
+root 'static_pages#index'
   resources :works
   #For at vise den kategory
   # Kan måske bruges

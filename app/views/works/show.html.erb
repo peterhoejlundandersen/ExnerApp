@@ -5,7 +5,9 @@
 	.header h4 { display: none; }
 </style>
 <div class="row ">
+	<% if current_user %>
 	<%= link_to "Rediger værk", edit_work_path(@work), class: "rediger-vaerk" %>
+	<% end %>
 	<div class="fixed top-bar-work">
 		<nav class="top-bar top-bar-zoom" data-topbar role="navigation">
 			<div class="clearfix">
