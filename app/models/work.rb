@@ -1,4 +1,6 @@
 class Work < ActiveRecord::Base
+	extend FriendlyId
+	friendly_id :name, use: :slugged
 	belongs_to :category
 	has_many :image_categories
 	has_many :images, through: :image_categories

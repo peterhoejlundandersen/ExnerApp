@@ -11,13 +11,13 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find(params[:id])
+    @work = Work.friendly.find(params[:id])
 
   end
 
   def update
-    @work = Work.find(params[:id])
-
+    @work = Work.friendly.find(params[:id])
+    byebug
     if @work.update(work_params)
       byebug
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
@@ -44,7 +44,7 @@ class WorksController < ApplicationController
   end
 
   def show 
-   @work = Work.find(params[:id])
+   @work = Work.friendly.find(params[:id])
    @image_categories = @work.image_categories
 
 
