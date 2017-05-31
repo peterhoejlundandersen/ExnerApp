@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="columns header large-12 text-center">
+    <%= link_to root_path do %>
+    <h4>Arkitekterne</h4><h1>Inger og Johannes Exner</h1>
+    <% end %>
+  </div>
+</div>
+<div class="navbar">
+	<% categories.each do |cat| %>
+	<div class="large-2 column">
+		<%= link_to cat.name, kategori_oversigt_path(cat), class: "text-center" %>
+	</div>
+	<% end %>
+</div>

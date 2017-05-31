@@ -1,12 +1,14 @@
 class StaticPagesController < ApplicationController
-	layout false, only: :index
+	layout false, only: :frontpage
 
-def index
+	def frontpage
+	@categories = Category.all
+	@first_category = @categories.first
+	end
 	
-end
-  def contact
-  end
+  	def contact
+  	end
 
-  def about
-  end
+  	def about
+ 	end
 end

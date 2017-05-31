@@ -13,11 +13,7 @@
 
   <body>
   <div class="row">
-    <div class="columns header large-12 text-center">
-      <%= link_to root_path do %>
-      <h4>Arkitekterne</h4><h1>Inger og Johannes Exner</h1>
-      <% end %>
-    </div>
+  <%= render partial: "shared/navbar", locals: { categories: @categories } %>
   </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
