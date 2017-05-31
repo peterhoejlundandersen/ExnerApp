@@ -1,6 +1,12 @@
 class WorksController < ApplicationController
   include WorksHelper
   
+  def index
+  @category = Category.friendly.find(params[:category_name])
+  @works = @category.works.order(sagsnr: :desc)   
+  @header_title = @category.name
+  end  
+
   def new
     @work = Work.new(info: [""])
     1.times {
