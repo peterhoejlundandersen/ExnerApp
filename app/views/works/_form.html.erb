@@ -1,7 +1,9 @@
 <div class="form-hided">
 <div class="large-12 column background-color-light-blue img-cat-field">
-	
+	<div class="button warning" id="deleteImageCat">Slet billedekategori</div>
+
 	<div class="image-cat-name">
+
 	<h3 class="text-center">Navn på billedekategorien</h3>
 	<input type="text" name="work[image_categories_attributes][0][name]" id="work_image_categories_attributes_0_name">
 	</div>
@@ -41,8 +43,13 @@
 <div class="large-10 large-offset-1 medium-10 medium-offset-1 columns">
 <h2 class="text-center">Opret Værk</h2>
 
+
 		<%# form_for(@work, :html => { :multipart => true }, url: works_path) do |f| %>
 		<%= form_for(@work, :html => { :multipart => true }) do |f| %>
+
+
+		<%= f.label :category_id, "Vælg side" %>
+		<%= f.collection_select(:category_id, Category.all, :id, :name) %>
 
 		<%= f.label "Navn:" %>
 		<%= f.text_field :name %>
@@ -93,6 +100,7 @@
 
 		<%= f.fields_for :image_categories do |img_cat| %>
 		<div class="large-12 column background-color-light-blue img-cat-field">
+		<div class="button warning" id="deleteImageCat">Slet billedekategori</div>
 		<div class="image-cat-name">
 			<h3 class="text-center">Navn på billedekategorien</h3>
 				<%= img_cat.text_field :name %>
@@ -159,24 +167,24 @@
 // Udskifter data, når man trykker "nyt billede"
  	function change_input_data(div, number, after_this_div="", add_box_after=false, erase_val=true) {
 // Tilføjer det add_image felt, som skal til. 
-	  $(div).find('label').each(function() {
+	  $(div).find('label').each(function(index) {
 	  	$(this).val("");
 	  	if (erase_val) {
 	    oldLabel = $(this).attr('for');
 		}
-	    newLabel = oldLabel.replace(new RegExp(/_[0-9]+(?!.*[0-9])_/), "_" + number + "_");
+	    newLabel = oldLabel.replace(new RegExp(/_[0-9]+(?!.*[0-9])_/), "_" + index + "_");
 	    $(this).attr('for', newLabel);
 
-	  $(div).find('textarea, input').each(function() {
+	  $(div).find('textarea, input').each(function(index) {
 	  	if (erase_val) {
 	  	$(this).val("");
 	  	}
 	    oldId = $(this).attr('id');
-	    newId = oldId.replace(new RegExp(/_[0-9]+(?!.*[0-9])_/), "_" + number + "_");
+	    newId = oldId.replace(new RegExp(/_[0-9]+(?!.*[0-9])_/), "_" + index + "_");
 	    $(this).attr('id', newId);
 	    
 	    oldName = $(this).attr('name');
-	    newName = oldName.replace(new RegExp(/\[[0-9]+\](?!.*\[[0-9]\])/), "[" + number + "]");
+	    newName = oldName.replace(new RegExp(/\[[0-9]+\](?!.*\[[0-9]\])/), "[" + index + "]");
 	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
 	    // newName = oldName.replace(new RegExp(/\[[0-9]+\]/), "[" + number + "]");
 	    $(this).attr('name', newName);
@@ -256,6 +264,15 @@ $("#CategoryAdd").on("click", function(e) {
 	} 
 });
 
+$(".new_work, .edit_work").on("click", "#deleteImageCat", function() {
+	$(this).parent().remove();
+	imageCatName = newImageCatField.find(".image-cat-name");
+	imageBoxField = newImageCatField.find(".image-box");
+	// Minus det gemte felt i starten
+	numOfFields = $(".img-cat-field").length - 2;
+	change_img_cat_data(numOfFields, imageBoxField, imageCatName)
+});
+
 // Add image
 $('.new_work, .edit_work').on("click", ".add-new-image", function(e) {
   e.preventDefault();
@@ -266,6 +283,7 @@ $('.new_work, .edit_work').on("click", ".add-new-image", function(e) {
   newNestedForm  = lastNestedForm.clone();
   // newNestedForm  = this_div;
   formsOnPage    = $('.image-box', this_image_category).length;
+
   change_input_data(newNestedForm, formsOnPage, lastNestedForm, true)
   // debugger;
 });

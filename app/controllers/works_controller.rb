@@ -1,7 +1,6 @@
 class WorksController < ApplicationController
   include WorksHelper
-
-
+  
   def new
     @work = Work.new(info: [""])
     1.times {
@@ -50,9 +49,18 @@ class WorksController < ApplicationController
 
  end
 
- def index
-   @works = Work.all
+ def destroy
+   @work = Work.friendly.find(params[:id])
+   work_category = @work.category_id
+   work_name = Work.name
+   if @work.destroy
+    flash[:succes] = "#{work_name} er nu blevet slettet"
+   redirect_to kategori_oversigt_path(work_category)
+  end
+
  end
+
+ 
 
  def category_show
  	# Dette kunne gøres for at lave et kategory each field som menu

@@ -6,7 +6,9 @@
 </style>
 <div class="row ">
 	<% if current_user %>
-	<%= link_to "Rediger værk", edit_work_path(@work), class: "rediger-vaerk" %>
+	<%= link_to "Slet værket", work_path(@work), method: :delete, data: {confirm: "Er du sikker på, at du vil slette værket?"}, class: "button warning" %>
+	<%= link_to "Rediger værk", edit_work_path(@work), class: "button secondary" %>
+
 	<% end %>
 	<div class="fixed top-bar-work">
 		<nav class="top-bar top-bar-zoom" data-topbar role="navigation">

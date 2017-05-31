@@ -7,8 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-@category = Category.create!(name: "Kirker og Sognegårde")
 @category = Category.create!(name: "Koldinghus")
+@category = Category.create!(name: "Kirker og Sognegårde")
+@category = Category.create!(name: "Kirkerestaureringer")
 @category = Category.create!(name: "Offentlige bygninger")
-@category = Category.create!(name: "Andre")
+@category = Category.create!(name: "Ikke opført")
 @category = Category.create!(name: "Design og orgler")
+@category = Category.create!(name: "Andre")

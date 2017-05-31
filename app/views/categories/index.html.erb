@@ -1,5 +1,8 @@
-<div class="row category-page">
 <%= link_to "Opret værk", new_work_path %>
+<div class="row category-page">
+<h2 class="text-center"><%= @category.name %></h2>
+<% if current_user %>
+<% end %>
 <% @works.each do |work| %>
 
 	<%= link_to work_path(work) do %>
@@ -15,9 +18,6 @@
 	<% end %>
 
 <% end %>
-
-
-
 
 </div>
 	
