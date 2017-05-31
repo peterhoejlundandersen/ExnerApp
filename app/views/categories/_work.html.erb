@@ -1,0 +1,10 @@
+<%= link_to work_path(work) do %>
+<div class="work-category large-3 medium-4 small-5 small-offset-1 medium-offset-0 columns ">
+
+	<% if work.images[0] %>
+	<%= image_tag(work.images[0].image.thumb.url)%>
+	<% end %>
+
+	<h6 class="text-center"><%= work.name %></h6>
+</div>
+<% end %>
