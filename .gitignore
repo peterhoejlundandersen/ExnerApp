@@ -21,6 +21,8 @@
 # Ignore application configuration
 config/application.yml
 
+#Fjern de filer jeg bruger lokalt!
+/.env
 
 # Hvis du tilføjer noget her, så bliver du nødt til nogle gange at bruge: 
 # git rm -r --cached . (Fjerner alt cached, så git add . kan starte forfra)
