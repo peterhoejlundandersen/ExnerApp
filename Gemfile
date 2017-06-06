@@ -58,9 +58,10 @@ gem 'carrierwave'
 gem 'foundation-rails'
 gem 'fog-aws'
 # For at gemme oplysninger sikkert før de bliver loadet op til git
-gem 'figaro'
 gem 'jquery-rails'
 gem 'friendly_id', '~> 5.1.0', :require => "friendly_id"
 gem 'mini_magick'
 # Til login
 gem 'devise', '~> 4.3'
+
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'

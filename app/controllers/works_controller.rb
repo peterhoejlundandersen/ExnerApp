@@ -1,5 +1,4 @@
 class WorksController < ApplicationController
-  include WorksHelper
   
   def index
   @category = Category.friendly.find(params[:category_name])
