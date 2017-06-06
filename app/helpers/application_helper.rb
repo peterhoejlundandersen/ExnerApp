@@ -8,4 +8,12 @@ module ApplicationHelper
 			default
 		end
 	end
+
+	def alert_notice_helper
+		if flash[:notice]
+			content_tag :p, flash[:notice], class: "alert text-center alert-success"
+		elsif flash[:alert]
+			content_tag :p, flash[:alert], class: "alert text-center alert-danger"
+		end		
+	end
 end

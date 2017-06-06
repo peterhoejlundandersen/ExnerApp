@@ -1,0 +1,15 @@
+	<%= form_for(category) do |f| %>
+
+	<div class="form-group col-md-12">
+		<%= f.label :name %>
+		<%= f.text_field :name, class: "form-control" %>
+	</div>
+
+	<div class="form-group col-md-6">
+		<label class="btn btn-primary" style="cursor: pointer;">
+		Upload billede til oversigtsiden
+			<%= f.file_field :image, style: "display: none" %>
+		</label>
+	</div>
+	<%= f.submit submit_text, class: "btn btn-primary" %>
+	<% end %>

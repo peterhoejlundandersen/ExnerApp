@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-	layout false, only: :frontpage
+	layout "frontpage", only: :frontpage
 
 	def frontpage
 	@categories = Category.all

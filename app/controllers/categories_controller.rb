@@ -1,2 +1,49 @@
 class CategoriesController < ApplicationController
+	access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
+	layout "works"
+	def new
+		@category = Category.new		
+	end
+	def edit
+		@category = Category.friendly.find(params[:id])		
+	end
+
+	def create
+		@category = Category.new(cat_params)	
+		if @category.save
+			redirect_to oversigt_path, notice: "Din kategori er blevet gemt"
+		else
+			redirect_to oversigt_path, alert: "Din kategori blev IKKE gemt, skriv til hilsenit@gmail.com"
+		end
+	end
+
+	def update
+		@category = Category.friendly.find(params[:id])		
+		if @category.update(cat_params)
+			redirect_to oversigt_path, notice: "Din kategori er blevet opdateret"
+		else
+			redirect_to oversigt_path, alert: "Din kategori blev IKKE opdateret, skriv til hilsenit@gmail.com"
+		end
+	end
+
+	def index
+		@categories = Category.all
+	end
+
+	def destroy
+		@category = Category.friendly.find(params[:id])		
+		if @category.destroy
+			redirect_to oversigt_path, notice: "Din kategori er blevet slettet"
+		else
+			redirect_to oversigt_path, alert: "Din kategori blev IKKE slettet, skriv til hilsenit@gmail.com"
+		end
+
+	end
+
+	private
+
+	def cat_params
+		params.require(:category).permit(:name, :image)
+	end
+
 end

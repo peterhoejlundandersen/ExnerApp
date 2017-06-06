@@ -1,14 +1,10 @@
-<div class="row">
-  <div class="columns header large-12 text-center">
-    <%= link_to root_path do %>
-    <h4>Arkitekterne</h4><h1>Inger og Johannes Exner</h1>
+<div class="blog-masthead">
+  <div class="nav-container container">
+    <nav class="nav blog-nav">
+    <%= link_to "Oversigt", oversigt_path, class: "nav-link" %>
+    <% categories.each do |cat| %>
+    <%= link_to cat.name, kategori_oversigt_path(cat), class: "nav-link active" %>
     <% end %>
+    </nav>
   </div>
-</div>
-<div class="navbar">
-	<% categories.each do |cat| %>
-	<div class="large-2 column">
-		<%= link_to cat.name, kategori_oversigt_path(cat), class: "text-center" %>
-	</div>
-	<% end %>
 </div>

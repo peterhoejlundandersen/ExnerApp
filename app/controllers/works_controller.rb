@@ -1,5 +1,7 @@
 class WorksController < ApplicationController
-  
+  access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
+
+  layout "works"  
   def index
   @category = Category.friendly.find(params[:category_name])
   @works = @category.works.order(sagsnr: :desc)   
@@ -85,7 +87,7 @@ class WorksController < ApplicationController
       end 
     end
  end
-
+ 
  def work_params
    params.require(:work).permit(:name, :sagsnr, :category_id,
     :description, :address,

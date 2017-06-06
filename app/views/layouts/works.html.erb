@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= "Hey!" %></title>
+  <meta name="keywords" content="<%= @seo_keywords %>" />
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+      <%= alert_notice_helper %>
+      <%= render partial: "admin/navbar" if logged_in?(:site_admin) %>
+      <%= render partial: "shared/masthead" %>
+      <%= render partial: "shared/navbar", locals: {categories: @categories} %>
+
+      <div class="container">
+      <%= yield %>
+      </div>
+
+</body>
+</html>
