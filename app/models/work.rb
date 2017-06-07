@@ -6,5 +6,5 @@ class Work < ActiveRecord::Base
 	has_many :images, through: :image_categories
 	has_many :infos
 	accepts_nested_attributes_for :image_categories, allow_destroy: true
-	accepts_nested_attributes_for :infos, reject_if: :all_blank, allow_destroy: true
+	accepts_nested_attributes_for :infos, allow_destroy: true
 end

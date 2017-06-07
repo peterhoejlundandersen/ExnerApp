@@ -1,4 +1,3 @@
 class Info < ApplicationRecord
-	belongs_to :works
-
+	belongs_to :work
 end

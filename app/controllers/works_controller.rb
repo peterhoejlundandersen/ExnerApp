@@ -34,14 +34,15 @@ class WorksController < ApplicationController
   def create
 
    @work = Work.new(work_params)
-
+   binding.pry
    @work.category_id = Category.find(1).id
 
 	  if @work.save
-  
+
 	    flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
 	    redirect_to @work
 	  else
+      binding.pry
 	    render 'new'
 	  end
 
@@ -94,9 +95,9 @@ class WorksController < ApplicationController
     :description, 
     :address,
     {infos_attributes: 
-      [:id, :title, :work_id, :_destroy]},
+      [:id, :work_id, :title, :_destroy]},
     {image_categories_attributes: 
-      [:id, :work_id, :name, 
+      [:id, :work_id, :name, :_destroy,
         images_attributes: 
         [:id, :image, :photographer, :image_description]]}) 
  end
