@@ -16,6 +16,35 @@
 
  @import "bootstrap";
 
+.devise-layout {
+	margin-top: 6%;
+}
+
+/* Navbar overwriting bootstrap default */
+a {
+	color: black;
+	&:hover {
+		color: black;
+	}
+}
+
+.nav-link:hover {
+	text-decoration: underline;
+}
+
+.masthead-overskrift {
+	font-family: "Times New Roman";
+	color: black; 
+	a:hover {
+		color: black;
+		text-decoration: none;
+	}
+}
+
+.blog-nav .active {
+	text-decoration: underline;
+}
+
 .nav-container {
 	min-width: 100%;
 }

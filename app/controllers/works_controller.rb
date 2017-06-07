@@ -9,15 +9,13 @@ class WorksController < ApplicationController
   end  
 
   def new
-    @work = Work.new(info: [""])
-    1.times {
-    @work.image_categories.build
-    @work.image_categories.last.images.build
-  }
+    @work = Work.new()
+    @categories = Category.all
   end
 
   def edit
     @work = Work.friendly.find(params[:id])
+    @categories = Category.all
 
   end
 
@@ -89,10 +87,17 @@ class WorksController < ApplicationController
  end
  
  def work_params
-   params.require(:work).permit(:name, :sagsnr, :category_id,
-    :description, :address,
-    {info: []}, {image_categories_attributes: 
-      [:id, :work_id, :name, images_attributes: 
+   params.require(:work).permit(
+    :name, 
+    :sagsnr, 
+    :category_id,
+    :description, 
+    :address,
+    {infos_attributes: 
+      [:id, :title, :work_id, :_destroy]},
+    {image_categories_attributes: 
+      [:id, :work_id, :name, 
+        images_attributes: 
         [:id, :image, :photographer, :image_description]]}) 
  end
 end

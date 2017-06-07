@@ -1,14 +1,15 @@
 class StaticPagesController < ApplicationController
-	layout "frontpage", only: :frontpage
-
+	layout "works", except: :frontpage
+	
 	def frontpage
-	@categories = Category.all
-	@first_category = @categories.first
+		render layout: "frontpage"
 	end
 	
   	def contact
+
   	end
 
   	def about
+  		
  	end
 end

@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
 	def create
 		@category = Category.new(cat_params)	
 		if @category.save
-			redirect_to oversigt_path, notice: "Din kategori er blevet gemt"
+			redirect_to oversigt_path, notice: "#{@category.name} er blevet gemt"
 		else
 			redirect_to oversigt_path, alert: "Din kategori blev IKKE gemt, skriv til hilsenit@gmail.com"
 		end
@@ -20,20 +20,21 @@ class CategoriesController < ApplicationController
 	def update
 		@category = Category.friendly.find(params[:id])		
 		if @category.update(cat_params)
-			redirect_to oversigt_path, notice: "Din kategori er blevet opdateret"
+			redirect_to oversigt_path, notice: "#{@category.name} er blevet opdateret"
 		else
 			redirect_to oversigt_path, alert: "Din kategori blev IKKE opdateret, skriv til hilsenit@gmail.com"
 		end
 	end
 
 	def index
-		@categories = Category.all
+
 	end
 
 	def destroy
 		@category = Category.friendly.find(params[:id])		
+		deleted_name = @category.name
 		if @category.destroy
-			redirect_to oversigt_path, notice: "Din kategori er blevet slettet"
+			redirect_to oversigt_path, notice: "#{deleted_name} er blevet slettet"
 		else
 			redirect_to oversigt_path, alert: "Din kategori blev IKKE slettet, skriv til hilsenit@gmail.com"
 		end

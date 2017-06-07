@@ -1,5 +1,5 @@
-<% provide(:title, "Opret nyt værk") %>
-<%= render 'form' %>
+<%= render partial: 'blog_form', locals: {work: @work, categories: @categories} %>
+
 
 
 

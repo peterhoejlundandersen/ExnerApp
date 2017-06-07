@@ -3,6 +3,7 @@
     <nav class="nav blog-nav">
     	<%= link_to "Opret ny kategori", new_category_path, class: "nav-links btn btn-secondary" %>
     	<%= link_to "Opret nyt værk", new_work_path, class: "nav-links btn btn-secondary" %>
+    	<%= link_to "Log ud", destroy_user_session_path, method: :delete, class: "nav-links btn btn-secondary float-right" %>
     </nav>
   </div>
 </div>

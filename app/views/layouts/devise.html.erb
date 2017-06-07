@@ -14,10 +14,12 @@
       <%= alert_notice_helper %>
       <%= render partial: "admin/navbar" if logged_in?(:site_admin) %>
       <%= render partial: "shared/masthead" %>
-      <%= render partial: "shared/navbar", locals: {categories: @categories} %>
-      
-      <div class="container">
+      <hr>
+      <div class="container devise-layout">
+       <div class="col-md-4 offset-md-4">
+
       <%= yield %>
+      </div>
       </div>
 
 </body>

@@ -7,10 +7,18 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-@category = Category.create!(name: "Koldinghus")
-@category = Category.create!(name: "Kirker og Sognegårde")
-@category = Category.create!(name: "Kirkerestaureringer")
-@category = Category.create!(name: "Offentlige bygninger")
-@category = Category.create!(name: "Ikke opført")
-@category = Category.create!(name: "Design og orgler")
-@category = Category.create!(name: "Andre")
+@category = Category.create!(name: "Kirker og sognegårde", position: 1)
+@category = Category.create!(name: "Koldinghus", position: 2)
+@category = Category.create!(name: "Særlige bygninger", position: 3)
+@category = Category.create!(name: "Andre", position: 4)
+@category = Category.create!(name: "Kirkerestaureringer", position: 5)
+@category = Category.create!(name: "Design", position: 6)
+@category = Category.create!(name: "Ikke opført", position: 7)
+
+
+
+10.times do |num|
+	Work.create!(sagsnr: 123 + num, name: "Heeeey", category_id: Category.first.id)
+end
+
+

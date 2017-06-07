@@ -1,2 +1,1 @@
-<% provide(:title, "Rediger værker " + @work.name ) %>
-<%= render 'form' %>
+<%= render partial: 'blog_form', locals: {work: @work, categories: @categories} %>

@@ -16,4 +16,9 @@ module ApplicationHelper
 			content_tag :p, flash[:alert], class: "alert text-center alert-danger"
 		end		
 	end
+
+	def active_helper? path
+		"active" if current_page? path
+	end
 end
+

@@ -1,0 +1,52 @@
+<h3 class="text-center">Opret et værk</h3>
+<hr>
+<%= form_for(work) do |f| %>
+<div class="row">
+<div class="col-md-6">
+	<div class="form-group">
+		<label class="btn btn-secondary">
+			Vælg kategori: (Hvilken side)
+			<%= f.collection_select(:category_id, categories, :id, :name) %>
+		</label>
+	</div>
+
+	<div class="form-group">
+		<%= f.label "Navn:" %>
+		<%= f.text_field :name, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label "Sagsnr:" %>
+		<%= f.number_field :sagsnr, class: "form-control" %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label "Adresse:" %>
+		<%= f.text_field :address, class: "form-control" %>
+	</div>
+</div>
+<div class="col-md-6">
+<hr>
+	<div class="form-group">
+	<p>Her kan du tilføje information til værket, altså de felter, som viser sig under adresse og sagsnr.</p>
+		<%= f.fields_for :infos do |info| %>
+			<%= render partial: "info_fields", locals: {f: info} %>
+		<% end %>
+	</div>
+	<div class="col-md-3">
+	<%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
+	</div> 
+</div>
+</div><!-- row -->
+
+
+<div class="row">
+<div class="col-md-12">
+	<div class="form-group">
+		<%= f.label "Beskrivelse" %>
+		<%= f.text_area :description, class: "form-control", rows: 12 %>
+	</div>
+</div>
+</div>
+
+<% end %>
