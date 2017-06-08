@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 # Security!
-gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
@@ -36,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
 end
@@ -48,6 +48,14 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+
+group :production do 
+
+  gem 'rails_12factor', group: :production
+
+end
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -72,3 +80,4 @@ gem 'petergate', '~> 1.7', '>= 1.7.5'
 
 gem 'cocoon', '~> 1.2', '>= 1.2.10'
 gem 'font-awesome-rails'
+gem 'rake'
