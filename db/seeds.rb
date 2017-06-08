@@ -16,9 +16,3 @@
 @category = Category.create!(name: "Ikke opført", position: 7)
 
 
-
-10.times do |num|
-	Work.create!(sagsnr: 123 + num, name: "Heeeey", category_id: Category.first.id)
-end
-
-
