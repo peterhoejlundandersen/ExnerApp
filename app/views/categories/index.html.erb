@@ -1,15 +1,19 @@
 <div class="row">
 
-<% @categories.each do |cat| %>
-	<div class="col-md-6">
-<%= link_to kategori_oversigt_path(cat) do %>
-		<%= image_tag cat.image, class: "col-md-12" %>
-		<h2><%= cat.name %></h2>
-		<%= link_to "Rediger kategori", edit_category_path(cat), class: "btn btn-primary" if logged_in?(:site_admin) %>
-		<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"}, class: "btn btn-warning" if logged_in?(:site_admin) %> 
+	<% unless @categories.empty? %>
+		<% @categories.each do |cat| %>
+		<div class="col-md-6">
+			<%= link_to kategori_oversigt_path(cat) do %>
+			<%= image_tag cat.image, class: "col-md-12" %>
+			<h2><%= cat.name %></h2>
+			<%= link_to "Rediger kategori", edit_category_path(cat), class: "btn btn-primary" if logged_in?(:site_admin) %>
+			<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"}, class: "btn btn-warning" if logged_in?(:site_admin) %> 
+			<% end %>
+		</div>
+		<% end %>
+	<% else %>
+
+		<h3 class="alert alert-warning text-center">Der er ikke nogle kategorier endnu. Login og opret</h3>
+
 	<% end %>
-	</div>
-<% end %>
-
-
 </div>

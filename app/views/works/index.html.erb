@@ -1,5 +1,10 @@
 <h2 class="text-center"><%= @category.name %></h2>
 
+<% unless @works.empty? %>
 <%= render @works %>
+<% else %>
+<hr>
+<h3 class="alert alert-warning text-center">Der er ikke nogle værker under <u><%= @category.name %></u> endnu. Login og opret</h3>
+<% end %>
 
 	
