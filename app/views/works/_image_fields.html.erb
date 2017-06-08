@@ -1,0 +1,19 @@
+<div class="form-group nested-fields col-md-3 billede-upload-box">
+	<% unless f.object.image.file.nil? %>
+		<%= image_tag f.object.image.thumb.url %>
+	<% else %>
+		<label class="btn btn-secondary billede-upload-felt">
+			Find billede
+			<%= f.file_field :image, style: "display: none" %>
+		</label>
+	<% end %>
+
+	<br>
+	<%= f.label :image_description, "Billedbeskrivelse" %>
+	<%= f.text_field :image_description, class: "form-control" %>
+	<%= f.label :photographer, "Fotograf" %>
+	<%= f.text_field :photographer, class: "form-control" %>
+
+	<%= link_to_remove_association "Fjern billede", f, class: "btn btn-warning" %>
+
+</div>

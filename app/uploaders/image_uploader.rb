@@ -17,12 +17,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    image_category = ImageCategory.find(model.image_category_id)
-    work = Work.find(image_category.work_id)
-    work_name = work.name.parameterize
-    work_category = Category.find(work.category_id).name.parameterize
-    image_category_name = image_category.name.parameterize
-    "exner/#{work_name}/#{work_category}/#{image_category_name}"
+    image_category = model.image_category
+    work = image_category.work
+    "vaerkers-billeder/#{work.category.name.parameterize}/#{work.name.parameterize}/#{image_category.name.parameterize}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

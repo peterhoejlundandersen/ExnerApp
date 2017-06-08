@@ -3,3 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 
+$img-form-color: lighten(#B3E5FC, 10%);
+
+.billede-upload-box {
+	padding: 25px;
+	-webkit-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	background-color: white;
+	border: 5px solid $img-form-color;
+}
+
+.billede-upload {
+	display: block;
+}
+
+.image-cat-form-field {
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding: 25px;
+	background-color: $img-form-color;
+
+}

@@ -1,8 +1,22 @@
 <hr>
-<div class="form-group nested-fields form-inline">
+<div class="form-group nested-fields form-inline image-cat-form-field col-lg-12">
 
-<%= f.label "Navngiv billedkategorien:" %>
-<%= f.text_field :name %>
+	<%= f.label :name, "Navngiv billedkategorien:" %>
+	<%= f.text_field :name %>
 
 
+	<div>
+		<%= link_to_remove_association "Fjern billedkategori", f, class: "btn btn-warning" %>
+	</div>
+
+	<div class="col-lg-12"></div>
+
+
+		<%= f.fields_for :images do |img| %>
+		<%= render partial: "image_fields", locals: {f: img} %>
+		<% end %>
+		<div>
+			<%= link_to_add_association "Tilføj billede", f, :images, class: "btn btn-primary" %>
+		</div>
+		
 </div>

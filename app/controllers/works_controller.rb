@@ -26,6 +26,8 @@ class WorksController < ApplicationController
   
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
       redirect_to @work
+    else
+      redirect_to kategori_oversigt_path(@work.category_id)
     end
 
 
@@ -34,7 +36,6 @@ class WorksController < ApplicationController
   def create
 
    @work = Work.new(work_params)
-   binding.pry
    @work.category_id = Category.find(1).id
 
 	  if @work.save
@@ -42,8 +43,7 @@ class WorksController < ApplicationController
 	    flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
 	    redirect_to @work
 	  else
-      binding.pry
-	    render 'new'
+	    redirect_to works_path
 	  end
 
   end
@@ -51,8 +51,7 @@ class WorksController < ApplicationController
   def show 
    @work = Work.friendly.find(params[:id])
    @image_categories = @work.image_categories
-
-
+   @images = @image_categories.first.images
  end
 
  def destroy

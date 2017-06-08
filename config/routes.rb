@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 	get '/oversigt' => 'categories#index', as: "oversigt"
 	
 	resources :works, except: :index
+	
 	get 'vaerker/:category_name/' => 'works#index', as: "kategori-oversigt"
-	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 
+	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 	root 'static_pages#frontpage'
 end

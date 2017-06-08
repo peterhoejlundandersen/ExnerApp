@@ -71,3 +71,4 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'petergate', '~> 1.7', '>= 1.7.5'
 
 gem 'cocoon', '~> 1.2', '>= 1.2.10'
+gem 'font-awesome-rails'
