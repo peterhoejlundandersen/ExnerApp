@@ -13,10 +13,11 @@
 
 
 		<%= f.fields_for :images do |img| %>
-		<%= render partial: "image_fields", locals: {f: img} %>
+			<%= render partial: "image_fields", locals: {f: img} %>
 		<% end %>
 		<div>
 			<%= link_to_add_association "Tilføj billede", f, :images, class: "btn btn-primary" %>
 		</div>
+	</div>
 		
 </div>

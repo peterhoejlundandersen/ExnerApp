@@ -3,14 +3,13 @@
 		<%= image_tag f.object.image.thumb.url %>
 	<% else %>
 		<label class="btn btn-secondary billede-upload-felt">
-			Find billede
-			<%= f.file_field :image, style: "display: none" %>
+			<%= f.file_field :image, class: "work-file-field" %>
 		</label>
 	<% end %>
 
 	<br>
 	<%= f.label :image_description, "Billedbeskrivelse" %>
-	<%= f.text_field :image_description, class: "form-control" %>
+	<%= f.text_area :image_description, class: "form-control" %>
 	<%= f.label :photographer, "Fotograf" %>
 	<%= f.text_field :photographer, class: "form-control" %>
 

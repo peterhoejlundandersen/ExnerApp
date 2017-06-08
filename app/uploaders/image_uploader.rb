@@ -110,5 +110,5 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "#{file.original_filename.split(".").shift}.jpg"
   # end
 
-  process :optimize
+  # process :optimize
 end

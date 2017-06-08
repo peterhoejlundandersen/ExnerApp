@@ -1,0 +1,12 @@
+<div class="blog-masthead">
+	<div class="nav-container container">
+		<nav class="nav work-navbar">
+			<% num = img_cat_col_helper(image_categories.length) %>
+			<% image_categories.each_with_index do |img_cat, index| %>
+			<%= content_tag :div, img_cat.name, 
+							class: "nav-link col-md-#{num} #{"active" if index == 0}" %>
+			<% end %>
+		</nav>
+	</div>
+</div>
+

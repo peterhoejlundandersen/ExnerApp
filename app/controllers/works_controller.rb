@@ -52,6 +52,7 @@ class WorksController < ApplicationController
    @work = Work.friendly.find(params[:id])
    @image_categories = @work.image_categories
    @images = @image_categories.first.images
+   @first_image_url = @images.first.image.url
  end
 
  def destroy
@@ -98,6 +99,6 @@ class WorksController < ApplicationController
     {image_categories_attributes: 
       [:id, :work_id, :name, :_destroy,
         images_attributes: 
-        [:id, :image, :photographer, :image_description]]}) 
+        [:id, :image, :photographer, :image_description, :_destroy]]}) 
  end
 end

@@ -1,25 +1,31 @@
 <div class="row ">
-	<% if logged_in?(:site_admin) %>
-		<div class="col-lg-12">
-			<%= link_to "Slet værket", work_path(@work), method: :delete, data: {confirm: "Er du sikker på, at du vil slette værket?"}, class: "btn btn-warning" %>
-			<%= link_to "Rediger værk", edit_work_path(@work), class: "btn btn-secondary" %>
-		</div>
-	<% end %>
+	<%= logged_in_work_helper if logged_in?(:site_admin) %>
+
 	<div class="col-lg-12">
-	<h2 class="text-center"><%= @work.name %></h2>
+		<h2 class="text-center"><%= @work.name %></h2>
+	</div>
+	<div class="vertical-center">
+		<%= image_tag @first_image_url, id: "largeImage"%>	    
 	</div>
 
-	<% @work.image_categories.each do |img_cat| %>	
-			<div class="col-lg-3">
-			 	<%= img_cat.name %>
-			</div>
-	<% end %>
+	<%= render partial: "work_navbar", locals: {image_categories: @image_categories} %>
 
-	<div class="col-lg-12">
-		<% @images.each do |img| %>
-		<div class="col-lg-3">
-			<%= image_tag img.image.thumb.url %>
+	<% @work.image_categories.each do |img_cat| %>
+	<div class="row thumbnail-container <%= img_cat.name.parameterize %>" id="<%= img_cat.id %>">
+		<% img_cat.images.each do |image_array| %>
+		<div class="col-lg-3 thumbnaildiv">
+			<%= image_tag(image_array.image.thumb.url, id: image_array.id, data: { largeimage: image_array.image.url }) %> <!-- URL for det store billede bliver gemt i largeimage -->
 		</div>
 		<% end %>
-	</div>
+	</div> <!-- img_cat.name -->
+	<% end %>
 </div>
+
+<script type="text/javascript">
+	$(".thumbnaildiv img").click(function() {
+		var thumbsrc = $(this).data("largeimage");
+		$("#largeImage").attr("src", thumbsrc);
+	});
+</script>
+
+
