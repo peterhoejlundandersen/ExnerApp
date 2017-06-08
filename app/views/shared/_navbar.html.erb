@@ -2,9 +2,13 @@
   <div class="nav-container container">
     <nav class="nav blog-nav">
     <%= link_to "Oversigt", oversigt_path, class: "nav-link #{active_helper? oversigt_path}" %>
-    <% categories.each do |cat| %>
-    <%= link_to cat.name, kategori_oversigt_path(cat), class: "nav-link #{active_helper? kategori_oversigt_path(cat)}" %>
-    <% end %>
+    <%= link_to "Kirker og sognegårde", kategori_oversigt_path("Kirker og sognegårde".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Kirker og sognegårde".parameterize)}" %>
+    <%= link_to "Koldinghus", kategori_oversigt_path("Koldinghus".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Koldinghus".parameterize)}" %>
+    <%= link_to "Særlige bygninger", kategori_oversigt_path("Særlige bygninger".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Særlige bygninger".parameterize)}" %>
+    <%= link_to "Andre", kategori_oversigt_path("Andre".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Andre".parameterize)}" %>
+    <%= link_to "Kirkerestaureringer", kategori_oversigt_path("Kirkerestaureringer".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Kirkerestaureringer".parameterize)}" %>
+    <%= link_to "Design", kategori_oversigt_path("Design".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Design".parameterize)}" %>
+    <%= link_to "Ikke opført", kategori_oversigt_path("Ikke opført".parameterize), class: "nav-link #{active_helper? kategori_oversigt_path("Ikke opført".parameterize)}" %>
     <%= link_to "Johannes' tekster", nil, class: "nav-link" %>
     <%= link_to "Om", om_path, class: "nav-link #{active_helper? om_path}" %>
     </nav>
