@@ -8,24 +8,30 @@
 		<%= image_tag @first_image_url, id: "largeImage"%>	    
 	</div>
 
-	<%= render partial: "work_navbar", locals: {image_categories: @image_categories} %>
+	<%= render partial: "img_cat_bar", locals: {image_categories: @image_categories } %>
 
-	<% @work.image_categories.each do |img_cat| %>
-	<div class="row thumbnail-container <%= img_cat.name.parameterize %>" id="<%= img_cat.id %>">
-		<% img_cat.images.each do |image_array| %>
-		<div class="col-lg-3 thumbnaildiv">
-			<%= image_tag(image_array.image.thumb.url, id: image_array.id, data: { largeimage: image_array.image.url }) %> <!-- URL for det store billede bliver gemt i largeimage -->
-		</div>
-		<% end %>
-	</div> <!-- img_cat.name -->
-	<% end %>
+	<%= render partial: "thumbnails", locals: {image_categories: @image_categories } %>
+
+
+	<p>
+	<%= simple_format(@work.description) %>
+	</p>
+
+
 </div>
 
 <script type="text/javascript">
+// Thumbnail til stort billede
 	$(".thumbnaildiv img").click(function() {
 		var thumbsrc = $(this).data("largeimage");
 		$("#largeImage").attr("src", thumbsrc);
 	});
+// Skift mellem thumbnailsoversigterne
+	$(".img-cat-nav").on("click", function() {
+		var divId = $(this).attr("data-divid");
+		$(".thumbnail-container").hide();
+		$("#" + divId).show();
+	})
 </script>
 
 

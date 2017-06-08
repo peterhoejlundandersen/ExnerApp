@@ -11,17 +11,17 @@
 		</div>
 
 		<div class="form-group">
-			<%= f.label "Navn:" %>
+			<%= f.label :name, "Navn:" %>
 			<%= f.text_field :name, class: "form-control" %>
 		</div>
 
 		<div class="form-group">
-			<%= f.label "Sagsnr:" %>
+			<%= f.label :sagsnr, "Sagsnr:" %>
 			<%= f.number_field :sagsnr, class: "form-control" %>
 		</div>
 
 		<div class="form-group">
-			<%= f.label "Adresse:" %>
+			<%= f.label :address, "Adresse:" %>
 			<%= f.text_field :address, class: "form-control" %>
 		</div>
 	</div>
@@ -39,10 +39,26 @@
 	</div>
 
 
-	<div class="col-md-12">
+	<div class="col-md-8">
 		<div class="form-group">
-			<%= f.label "Beskrivelse" %>
+			<%= f.label :description, "Beskrivelse" %>
 			<%= f.text_area :description, class: "form-control", rows: 12 %>
+		</div>
+	</div>
+	<div class="col-md-4">
+			<hr>
+		<div class="form-group">
+			<% if f.object.overview_img.file.nil? %>
+				<%= f.label :overview_img, "Oversigtbillede" %>
+				<p>Vælg billedet, som skal være på oversigten. (gerne 285x185px) </p>
+
+				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
+			<% else %>
+				<%= image_tag f.object.overview_img.url %>
+				<P>Vælg nyt billede</p>
+				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
+
+			<% end %>
 		</div>
 	</div>
 

@@ -4,7 +4,7 @@
 			<% num = img_cat_col_helper(image_categories.length) %>
 			<% image_categories.each_with_index do |img_cat, index| %>
 			<%= content_tag :div, img_cat.name, 
-							class: "nav-link col-md-#{num} #{"active" if index == 0}" %>
+							class: "nav-link img-cat-nav col-md-#{num} #{"active" if index == 0}", data: { divid: img_cat.id} %>
 			<% end %>
 		</nav>
 	</div>

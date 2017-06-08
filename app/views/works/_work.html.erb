@@ -1,8 +1,10 @@
 <%= link_to work_path(work) do %>
 <div class="col-md-3">
 
-	<% if work.images[0] %>
-	<%= image_tag(work.images[0].image.thumb.url)%>
+	<% unless work.overview_img.file.nil? %>
+		<%= image_tag(work.overview_img.url)%>
+	<% else %>
+
 	<% end %>
 
 	<h6 class="text-center"><%= work.name %></h6>

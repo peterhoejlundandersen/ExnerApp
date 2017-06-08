@@ -94,6 +94,7 @@ class WorksController < ApplicationController
     :category_id,
     :description, 
     :address,
+    :overview_img,
     {infos_attributes: 
       [:id, :work_id, :title, :_destroy]},
     {image_categories_attributes: 

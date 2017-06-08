@@ -5,6 +5,9 @@
 
 $img-form-color: lighten(#B3E5FC, 10%);
 
+.hide-it {
+	display: none;
+}
 .billede-upload-box {
 	padding: 25px;
 	-webkit-border-radius: 15px;
@@ -45,4 +48,10 @@ $img-form-color: lighten(#B3E5FC, 10%);
 
 .work-navbar .active {
 	text-decoration: underline;
+}
+
+.img-cat-remove {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
