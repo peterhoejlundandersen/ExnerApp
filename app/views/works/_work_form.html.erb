@@ -24,16 +24,25 @@
 			<%= f.label :address, "Adresse:" %>
 			<%= f.text_field :address, class: "form-control" %>
 		</div>
+
+		<div class="form-group">
+			<%= f.label :competition, "Konkurrenceår:" %>
+			<%= f.number_field :competition, class: "form-control" %>
+		</div>
+		<div class="form-group ">
+			<%= f.label :opening_year, "Indvielsesår:" %>
+			<%= f.number_field :opening_year, class: "form-control" %>
+		</div>
 	</div>
 	<div class="col-lg-6">
 		<hr>
 		<div class="form-group">
 			<p>Her kan du tilføje information til værket, altså den tekst, som vises under adresse og sagsnr.</p>
-				<%= f.fields_for :infos do |info| %>
-					<%= render partial: "info_fields", locals: {f: info} %>
-				<% end %>
+			<%= f.fields_for :infos do |info| %>
+			<%= render partial: "info_fields", locals: {f: info} %>
+			<% end %>
 			<div>
-			<%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
+				<%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
 			</div>
 		</div>
 	</div>
@@ -46,38 +55,39 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-			<hr>
+		<hr>
 		<div class="form-group">
 			<% if f.object.overview_img.file.nil? %>
-				<%= f.label :overview_img, "Oversigtbillede" %>
-				<p>Vælg billedet, som skal være på oversigten. (gerne 285x185px) </p>
+			<%= f.label :overview_img, "Oversigtbillede" %>
+			<p>Vælg billedet, som skal være på oversigten. (gerne 285x185px) </p>
 
-				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
+			<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
 			<% else %>
-				<%= image_tag f.object.overview_img.url %>
-				<P>Vælg nyt billede</p>
+			<%= f.label :overview_img, :"Billede til oversigten" %>
+			<%= image_tag f.object.overview_img.url %>
+			<p>Vælg nyt billede</p>
 				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
 
+				<% end %>
+			</div>
+		</div>
+
+		<hr>
+			<%= f.fields_for :image_categories do |cat| %>
+			<%= render partial: "image_category_fields", locals: {f: cat} %>
 			<% end %>
+
+		<div class="container">	<!-- Ved ikke hvorfor! -->
+			<div class="col-md-12">
+
+				<%= link_to_add_association "Tilføj billedekategori", f, :image_categories, class: "btn btn-secondary" %>
+			</div>
+			<hr>
+			<div class="col-md-12">
+
+				<%= f.submit submit_button_text, class: "btn btn-primary" %>
+
+			</div>
 		</div>
 	</div>
-
-	<div class="col-md-12">
-		<%= f.fields_for :image_categories do |cat| %>
-			<%= render partial: "image_category_fields", locals: {f: cat} %>
-		<% end %>
-	</div>
-	<div class="container">	<!-- Ved ikke hvorfor! -->
-	<div class="col-md-12">
-
-		<%= link_to_add_association "Tilføj billedekategori", f, :image_categories, class: "btn btn-secondary" %>
-	</div>
-	<hr>
-	<div class="col-md-12">
-
-		<%= f.submit submit_button_text, class: "btn btn-primary" %>
-
-	</div>
-	</div>
-</div>
-<% end %>
+	<% end %>

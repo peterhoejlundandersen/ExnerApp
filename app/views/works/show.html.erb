@@ -12,10 +12,11 @@
 
 	<%= render partial: "thumbnails", locals: {image_categories: @image_categories } %>
 
+		<%= info_helper @work %>
+		<div class="col-lg-8">
+		<%= simple_format(@work.description) if @work.description %>
+		</div>
 
-	<p>
-	<%= simple_format(@work.description) %>
-	</p>
 
 
 </div>
