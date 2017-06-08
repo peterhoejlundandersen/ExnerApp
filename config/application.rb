@@ -10,7 +10,10 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
-if (app.get('env') == 'development'){ require "dotenv"  }
+
+if Rails.env.development?
+	require "dotenv"
+end 
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
