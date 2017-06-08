@@ -10,5 +10,9 @@ Rails.application.routes.draw do
 	get 'vaerker/:category_name/' => 'works#index', as: "kategori-oversigt"
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
+
+	get 'billede-uploader' => 'image_uploaders#uploader', as: "image_uploader"
+	post 'billede-uploader' => 'image_uploaders#create'
+	
 	root 'static_pages#frontpage'
 end

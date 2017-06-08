@@ -1,0 +1,11 @@
+
+
+<h2 class="text-center">Vælg sti</h2>
+<hr>
+<div class="form-group">
+<%= form_tag  do %>
+	<%= label_tag :path, "Indtast din sti til mappen her" %>
+	<%= text_field_tag :path %>
+	<%= submit_tag("Start upload") %>
+<% end %>
+</div>
