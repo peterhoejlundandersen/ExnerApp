@@ -1,9 +1,8 @@
 <% image_categories.each_with_index do |img_cat, index| %>
 <div class="col-lg-12 thumbnail-container <%= "hide-it" unless index == 0 %> <%= img_cat.name.parameterize %>" id="<%= img_cat.id %>">
 	<% img_cat.images.each do |image_array| %>
-	<div class="col-lg-3 thumbnaildiv">
-		<%= image_tag(image_array.image.thumb.url, id: image_array.id, data: { largeimage: image_array.image.url }) %> <!-- URL for det store billede bliver gemt i largeimage -->
-	</div>
+
+		<%= image_tag(image_array.image.thumb.url, id: image_array.id, class: "col-lg-3 thumbnaildiv", data: { largeimage: image_array.image.url }) %> <!-- URL for det store billede bliver gemt i largeimage -->
 	<% end %>
 </div> <!-- thumbnail-container -->
 <% end %>

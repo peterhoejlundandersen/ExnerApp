@@ -4,20 +4,20 @@
 	<% @works.each do |work| %>
 		<%= link_to work_path(work) do %>
 			<div class="col-md-3">
-					<%= image_tag(work.overview_img.url)%>
 				<% unless work.overview_img.file.nil? %>
+					<%= image_tag(work.overview_img)%>
+					<%= work.name %>
 				<% else %>
-
+					<h2><%= work.name %></h2>
+					<p class="alert alert-succes">Værket er uden billeder</p>
 				<% end %>
-
-				<h6 class="text-center"><%= work.name %></h6>
 			</div>
 
 		<% end %>
 	<% end %>
 <% else %>
 <h3 class="alert alert-warning text-center">Der er ikke nogle værker under <u><%= @category.name %></u> endnu. Login og opret</h3>
-<% end %>
-<!-- @works.empty? -->
+<% end %><!-- @works.empty? -->
+
 
 	

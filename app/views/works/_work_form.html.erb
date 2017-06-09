@@ -69,13 +69,14 @@
 				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
 
 				<% end %>
-			</div>
 		</div>
-
+	</div>
+	<div class="container">
 		<hr>
 			<%= f.fields_for :image_categories do |cat| %>
 			<%= render partial: "image_category_fields", locals: {f: cat} %>
 			<% end %>
+	</div>
 
 		<div class="container">	<!-- Ved ikke hvorfor! -->
 			<div class="col-md-12">

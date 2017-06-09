@@ -42,20 +42,25 @@ class ImageUploadersController < ApplicationController
 					  image.image_category = image_category
 					
 					  	File.open("#{img_categories_path}/#{image_path}") do |f|
-					  	  @work.overview_img = f if f.include? "START"
 					  	  image.image = f
+					  	end
+					  	binding.pry
+					  	if image_path.include? "START"
+						  	File.open("#{img_categories_path}/#{image_path}") do |f|
+						  	  @work.overview_img = f 
+						  	  @work.save!
+						  		binding.pry
+						  	  
+						  	end
 					  	end
 
 					  image.save!
-
 					end
 
 				else
-
-
-
 				end
 			end
+
 		end
 		redirect_to oversigt_path
 	end
