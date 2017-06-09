@@ -17,12 +17,49 @@ class ImageUploadersController < ApplicationController
 			Dir.foreach(path + "/" + category_folder) do |work_folder|  
 				next if folder_or_file_excluded? work_folder
 				next if is_text_document? work_folder
-				create_work work_folder, category, category_folder
-				
+				@work = create_work work_folder, category, category_folder
+
+				image_categories = []
+				img_categories_path = "#{path}/#{category_folder}/#{work_folder}"
+
+				Dir.foreach(img_categories_path) do |image_category_folder| 
+					next if folder_or_file_excluded? image_category_folder
+					next if is_text_document? image_category_folder
+					next if images_accepted? image_category_folder.split(".")[-1]
+				  image_categories << image_category_folder 
+
+				end 
+				if image_categories.empty?
+					image_category = ImageCategory.new(name: "Alle")
+					image_category.work = @work
+					image_category.save
+					Dir.foreach(img_categories_path) do |image_path|
+					  next if folder_or_file_excluded? image_path
+					  next if is_text_document? image_path
+					  next unless images_accepted? image_path.split(".")[-1]
+					  image = Image.new
+					  image.image_category = image_category
+					  images = []
+					  if image_path.include? "START"
+					  	File.open("#{img_categories_path}/#{image_path}") do |f|
+					  	  @work.overview_img = f
+					  	  image.image = f
+					  	end
+					  else
+						  File.open("#{img_categories_path}/#{image_path}") do |f|
+						    image.image = f
+						  end
+					  end
+					  image.save
+					end
+
+				else
+
+
+				end
 			end
-
 		end
-
+		redirect_to oversigt_path
 	end
 
 	private
@@ -40,7 +77,8 @@ class ImageUploadersController < ApplicationController
 		look_for_description folder, "#{path}/#{parent_category_folder}"
 		work.description = @description
 		work.address = @address
-		work.save!
+		work.save
+		work
 	end
 
 	def is_an_integer? input
@@ -86,8 +124,8 @@ class ImageUploadersController < ApplicationController
 		list.include? folder_file	
 	end
 
-	def images_accepted? image
-	%w(gif jpg png tif jpeg tiff JPG TIF TIFF PNG JPEG).include? image
+	def images_accepted? image_file_ending
+	%w(gif jpg png tif jpeg tiff JPG TIF TIFF PNG JPEG).include? image_file_ending
 	end
 
 
