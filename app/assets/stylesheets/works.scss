@@ -16,6 +16,19 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	border: 5px solid $img-form-color;
 }
 
+.info-field-work {
+    display: none;
+}
+
+.info-kort h2 {
+    border-bottom: 3px solid black;
+}
+
+.info-kort {
+    width: 30%;
+    float: left;
+}
+
 .billede-upload {
 	display: block;
 }
@@ -62,6 +75,13 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	}
 }
 
+.info-field-work {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	background-color: white;
+	width: 100%;
+}
 .work-navbar .active {
 	text-decoration: underline;
 

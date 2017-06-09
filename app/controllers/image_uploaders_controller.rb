@@ -44,7 +44,6 @@ class ImageUploadersController < ApplicationController
 					  	File.open("#{work_folder_path}/#{image_path}") do |f|
 					  	  image.image = f
 					  	end
-					  	binding.pry
 					  	if image_path.include? "START"
 						  	File.open("#{work_folder_path}/#{image_path}") do |f|
 						  	  @work.overview_img = f 
@@ -58,12 +57,10 @@ class ImageUploadersController < ApplicationController
 
 				else
 					image_categories.each do |image_category_path| #For hver billedekategori
-						binding.pry
 					  image_category = ImageCategory.new(name: image_category_path)
 					  image_category.work = @work #Hvis der ikke er nogle billede underkategorier
 					  image_category.save
 					  Dir.foreach("#{work_folder_path}/#{image_category_path}") do |image_file|
-					  	binding.pry
 					    next if folder_or_file_excluded? image_file
 					    next if is_text_document? image_file
 					    next if image_file.empty? 

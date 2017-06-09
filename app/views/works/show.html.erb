@@ -6,16 +6,19 @@
 	</div>
 	<div class="vertical-center">
 		<%= image_tag @first_image_url, id: "largeImage"%>	    
+
+	</div>
+	<div class="col-lg-12 hide-it info-field-work">
+		<%= info_helper @work %>
+		<div class="info-beskrivelse">
+		<hr>
+		<%= simple_format(@work.description) if @work.description %>
+		</div>
 	</div>
 
 	<%= render partial: "img_cat_bar", locals: {image_categories: @image_categories } %>
 
 	<%= render partial: "thumbnails", locals: {image_categories: @image_categories } %>
-
-		<%= info_helper @work %>
-		<div class="col-lg-8">
-		<%= simple_format(@work.description) if @work.description %>
-		</div>
 
 
 
@@ -34,6 +37,11 @@
 		$(".thumbnail-container").hide();
 		$("#" + divId).show();
 	});
+
+// info visning
+	$(".info-button").on("click", function() {
+		$(".info-field-work").slideToggle("fast");
+	})
 
 </script>
 
