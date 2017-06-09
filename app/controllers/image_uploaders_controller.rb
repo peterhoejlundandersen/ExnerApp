@@ -77,7 +77,6 @@ class ImageUploadersController < ApplicationController
 				    	  	File.open("#{work_folder_path}/#{image_category_path}/#{image_file}") do |f|
 				    	  	  @work.overview_img = f 
 				    	  	  @work.save!
-				    	  		binding.pry
 				    	  	  
 				    	  	end
 				      	end
@@ -109,6 +108,7 @@ class ImageUploadersController < ApplicationController
 		work.category = parent_category 
 		look_for_description folder, "#{path}/#{parent_category_folder}"
 		work.description = @description
+		@description = nil
 		work.address = @address
 		work.save
 		work
@@ -153,7 +153,7 @@ class ImageUploadersController < ApplicationController
 	end
 
 	def folder_or_file_excluded? folder_file
-		list = %w(Fravalgt Fravalg Valgt fra fravalg fravalgt . .git DS_Store .. .DS_Store image_upload.rb)
+		list = %w(Fravalgt Fravalg Valgt fra fravalg fravalgt JPEG . .git DS_Store .. .DS_Store image_upload.rb)
 		list.include? folder_file	
 	end
 

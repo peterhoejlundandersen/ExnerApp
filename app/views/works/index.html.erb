@@ -2,14 +2,18 @@
 <div class="row">
 <% unless @works.empty? %>
 	<% @works.each do |work| %>
-			<div class="col-md-3">
+			<div class="col-md-3 overview-work">
 		<%= link_to work_path(work) do %>
-				<% unless work.overview_img.file.nil? %>
-					<%= image_tag(work.overview_img)%>
+				<% if !work.overview_img.file.nil? %>
+					<%= image_tag(work.overview_img, class: "overview-img") %>
 					<%= work.name %>
-				<% else %>
+				<% elsif work.images.empty? %>
 					<h2><%= work.name %></h2>
 					<p class="alert alert-succes">Værket er uden billeder</p>
+				<% else %>
+					<h2><%= work.name %></h2>
+					<p class="alert alert-succes">Værket er uden oversigtbillede</p>
+
 				<% end %>
 
 		<% end %>

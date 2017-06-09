@@ -8,6 +8,14 @@ $img-form-color: lighten(#B3E5FC, 10%);
 /* MIDLERTIDIGT */
 .thumbnaildiv {
     max-width: 16.3% !important;
+    cursor: pointer;
+    &:hover {
+    	opacity: 0.6;
+    }
+}
+
+#largeImage {
+	max-height: 850px; 
 }
 /* MIDLERTIDIGT */
 .hide-it {
@@ -89,6 +97,16 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	    margin-top: 10px;
 }
 
+img.overview-img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%; 
+}
+.col-md-3.overview-work {
+    margin: 0;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
 .info-button-active {
     text-decoration: underline;
 }

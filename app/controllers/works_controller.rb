@@ -4,7 +4,7 @@ class WorksController < ApplicationController
   layout "works"  
   def index
   @category = Category.friendly.find(params[:category_name])
-  @works = @category.works.order(sagsnr: :desc)   
+  @works = @category.works.order(sagsnr: :asc)   
   @header_title = @category.name
   end  
 
@@ -21,11 +21,10 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.friendly.find(params[:id])
-    binding.pry
     if @work.update(work_params)
   
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
-      redirect_to @work
+      redirect_to work_path(@work)
     else
       redirect_to kategori_oversigt_path(@work.category_id)
     end

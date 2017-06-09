@@ -31,6 +31,8 @@ module WorksHelper
 			3
 		when 5
 			2
+		when 6
+			2
 		end
 
 	end
