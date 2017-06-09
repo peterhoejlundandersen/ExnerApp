@@ -10,7 +10,7 @@ module WorksHelper
 	end
 
 	def info_helper work
-		info = "<h2>Information</h2><br>"
+		info = "<h2>Information</h2>"
 		info << "Sagsnr: #{work.sagsnr.to_s}<br>" if work.sagsnr
 		info << "Adresse: #{work.address}<br>" if work.address
 		info << "Konkurrenceår: #{work.competition.to_s}<br>" if work.competition

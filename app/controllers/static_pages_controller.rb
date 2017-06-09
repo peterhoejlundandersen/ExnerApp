@@ -10,6 +10,6 @@ class StaticPagesController < ApplicationController
   	end
 
   	def about
-  		
+		@header_title = "Om Inger & Johannes"   		
  	end
 end

@@ -27,7 +27,8 @@ class CategoriesController < ApplicationController
 	end
 
 	def index
-
+		@categories = Category.all
+		@header_title = "Oversigt"
 	end
 
 	def destroy

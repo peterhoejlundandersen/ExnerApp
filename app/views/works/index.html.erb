@@ -1,9 +1,9 @@
 <h2 class="text-center"><%= @category.name %></h2>
-
+<div class="row">
 <% unless @works.empty? %>
 	<% @works.each do |work| %>
-		<%= link_to work_path(work) do %>
 			<div class="col-md-3">
+		<%= link_to work_path(work) do %>
 				<% unless work.overview_img.file.nil? %>
 					<%= image_tag(work.overview_img)%>
 					<%= work.name %>
@@ -11,13 +11,14 @@
 					<h2><%= work.name %></h2>
 					<p class="alert alert-succes">Værket er uden billeder</p>
 				<% end %>
-			</div>
 
 		<% end %>
+			</div>
 	<% end %>
 <% else %>
 <h3 class="alert alert-warning text-center">Der er ikke nogle værker under <u><%= @category.name %></u> endnu. Login og opret</h3>
 <% end %><!-- @works.empty? -->
+</div>
 
 
 	

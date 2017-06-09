@@ -16,11 +16,11 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	border: 5px solid $img-form-color;
 }
 
-.info-field-work {
+.col-lg-12.hide-it.info-field-work {
     display: none;
 }
-
 .info-kort h2 {
+	margin-top: 10px;
     border-bottom: 3px solid black;
 }
 
@@ -29,6 +29,11 @@ $img-form-color: lighten(#B3E5FC, 10%);
     float: left;
 }
 
+.info-beskrivelse {
+	float: left;
+	margin-left: 20px;	
+	padding-top: 49px;
+}
 .billede-upload {
 	display: block;
 }
@@ -65,11 +70,24 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	position: relative;
 }
 
+
 .info-button {
 	position: absolute;
 	right: 0;
 	cursor: pointer;
 	padding: 0.5rem 1rem;
+	#InfoTriangle {
+		position: absolute;
+	    border-left: 12px solid transparent;
+	    border-right: 12px solid transparent;
+	    border-bottom: 17px solid black;
+	    width: 0;
+	    height: 0;
+	    right: 0;
+	    top: 12px;
+	    margin-right: -13px;
+	    transform: rotate(0deg);
+	}
 	&:hover {
 		text-decoration: underline;
 	}
@@ -82,6 +100,8 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	background-color: white;
 	width: 100%;
 }
+
+
 .work-navbar .active {
 	text-decoration: underline;
 
