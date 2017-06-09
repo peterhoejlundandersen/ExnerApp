@@ -23,16 +23,17 @@
 
 <script type="text/javascript">
 // Thumbnail til stort billede
-	$(".thumbnaildiv img").click(function() {
+	$(".thumbnaildiv").click(function() {
 		var thumbsrc = $(this).data("largeimage");
 		$("#largeImage").attr("src", thumbsrc);
 	});
 // Skift mellem thumbnailsoversigterne
 	$(".img-cat-nav").on("click", function() {
+		$(this).addClass('active').siblings().removeClass('active');
 		var divId = $(this).attr("data-divid");
 		$(".thumbnail-container").hide();
 		$("#" + divId).show();
-	})
-</script>
+	});
 
+</script>
 

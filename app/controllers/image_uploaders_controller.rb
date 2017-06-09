@@ -20,9 +20,9 @@ class ImageUploadersController < ApplicationController
 				@work = create_work work_folder, category, category_folder
 
 				image_categories = []
-				img_categories_path = "#{path}/#{category_folder}/#{work_folder}"
+				work_folder_path = "#{path}/#{category_folder}/#{work_folder}"
 
-				Dir.foreach(img_categories_path) do |image_category_folder| 
+				Dir.foreach(work_folder_path) do |image_category_folder| 
 					next if folder_or_file_excluded? image_category_folder
 					next if is_text_document? image_category_folder
 					next if images_accepted? image_category_folder.split(".")[-1]
@@ -34,22 +34,21 @@ class ImageUploadersController < ApplicationController
 					image_category = ImageCategory.new(name: "Alle")
 					image_category.work = @work
 					image_category.save!
-					Dir.foreach(img_categories_path) do |image_path|
+					Dir.foreach(work_folder_path) do |image_path|
 					  next if folder_or_file_excluded? image_path
 					  next if is_text_document? image_path
 					  next unless images_accepted? image_path.split(".")[-1]
 					  image = Image.new
 					  image.image_category = image_category
 					
-					  	File.open("#{img_categories_path}/#{image_path}") do |f|
+					  	File.open("#{work_folder_path}/#{image_path}") do |f|
 					  	  image.image = f
 					  	end
 					  	binding.pry
 					  	if image_path.include? "START"
-						  	File.open("#{img_categories_path}/#{image_path}") do |f|
+						  	File.open("#{work_folder_path}/#{image_path}") do |f|
 						  	  @work.overview_img = f 
 						  	  @work.save!
-						  		binding.pry
 						  	  
 						  	end
 					  	end
@@ -58,10 +57,44 @@ class ImageUploadersController < ApplicationController
 					end
 
 				else
-				end
-			end
+					image_categories.each do |image_category_path| #For hver billedekategori
+						binding.pry
+					  image_category = ImageCategory.new(name: image_category_path)
+					  image_category.work = @work #Hvis der ikke er nogle billede underkategorier
+					  image_category.save
+					  Dir.foreach("#{work_folder_path}/#{image_category_path}") do |image_file|
+					  	binding.pry
+					    next if folder_or_file_excluded? image_file
+					    next if is_text_document? image_file
+					    next if image_file.empty? 
 
-		end
+					    image = Image.new
+					   	image.image_category = image_category
+
+					    # GEMMER BILLEDET
+					    File.open("#{work_folder_path}/#{image_category_path}/#{image_file}") do |f|
+					      image.image = f
+					    end
+
+				      	if image_file.include? "START"
+				    	  	File.open("#{work_folder_path}/#{image_category_path}/#{image_file}") do |f|
+				    	  	  @work.overview_img = f 
+				    	  	  @work.save!
+				    	  		binding.pry
+				    	  	  
+				    	  	end
+				      	end
+
+					    image.save!
+					  end # image_file
+
+					end # new_image_category - image_Category_path
+
+				end # image_categories.empty?
+
+			end # work_folder
+
+		end #category_folder
 		redirect_to oversigt_path
 	end
 

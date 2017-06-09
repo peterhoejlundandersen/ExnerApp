@@ -21,10 +21,12 @@ $img-form-color: lighten(#B3E5FC, 10%);
 }
 
 .image-cat-form-field {
+	position: relative;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	padding: 25px;
 	background-color: $img-form-color;
+	margin-bottom: 30px;
 
 }
 
@@ -46,12 +48,35 @@ $img-form-color: lighten(#B3E5FC, 10%);
   align-items: center;
 }
 
+.work-navbar {
+	position: relative;
+}
+
+.info-button {
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
 .work-navbar .active {
 	text-decoration: underline;
+
 }
 
 .img-cat-remove {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.img-cat-name-input {
+	text-align: center;
+}
+
+.nav-link {
+	cursor: pointer;
 }

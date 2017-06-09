@@ -39,10 +39,10 @@
 		<div class="form-group">
 			<p>Her kan du tilføje information til værket, altså den tekst, som vises under adresse og sagsnr.</p>
 			<%= f.fields_for :infos do |info| %>
-			<%= render partial: "info_fields", locals: {f: info} %>
+				<%= render partial: "info_fields", locals: {f: info} %>
 			<% end %>
 			<div>
-				<%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
+			<%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
 			</div>
 		</div>
 	</div>
