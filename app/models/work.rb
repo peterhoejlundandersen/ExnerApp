@@ -1,6 +1,6 @@
 class Work < ActiveRecord::Base
 	extend FriendlyId
-	mount_uploader :overview_img, OverviewImgUploader
+	mount_uploader :overview_img, OverviewUploader
 	friendly_id :name, use: :slugged
 	belongs_to :category
 	has_many :infos

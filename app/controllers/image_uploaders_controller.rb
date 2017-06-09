@@ -29,31 +29,29 @@ class ImageUploadersController < ApplicationController
 				  image_categories << image_category_folder 
 
 				end 
+
 				if image_categories.empty?
 					image_category = ImageCategory.new(name: "Alle")
 					image_category.work = @work
-					image_category.save
+					image_category.save!
 					Dir.foreach(img_categories_path) do |image_path|
 					  next if folder_or_file_excluded? image_path
 					  next if is_text_document? image_path
 					  next unless images_accepted? image_path.split(".")[-1]
 					  image = Image.new
 					  image.image_category = image_category
-					  images = []
-					  if image_path.include? "START"
+					
 					  	File.open("#{img_categories_path}/#{image_path}") do |f|
-					  	  @work.overview_img = f
+					  	  @work.overview_img = f if f.include? "START"
 					  	  image.image = f
 					  	end
-					  else
-						  File.open("#{img_categories_path}/#{image_path}") do |f|
-						    image.image = f
-						  end
-					  end
-					  image.save
+
+					  image.save!
+
 					end
 
 				else
+
 
 
 				end

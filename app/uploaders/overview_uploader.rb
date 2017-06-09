@@ -1,4 +1,4 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class OverviewUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -17,9 +17,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    image_category = model.image_category
-    work = image_category.work
-    "vaerkers-billeder/#{work.category.name.parameterize}/#{work.name.parameterize}/#{image_category.name.parameterize}"
+    "overview/#{model.name.parameterize}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -34,12 +32,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   
 
   def resize_to_width
-  image_width, image_height = ::MiniMagick::Image.open(file.file)[:dimensions]
-      if image_width >= image_height
-        resize_to_limit 1200, 10000
-      else
-        resize_to_limit nil, 900
-      end
+        resize_to_limit 285, 180
   end
 
   
@@ -66,13 +59,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def scale
 
   # process :scale_width [1200, nil] if
-  version :medium do
-    process resize_to_fill: [270, 162]
-  end
+  # version :medium do
+  #   process resize_to_fill: [270, 162]
+  # end
 
-  version :thumb do
-    process resize_to_fill: [168, 120]
-  end
+  # version :thumb do
+  #   process resize_to_fill: [168, 120]
+  # end
 
 
   # def er_oversigt_bil?(file)

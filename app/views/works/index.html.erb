@@ -1,10 +1,23 @@
 <h2 class="text-center"><%= @category.name %></h2>
 
 <% unless @works.empty? %>
-<%= render @works %>
+	<% @works.each do |work| %>
+		<%= link_to work_path(work) do %>
+			<div class="col-md-3">
+					<%= image_tag(work.overview_img.url)%>
+				<% unless work.overview_img.file.nil? %>
+				<% else %>
+
+				<% end %>
+
+				<h6 class="text-center"><%= work.name %></h6>
+			</div>
+
+		<% end %>
+	<% end %>
 <% else %>
-<hr>
 <h3 class="alert alert-warning text-center">Der er ikke nogle værker under <u><%= @category.name %></u> endnu. Login og opret</h3>
 <% end %>
+<!-- @works.empty? -->
 
 	
