@@ -21,7 +21,7 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.friendly.find(params[:id])
-  
+    binding.pry
     if @work.update(work_params)
   
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  

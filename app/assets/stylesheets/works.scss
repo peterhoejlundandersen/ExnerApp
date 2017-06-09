@@ -5,8 +5,30 @@
 
 $img-form-color: lighten(#B3E5FC, 10%);
 
+/* MIDLERTIDIGT */
+.thumbnaildiv {
+    max-width: 16.3% !important;
+}
+/* MIDLERTIDIGT */
 .hide-it {
 	display: none;
+}
+
+.work-row .thumbnail-container.hide-it {
+    display: none;
+}
+
+.thumbnail-container {
+	width: 100%; 
+}
+.thumbnaildiv {
+	padding: 0!important;
+	margin-top: 3px; 
+	border: 3px solid white; 
+}
+
+.work-row {
+	margin-bottom: 35px; 
 }
 .billede-upload-box {
 	padding: 25px;
@@ -68,12 +90,18 @@ $img-form-color: lighten(#B3E5FC, 10%);
 
 .work-navbar {
 	position: relative;
+	    margin-top: 10px;
 }
 
-
+.info-button-active {
+	text-decoration: underline;
+}
 .info-button {
+	background-color: black;
+	text-decoration: none; 
+	color: white;
 	position: absolute;
-	right: 0;
+	left: 0;
 	cursor: pointer;
 	padding: 0.5rem 1rem;
 	#InfoTriangle {
