@@ -5,6 +5,9 @@
 
 $img-form-color: lighten(#B3E5FC, 10%);
 
+.work-header {
+	font-family: "Times New Roman";
+}
 /* MIDLERTIDIGT */
 .thumbnaildiv {
     max-width: 16.3% !important;
@@ -12,6 +15,10 @@ $img-form-color: lighten(#B3E5FC, 10%);
     &:hover {
     	opacity: 0.6;
     }
+}
+nav.nav.blog-nav {
+    width: 1300px;
+    margin: 0 auto;
 }
 
 #largeImage {

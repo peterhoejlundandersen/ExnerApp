@@ -49,9 +49,14 @@ class WorksController < ApplicationController
 
   def show 
    @work = Work.friendly.find(params[:id])
-   @image_categories = @work.image_categories
-   @images = @image_categories.first.images
-   @first_image_url = @images.first.image.url
+   unless @work.image_categories.empty?
+    @image_categories = @work.image_categories
+    @images = @image_categories.first.images 
+    @first_image_url = @images.first.image.url
+    render 'show'
+  else 
+    render 'show_no_images'
+  end 
  end
 
  def destroy
