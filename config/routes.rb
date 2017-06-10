@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 	resources :categories, except: :index
 	get '/oversigt' => 'categories#index', as: "oversigt"
 	
-	resources :works, except: :index
+	resources :works, except: :index do
+		put :sort, on: :collection
+	end
 	
 	get 'vaerker/:category_name/' => 'works#index', as: "kategori-oversigt"
 	
