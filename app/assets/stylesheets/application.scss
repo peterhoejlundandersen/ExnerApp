@@ -25,6 +25,10 @@
 
  @import "bootstrap";
 
+h1,h2,h3,h4,h5,h6:not(.masthead-overskrift h1 + h4) {
+	font-family: Corbel; 
+	letter-spacing: 2px;
+}
 .devise-layout {
 	margin-top: 6%;
 }

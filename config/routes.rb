@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 	resources :works, except: :index
 	
 	get 'vaerker/:category_name/' => 'works#index', as: "kategori-oversigt"
+	
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 

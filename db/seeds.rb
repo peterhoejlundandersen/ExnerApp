@@ -6,13 +6,3 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
-@category = Category.create!(name: "Kirker og sognegårde", position: 1)
-@category = Category.create!(name: "Koldinghus", position: 2)
-@category = Category.create!(name: "Særlige bygninger", position: 3)
-@category = Category.create!(name: "Andre", position: 4)
-@category = Category.create!(name: "Kirkerestaureringer", position: 5)
-@category = Category.create!(name: "Design", position: 6)
-@category = Category.create!(name: "Ikke opført", position: 7)
-
-

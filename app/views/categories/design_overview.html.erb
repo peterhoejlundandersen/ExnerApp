@@ -1,0 +1,10 @@
+<div class="row">
+<% @categories.each do |cat| %>
+		<div class="col-lg-4 text-center">	
+	<%= link_to kategori_oversigt_path(cat) do %>	
+		<%= image_tag cat.image unless cat.image.file.nil? %> 
+		<h2><%= cat.name %></h2>
+	<% end %>
+		</div>
+<% end %>
+</div>

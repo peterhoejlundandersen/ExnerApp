@@ -3,9 +3,14 @@ class WorksController < ApplicationController
 
   layout "works"  
   def index
-  @category = Category.friendly.find(params[:category_name])
-  @works = @category.works.order(sagsnr: :asc)   
-  @header_title = @category.name
+  if params[:category_name] == "design"
+    set_design_categories
+    render 'categories/design_overview'
+  else
+    @category = Category.friendly.find(params[:category_name])
+    @works = @category.works.order(sagsnr: :asc)   
+    @header_title = @category.name
+  end
   end  
 
   def new
@@ -80,6 +85,12 @@ class WorksController < ApplicationController
 
  private
 
+ def set_design_categories
+   @categories = []
+   @categories << Category.find(13)
+   @categories << Category.find(15)
+   @categories << Category.find(18)
+ end
 
  def prepare_save
    @work.image_categories.each do |img_cat| 

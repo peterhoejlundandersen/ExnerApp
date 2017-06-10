@@ -12,7 +12,7 @@ class ImageUploadersController < ApplicationController
 		Dir.foreach(path) do |category_folder|  
 			next if folder_or_file_excluded? category_folder
 
-			category = Category.find_by_name category_folder
+			category = Category.new(name: category_folder)
 
 			Dir.foreach(path + "/" + category_folder) do |work_folder|  
 				next if folder_or_file_excluded? work_folder
@@ -89,7 +89,7 @@ class ImageUploadersController < ApplicationController
 				end # image_categories.empty?
 
 			end # work_folder
-
+			category.save!
 		end #category_folder
 		redirect_to oversigt_path
 	end
@@ -108,9 +108,10 @@ class ImageUploadersController < ApplicationController
 		work.category = parent_category 
 		look_for_description folder, "#{path}/#{parent_category_folder}"
 		work.description = @description
-		@description = nil
 		work.address = @address
 		work.save
+		@address = nil
+		@description = nil
 		work
 	end
 
@@ -124,14 +125,15 @@ class ImageUploadersController < ApplicationController
 				file_name = file_name_without_path.split(".") #Del filendelsen og navnet op
 				file_name.pop(1) # Fjern endelsen
 				file_name = file_name.join(".") # Sæt sammen igen (Hvis der nu er "." i et navn)
-					if folder == file_name #hvis identisk navn, tilføj beskrivelse
+				# Nulstil!
+					if folder.downcase == file_name.downcase #hvis identisk navn, tilføj beskrivelse
 						# Den fucking ENCODING LØSTE FUCKING PROBLEMET - OMG! 
 
 						@description = ""
 						File.foreach(file, encoding: 'iso-8859-1') do |line|
 							words = line.split(" ")
-							@address = nil
-							if words[0] == "Adresse:"
+
+							if words[0] == "Adresse:" || words[0] == "Addresse:"
 								words.shift
 								@address = words.join(" ")
 								next
@@ -143,7 +145,7 @@ class ImageUploadersController < ApplicationController
 	end 
 
 	def path
-	"/Users/bruger/Desktop/EXNER FORSØG 3"
+	"/Users/bruger/Desktop/EXNER FORSØG 2"
 	end
 
 	def is_text_document? folder_or_file

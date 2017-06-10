@@ -17,7 +17,7 @@ class OverviewUploader < CarrierWave::Uploader::Base
 
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "nye/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -32,7 +32,7 @@ class OverviewUploader < CarrierWave::Uploader::Base
   
 
   def resize_to_width
-        resize_to_limit 285, 180
+        resize_to_limit 255, 170
   end
 
   

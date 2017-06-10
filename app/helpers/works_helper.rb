@@ -24,13 +24,13 @@ module WorksHelper
 	def img_cat_col_helper img_cat_num
 		case img_cat_num
 		when 1
-			12
+			10
 		when 2
-			6
+			5
 		when 3
-			4
-		when 4
 			3
+		when 4
+			2
 		when 5
 			2
 		when 6
