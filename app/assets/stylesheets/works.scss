@@ -6,19 +6,59 @@
 $img-form-color: lighten(#B3E5FC, 10%);
 
 .work-header {
-	font-family: "Times New Roman";
+	font-family: LinLibertine;
+}
+
+.overview-work-h2 {
+	font-family: Corbel;
+	text-align: center;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 0.7em!important;
+	letter-spacing: 2px;
+}
+.overview-img-block {
+	min-height: 182px;
+}
+.work-headline {
+	font-family: Corbel;
+	text-align: center;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 1.7em!important;
+	letter-spacing: 2px;
+	margin-top: 20px;
+}
+
+span.without-overview-text {
+	height: 100%;
+	border: 1px dotted black;
+	margin: auto 0;
+	top: 69px;
+	position: relative;
+}
+
+.without-overview-img {
+	min-height: 166px;
+	width: 100%;
+	display: block;
+	text-align: center;
+}
+
+.blog-nav {
+	margin-top: -8px;
 }
 /* MIDLERTIDIGT */
 .thumbnaildiv {
-    max-width: 16.3% !important;
-    cursor: pointer;
-    &:hover {
-    	opacity: 0.6;
-    }
+	max-width: 16.3% !important;
+	cursor: pointer;
+	&:hover {
+		opacity: 0.6;
+	}
 }
 nav.nav.blog-nav {
-    width: 1300px;
-    margin: 0 auto;
+	width: 1300px;
+	margin: 0 auto;
 }
 
 #largeImage {
@@ -50,22 +90,34 @@ nav.nav.blog-nav {
 }
 
 .col-lg-12.hide-it.info-field-work {
-    display: none;
+	display: none;
 }
+
+
 .info-kort h2 {
 	margin-top: 10px;
-    border-bottom: 3px solid black;
+	text-decoration: underline; 
+	font-family: Corbel;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 1em!important;
+	letter-spacing: 2px;
+}
+
+.info-kort p, .info-beskrivelse p {
+	font-family: Corbel;
 }
 
 .info-kort {
-    width: 30%;
-    float: left;
+	width: 30%;
+	float: left;
 }
 
 .info-beskrivelse {
 	float: left;
+	width: 66%;
 	margin-left: 20px;	
-	padding-top: 49px;
+	padding-top: 56px;
 }
 .billede-upload {
 	display: block;
@@ -83,8 +135,8 @@ nav.nav.blog-nav {
 
 .work-file-field {
 	width: 190px; 
-    font-size: 12px;
-    letter-spacing: -1px;
+	font-size: 12px;
+	letter-spacing: -1px;
 }
 
 .billede-upload-felt {
@@ -100,25 +152,30 @@ nav.nav.blog-nav {
 }
 
 .work-navbar {
+	height: 40px;
 	position: relative;
-	    margin-top: 10px;
+	margin-top: 10px;
 }
 
 img.overview-img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%; 
+	display: block;
+	margin: 0 auto;
+	max-width: 100%; 
 }
 .col-md-3.overview-work {
-    margin: 0;
-    margin-bottom: 20px;
-    margin-top: 5px;
+	margin: 0;
+	margin-bottom: 20px;
+	margin-top: 5px;
 }
 .info-button-active {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 .info-button {
-	background-color: black;
+	font-size: 0.8em;
+	font-family: Corbel;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	background-color: lighten(black, 75%);
 	color: white;
 	position: absolute;
 	left: 0;
@@ -126,15 +183,15 @@ img.overview-img {
 	padding: 0.5rem 1rem;
 	#InfoTriangle {
 		position: absolute;
-	    border-left: 12px solid transparent;
-	    border-right: 12px solid transparent;
-	    border-bottom: 17px solid black;
-	    width: 0;
-	    height: 0;
-	    right: 0;
-	    top: 12px;
-	    margin-right: -13px;
-	    transform: rotate(0deg);
+		border-left: 12px solid transparent;
+		border-right: 12px solid transparent;
+		border-bottom: 17px solid black;
+		width: 0;
+		height: 0;
+		right: 0;
+		top: 12px;
+		margin-right: -13px;
+		transform: rotate(0deg);
 	}
 	&:hover {
 		text-decoration: underline;
@@ -156,9 +213,9 @@ img.overview-img {
 }
 
 .img-cat-remove {
-    position: absolute;
-    right: 0;
-    top: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .img-cat-name-input {
@@ -166,5 +223,7 @@ img.overview-img {
 }
 
 .nav-link {
+	font-size: 19px; 
+	font-family: LinLibertine;
 	cursor: pointer;
 }

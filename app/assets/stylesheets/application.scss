@@ -14,6 +14,15 @@
  *= require_self
  */
 
+ @font-face {
+   font-family: 'Corbel';
+   src:url('corbel.ttf') format('truetype');
+ }
+ @font-face {
+   font-family: 'LinLibertine';
+   src:url('LinLibertineReg.ttf') format('truetype');
+ }
+
  @import "bootstrap";
 
 .devise-layout {
@@ -33,7 +42,7 @@ a {
 }
 
 .masthead-overskrift {
-	font-family: "Times New Roman";
+	font-family: LinLibertine;
 	color: black; 
 	margin-top: 20px;
 	a:hover {
@@ -42,6 +51,9 @@ a {
 	}
 }
 
+.blog-nav {
+	background-color: lighten(black, 80%);
+}
 .blog-nav .active {
 	text-decoration: underline;
 }

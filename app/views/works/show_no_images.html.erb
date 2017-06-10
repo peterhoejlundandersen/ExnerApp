@@ -1,1 +1,3 @@
 <h1><%= @work.name %></h1>
+<%= logged_in_work_helper if logged_in?(:site_admin) %>
+<p><%= @work.description %>

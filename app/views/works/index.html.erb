@@ -5,14 +5,24 @@
 			<div class="col-md-3 overview-work">
 		<%= link_to work_path(work) do %>
 				<% if !work.overview_img.file.nil? %>
+					<div class="overview-img-block">
 					<%= image_tag(work.overview_img, class: "overview-img") %>
-					<%= work.name %>
+					</div>
+					<h2 class="overview-work-h2"><%= work.name %></h2>
 				<% elsif work.images.empty? %>
-					<h2><%= work.name %></h2>
-					<p class="alert alert-succes">Værket er uden billeder</p>
+					<div class="without-overview-img">
+						<span class="without-overview-text">
+							Værket er uden billede
+						</span>
+					</div>
+					<h2 class="overview-work-h2"><%= work.name %></h2>
 				<% else %>
-					<h2><%= work.name %></h2>
-					<p class="alert alert-succes">Værket er uden oversigtbillede</p>
+					<div class="without-overview-img">
+						<span class="without-overview-text">
+							Værket er uden oversigtsbillede
+						</span>
+					</div>
+					<h2 class="overview-work-h2"><%= work.name %></h2>
 
 				<% end %>
 

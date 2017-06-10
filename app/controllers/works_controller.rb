@@ -49,7 +49,7 @@ class WorksController < ApplicationController
 
   def show 
    @work = Work.friendly.find(params[:id])
-   unless @work.image_categories.empty?
+   unless @work.image_categories.first.images.empty?
     @image_categories = @work.image_categories
     @images = @image_categories.first.images 
     @first_image_url = @images.first.image.url
