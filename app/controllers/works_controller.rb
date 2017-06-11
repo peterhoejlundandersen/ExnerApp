@@ -4,15 +4,15 @@ class WorksController < ApplicationController
   layout "works"  
 
   def index
-    @works = Category.first.works.order_by_position
-    # if params[:category_name] == "design"
-    #   set_design_categories
-    #   render 'categories/design_overview'
-    # else
-    #   @category = Category.friendly.find(params[:category_name])
-    #   @works = @category.works.order(position: :asc)   
-    #   @header_title = @category.name
-    # end
+    # @works = Category.first.works.order_by_position
+    if params[:format] == "design"
+      set_design_categories
+      render 'categories/design_overview'
+    else
+      @category = Category.friendly.find(params[:format])
+      @header_title = @category.name
+      @works = @category.works.order_by_position 
+    end
   end  
 
   def sort

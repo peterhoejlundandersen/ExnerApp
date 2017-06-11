@@ -2,7 +2,7 @@
 
 <% unless @works.empty? %>
 	<% @works.each do |work| %>
-			<div class="col-md-3 overview-work card" data-id="<%= work.id %>">
+			<div class="col-md-3 overview-work sortable-item" data-id="<%= work.id %>">
 		<%= link_to work_path(work) do %>
 				<% if !work.overview_img.file.nil? %>
 					<div class="overview-img-block">
