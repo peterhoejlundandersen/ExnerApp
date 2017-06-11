@@ -24,17 +24,17 @@ module WorksHelper
 	def img_cat_col_helper img_cat_num
 		case img_cat_num
 		when 1
-			10
+			"img-cat-1"
 		when 2
-			5
+			"img-cat-2"
 		when 3
-			3
+			"img-cat-3"
 		when 4
-			2
+			"img-cat-4"
 		when 5
-			2
+			"img-cat-5"
 		when 6
-			2
+			"img-cat-6"
 		end
 
 	end

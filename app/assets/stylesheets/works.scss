@@ -153,10 +153,21 @@ nav.nav.blog-nav {
   align-items: center;
 }
 
-.work-navbar {
+.nav-thumbnail-con .work-navbar {
 	height: 30px;
 	position: relative;
 	margin-top: 10px;
+}
+.nav-thumbnail-con .work-navbar .nav-link:first-child {
+	margin-left: 20px!important;
+}
+
+.nav-thumbnail-con .nav-link {
+		font-size: 0.8em;
+		font-family: Corbel;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		cursor: pointer;
 }
 
 img.overview-img {
@@ -173,15 +184,17 @@ img.overview-img {
 	text-decoration: underline;
 }
 .info-button {
+	left: 0;
+	
 	font-size: 0.8em;
 	font-family: Corbel;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	background-color: lighten(black, 75%);
 	color: white;
-	left: 0;
 	cursor: pointer;
 	padding: 0.5rem 1rem;
+	margin-right: 15px;
 	#InfoTriangle {
 		position: absolute;
 		border-left: 12px solid transparent;
@@ -223,8 +236,3 @@ img.overview-img {
 	text-align: center;
 }
 
-.nav-link {
-	font-size: 19px; 
-	font-family: LinLibertine;
-	cursor: pointer;
-}
