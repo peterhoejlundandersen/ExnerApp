@@ -16,7 +16,7 @@ class WorksController < ApplicationController
   end  
 
   def sort
-    
+
     params[:order].each do |key, value|
       Work.find(value[:id]).update(position: value[:position])
     end 
@@ -24,6 +24,7 @@ class WorksController < ApplicationController
     render nothing: true   
 
   end
+
 
   def new
     @work = Work.new()
@@ -67,51 +68,50 @@ class WorksController < ApplicationController
  def show 
    @work = Work.friendly.find(params[:id])
    unless @work.image_categories.first.images.empty?
-    @image_categories = @work.image_categories
-    @images = @image_categories.first.images 
-    @first_image_url = @images.first.image.url
+    @image_categories = @work.image_categories.includes(:images).order("images.position ASC")
+    @first_image_url = @image_categories.first.images.first.image
     render 'show'
   else 
-    render 'show_no_images'
-  end 
-end
-
-def destroy
- @work = Work.friendly.find(params[:id])
- work_category = @work.category_id
- work_name = Work.name
- if @work.destroy
-  flash[:succes] = "#{work_name} er nu blevet slettet"
-  redirect_to kategori_oversigt_path(work_category)
-end
-
-end
-
-
-
-def category_show
- 	# Dette kunne gøres for at lave et kategory each field som menu
- 	# @work = Category.find(category_slug: params[:category]).works 
- end
-
-
- private
-
- def set_design_categories
-   @categories = []
-   @categories << Category.find(13)
-   @categories << Category.find(15)
-   @categories << Category.find(18)
- end
-
- def prepare_save
-   @work.image_categories.each do |img_cat| 
-    img_cat.save
-    binding.pry
-    if images = Image.where(image_category_id: img_cat.id)
-      img_cat.images << images
+      # For work without images
+      render 'show_no_images'
     end 
   end
+
+  def sort_images
+    params[:order].each do |key, value|
+      Image.find(value[:id]).update(position: value[:position])
+    end
+    render nothing: true
+  end
+
+  def destroy
+   @work = Work.friendly.find(params[:id])
+   work_category = @work.category_id
+   work_name = Work.name
+     if @work.destroy
+      flash[:succes] = "#{work_name} er nu blevet slettet"
+      redirect_to kategori_oversigt_path(work_category)
+    end
+
+  end
+
+private
+
+def set_design_categories
+ @categories = []
+ @categories << Category.find(13)
+ @categories << Category.find(15)
+ @categories << Category.find(18)
+end
+
+def prepare_save
+ @work.image_categories.each do |img_cat| 
+  img_cat.save
+  binding.pry
+  if images = Image.where(image_category_id: img_cat.id)
+    img_cat.images << images
+  end 
+end
 end
 
 def work_params

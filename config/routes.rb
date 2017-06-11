@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 	
 	resources :works do
 		put :sort, on: :collection
+		member do
+			put :sort_images
+		end
 	end
 	
 	get 'vaerker/:category_name/' => 'works#banan', as: "kategori-oversigt"
