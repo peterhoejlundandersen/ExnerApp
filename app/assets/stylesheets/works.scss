@@ -58,7 +58,7 @@ span.without-overview-text {
 	}
 }
 nav.nav.blog-nav {
-	width: 1300px;
+	max-width: 1300px;
 	margin: 0 auto;
 }
 
@@ -111,13 +111,13 @@ nav.nav.blog-nav {
 
 .info-kort {
 	font-family: Corbel;
-	width: 30%;
+	width: 34%;
 	float: left;
 }
 
 .info-beskrivelse {
 	float: left;
-	width: 66%;
+	width: 64%;
 	margin-left: 20px;	
 	padding-top: 56px;
 }
