@@ -1,3 +1,5 @@
+<%= javascript_include_tag "work_images", 'data-turbolinks-track' => true %>
+
 <div class="row work-row">
 	<%= logged_in_work_helper if logged_in?(:site_admin) %>
 
@@ -43,7 +45,8 @@
 		$(".info-field-work").slideToggle("fast");
 	});
 
-	
+
+
 
 </script>
 
