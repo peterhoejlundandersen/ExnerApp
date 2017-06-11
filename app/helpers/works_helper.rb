@@ -16,8 +16,8 @@ module WorksHelper
 		info << "Adresse: #{work.address}<br>" if work.address
 		info << "Konkurrenceår: #{work.competition.to_s}<br>" if work.competition
 		info << "Indvielse: #{work.opening_year.to_s}<br>" if work.opening_year
-		info << "</p>"
 		work.infos.each {|i| info << "#{i.title} <br>" } unless work.infos.empty?
+		info << "</p>"
 		content_tag :div, info.html_safe, class: "info-kort"
 	end
 
