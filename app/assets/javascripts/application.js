@@ -16,7 +16,7 @@
 //= require rails-ujs
 //= require cocoon
 //= require popper
-//= require html.sortable
+
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require cable
