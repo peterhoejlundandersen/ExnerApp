@@ -124,6 +124,7 @@ def work_params
   :competition,
   :opening_year,
   :overview_img,
+  :position,
   {infos_attributes: 
     [:id, :work_id, :title, :_destroy]},
     {image_categories_attributes: 

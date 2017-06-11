@@ -10,6 +10,8 @@
 			</label>
 		</div>
 
+		<%= f.hidden_field :position %>
+
 		<div class="form-group">
 			<%= f.label :name, "Navn:" %>
 			<%= f.text_field :name, class: "form-control" %>
@@ -71,6 +73,11 @@
 				<% end %>
 		</div>
 	</div>
+	<div class="col-md-12">
+
+		<%= f.submit submit_button_text, class: "btn btn-primary" %>
+
+	</div>
 	<div class="container">
 		<hr>
 			<%= f.fields_for :image_categories do |cat| %>
@@ -92,12 +99,3 @@
 		</div>
 	</div>
 	<% end %>
-
-
-	<script type="text/javascript">
-		
-		$(document).ready(function() {
-			alert("hey!");
-			$(".sort-this-image").sortable();
-		});
-	</script>
