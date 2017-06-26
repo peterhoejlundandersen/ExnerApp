@@ -65,7 +65,7 @@
 
 			<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
 			<% else %>
-			<%= f.label :overview_img, :"Billede til oversigten" %>
+			<%= f.label :overview_img, "Billede til oversigten" %>
 			<%= image_tag f.object.overview_img.url %>
 			<p>Vælg nyt billede</p>
 				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>

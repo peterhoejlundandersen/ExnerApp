@@ -1,10 +1,9 @@
 class WorksController < ApplicationController
   access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
-
+  # before_action :modify_overview_img_in_work_params, only: [:update, :create]
   layout "works"  
 
   def index
-    # @works = Category.first.works.order_by_position
     if params[:format] == "design"
       set_design_categories
       render 'categories/design_overview'
@@ -16,13 +15,10 @@ class WorksController < ApplicationController
   end  
 
   def sort
-
     params[:order].each do |key, value|
       Work.find(value[:id]).update(position: value[:position])
     end 
-
     render nothing: true   
-
   end
 
 
@@ -37,20 +33,9 @@ class WorksController < ApplicationController
 
   end
 
-  def update
-    @work = Work.friendly.find(params[:id])
-    if @work.update(work_params)
-
-      flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
-      redirect_to work_path(@work)
-    else
-      redirect_to kategori_oversigt_path(@work.category_id)
-    end
-
-
-  end
   
   def create
+    binding.pry
    @work = Work.new(work_params)
     params[:work][:image_categories_attributes].values.each do |img_cat|
       img_cat[:images_attributes].values.each do |img|
@@ -96,8 +81,39 @@ class WorksController < ApplicationController
    work_name = Work.name
      if @work.destroy
       flash[:succes] = "#{work_name} er nu blevet slettet"
-      redirect_to kategori_oversigt_path(work_category)
+      redirect_to works_path(work_category.name.parameterize)
     end
+
+  end
+
+  def update
+
+
+    @work = Work.friendly.find(params[:id])
+    
+    if @work.update(work_params)
+
+    params[:work][:image_categories_attributes].values.each do |img_cat|
+      img_cat[:images_attributes].values.each do |img|
+        if img[:is_review_img] == "1"
+          #Kalder den work_params, saa den vil blive redigeret
+          binding.pry
+          @work.overview_img = Image.find(img[:id]).image
+          @work.save!
+          binding.pry
+
+        end
+      end
+    end  
+
+      flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
+      redirect_to work_path(@work)
+
+
+    else
+      redirect_to kategori_oversigt_path(@work.category_id)
+    end
+
 
   end
 
@@ -110,15 +126,29 @@ def set_design_categories
  @categories << Category.find(18)
 end
 
-def prepare_save
- @work.image_categories.each do |img_cat| 
-  img_cat.save
-  binding.pry
-  if images = Image.where(image_category_id: img_cat.id)
-    img_cat.images << images
-  end 
+# def prepare_save
+#  @work.image_categories.each do |img_cat| 
+#   img_cat.save
+#   binding.pry
+#   if images = Image.where(image_category_id: img_cat.id)
+#     img_cat.images << images
+#   end 
+# end
+# end
+
+def modify_overview_img_in_work_params
+  params[:work][:image_categories_attributes].values.each do |img_cat|
+    img_cat[:images_attributes].values.each do |img|
+      if img[:is_review_img] == "1"
+        #Kalder den work_params, saa den vil blive redigeret
+        params[:work][:overview_img] = 
+                    Image.find(img[:id]).image
+                    binding.pry
+      end
+    end
+  end  
 end
-end
+
 
 def work_params
  params.require(:work).permit(
