@@ -11,10 +11,7 @@ Rails.application.routes.draw do
 			put :sort_images
 		end
 	end
-	
-	get 'vaerker/:category_name/' => 'works#banan', as: "kategori-oversigt"
-	
-
+		
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 
 	get 'billede-uploader' => 'image_uploaders#uploader', as: "image_uploader"

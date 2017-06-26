@@ -51,11 +51,17 @@ class WorksController < ApplicationController
   end
   
   def create
-
    @work = Work.new(work_params)
-   @work.category_id = Category.find(1).id
+    params[:work][:image_categories_attributes].values.each do |img_cat|
+      img_cat[:images_attributes].values.each do |img|
+        if img[:is_review_img] == 1
+          @work.overview_img = img
+          binding.pry
+        end
+      end
+    end
 
-   if @work.save
+   if @work.save!
 
      flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
      redirect_to @work
@@ -130,6 +136,6 @@ def work_params
     {image_categories_attributes: 
       [:id, :work_id, :name, :_destroy,
         images_attributes: 
-        [:id, :image, :photographer, :image_description, :_destroy]]}) 
+        [:id, :image, :photographer, :image_description, :is_review_img, :_destroy]]}) 
 end
 end

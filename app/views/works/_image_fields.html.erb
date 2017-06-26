@@ -1,4 +1,7 @@
 <div class="form-group nested-fields col-lg-3 billede-upload-box sort-this-image">
+	<%= f.label :is_review_img, "Vælg som oversigtsbillede: " %>
+	<%= f.check_box :is_review_img %>
+	
 	<% unless f.object.image.file.nil? %>
 		<%= image_tag f.object.image.thumb.url %>
 	<% else %>
