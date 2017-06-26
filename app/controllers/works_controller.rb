@@ -35,16 +35,8 @@ class WorksController < ApplicationController
 
   
   def create
-    binding.pry
    @work = Work.new(work_params)
-    params[:work][:image_categories_attributes].values.each do |img_cat|
-      img_cat[:images_attributes].values.each do |img|
-        if img[:is_review_img] == 1
-          @work.overview_img = img
-          binding.pry
-        end
-      end
-    end
+    
 
    if @work.save!
 
@@ -88,23 +80,11 @@ class WorksController < ApplicationController
 
   def update
 
-
     @work = Work.friendly.find(params[:id])
     
     if @work.update(work_params)
 
-    params[:work][:image_categories_attributes].values.each do |img_cat|
-      img_cat[:images_attributes].values.each do |img|
-        if img[:is_review_img] == "1"
-          #Kalder den work_params, saa den vil blive redigeret
-          binding.pry
-          @work.overview_img = Image.find(img[:id]).image
-          @work.save!
-          binding.pry
-
-        end
-      end
-    end  
+      save_overview_img_if_checkbox_checked @work
 
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
       redirect_to work_path(@work)
@@ -129,24 +109,26 @@ end
 # def prepare_save
 #  @work.image_categories.each do |img_cat| 
 #   img_cat.save
-#   binding.pry
+#   
 #   if images = Image.where(image_category_id: img_cat.id)
 #     img_cat.images << images
 #   end 
 # end
 # end
 
-def modify_overview_img_in_work_params
-  params[:work][:image_categories_attributes].values.each do |img_cat|
-    img_cat[:images_attributes].values.each do |img|
-      if img[:is_review_img] == "1"
-        #Kalder den work_params, saa den vil blive redigeret
-        params[:work][:overview_img] = 
-                    Image.find(img[:id]).image
-                    binding.pry
-      end
-    end
-  end  
+def save_overview_img_if_checkbox_checked work
+ params[:work][:image_categories_attributes].values.each do |img_cat|
+   img_cat[:images_attributes].values.each do |img|
+     if img[:is_review_img] == "1"
+       #Kalder den work_params, saa den vil blive redigeret
+       work.overview_img = Image.find(img[:id]).image
+       work.save!
+       return work
+
+     end
+   end
+ end  
+ 
 end
 
 

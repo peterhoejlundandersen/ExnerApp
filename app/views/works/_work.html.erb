@@ -1,6 +1,5 @@
 <%= link_to work_path(work) do %>
 <div class="col-md-3">
-<% binding.pry %>
 	<% unless work.overview_img.file.nil? %>
 		<%= image_tag(work.overview_img.url)%>
 	<% else %>

@@ -59,18 +59,16 @@
 	<div class="col-md-4">
 		<hr>
 		<div class="form-group">
+			<h4>Oversigtsbillede</h4>
 			<% if f.object.overview_img.file.nil? %>
 			<%= f.label :overview_img, "Oversigtbillede" %>
-			<p>Vælg billedet, som skal være på oversigten. (gerne 285x185px) </p>
+			<p>Vælg billedet, som skal være på oversigten ved at trykke på "Vælg som oversigtsbillede"-checkboxen under billederne nedenunde.</p>
 
-			<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
 			<% else %>
-			<%= f.label :overview_img, "Billede til oversigten" %>
 			<%= image_tag f.object.overview_img.url %>
-			<p>Vælg nyt billede</p>
-				<%= f.file_field :overview_img, class: "form-control", rows: 12 %>
+			<p>Vælg nyt billede ved at tjekke et nyt felt ved siden af "Vælg som oversigtbillede" over hvert billede underneden.</p>
 
-				<% end %>
+			<% end %>
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -99,3 +97,11 @@
 		</div>
 	</div>
 	<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('input.overview-img-checkbox').on('change', function() {
+		    $('input.overview-img-checkbox').not(this).prop('checked', false);  
+		});
+	});
+</script>
