@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :johannes_writings do
+  end
+
 	devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' } 
 	
 	resources :categories, except: :index
