@@ -5,6 +5,7 @@
 CarrierWave.configure do |config|
 config.ignore_integrity_errors = true
   config.fog_provider = 'fog/aws'                        # required
+  config.fog_public = true
   config.fog_credentials = {
     provider:              'AWS',                        # required
     aws_access_key_id:     ENV["AWS_ACCESS_KEY_ID"],        # required

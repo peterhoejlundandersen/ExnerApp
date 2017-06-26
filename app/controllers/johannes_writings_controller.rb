@@ -20,6 +20,15 @@ class JohannesWritingsController < ApplicationController
 	end
 	def show
 		@johannes_writing = JohannesWriting.friendly.find(params[:id])
+		# respond_to do |format|
+		# 	format.pdf do 
+		# 		send_file @johannes_writing.pdf.url
+		# 	end
+		# 	format.html do
+		# 		render :show
+		# 	end
+
+		# end
 	end
 
 	private

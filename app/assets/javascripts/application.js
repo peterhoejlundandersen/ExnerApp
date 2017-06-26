@@ -16,7 +16,8 @@
 //= require rails-ujs
 //= require cocoon
 //= require popper
-
+//= require vendor/pdf
+//= require vendor/pdf.worker
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require cable
