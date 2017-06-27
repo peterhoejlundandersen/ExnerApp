@@ -85,3 +85,4 @@ gem 'font-awesome-rails'
 gem 'rake'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 # PDF-viewer
+gem 'pdfjs_viewer-rails'
