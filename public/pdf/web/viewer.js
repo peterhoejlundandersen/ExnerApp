@@ -6446,7 +6446,10 @@ var pdfjsWebLibs;
     'null',
     'http://mozilla.github.io',
     'https://mozilla.github.io',
-    'http://localhost:3000/'
+    'http://localhost:3000', 
+    'https://inger-exner.herokuapp.com',
+    'http://inger-exner.herokuapp.com',
+    'https://s3.eu-west-2.amazonaws.com'
    ];
    validateFileURL = function validateFileURL(file) {
     try {

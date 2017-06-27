@@ -1,6 +1,4 @@
 <h1>Hey, i er igang!</h1>
-<%= link_to "display using the full viewer", pdfjs.full_path(file: "compressed.tracemonkey-pldi-09.pdf") %>
-
 <%= link_to "Opret ny artikel/pdf", new_johannes_writing_path(), class: "btn btn-primary" if logged_in?(:site_admin) %>
 <hr>
 <%= render @johannes_writings %>
