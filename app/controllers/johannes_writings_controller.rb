@@ -1,4 +1,5 @@
 class JohannesWritingsController < ApplicationController
+
 	layout "works"
 	def index
 		@johannes_writings = JohannesWriting.all
@@ -36,4 +37,7 @@ class JohannesWritingsController < ApplicationController
 	def johannes_writing_params
 		params.require(:johannes_writing).permit(:title, :pdf)
 	end
+
+
+	private
 end
