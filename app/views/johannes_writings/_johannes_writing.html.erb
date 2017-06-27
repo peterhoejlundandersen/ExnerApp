@@ -1,11 +1,4 @@
-<% pdf_viewer_path = "pdf/web/viewer?file=" %>
-<% file_path = ERB::Util.url_encode(johannes_writing.pdf.url) %>
-
-<%= link_to pdf_viewer_path + file_path do %>
+<%= link_to johannes_writing_path(johannes_writing) do %>
 <h3>Læs</h3>
-
-<% end %>
 <hr>
-
-
-
+<% end %>

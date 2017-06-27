@@ -1,3 +1,45 @@
+<%# pdf_viewer_path = "pdf/web/viewer?file=" %>
+<%# file_path = ERB::Util.url_encode(johannes_writing.pdf.url) %>
+<%#= link_to pdf_viewer_path + file_path do %>
+
+<script type="text/javascript" src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+<script type="text/javascript">
+// URL of PDF document
+var url = "<%= @johannes_writing.pdf.url %>";
+
+// Asynchronous download PDF
+PDFJS.getDocument(url)
+  .then(function(pdf) {
+    return pdf.getPage(1);
+  })
+  .then(function(page) {
+
+    // Set scale (zoom) level
+    var scale = 1.5;
+
+    // Get viewport (dimensions)
+    var viewport = page.getViewport(scale);
+
+    // Get div#the-svg
+    var container = document.getElementById('the-svg');
+
+    // Set dimensions
+    container.style.width = viewport.width + 'px';
+    container.style.height = viewport.height + 'px';
+
+    // SVG rendering by PDF.js
+    page.getOperatorList()
+      .then(function (opList) {
+        var svgGfx = new PDFJS.SVGGraphics(page.commonObjs, page.objs);
+        return svgGfx.getSVG(opList, viewport);
+      })
+      .then(function (svg) {
+        container.appendChild(svg);
+      });
+
+  });
+</script>
 <h4 class="text-center"><%= @johannes_writing.title %></h4>
-<div id="viewer"></div>
+<div id="the-svg"></div>
 

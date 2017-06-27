@@ -1,6 +1,7 @@
 class JohannesWritingsController < ApplicationController
 
-	layout "works"
+	layout "works", except: [:show]
+	layout false, only: [:show]
 	def index
 		@johannes_writings = JohannesWriting.all
 	end
