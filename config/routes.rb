@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-
-	mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
+	get 'pdf-views/show' => 'pdf_views#show', as: 'pdf_view' do
+	end
 
 	devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' } 
 	
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 	end
 	
 	resources :johannes_writings do
+
 	end
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"

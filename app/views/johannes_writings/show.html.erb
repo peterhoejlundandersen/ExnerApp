@@ -1,6 +1,2 @@
-<%# pdf_viewer_path = "pdf/web/viewer?file=" %>
-<%# file_path = ERB::Util.url_encode(johannes_writing.pdf.url) %>
-<%#= link_to pdf_viewer_path + file_path do %>
+<iframe src="<%= @johannes_url %>" style="border: 0" frameborder="0" scrolling="no"></iframe>
 
-
-<%= pdfjs_viewer pdf_url: @johannes_writing.pdf.url, style: :full %>

@@ -4,6 +4,17 @@
 @import "bootstrap";
 @import "jquery-ui";
 
+/* FOR IFRAME */
+html, body {
+	height: 100%;
+	width: 100%;
+}
+iframe {
+    height: 100%;
+    width: 100%;
+}
+
+
 $img-form-color: lighten(#B3E5FC, 10%);
 
 .work-header {

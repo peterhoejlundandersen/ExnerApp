@@ -1,6 +1,5 @@
 class JohannesWritingsController < ApplicationController
-
-	layout "works", except: [:show]
+	layout "works"
 	def index
 		@johannes_writings = JohannesWriting.all
 
@@ -21,7 +20,10 @@ class JohannesWritingsController < ApplicationController
 		
 	end
 	def show
-		@johannes_writing = JohannesWriting.friendly.find(params[:id])
+		johannes_writing = JohannesWriting.friendly.find(params[:id])
+		encoded_url = ERB::Util.url_encode(johannes_writing.pdf.url)
+		path_to_viewer = "/pdfjs/web/viewer.html?file="
+		@johannes_url = path_to_viewer + encoded_url
 		render layout: false
 	end
 
@@ -33,4 +35,6 @@ class JohannesWritingsController < ApplicationController
 
 
 	private
+
+
 end
