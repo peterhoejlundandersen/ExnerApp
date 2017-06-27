@@ -2,8 +2,11 @@
 <% file_path = ERB::Util.url_encode(johannes_writing.pdf.url) %>
 
 <%= link_to pdf_viewer_path + file_path do %>
-<%= johannes_writing.title %>
+
+	<%= johannes_writing.title %>
+
 <% end %>
+
 <hr>
 
 

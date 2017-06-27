@@ -100,8 +100,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('input.overview-img-checkbox').on('change', function() {
-		    $('input.overview-img-checkbox').not(this).prop('checked', false);  
+		$('body').on('change', '.overview-img-checkbox', function() {
+		    $('.overview-img-checkbox').not(this).prop('checked', false);  
 		});
 	});
 </script>
