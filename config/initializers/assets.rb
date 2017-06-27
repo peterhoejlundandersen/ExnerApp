@@ -12,10 +12,6 @@ Rails.application.config.assets.precompile += %w( frontpage.scss )
 Rails.application.config.assets.precompile += %w( work_images.js )
 Rails.application.config.assets.precompile += %w( works.js )
 Rails.application.config.assets.precompile += %w( html.sortable.js )
-Rails.application.config.assets.precompile += %w( vendor/pdf.worker.js )
-Rails.application.config.assets.precompile += %w( vendor/pdf.js )
-
-# Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )

@@ -1,9 +1,9 @@
 class JohannesWritingsController < ApplicationController
 
 	layout "works", except: [:show]
-	layout false, only: [:show]
 	def index
 		@johannes_writings = JohannesWriting.all
+
 	end
 
 	def new
@@ -22,15 +22,7 @@ class JohannesWritingsController < ApplicationController
 	end
 	def show
 		@johannes_writing = JohannesWriting.friendly.find(params[:id])
-		# respond_to do |format|
-		# 	format.pdf do 
-		# 		send_file @johannes_writing.pdf.url
-		# 	end
-		# 	format.html do
-		# 		render :show
-		# 	end
-
-		# end
+		render layout: false
 	end
 
 	private

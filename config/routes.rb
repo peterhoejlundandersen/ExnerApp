@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+	mount PdfjsViewer::Rails::Engine => "/pdfjs", as: 'pdfjs'
 
 	devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' } 
 	
