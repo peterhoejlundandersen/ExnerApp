@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626145751) do
+ActiveRecord::Schema.define(version: 20170628110738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170626145751) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "pdf"
+    t.string "remote_url_amazon"
     t.index ["slug"], name: "index_johannes_writings_on_slug", unique: true
   end
 

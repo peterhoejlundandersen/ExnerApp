@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 		end
 	end
 	
+		get "upload_pdfs" => "johannes_writings#upload_pdfs", as: "upload_pdfs"
 	resources :johannes_writings do
-
 	end
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"

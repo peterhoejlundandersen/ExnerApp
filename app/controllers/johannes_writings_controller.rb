@@ -21,10 +21,28 @@ class JohannesWritingsController < ApplicationController
 	end
 	def show
 		johannes_writing = JohannesWriting.friendly.find(params[:id])
-		encoded_url = ERB::Util.url_encode(johannes_writing.pdf.url)
+		encoded_url = ERB::Util.url_encode(johannes_writing.remote_url_amazon)
 		path_to_viewer = "/pdfjs/web/viewer.html?file="
 		@johannes_url = path_to_viewer + encoded_url
 		render layout: false
+	end
+
+	def upload_pdfs
+
+		s3 = Aws::S3::Client.new 
+		resp = s3.list_objects(bucket: 'exnerbilleder', max_keys: 100, prefix: "pdf")
+		resp.contents.each do |object|
+			title_from_path = object.key.split("/")[-1].split(".")[0..-2].join(".")
+			binding.pry
+			JohannesWriting.create(
+							title: title_from_path,
+							remote_url_amazon: 
+							"https://s3.eu-west-2.amazonaws.com/exnerbilleder/" + 
+							URI.escape(object.key)
+							)
+			binding.pry
+		end
+
 	end
 
 	private

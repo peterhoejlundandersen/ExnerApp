@@ -44,6 +44,8 @@ gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
 gem 'foundation-rails'
 gem 'fog-aws'
+# Få at få kontakt til min bucket
+gem 'aws-sdk', '~> 2'
 gem 'jquery-rails'
 gem 'friendly_id', '~> 5.1.0', :require => "friendly_id"
 gem 'mini_magick'

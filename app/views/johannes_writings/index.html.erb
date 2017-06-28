@@ -3,3 +3,5 @@
 <%= link_to "Opret ny artikel/pdf", new_johannes_writing_path(), class: "btn btn-primary" if logged_in?(:site_admin) %>
 <hr>
 <%= render @johannes_writings %>
+
+<%= link_to "Upload PDFS", upload_pdfs_path() %>
