@@ -1,5 +1,7 @@
+# Sort images
 ready = undefined
 set_positions = undefined
+
 
 set_positions = -> 
   $(".sortable-image-item").each (i) ->
@@ -15,6 +17,7 @@ ready = ->
     $(".sortable-image-item").each (i) -> 
       updated_order.push
         id: $(this).data("id")
+        type: $(this).data("type")
         position: i + 1
       return
     $.ajax
@@ -25,4 +28,8 @@ ready = ->
   return
 
 
-$(document).ready ready 
+
+$(document).ready ready
+
+
+

@@ -62,7 +62,11 @@ class WorksController < ApplicationController
 
   def sort_images
     params[:order].each do |key, value|
-      Image.find(value[:id]).update(position: value[:position])
+      if value[:type] == "ImageCategory"
+        ImageCategory.find(value[:id]).update(position: value[:position])
+      else
+        Image.find(value[:id]).update(position: value[:position])
+      end
     end
     render nothing: true
   end

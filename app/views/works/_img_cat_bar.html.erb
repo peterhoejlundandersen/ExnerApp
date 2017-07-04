@@ -1,6 +1,6 @@
 <div class="blog-masthead work-navbar-outer">
 	<div class="nav-container nav-thumbnail-con container">
-		<nav class="nav work-navbar ">
+		<nav class="nav work-navbar sortable-images">
 			<div class="info-button">
 			 Info
 			</div>
@@ -8,7 +8,7 @@
 			<%= "<span class='hide-it'>".html_safe if image_categories.length == 1 %>
 				<% image_categories.each_with_index do |img_cat, index| %>
 				<%= content_tag :div, img_cat.name, 
-								class: "nav-link text-center img-cat-nav col-md-#{num} #{"active" if index == 0}", data: { divid: img_cat.id} %>
+								class: "nav-link sortable-image-item stext-center img-cat-nav col-md-#{num} #{"active" if index == 0}", data: { divid: img_cat.id, id: img_cat.id, type: img_cat.class.to_s } %>
 				<% end %>
 			<%= "</span>" if image_categories.length == 1%>
 		</nav>
