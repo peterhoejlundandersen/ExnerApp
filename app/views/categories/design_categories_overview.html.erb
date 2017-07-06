@@ -1,0 +1,12 @@
+<h2 class="text-center">Vælg kategori</h2>
+<div class="row">
+<% @categories.each do |cat| %>
+	<div class="col-md-4">
+	<%= link_to works_path(cat.name.parameterize) do %>
+	<h3 class="text-center"><%= cat.name %></h3>
+	<% end %>
+	</div>
+
+
+<% end %>
+

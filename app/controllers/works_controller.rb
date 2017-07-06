@@ -1,12 +1,11 @@
 class WorksController < ApplicationController
   access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
-  # before_action :modify_overview_img_in_work_params, only: [:update, :create]
   layout "works"  
 
   def index
     if params[:format] == "design"
       set_design_categories
-      render 'categories/design_overview'
+      render 'categories/design_categories_overview'
     else
       @category = Category.friendly.find(params[:format])
       @header_title = @category.name
@@ -36,8 +35,6 @@ class WorksController < ApplicationController
   
   def create
    @work = Work.new(work_params)
-    
-
    if @work.save!
 
      flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
@@ -109,16 +106,6 @@ def set_design_categories
  @categories << Category.find(15)
  @categories << Category.find(18)
 end
-
-# def prepare_save
-#  @work.image_categories.each do |img_cat| 
-#   img_cat.save
-#   
-#   if images = Image.where(image_category_id: img_cat.id)
-#     img_cat.images << images
-#   end 
-# end
-# end
 
 def save_overview_img_if_checkbox_checked work
  params[:work][:image_categories_attributes].values.each do |img_cat|

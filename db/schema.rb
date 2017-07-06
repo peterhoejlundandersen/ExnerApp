@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704075147) do
+ActiveRecord::Schema.define(version: 20170705082204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,14 +64,20 @@ ActiveRecord::Schema.define(version: 20170704075147) do
     t.integer "work_id"
   end
 
-  create_table "johannes_writings", force: :cascade do |t|
+  create_table "pdf_categories", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
-    t.string "pdf"
-    t.string "remote_url_amazon"
-    t.index ["slug"], name: "index_johannes_writings_on_slug", unique: true
+  end
+
+  create_table "pdfs", force: :cascade do |t|
+    t.string "title"
+    t.string "file"
+    t.bigint "pdf_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "date"
+    t.index ["pdf_category_id"], name: "index_pdfs_on_pdf_category_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,4 +1,3 @@
-# Sort images
 ready = undefined
 set_positions = undefined
 
