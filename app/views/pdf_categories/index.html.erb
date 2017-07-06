@@ -1,2 +1,9 @@
-<h5>hey!</h5>
-<%= link_to "Upload pdfs!", upload_pdfs_path %>
+
+<% @pdfs.each do |pdf| %>
+
+	<h2><%= pdf.title %></h2>
+	<%= link_to "Se pdf", pdf_path(pdf) %>
+
+<% end %>
+
+<%# link_to "Upload pdfs!", upload_pdfs_via_s3_path %>

@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'pdf_categories/show'
-
-  get 'pdf_categories/new'
-
-  get 'pdf_categories/edit'
-
 	get 'pdf-views/show' => 'pdf_views#show', as: 'pdf_view' do
 	end
 
@@ -22,8 +16,11 @@ Rails.application.routes.draw do
 	end
 	
 	get "upload_pdfs/now" => "pdf_categories#upload_pdfs", as: "upload_pdfs"
+	get "upload_pdfs_via_s3/now" => "pdf_categories#upload_pdfs_via_s3", as: "upload_pdfs_via_s3"
 	resources :pdf_categories do
 	end
+
+	resources :pdfs, controller: "pdf_categories"
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 
