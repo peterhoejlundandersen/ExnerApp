@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705082204) do
+ActiveRecord::Schema.define(version: 20170706102646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170705082204) do
     t.bigint "pdf_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "date"
+    t.datetime "date"
     t.index ["pdf_category_id"], name: "index_pdfs_on_pdf_category_id"
   end
 

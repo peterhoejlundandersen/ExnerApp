@@ -1,9 +1,18 @@
 
-<% @pdfs.each do |pdf| %>
+<% @pdf_categories.each do |cat| %>
 
-	<h2><%= pdf.title %></h2>
-	<%= link_to "Se pdf", pdf_path(pdf) %>
+	<h4><%= cat.title %></h4>
+	------------
 
 <% end %>
 
-<%# link_to "Upload pdfs!", upload_pdfs_via_s3_path %>
+<% @pdf_categories.each do |pdf_categories| %>
+	<% pdf_categories.pdfs.each do |pdf| %>
+		<%= link_to pdf_path(pdf)  do %>
+		<h2><%= pdf.title %></h2>
+		<%= content_tag :p, "Udgivet: #{pdf.date.strftime("%Y")}" unless pdf.date.nil? %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<%= link_to "Upload pdfs!", upload_pdfs_via_s3_path %>

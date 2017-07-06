@@ -1,10 +1,10 @@
 class PdfCategoriesController < ApplicationController
-	include PdfCategoriesHelper
+	access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
 	layout false
 	layout "works", except: [:show]
 
 	def index
-		@pdfs = Pdf.all
+		@pdf_categories = PdfCategory.all.includes(:pdfs)
 	end
 
 	def show
@@ -25,9 +25,10 @@ class PdfCategoriesController < ApplicationController
 
 		s3 = Aws::S3::Resource.new
 		objects = s3.bucket('exnerbilleder').objects(prefix: "pdf/")
-
 		objects.each do |object|
+		binding.pry
 			next if object.key == "pdf/"
+			next if folder_or_file_excluded? object.key.split("/").last 
 
 			category_title = object.key.split("/")[-2]
 
@@ -45,16 +46,30 @@ class PdfCategoriesController < ApplicationController
 			encode_object_key = URI.encode(object.key)
 			amazon_url = amazon_bucket_path + encode_object_key
 
+			first_num_or_letters = file_name_without_ending.split(" ").first
+
+			if is_integer? first_num_or_letters
+				date_from_file = first_num_or_letters
+				date_from_file = date_from_file.to_i
+				file_name_without_ending = file_name_without_ending.split(" ")[1..-1].join(" ")
+			elsif ( first_num_or_letters.split(".").length > 1 ) && ( is_integer? first_num_or_letters.split(".").first )
+				date_from_file = first_num_or_letters.split(".")
+				date_from_file.map! { |date| date.to_i }
+				file_name_without_ending = file_name_without_ending.split(" ")[1..-1].join(" ")
+			else
+				date_from_file = nil
+			end 
+
 			Pdf.create!(
 					title: file_name_without_ending, 
 					pdf_category_id: @pdf_category.id,
+					date: date_from_file.nil? ? nil : DateTime.new(*date_from_file),
 					file: amazon_url
 					)
-			binding.pry
 
 		end
 
-		head :ok
+		redirect_to pdf_categories_path
 	end
 
 	def upload_pdfs
@@ -86,7 +101,6 @@ class PdfCategoriesController < ApplicationController
 				File.open("#{path}/#{category_path}/#{file_path}") do |file_from_path|
 					new_pdf.file = file_from_path
 					new_pdf.save!
-					binding.pry
 				end
 
 			end # file_path
@@ -100,7 +114,7 @@ class PdfCategoriesController < ApplicationController
 
 	def remove_last_obj_of_arr array
 		new_array = array.first array.size - 1
-		new_array.join()
+		new_array.join(".")
 
 	end
 
