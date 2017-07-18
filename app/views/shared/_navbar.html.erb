@@ -9,7 +9,7 @@
     <%= link_to "Kirkerestaureringer", works_path("Kirkerestaureringer".parameterize), class: "nav-link #{active_helper? works_path("Kirkerestaureringer".parameterize)}" %>
     <%= link_to "Design", works_path("Design".parameterize), class: "nav-link #{active_helper? works_path("Design".parameterize)}" %>
     <%= link_to "Ikke opført", works_path("Ikke opført".parameterize), class: "nav-link #{active_helper? works_path("Ikke opført".parameterize)}" %>
-    <%= link_to "Johannes' tekster", pdf_categories_path(), class: "nav-link" %>
+    <%= link_to "Johannes' tekster", show_pdf_category_path(0), class: "nav-link" %>
     <%= link_to "Om", om_path, class: "nav-link #{active_helper? om_path}" %>
     </nav>
   </div>

@@ -4,7 +4,13 @@ class PdfCategoriesController < ApplicationController
 	layout "works", except: [:show]
 
 	def index
-		@pdf_categories = PdfCategory.all.includes(:pdfs)
+		unless params[:category_id] == "0"
+			@pdf_categories = PdfCategory.all
+			@pdfs = Pdf.where(pdf_category_id: params[:category_id])
+		else 
+			@pdf_categories = PdfCategory.all
+			@pdfs = Pdf.all
+		end
 	end
 
 	def show
@@ -26,7 +32,6 @@ class PdfCategoriesController < ApplicationController
 		s3 = Aws::S3::Resource.new
 		objects = s3.bucket('exnerbilleder').objects(prefix: "pdf/")
 		objects.each do |object|
-		binding.pry
 			next if object.key == "pdf/"
 			next if folder_or_file_excluded? object.key.split("/").last 
 
@@ -42,9 +47,7 @@ class PdfCategoriesController < ApplicationController
 			file_name_array = file_name_with_ending.split(".")
 			file_name_without_ending = remove_last_obj_of_arr file_name_array
 			#Pdf path
-			amazon_bucket_path = "https://s3.eu-west-2.amazonaws.com/exnerbilleder/"
-			encode_object_key = URI.encode(object.key)
-			amazon_url = amazon_bucket_path + encode_object_key
+			amazon_url = object.public_url
 
 			first_num_or_letters = file_name_without_ending.split(" ").first
 
@@ -70,43 +73,6 @@ class PdfCategoriesController < ApplicationController
 		end
 
 		redirect_to pdf_categories_path
-	end
-
-	def upload_pdfs
-		
-		path = "/Users/bruger/Desktop/DENHER"
-
-		Dir.foreach(path) do |category_path|
-
-			puts "*" * 30
-			puts "FØR pdf_category create"
-			puts "*" * 30
-
-			next if folder_or_file_excluded? category_path
-			pdf_category = PdfCategory.create!(title: category_path)
-
-			puts "*" * 30
-			puts "EFTER pdf_category create"
-			puts "*" * 30
-
-			Dir.foreach("#{path}/#{category_path}") do |file_path|  
-
-				next if folder_or_file_excluded? file_path
-
-				new_pdf = Pdf.new(
-							title: file_path,
-							pdf_category_id: pdf_category.id,
-							)
-
-				File.open("#{path}/#{category_path}/#{file_path}") do |file_from_path|
-					new_pdf.file = file_from_path
-					new_pdf.save!
-				end
-
-			end # file_path
-
-		end # category_path
-		redirect_to root_path
 	end
 
 
