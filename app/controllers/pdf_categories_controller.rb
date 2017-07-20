@@ -17,8 +17,8 @@ class PdfCategoriesController < ApplicationController
 		pdf_viewer = "/pdfjs/web/viewer.html?file="
 		pdf = Pdf.find(params[:id])
 		@pdf_category = pdf.pdf_category
-		@next_pdf = Pdf.find(pdf.id + 1) unless pdf == Pdf.last 
-		@prev_pdf = Pdf.find(pdf.id - 1) unless pdf == Pdf.first
+		pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1) 
+		pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
 		@pdf_url = pdf_viewer + pdf.file
 	end
 
