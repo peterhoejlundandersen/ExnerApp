@@ -20,6 +20,9 @@ class PdfCategoriesController < ApplicationController
 		pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1) 
 		pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
 		@pdf_url = pdf_viewer + pdf.file
+		# Alt data der skal vises i pdf-navbar, hvis jeg bruger den anden metode
+		# @pdf_url = pdf_viewer + pdf.file + "&next_title=#{@next_pdf.title}" + "&next_id=#{@next_pdf.id}" + "&prev_title=#{@prev_pdf.title}" + "&prev_id=#{@prev_pdf.id}" + "&pdf_category_title=#{@pdf_category.title}" + "&pdf_category_id=#{@pdf_category.id}"
+
 	end
 
 	def new
