@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 	
 
 	### PDFS ### 	
+
 	resources :pdf_categories, except: [:index]
 
 	resources :pdfs, controller: "pdf_categories"
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
 
 	get 'pdf-views/show' => 'pdf_views#show', as: 'pdf_view'
 
-	### END PDFS ### 
+	### PDFS END ### 
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 

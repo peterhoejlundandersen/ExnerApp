@@ -1,13 +1,13 @@
 
 
 <div style="float: left; width: 33%; height: 30px; text-align: center">
-	<%= fa_icon("arrow-left", text: truncate(@prev_pdf.title, length: 30)) unless @prev_pdf.nil? %>
+	<%= link_to fa_icon("arrow-left", text: truncate(@prev_pdf.title, length: 30)), pdf_category_path(@prev_pdf) unless @prev_pdf.nil? %>
 </div>
 <div style="float: left; width: 33%; height: 30px; text-align: center">
 	<%= @pdf_category.title %>
 </div>
 <div style="float: left; width: 33%; height: 30px; text-align: center">
-	<%= fa_icon("arrow-right", text: truncate(@next_pdf.title, length: 30), right: true) unless @next_pdf.nil? %>
+	<%= link_to fa_icon("arrow-right", text: truncate(@next_pdf.title, length: 30), right: true), pdf_category_path(@next_pdf) unless @next_pdf.nil? %>
 </div>
 
 <iframe src="<%= @pdf_url %>" style="left: 0; border: 0; width: 100%; height: 100%; position: absolute; top: 30px" frameborder="0" scrolling="no" crossorigin="anonymous">
