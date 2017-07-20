@@ -167,7 +167,7 @@ html[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
 #mainContainer {
   position: absolute;
   /* HAR JEG ÆNDRET */
-  top: 30px!important;
+  top: 0px;
   right: 0;
   bottom: 0;
   left: 0;

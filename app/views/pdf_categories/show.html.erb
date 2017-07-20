@@ -1,5 +1,16 @@
-<% binding.pry %>
-<iframe src="<%= @pdf_url %>" style="border: 0; width: 100%; height: 100%" frameborder="0" scrolling="no" crossorigin="anonymous">
+
+
+<div style="float: left; width: 33%; height: 30px; text-align: center">
+	<%= fa_icon("arrow-left", text: truncate(@prev_pdf.title, length: 30)) unless @prev_pdf.nil? %>
+</div>
+<div style="float: left; width: 33%; height: 30px; text-align: center">
+	<%= @pdf_category.title %>
+</div>
+<div style="float: left; width: 33%; height: 30px; text-align: center">
+	<%= fa_icon("arrow-right", text: truncate(@next_pdf.title, length: 30), right: true) unless @next_pdf.nil? %>
+</div>
+
+<iframe src="<%= @pdf_url %>" style="left: 0; border: 0; width: 100%; height: 100%; position: absolute; top: 30px" frameborder="0" scrolling="no" crossorigin="anonymous">
 </iframe> 
 
 
