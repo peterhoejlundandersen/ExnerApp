@@ -15,8 +15,10 @@ class PdfCategoriesController < ApplicationController
 
 	def show
 		pdf_viewer = "/pdfjs/web/viewer.html?file="
-		url = Pdf.find(params[:id]).file
-		@pdf_url = pdf_viewer + url
+		pdf = Pdf.find(params[:id])
+		next_title = Pdf.find(pdf.id + 1).title
+		prev_title = Pdf.find(pdf.id - 1).title
+		@pdf_url = pdf_viewer + pdf.file + "&n=" + next_title + "&p" + prev_title
 	end
 
 	def new

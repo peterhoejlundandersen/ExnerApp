@@ -13,18 +13,19 @@ Rails.application.routes.draw do
 		end
 	end
 	
-	
-	resources :pdf_categories, except: [:index] do
 
-	end
-	get "pdf-kategori/:category_id" => "pdf_categories#index", as: "show_pdf_category"
-
+	### PDFS ### 	
+	resources :pdf_categories, except: [:index]
 
 	resources :pdfs, controller: "pdf_categories"
+
+	get "pdf-kategori/:category_id" => "pdf_categories#index", as: "show_pdf_category"
 
 	get "upload_pdfs_via_s3/now" => "pdf_categories#upload_pdfs_via_s3", as: "upload_pdfs_via_s3"
 
 	get 'pdf-views/show' => 'pdf_views#show', as: 'pdf_view'
+
+	### END PDFS ### 
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 
