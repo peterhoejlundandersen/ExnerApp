@@ -3,11 +3,11 @@ class WorksController < ApplicationController
   layout "works"  
 
   def index
-    if params[:format] == "design"
+    if params[:vaerker_cat] == "design"
       set_design_categories
       render 'categories/design_categories_overview'
     else
-      @category = Category.friendly.find(params[:format])
+      @category = Category.friendly.find(params[:vaerker_cat])
       @header_title = @category.name
       @works = @category.works.order_by_position 
     end

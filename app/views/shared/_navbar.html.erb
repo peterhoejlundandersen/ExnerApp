@@ -2,14 +2,14 @@
   <div class="nav-container container">
     <nav class="nav blog-nav">
     <%= link_to "Oversigt", oversigt_path, class: "nav-link #{active_helper? oversigt_path}" %>
-    <%= link_to "Kirker og sognegårde", works_path("Kirker og sognegårde".parameterize), class: "nav-link #{active_helper? works_path("Kirker og sognegårde".parameterize)}" %>
-    <%= link_to "Koldinghus", works_path("Koldinghus".parameterize), class: "nav-link #{active_helper? works_path("Koldinghus".parameterize)}" %>
-    <%= link_to "Særlige bygninger", works_path("Særlige bygninger".parameterize), class: "nav-link #{active_helper? works_path("Særlige bygninger".parameterize)}" %>
-    <%= link_to "Andre", works_path("Andre".parameterize), class: "nav-link #{active_helper? works_path("Andre".parameterize)}" %>
-    <%= link_to "Kirkerestaureringer", works_path("Kirkerestaureringer".parameterize), class: "nav-link #{active_helper? works_path("Kirkerestaureringer".parameterize)}" %>
-    <%= link_to "Design", works_path("Design".parameterize), class: "nav-link #{active_helper? works_path("Design".parameterize)}" %>
-    <%= link_to "Ikke opført", works_path("Ikke opført".parameterize), class: "nav-link #{active_helper? works_path("Ikke opført".parameterize)}" %>
-    <%= link_to "Johannes' tekster", show_pdf_category_path(0), class: "nav-link" %>
+    <%= link_to "Kirker og sognegårde", vaerker_path("Kirker og sognegårde".parameterize), class: "nav-link #{active_helper? vaerker_path("Kirker og sognegårde".parameterize)}" %>
+    <%= link_to "Koldinghus", vaerker_path("Koldinghus".parameterize), class: "nav-link #{active_helper? vaerker_path("Koldinghus".parameterize)}" %>
+    <%= link_to "Særlige bygninger", vaerker_path("Særlige bygninger".parameterize), class: "nav-link #{active_helper? vaerker_path("Særlige bygninger".parameterize)}" %>
+    <%= link_to "Andre", vaerker_path("Andre".parameterize), class: "nav-link #{active_helper? vaerker_path("Andre".parameterize)}" %>
+    <%= link_to "Kirkerestaureringer", vaerker_path("Kirkerestaureringer".parameterize), class: "nav-link #{active_helper? vaerker_path("Kirkerestaureringer".parameterize)}" %>
+    <%= link_to "Design", vaerker_path("Design".parameterize), class: "nav-link #{active_helper? vaerker_path("Design".parameterize)}" %>
+    <%= link_to "Ikke opført", vaerker_path("Ikke opført".parameterize), class: "nav-link #{active_helper? vaerker_path("Ikke opført".parameterize)}" %>
+    <%= link_to "Johannes' tekster", show_pdf_category_path("Alle", 0), class: "nav-link" %>
     <%= link_to "Om", om_path, class: "nav-link #{active_helper? om_path}" %>
     </nav>
   </div>

@@ -5,7 +5,7 @@
 	</div>
 	<% @pdf_categories.each do |cat| %>
 	<div class="col-md-6 col-sm-4 pdf-cat <%= "active" if cat.id == params[:category_id].to_i %>">
-		<%= link_to show_pdf_category_path(cat) do %>
+		<%= link_to show_pdf_category_path(cat.friendly_id, cat.id) do %>
 		<h4><%= cat.title %></h4>
 		<% end %>
 	</div>
@@ -15,7 +15,8 @@
 	<div class="pdf-works row">
 		<% @pdfs.each do |pdf| %>
 		<div class="col-md-3">
-			<%= link_to pdf_path(pdf)  do %>
+			<%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf) if logged_in?(:site_admin) %>
+			<%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
 			<h4><%= pdf.title %></h4>
 			<%= content_tag :p, "Udgivet: #{pdf.date.strftime("%Y")}" unless pdf.date.nil? %>
 			<% end %>

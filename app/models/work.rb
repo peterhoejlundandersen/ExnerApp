@@ -1,7 +1,7 @@
 class Work < ActiveRecord::Base
 	extend FriendlyId
-	mount_uploader :overview_img, OverviewUploader
 	friendly_id :name, use: :slugged
+	mount_uploader :overview_img, OverviewUploader
 	belongs_to :category
 	has_many :infos
 	has_many :image_categories, -> { order(position: :asc) } 

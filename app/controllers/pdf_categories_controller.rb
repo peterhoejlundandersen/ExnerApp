@@ -6,28 +6,11 @@ class PdfCategoriesController < ApplicationController
 	def index
 		unless params[:category_id] == "0"
 			@pdf_categories = PdfCategory.all
-			@pdfs = Pdf.where(pdf_category_id: params[:category_id])
+ 			@pdfs = Pdf.where(pdf_category_id: params[:category_id])
 		else 
 			@pdf_categories = PdfCategory.all
 			@pdfs = Pdf.all
 		end
-	end
-
-	def show
-		pdf_viewer = "/pdfjs/web/viewer.html?file="
-		pdf = Pdf.find(params[:id])
-		@pdf_category = pdf.pdf_category
-		pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1) 
-		pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
-		@pdf_url = pdf_viewer + pdf.file
-	end
-
-	def new
-
-	end
-
-	def edit
-
 	end
 
 	# def upload_pdfs_via_s3 
@@ -81,22 +64,22 @@ class PdfCategoriesController < ApplicationController
 
 	private 
 
-	def remove_last_obj_of_arr array
-		new_array = array.first array.size - 1
-		new_array.join(".")
+	# def remove_last_obj_of_arr array
+	# 	new_array = array.first array.size - 1
+	# 	new_array.join(".")
 
-	end
+	# end
 
-	def is_integer? thing
-		thing.to_i.to_s == thing
-	end 
+	# def is_integer? thing
+	# 	thing.to_i.to_s == thing
+	# end 
 
-	def folder_or_file_excluded? folder_file
-		list = %w(. .git DS_Store .. .DS_Store)
-		list.include? folder_file	
-	end
+	# def folder_or_file_excluded? folder_file
+	# 	list = %w(. .git DS_Store .. .DS_Store)
+	# 	list.include? folder_file	
+	# end
 
-	def pdf_params
-		params.require(:pdf_category).permit(:title, pdf_attributtes: [:title, :file])
-	end
+	# def pdf_params
+	# 	params.require(:pdf_category).permit(:title, pdf_attributtes: [:title, :file])
+	# end
 end
