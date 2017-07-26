@@ -20,9 +20,6 @@ class PdfCategoriesController < ApplicationController
 		pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1) 
 		pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
 		@pdf_url = pdf_viewer + pdf.file
-		# Alt data der skal vises i pdf-navbar, hvis jeg bruger den anden metode
-		# @pdf_url = pdf_viewer + pdf.file + "&next_title=#{@next_pdf.title}" + "&next_id=#{@next_pdf.id}" + "&prev_title=#{@prev_pdf.title}" + "&prev_id=#{@prev_pdf.id}" + "&pdf_category_title=#{@pdf_category.title}" + "&pdf_category_id=#{@pdf_category.id}"
-
 	end
 
 	def new
@@ -33,53 +30,53 @@ class PdfCategoriesController < ApplicationController
 
 	end
 
-	def upload_pdfs_via_s3 
+	# def upload_pdfs_via_s3 
 
-		s3 = Aws::S3::Resource.new
-		objects = s3.bucket('exnerbilleder').objects(prefix: "pdf/")
-		objects.each do |object|
-			next if object.key == "pdf/"
-			next if folder_or_file_excluded? object.key.split("/").last 
+	# 	s3 = Aws::S3::Resource.new
+	# 	objects = s3.bucket('exnerbilleder').objects(prefix: "pdf/")
+	# 	objects.each do |object|
+	# 		next if object.key == "pdf/"
+	# 		next if folder_or_file_excluded? object.key.split("/").last 
 
-			category_title = object.key.split("/")[-2]
+	# 		category_title = object.key.split("/")[-2]
 
-			@pdf_category ||= Pdf.new			
+	# 		@pdf_category ||= Pdf.new			
 
-			unless @pdf_category.title == category_title
-				@pdf_category = PdfCategory.create!(title: category_title) 
-			end
-			#Pdf title
-			file_name_with_ending = object.key.split("/")[-1]
-			file_name_array = file_name_with_ending.split(".")
-			file_name_without_ending = remove_last_obj_of_arr file_name_array
-			#Pdf path
-			amazon_url = object.public_url
+	# 		unless @pdf_category.title == category_title
+	# 			@pdf_category = PdfCategory.create!(title: category_title) 
+	# 		end
+	# 		#Pdf title
+	# 		file_name_with_ending = object.key.split("/")[-1]
+	# 		file_name_array = file_name_with_ending.split(".")
+	# 		file_name_without_ending = remove_last_obj_of_arr file_name_array
+	# 		#Pdf path
+	# 		amazon_url = object.public_url
 
-			first_num_or_letters = file_name_without_ending.split(" ").first
+	# 		first_num_or_letters = file_name_without_ending.split(" ").first
 
-			if is_integer? first_num_or_letters
-				date_from_file = first_num_or_letters
-				date_from_file = date_from_file.to_i
-				file_name_without_ending = file_name_without_ending.split(" ")[1..-1].join(" ")
-			elsif ( first_num_or_letters.split(".").length > 1 ) && ( is_integer? first_num_or_letters.split(".").first )
-				date_from_file = first_num_or_letters.split(".")
-				date_from_file.map! { |date| date.to_i }
-				file_name_without_ending = file_name_without_ending.split(" ")[1..-1].join(" ")
-			else
-				date_from_file = nil
-			end 
+	# 		if is_integer? first_num_or_letters
+	# 			date_from_file = first_num_or_letters
+	# 			date_from_file = date_from_file.to_i
+	# 			file_name_without_ending = file_name_without_ending.split(" ")[1..-1].join(" ")
+	# 		elsif ( first_num_or_letters.split(".").length > 1 ) && ( is_integer? first_num_or_letters.split(".").first )
+	# 			date_from_file = first_num_or_letters.split(".")
+	# 			date_from_file.map! { |date| date.to_i }
+	# 			file_name_without_ending = file_name_without_ending.split(" ")[1..-1].join(" ")
+	# 		else
+	# 			date_from_file = nil
+	# 		end 
 
-			Pdf.create!(
-					title: file_name_without_ending, 
-					pdf_category_id: @pdf_category.id,
-					date: date_from_file.nil? ? nil : DateTime.new(*date_from_file),
-					file: amazon_url
-					)
+	# 		Pdf.create!(
+	# 				title: file_name_without_ending, 
+	# 				pdf_category_id: @pdf_category.id,
+	# 				date: date_from_file.nil? ? nil : DateTime.new(*date_from_file),
+	# 				file: amazon_url
+	# 				)
 
-		end
+	# 	end
 
-		redirect_to pdf_categories_path
-	end
+	# 	redirect_to pdf_categories_path
+	# end
 
 
 	private 
