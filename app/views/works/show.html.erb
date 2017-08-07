@@ -14,7 +14,7 @@
 	<div class="col-lg-12 hide-it info-field-work">
 		<%= info_helper @work %>
 		<div class="info-beskrivelse">
-		<%= simple_format(@work.description) if @work.description %>
+			<%= simple_format(@work.description) if @work.description %>
 		</div>
 	</div>
 
@@ -29,42 +29,35 @@
 <script type="text/javascript">
 	
 	$(document).keydown(function(e) {
-	    switch(e.which) {
+		switch(e.which) {
 	        case 37: // venstre piletast
-	        	var image_id = $("#largeImage").data('pos');
-	        	if ( $("#" + image_id).data("start") ) {
+	        var image_id = $("#largeImage").data('pos');
+	        if ( $("#" + image_id).data("start") ) {
 	        		// Hvis næste billede-kategori findes
 	        		var prev_img_cat = $(".nav-link.active").prev(".nav-link")
 	        		if ( prev_img_cat.length ) {
-	        			change_img_cat(prev_img_cat, last_image_active=true);
+	        			change_img_cat(
+	        				prev_img_cat, 
+	        				last_image_active=true
+	        				);
 	        		} else {
-	        			change_img_cat($(".work-navbar .nav-link").last(), true);
+	        			change_img_cat(
+	        				$(".work-navbar .nav-link").last(), last_image_active=true
+	        				);
 	        		}
 
 	        	} else {
-		        	var new_image_id = image_id - 1;
-		        	var next_thumb = $("#" + new_image_id);
-		        	var large_url = next_thumb.data("largeimage");
-		        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        	update_large_img(large_url, new_image_id);
+	        		var new_image_id = image_id - 1;
+	        		var next_thumb = $("#" + new_image_id);
+	        		var large_url = next_thumb.data("largeimage");
+	        		add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
+	        		update_large_img(large_url, new_image_id);
 	        	}
-		        // var image_id = $("#largeImage").data('pos');
-		        // var new_image_id = image_id - 1;
-		        // var next_thumb = $("#" + new_image_id);
-
-		        // if ( next_thumb.data("end") == "true" ) {
-		        // 	alert("Heeey!");
-
-		        // } else {		        	
-		        // var large_url = next_thumb.data("largeimage");
-		        // add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        // update_large_img(large_url, new_image_id);
-		        // }
-	        break;
+		    break;
 
 	        case 39: // højre piletast
-		        var image_id = $("#largeImage").data('pos');
-		        if ( $("#" + image_id).data("end") ) {
+	        var image_id = $("#largeImage").data('pos');
+	        if ( $("#" + image_id).data("end") ) {
 		        	// Hvis næste billede-kategori findes
 		        	var next_img_cat = $(".nav-link.active").next(".nav-link")
 		        	if ( next_img_cat.length ) {
@@ -74,34 +67,34 @@
 		        	}
 
 		        } else {
-		        var new_image_id = image_id + 1;
-		        var next_thumb = $("#" + new_image_id);
-		        var large_url = next_thumb.data("largeimage");
-		        add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        update_large_img(large_url, new_image_id);
-		        debugger;
-		    	}
-	        break;
+		        	var new_image_id = image_id + 1;
+		        	var next_thumb = $("#" + new_image_id);
+		        	var large_url = next_thumb.data("largeimage");
+		        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
+		        	update_large_img(large_url, new_image_id);
+
+		        }
+		    break;
 
 	        default: return; // exit this handler for other keys
 	    }
 	    e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
 // Skift mellem billeder ved tryk
-	$(".thumbnaildiv").on("click", function() {
-		add_active_class_rm_siblings(this, "thumbnail-active");
-		update_large_img( $(this).data("largeimage"), parseInt($(this).attr("id")) );
-	});
+$(".thumbnaildiv").on("click", function() {
+	add_active_class_rm_siblings(this, "thumbnail-active");
+	update_large_img( $(this).data("largeimage"), parseInt($(this).attr("id")) );
+});
 // Skift mellem billede-kategorierne
-	$(".img-cat-nav").on("click", function() {
-		change_img_cat(this);
-	});
-	
+$(".img-cat-nav").on("click", function() {
+	change_img_cat(this);
+});
+
 // info visning
-	$(".info-button").on("click", function() {
-		$(this).toggleClass("info-button-active");
-		$(".info-field-work").slideToggle("fast");
-	});
+$(".info-button").on("click", function() {
+	$(this).toggleClass("info-button-active");
+	$(".info-field-work").slideToggle("fast");
+});
 
 // FUNKTIONER
 function add_active_class_rm_siblings(object, active_class) {
