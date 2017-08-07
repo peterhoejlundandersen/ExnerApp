@@ -29,7 +29,6 @@ class WorksController < ApplicationController
   def edit
     @work = Work.friendly.find(params[:id])
     @categories = Category.all
-
   end
 
   
@@ -48,7 +47,7 @@ class WorksController < ApplicationController
  def show 
    @work = Work.friendly.find(params[:id])
    unless @work.image_categories.first.images.empty?
-    @image_categories = @work.image_categories.includes(:images).where(images: {draft: false })
+    @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
     @first_image = @image_categories.first.images.published.first
     render 'show'
   else 
