@@ -3,4 +3,6 @@ class ImageCategory < ApplicationRecord
 	belongs_to :work
 	has_many :images
 	accepts_nested_attributes_for :images, allow_destroy: true
+
+	default_scope { order(:position) }
 end

@@ -9,7 +9,7 @@ class WorksController < ApplicationController
     else
       @category = Category.friendly.find(params[:vaerker_cat])
       @header_title = @category.name
-      @works = @category.works.order_by_position 
+      @works = @category.works
     end
   end  
 
@@ -123,22 +123,22 @@ def save_overview_img_if_checkbox_checked work
 end
 
 
-def work_params
- params.require(:work).permit(
-  :name, 
-  :sagsnr, 
-  :category_id,
-  :description, 
-  :address,
-  :competition,
-  :opening_year,
-  :overview_img,
-  :position,
-  {infos_attributes: 
-    [:id, :work_id, :title, :_destroy]},
-    {image_categories_attributes: 
-      [:id, :work_id, :name, :_destroy,
-        images_attributes: 
-        [:id, :image, :photographer, :image_description, :is_review_img, :_destroy]]}) 
-end
+  def work_params
+   params.require(:work).permit(
+    :name, 
+    :sagsnr, 
+    :category_id,
+    :description, 
+    :address,
+    :competition,
+    :opening_year,
+    :overview_img,
+    :position,
+    {infos_attributes: 
+      [:id, :work_id, :title, :_destroy]},
+      {image_categories_attributes: 
+        [:id, :work_id, :name, :_destroy,
+          images_attributes: 
+          [:id, :image, :photographer, :image_description, :is_review_img, :_destroy]]}) 
+  end
 end
