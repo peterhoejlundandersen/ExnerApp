@@ -49,7 +49,7 @@ class WorksController < ApplicationController
    @work = Work.friendly.find(params[:id])
    unless @work.image_categories.first.images.empty?
     @image_categories = @work.image_categories.includes(:images).where(images: {draft: false })
-    @first_image_url = @image_categories.first.images.published.first.image
+    @first_image = @image_categories.first.images.published.first
     render 'show'
   else 
       # For work without images
