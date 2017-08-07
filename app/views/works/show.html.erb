@@ -31,7 +31,7 @@
 	
 	$(document).keydown(function(e) {
 	    switch(e.which) {
-	        case 37: // left
+	        case 37: // venstre piletast
 		        var image_id = $("#largeImage").data('pos');
 		        var new_image_id = image_id - 1;
 		        var large_url = $("#" + new_image_id).data("largeimage");
@@ -39,7 +39,7 @@
 		        $("#largeImage").data("pos", new_image_id);
 	        break;
 
-	        case 39: // right
+	        case 39: // højre piletast
 		        var image_id = $("#largeImage").data('pos');
 		        var new_image_id = image_id + 1;
 		        var large_url = $("#" + new_image_id).data("largeimage");
@@ -56,6 +56,7 @@
 		var thumbsrc = $(this).data("largeimage");
 		var thumbid = $(this).attr("id");
 		$("#largeImage").attr("src", thumbsrc);
+		$("#largeImage").data("pos", parseInt(thumbid));
 	});
 // Skift mellem thumbnailsoversigterne
 	$(".img-cat-nav").on("click", function() {
@@ -63,8 +64,12 @@
 		var divId = $(this).attr("data-divid");
 		$(".thumbnail-container").hide();
 		$("." + divId).show();
-		var catthumbsrc = $("." + divId).children().first().data("largeimage");
+		var first_child = $("." + divId).children().first()
+		var catthumbsrc = first_child.data("largeimage");
+		var new_img_id = first_child.data("pos");
 		$("#largeImage").attr("src", catthumbsrc);
+		$("#largeImage").data("pos", new_img_id);
+
 	});
 	
 // info visning
