@@ -8,7 +8,9 @@
 		<h2 class="work-headline text-center"><%= @work.name %></h2>
 	</div>
 	<div class="vertical-center">
+	<%= image_tag "arrow-left", class: "work-arrows", id: "leftArrow" %>
 		<%= image_tag @first_image.image, id: "largeImage", data: { pos: 1 } %>	    
+	<%= image_tag "arrow-right", class: "work-arrows", id: "rightArrow" %>
 
 	</div>
 	<div class="col-lg-12 hide-it info-field-work">
@@ -29,6 +31,7 @@
 <script type="text/javascript">
 	
 	$(document).ready(function() {
+		// Jeg var nødt til at lave den her for at det f*cking fungerede!
 		$("body").keydown(function(e) {
 			switch(e.which) {
 	        case 37: // venstre piletast
@@ -85,7 +88,9 @@
 // Skift mellem billeder ved tryk
 $(".thumbnaildiv").on("click", function() {
 	add_active_class_rm_siblings(this, "thumbnail-active");
-	update_large_img( $(this).data("largeimage"), parseInt($(this).attr("id")) );
+	thumb_large_url = $(this).data("largeimage");
+	thumb_id = parseInt($(this).attr("id"));
+	update_large_img( thumb_large_url, thumb_id );
 });
 // Skift mellem billede-kategorierne
 $(".img-cat-nav").on("click", function() {

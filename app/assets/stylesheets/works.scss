@@ -14,6 +14,20 @@ html, body {
 
 $img-form-color: lighten(#B3E5FC, 10%);
 
+.work-arrows {
+	position: absolute;
+	cursor: pointer;
+}
+#leftArrow {
+	left: 0;
+	width: 150px;
+	height: 150px;
+}
+#rightArrow {
+	right: 0;
+	width: 150px;
+	height: 150px;
+}
 .work-header {
 	font-family: LinLibertine;
 }
