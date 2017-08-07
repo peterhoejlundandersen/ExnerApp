@@ -40,37 +40,28 @@
 
 		        } else {		        	
 		        var large_url = next_thumb.data("largeimage");
-		        next_thumb.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
-		        $("#largeImage").attr("src", large_url); 
-		        $("#largeImage").data("pos", new_image_id);
+		        add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
+		        update_large_img(large_url, new_image_id);
 		        }
 	        break;
 
 	        case 39: // højre piletast
 		        var image_id = $("#largeImage").data('pos');
-		        var new_image_id = image_id + 1;
-		        var next_thumb = $("#" + new_image_id);
 		        if ( $("#" + image_id).data("end") ) {
 		        	// Hvis næste billede-kategori findes
 		        	var next_img_cat = $(".nav-link.active").next(".nav-link")
 		        	if ( next_img_cat.length ) {
-		        		next_img_cat.addClass('active').siblings().removeClass('active');
-		        		var divId = next_img_cat.attr("data-divid");
-		        		$(".thumbnail-container").hide();
-		        		$("." + divId).show();
-		        		var first_child = $("." + divId).children().first();
-		        		first_child.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
-		        		$("#largeImage").attr("src", first_child.data("largeimage"));
-		        		$("#largeImage").data("pos", parseInt(first_child.attr("id")));
+		        		change_img_cat(next_img_cat);
 		        	} else {
-		        		alert("Det findes ikke!");
+		        		change_img_cat($(".work-navbar .nav-link").first());
 		        	}
 
 		        } else {
+		        var new_image_id = image_id + 1;
+		        var next_thumb = $("#" + new_image_id);
 		        var large_url = next_thumb.data("largeimage");
-		        next_thumb.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
-		        $("#largeImage").attr("src", large_url); 
-		        $("#largeImage").data("pos", new_image_id);
+		        add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
+		        update_large_img(large_url, new_image_id);
 		    	}
 	        break;
 
@@ -79,23 +70,13 @@
 	    e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
 // Skift mellem billeder ved tryk
-	$(".thumbnaildiv").click(function() {
-		$(this).addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
-		$("#largeImage").attr("src", $(this).data("largeimage"));
-		$("#largeImage").data("pos", parseInt($(this).attr("id")));
+	$(".thumbnaildiv").on("click", function() {
+		add_active_class_rm_siblings(this, "thumbnail-active");
+		update_large_img( $(this).data("largeimage"), parseInt($(this).attr("id")) );
 	});
 // Skift mellem billede-kategorierne
 	$(".img-cat-nav").on("click", function() {
-		$(this).addClass('active').siblings().removeClass('active');
-		var divId = $(this).attr("data-divid");
-		$(".thumbnail-container").hide();
-		$("." + divId).show();
-
-		var first_child = $("." + divId).children().first();
-		first_child.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
-		$("#largeImage").attr("src", first_child.data("largeimage"));
-		$("#largeImage").data("pos", parseInt(first_child.attr("id")));
-
+		change_img_cat(this);
 	});
 	
 // info visning
@@ -104,6 +85,25 @@
 		$(".info-field-work").slideToggle("fast");
 	});
 
+// FUNKTIONER
+function add_active_class_rm_siblings(object, active_class) {
+	$(object).addClass(active_class).siblings().removeClass(active_class);
+}
 
+function change_img_cat(new_img_cat) {
+	add_active_class_rm_siblings(new_img_cat, "active");
+	var divId = $(new_img_cat).attr("data-divid");
+	$(".thumbnail-container").hide();
+	$("." + divId).show();
+	var first_child = $("." + divId).children().first();
+	first_child.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
+	$("#largeImage").attr("src", first_child.data("largeimage"));
+	$("#largeImage").data("pos", parseInt(first_child.attr("id")));
+}
+
+function update_large_img(src_attr, data_attr) {
+	$("#largeImage").attr("src", src_attr); 
+	$("#largeImage").data("pos", data_attr);
+}
 </script>
 
