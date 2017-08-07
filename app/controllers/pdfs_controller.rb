@@ -1,4 +1,6 @@
 class PdfsController < ApplicationController
+	layout "works", except: :show
+
 	def show
 		pdf_viewer = "/pdfjs/web/viewer.html?file="
 		pdf = Pdf.friendly.find(params[:id])
@@ -10,16 +12,29 @@ class PdfsController < ApplicationController
 
 	def edit
 		@pdf = Pdf.friendly.find(params[:id])
+		@category = @pdf.pdf_category
+		@categories = PdfCategory.all
 	end
 
-	def new
-		@pdf = Pdf.new()
+	def update
+		@pdf = Pdf.friendly.find(params[:id])
+		if @pdf.update(pdf_params)
+			flash[:notice] = "\"#{@pdf.title}\" er blevet opdateret."
+			redirect_to show_pdf_category_path("Alle", 0)
+		else
+			flash[:notice] = "Der gik noget galt. Prøv igen."
+			render "edit"
+		end
 	end
 
+def new
+	@pdf = Pdf.new()
+end
 
-	private
 
-	def pdf_params
-		params.require(:pdf).permit(:title, :file)
-	end
+private
+
+def pdf_params
+	params.require(:pdf).permit(:title, :pdf_category_id)
+end
 end

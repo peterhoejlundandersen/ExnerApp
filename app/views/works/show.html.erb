@@ -1,9 +1,6 @@
-<%= label_tag "Hey!" do %>
-Hej
-<% end %>
-
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "work_images", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
+
 <div class="row work-row">
 	<%= logged_in_work_helper if logged_in?(:site_admin) %>
 
@@ -42,7 +39,7 @@ Hej
 		$(".thumbnail-container").hide();
 		$("." + divId).show();
 	});
-
+	
 // info visning
 	$(".info-button").on("click", function() {
 		$(this).toggleClass("info-button-active");

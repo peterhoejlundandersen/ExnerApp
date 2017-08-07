@@ -4,7 +4,7 @@
 	<%= link_to truncate(@prev_pdf.title, length: 45), pdf_category_pdf_path(@prev_pdf.pdf_category, @prev_pdf) %>
 </div>
 <div style="float: left; width: 33%; height: 30px; text-align: center">
-	<%= link_to @pdf_category.title, show_pdf_category_path(@pdf_category.id) %>
+	<%= link_to @pdf_category.title, show_pdf_category_path(@pdf_category.friendly_id, @pdf_category.id) %>
 </div>
 <div style="float: left; width: 33%; height: 30px; text-align: center">
 	<%= link_to truncate(@next_pdf.title, length: 45), pdf_category_pdf_path(@next_pdf.pdf_category, @next_pdf) %>
