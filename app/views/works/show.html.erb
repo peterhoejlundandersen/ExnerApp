@@ -8,7 +8,7 @@
 		<h2 class="work-headline text-center"><%= @work.name %></h2>
 	</div>
 	<div class="vertical-center">
-		<%= image_tag @first_image.image, id: "largeImage", data: { pos: @first_image.position } %>	    
+		<%= image_tag @first_image.image, id: "largeImage", data: { pos: 1 } %>	    
 
 	</div>
 	<div class="col-lg-12 hide-it info-field-work">
@@ -27,48 +27,74 @@
 </div>
 
 <script type="text/javascript">
-// Thumbnail til stort billede
 	
 	$(document).keydown(function(e) {
 	    switch(e.which) {
 	        case 37: // venstre piletast
 		        var image_id = $("#largeImage").data('pos');
 		        var new_image_id = image_id - 1;
-		        var large_url = $("#" + new_image_id).data("largeimage");
+		        var next_thumb = $("#" + new_image_id);
+
+		        if ( next_thumb.data("end") == "true" ) {
+		        	alert("Heeey!");
+
+		        } else {		        	
+		        var large_url = next_thumb.data("largeimage");
+		        next_thumb.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
 		        $("#largeImage").attr("src", large_url); 
 		        $("#largeImage").data("pos", new_image_id);
+		        }
 	        break;
 
 	        case 39: // højre piletast
 		        var image_id = $("#largeImage").data('pos');
 		        var new_image_id = image_id + 1;
-		        var large_url = $("#" + new_image_id).data("largeimage");
+		        var next_thumb = $("#" + new_image_id);
+		        if ( $("#" + image_id).data("end") ) {
+		        	// Hvis næste billede-kategori findes
+		        	var next_img_cat = $(".nav-link.active").next(".nav-link")
+		        	if ( next_img_cat.length ) {
+		        		next_img_cat.addClass('active').siblings().removeClass('active');
+		        		var divId = next_img_cat.attr("data-divid");
+		        		$(".thumbnail-container").hide();
+		        		$("." + divId).show();
+		        		var first_child = $("." + divId).children().first();
+		        		first_child.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
+		        		$("#largeImage").attr("src", first_child.data("largeimage"));
+		        		$("#largeImage").data("pos", parseInt(first_child.attr("id")));
+		        	} else {
+		        		alert("Det findes ikke!");
+		        	}
+
+		        } else {
+		        var large_url = next_thumb.data("largeimage");
+		        next_thumb.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
 		        $("#largeImage").attr("src", large_url); 
 		        $("#largeImage").data("pos", new_image_id);
+		    	}
 	        break;
 
 	        default: return; // exit this handler for other keys
 	    }
 	    e.preventDefault(); // prevent the default action (scroll / move caret)
 	});
-
+// Skift mellem billeder ved tryk
 	$(".thumbnaildiv").click(function() {
-		var thumbsrc = $(this).data("largeimage");
-		var thumbid = $(this).attr("id");
-		$("#largeImage").attr("src", thumbsrc);
-		$("#largeImage").data("pos", parseInt(thumbid));
+		$(this).addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
+		$("#largeImage").attr("src", $(this).data("largeimage"));
+		$("#largeImage").data("pos", parseInt($(this).attr("id")));
 	});
-// Skift mellem thumbnailsoversigterne
+// Skift mellem billede-kategorierne
 	$(".img-cat-nav").on("click", function() {
 		$(this).addClass('active').siblings().removeClass('active');
 		var divId = $(this).attr("data-divid");
 		$(".thumbnail-container").hide();
 		$("." + divId).show();
-		var first_child = $("." + divId).children().first()
-		var catthumbsrc = first_child.data("largeimage");
-		var new_img_id = first_child.data("pos");
-		$("#largeImage").attr("src", catthumbsrc);
-		$("#largeImage").data("pos", new_img_id);
+
+		var first_child = $("." + divId).children().first();
+		first_child.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
+		$("#largeImage").attr("src", first_child.data("largeimage"));
+		$("#largeImage").data("pos", parseInt(first_child.attr("id")));
 
 	});
 	

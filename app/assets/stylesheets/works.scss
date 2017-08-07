@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 @import "jquery-ui";
+@import "mixins/transition";
 
 /* FOR IFRAME */
 html, body {
@@ -60,7 +61,9 @@ span.without-overview-text {
 .thumbnaildiv {
 	max-width: 16.3% !important;
 	cursor: pointer;
+	opacity: 1;
 	&:hover {
+	@include transition(opacity .4s ease-out);
 		opacity: 0.6;
 	}
 }
@@ -88,8 +91,15 @@ nav.nav.blog-nav {
 	padding: 0!important;
 	margin-top: 3px; 
 	border: 3px solid white; 
+
+	&:hover {
+		opacity: 0.6;
+	}
 }
 
+.thumbnail-active {
+	opacity: 0.5;
+}
 .work-row {
 	margin-bottom: 35px; 
 }
