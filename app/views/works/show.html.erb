@@ -31,18 +31,35 @@
 	$(document).keydown(function(e) {
 	    switch(e.which) {
 	        case 37: // venstre piletast
-		        var image_id = $("#largeImage").data('pos');
-		        var new_image_id = image_id - 1;
-		        var next_thumb = $("#" + new_image_id);
+	        	var image_id = $("#largeImage").data('pos');
+	        	if ( $("#" + image_id).data("start") ) {
+	        		// Hvis næste billede-kategori findes
+	        		var prev_img_cat = $(".nav-link.active").prev(".nav-link")
+	        		if ( prev_img_cat.length ) {
+	        			change_img_cat(prev_img_cat, last_image_active=true);
+	        		} else {
+	        			change_img_cat($(".work-navbar .nav-link").last(), true);
+	        		}
 
-		        if ( next_thumb.data("end") == "true" ) {
-		        	alert("Heeey!");
+	        	} else {
+		        	var new_image_id = image_id - 1;
+		        	var next_thumb = $("#" + new_image_id);
+		        	var large_url = next_thumb.data("largeimage");
+		        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
+		        	update_large_img(large_url, new_image_id);
+	        	}
+		        // var image_id = $("#largeImage").data('pos');
+		        // var new_image_id = image_id - 1;
+		        // var next_thumb = $("#" + new_image_id);
 
-		        } else {		        	
-		        var large_url = next_thumb.data("largeimage");
-		        add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        update_large_img(large_url, new_image_id);
-		        }
+		        // if ( next_thumb.data("end") == "true" ) {
+		        // 	alert("Heeey!");
+
+		        // } else {		        	
+		        // var large_url = next_thumb.data("largeimage");
+		        // add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
+		        // update_large_img(large_url, new_image_id);
+		        // }
 	        break;
 
 	        case 39: // højre piletast
@@ -62,6 +79,7 @@
 		        var large_url = next_thumb.data("largeimage");
 		        add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
 		        update_large_img(large_url, new_image_id);
+		        debugger;
 		    	}
 	        break;
 
@@ -90,15 +108,19 @@ function add_active_class_rm_siblings(object, active_class) {
 	$(object).addClass(active_class).siblings().removeClass(active_class);
 }
 
-function change_img_cat(new_img_cat) {
+function change_img_cat(new_img_cat, last_image_active=false) {
 	add_active_class_rm_siblings(new_img_cat, "active");
-	var divId = $(new_img_cat).attr("data-divid");
+	// Find connected thumbnail-div to img-cat-button
+	var divId = $(new_img_cat).data("divid");
 	$(".thumbnail-container").hide();
 	$("." + divId).show();
-	var first_child = $("." + divId).children().first();
-	first_child.addClass('thumbnail-active').siblings().removeClass('thumbnail-active');
-	$("#largeImage").attr("src", first_child.data("largeimage"));
-	$("#largeImage").data("pos", parseInt(first_child.attr("id")));
+	if (last_image_active) {
+		var img_child = $("." + divId).children().last();
+	} else {
+		var img_child = $("." + divId).children().first(); 
+	}
+	add_active_class_rm_siblings(img_child, 'thumbnail-active'); 
+	update_large_img(img_child.data("largeimage"), parseInt(img_child.attr("id"))); 
 }
 
 function update_large_img(src_attr, data_attr) {
