@@ -28,8 +28,9 @@
 
 <script type="text/javascript">
 	
-	$(document).keydown(function(e) {
-		switch(e.which) {
+	$(document).ready(function() {
+		$("body").keydown(function(e) {
+			switch(e.which) {
 	        case 37: // venstre piletast
 	        var image_id = $("#largeImage").data('pos');
 	        if ( $("#" + image_id).data("start") ) {
@@ -42,7 +43,7 @@
 	        				);
 	        		} else {
 	        			change_img_cat(
-	        				$(".work-navbar .nav-link").last(), last_image_active=true
+	        				$(".work-navbar .nav-link").last(),last_image_active=true
 	        				);
 	        		}
 
@@ -53,7 +54,7 @@
 	        		add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
 	        		update_large_img(large_url, new_image_id);
 	        	}
-		    break;
+			    break;
 
 	        case 39: // højre piletast
 	        var image_id = $("#largeImage").data('pos');
@@ -72,14 +73,15 @@
 		        	var large_url = next_thumb.data("largeimage");
 		        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
 		        	update_large_img(large_url, new_image_id);
-
 		        }
-		    break;
+			    break;
 
 	        default: return; // exit this handler for other keys
 	    }
 	    e.preventDefault(); // prevent the default action (scroll / move caret)
-	});
+	});			/* Act on the event */
+});
+
 // Skift mellem billeder ved tryk
 $(".thumbnaildiv").on("click", function() {
 	add_active_class_rm_siblings(this, "thumbnail-active");
