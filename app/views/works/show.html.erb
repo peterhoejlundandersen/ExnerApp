@@ -38,6 +38,8 @@
 		var divId = $(this).attr("data-divid");
 		$(".thumbnail-container").hide();
 		$("." + divId).show();
+		var catthumbsrc = $("." + divId).children().first().data("largeimage");
+		$("#largeImage").attr("src", catthumbsrc);
 	});
 	
 // info visning
