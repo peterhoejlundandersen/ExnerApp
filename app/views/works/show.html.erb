@@ -33,9 +33,13 @@
 	    switch(e.which) {
 	        case 37: // left
 	        var image_id = $("#largeImage").data('thumbid');
-	        var new_image_large_url = $("#" + image_id).prev().data("largeimage");
-	        $("#largeImage").attr("src", new_image_large_url); 
-	        debugger;
+	        var new_image = $("#" + image_id).prev()
+	        var large_url = new_image.data("largeimage");
+	        var new_id = new_image.attr("id");
+	        $("#largeImage").attr({
+	        	src: large_url,
+	        	"data-thumbid": new_id}
+	        ); 
 	        break;
 
 	        case 39: // right
