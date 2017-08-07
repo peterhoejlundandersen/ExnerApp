@@ -8,7 +8,7 @@
 		<h2 class="work-headline text-center"><%= @work.name %></h2>
 	</div>
 	<div class="vertical-center">
-		<%= image_tag @first_image.image, id: "largeImage", data: { thumbid: @first_image.id } %>	    
+		<%= image_tag @first_image.image, id: "largeImage", data: { pos: @first_image.position } %>	    
 
 	</div>
 	<div class="col-lg-12 hide-it info-field-work">
@@ -32,17 +32,19 @@
 	$(document).keydown(function(e) {
 	    switch(e.which) {
 	        case 37: // left
-	        var image_id = $("#largeImage").data('thumbid');
-	        var new_image = $("#" + image_id).prev()
-	        var large_url = new_image.data("largeimage");
-	        var new_id = new_image.attr("id");
-	        $("#largeImage").attr({
-	        	src: large_url,
-	        	"data-thumbid": new_id}
-	        ); 
+		        var image_id = $("#largeImage").data('pos');
+		        var new_image_id = image_id - 1;
+		        var large_url = $("#" + new_image_id).data("largeimage");
+		        $("#largeImage").attr("src", large_url); 
+		        $("#largeImage").data("pos", new_image_id);
 	        break;
 
 	        case 39: // right
+		        var image_id = $("#largeImage").data('pos');
+		        var new_image_id = image_id + 1;
+		        var large_url = $("#" + new_image_id).data("largeimage");
+		        $("#largeImage").attr("src", large_url); 
+		        $("#largeImage").data("pos", new_image_id);
 	        break;
 
 	        default: return; // exit this handler for other keys
@@ -53,10 +55,7 @@
 	$(".thumbnaildiv").click(function() {
 		var thumbsrc = $(this).data("largeimage");
 		var thumbid = $(this).attr("id");
-		$("#largeImage").attr({
-			src: thumbsrc, 
-			"data-thumbid": thumbid
-		});
+		$("#largeImage").attr("src", thumbsrc);
 	});
 // Skift mellem thumbnailsoversigterne
 	$(".img-cat-nav").on("click", function() {
@@ -65,7 +64,7 @@
 		$(".thumbnail-container").hide();
 		$("." + divId).show();
 		var catthumbsrc = $("." + divId).children().first().data("largeimage");
-		$("#largeImage").attr({src: catthumbsrc, "data-thumbid": divId});
+		$("#largeImage").attr("src", catthumbsrc);
 	});
 	
 // info visning
