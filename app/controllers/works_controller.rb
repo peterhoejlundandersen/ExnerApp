@@ -48,8 +48,8 @@ class WorksController < ApplicationController
  def show 
    @work = Work.friendly.find(params[:id])
    unless @work.image_categories.first.images.empty?
-    @image_categories = @work.image_categories.includes(:images).order("images.position ASC")
-    @first_image_url = @image_categories.first.images.first.image
+    @image_categories = @work.image_categories.includes(:images).where(images: {draft: false })
+    @first_image_url = @image_categories.first.images.published.first.image
     render 'show'
   else 
       # For work without images
@@ -139,6 +139,6 @@ end
       {image_categories_attributes: 
         [:id, :work_id, :name, :_destroy,
           images_attributes: 
-          [:id, :image, :photographer, :image_description, :is_review_img, :_destroy]]}) 
+          [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]}) 
   end
 end

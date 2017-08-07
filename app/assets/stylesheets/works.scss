@@ -72,6 +72,10 @@ nav.nav.blog-nav {
 #largeImage {
 	max-height: 850px;
 }
+
+.image-draft {
+	background-color: lighten(red, 20%)!important;
+}
 /* MIDLERTIDIGT */
 .hide-it {
 	display: none;
