@@ -1,7 +1,9 @@
 <h2>Hallo!</h2>
 <% @pdf_categories.each do |cat| %>
 <div class="col-md-6 col-sm-4 pdf-cat ">
-	<%= link_to show_pdf_category_path(cat.friendly_id) do %>
-	<h4 class="text-center"><%= cat.title %></h4>
+	<%= link_to show_pdf_category_path(cat.id) do %>
+		<h4 class="text-center"><%= cat.title %></h4>
 	<% end %>
 </div>
+
+<% end %>
