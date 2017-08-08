@@ -3,10 +3,17 @@ class PdfCategoriesController < ApplicationController
 
 	def index
 		@pdf_categories = PdfCategory.all
-		@pdfs = PdfCategory.find(params[:category_id]).pdfs
+		@pdfs = Pdf.all
 		render 'hallo'
 			# @pdf_categories = PdfCategory.all
 			# @pdfs = Pdf.all
+	end
+
+	def show_category
+		@pdfs = PdfCategory.find(params[:kategori_id]).pdfs
+		respond_to do |format|
+			format.js
+		end
 	end
 
 end

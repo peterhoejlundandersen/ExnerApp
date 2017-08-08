@@ -26,7 +26,10 @@ Rails.application.routes.draw do
 	resources :pdf_categories, except: [:index] do 
 		resources :pdfs, except: [:index] 
 	end 
-	get "pdf-kategori/:category_id" => "pdf_categories#index", as: "show_pdf_category"
+
+	get "pdf-kategori/vis-alle" => "pdf_categories#index", as: "show_pdf_category"
+
+	get "pdf-kategori/:kategori_id" => "pdf_categories#show_category", as: "show_this_pdf_category" 
 
 	get 'pdf-views/show' => 'pdf_views#show', as: 'pdf_view'
 
