@@ -3,7 +3,6 @@
 <head>
 	<title><%= "Johannes' værker | #{@header_title}" %></title>
 </head>
-<a href="<%= @pdf_file_url %>" target="_blank">Print</a>
 <%= link_to truncate(@prev_pdf.title, length: 45), pdf_category_pdf_path(@prev_pdf.pdf_category, @prev_pdf), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center" %>
 <%= link_to @pdf_category.title, show_pdf_category_path(@pdf_category.friendly_id), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center" %>
 
