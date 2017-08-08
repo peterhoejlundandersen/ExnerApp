@@ -1,6 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -91,4 +92,8 @@ Rails.application.configure do
 
   #Javascript not working on heroku 
   config.assets.compile = true
+
+  #Jeg har min public js viewer, som ikke bliver opdateret
+  config.public_file_server.enabled = true
+
 end

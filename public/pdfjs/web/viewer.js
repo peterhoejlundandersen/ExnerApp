@@ -1397,7 +1397,8 @@ var PDFView = {
   initialized: false,
   fellback: false,
   pdfDocument: null,
-  sidebarOpen: false,
+  // Har jeg ændret fra false
+  sidebarOpen: 1,
   pageViewScroll: null,
   thumbnailViewScroll: null,
   isPresentationMode: false,

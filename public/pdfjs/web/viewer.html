@@ -30,21 +30,18 @@ limitations under the License.
 
 <!-- This snippet is used in production, see Makefile -->
 <link rel="resource" type="application/l10n" href="locale/locale.properties"/>
-<script type="text/javascript" src="l10n.js"></script>
-<script type="text/javascript" src="../build/pdf.js"></script>
-
-
+    <script type="text/javascript" src="l10n.js"></script>
+    <script type="text/javascript" src="../build/pdf.js"></script>
 
     <script type="text/javascript" src="debugger.js"></script>
     <script type="text/javascript" src="viewer.js"></script>
 
-  </head>
+</head>
 
   <body tabindex="1">
-    <div id="outerContainer" class="loadingInProgress">
-
-
-      <div id="sidebarContainer">
+    <!-- <div id="outerContainer" class="loadingInProgress"> -->
+    <div id="outerContainer" class="sidebarOpen"> 
+      <div id="sidebarContainer" class="hide-sidebar-medium">
         <div id="toolbarSidebar">
           <div class="splitToolbarButton toggled">
             <button id="viewThumbnail" class="toolbarButton group toggled" title="Show Thumbnails" tabindex="2" data-l10n-id="thumbs">
@@ -64,6 +61,7 @@ limitations under the License.
       </div>  <!-- sidebarContainer -->
 
       <div id="mainContainer">
+
         <div class="findbar hidden doorHanger hiddenSmallView" id="findbar">
           <label for="findInput" class="toolbarLabel" data-l10n-id="find_label">Find:</label>
           <input id="findInput" class="toolbarField" tabindex="41">

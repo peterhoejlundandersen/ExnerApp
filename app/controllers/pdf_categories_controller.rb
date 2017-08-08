@@ -4,7 +4,7 @@ class PdfCategoriesController < ApplicationController
 	def index
 		unless params[:category_id] == "0"
 			@pdf_categories = PdfCategory.all
- 			@pdfs = Pdf.where(pdf_category_id: params[:category_id].to_i)
+			@pdfs = PdfCategory.friendly.find(params[:category_id]).pdfs
 		else 
 			@pdf_categories = PdfCategory.all
 			@pdfs = Pdf.all

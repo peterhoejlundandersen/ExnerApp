@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	
-	def header_title
+	def header_title_helper 
 		default = "I&J EXNER"
 		if @header_title 
 			default + " | " + @header_title

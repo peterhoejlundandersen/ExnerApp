@@ -7,8 +7,8 @@ class PdfsController < ApplicationController
 		@pdf_category = pdf.pdf_category
 		pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1) 
 		pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
-		@pdf_url_google = pdf.file
 		@pdf_url = pdf_viewer + pdf.file
+		@header_title = pdf.title
 	end
 
 	def edit
