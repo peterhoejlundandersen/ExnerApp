@@ -49,6 +49,7 @@ class WorksController < ApplicationController
    unless @work.image_categories.first.images.empty?
     @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
     @first_image = @image_categories.first.images.published.first
+    @work_cat = @work.category
     render 'show'
   else 
       # For work without images

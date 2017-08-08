@@ -1,6 +1,7 @@
 <div class="blog-masthead work-navbar-outer">
 	<div class="nav-container nav-thumbnail-con container">
 		<nav class="nav work-navbar sortable-images">
+			<%= link_to "Tilbage til #{work_cat.name}", vaerker_path(work_cat.name.parameterize), class: "btn btn-secondary" %>
 			<div class="info-button">
 			 Info
 			</div>

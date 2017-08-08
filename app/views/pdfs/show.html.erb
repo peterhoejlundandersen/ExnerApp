@@ -9,8 +9,10 @@
 <div style="float: left; width: 33%; height: 30px; text-align: center">
 	<%= link_to truncate(@next_pdf.title, length: 45), pdf_category_pdf_path(@next_pdf.pdf_category, @next_pdf) %>
 </div>
-
-<iframe src="<%= @pdf_url %>" style="left: 0; border: 0; width: 100%; height: 100%; position: absolute; top: 30px" frameborder="0" scrolling="no" crossorigin="anonymous">
+<iframe style="left: 0; border: 0; width: 100%; height: 100%; top: 30px" src="https://drive.google.com/viewerng/viewer?
+url=<%= @pdf_url_google %>?
+pid=explorer&efh=false&a=v&chrome=false&embedded=true" width="400px" height="300px"  />
+<iframe src="<%= @pdf_url %>" style="left: 0; border: 0; width: 100%; height: 100%; top: 30px" frameborder="0" scrolling="no" crossorigin="anonymous">
 </iframe> 
 
 
