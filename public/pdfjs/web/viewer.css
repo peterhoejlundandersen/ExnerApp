@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 /* JEG HAR FJERNET NOGLE TING */
-#viewThumbnail, #viewOutline, #viewBookmark, #secondaryToolbarToggle {
+#openFile, #viewThumbnail, #viewOutline, #viewBookmark, #secondaryToolbarToggle {
   display: none;
 }
 
@@ -590,8 +590,8 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
   padding: 2px 6px 0;
   border: 1px solid transparent;
   border-radius: 2px;
-  color: hsla(0,0%,100%,.8);
-  font-size: 12px;
+  color: black;
+  font-size: 14px;
   line-height: 14px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -692,10 +692,10 @@ html[dir='rtl'] .dropdownToolbarButton {
   -webkit-appearance: none;
   -moz-appearance: none; /* in the future this might matter, see bugzilla bug #649849 */
   min-width: 140px;
-  font-size: 12px;
-  color: hsl(0,0%,95%);
+  font-size: 14px;
+  color: black;
   margin: 0;
-  padding: 0;
+  padding: 1px;
   border: none;
   background: rgba(0,0,0,0); /* Opera does not support 'transparent' <select> background */
 }
@@ -954,8 +954,8 @@ html[dir='rtl'] .verticalToolbarSeparator {
   border-color: hsla(0,0%,0%,.32) hsla(0,0%,0%,.38) hsla(0,0%,0%,.42);
   box-shadow: 0 1px 0 hsla(0,0%,0%,.05) inset,
               0 1px 0 hsla(0,0%,100%,.05);
-  color: hsl(0,0%,95%);
-  font-size: 12px;
+  color: black;
+  font-size: 14px;
   line-height: 14px;
   outline-style: none;
   transition-property: background-color, border-color, box-shadow;
@@ -996,8 +996,8 @@ html[dir='rtl'] .verticalToolbarSeparator {
   margin: 4px 2px 4px 0;
   border: 1px solid transparent;
   border-radius: 2px;
-  color: hsl(0,0%,85%);
-  font-size: 12px;
+  color: black;
+  font-size: 14px;
   line-height: 14px;
   text-align: left;
   -webkit-user-select: none;

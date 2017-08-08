@@ -3876,8 +3876,10 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
   }
 
   if (!PDFView.supportsPrinting) {
-    document.getElementById('print').classList.add('hidden');
-    document.getElementById('secondaryPrint').classList.add('hidden');
+    // HAR JEG LAVET
+    // FOR AT FÅ DEN TIL AT PRINTE
+    // document.getElementById('print').classList.add('hidden');
+    // document.getElementById('secondaryPrint').classList.add('hidden');
   }
 
   if (!PDFView.supportsFullscreen) {
