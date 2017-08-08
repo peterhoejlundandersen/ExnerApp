@@ -3,8 +3,8 @@ class PdfCategoriesController < ApplicationController
 
 	def index
 		@pdf_categories = PdfCategory.all
+		@pdfs = PdfCategory.friendly.find(params[:category_id]).pdfs
 		render 'hallo'
-			# @pdfs = PdfCategory.friendly.find(params[:category_id]).pdfs
 			# @pdf_categories = PdfCategory.all
 			# @pdfs = Pdf.all
 	end
