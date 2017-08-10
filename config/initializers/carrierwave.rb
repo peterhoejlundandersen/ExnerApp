@@ -1,6 +1,4 @@
-# # config/initializers/carrierwave.rb
-
-# NÅR JEG ARBEJDER LOKALT
+ # # config/initializers/carrierwave.rb
 
 CarrierWave.configure do |config|
 config.ignore_integrity_errors = true

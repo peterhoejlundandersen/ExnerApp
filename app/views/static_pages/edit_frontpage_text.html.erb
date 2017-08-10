@@ -1,0 +1,16 @@
+<div class="row">
+	<div class="offset-lg-2 col-lg-8">
+		<%= form_for @text, url: opdater_forside_tekst_path(@text.id) do |f| %>
+
+		<div class="form-fields">
+			<%= f.label "Tekst" %>
+			<%= f.text_area :text, cols: 40, rows: 20, class: "form-control" %>
+		</div>
+
+		<hr>
+
+		<%= f.submit "Gem tekst", class: "btn btn-primary" %>
+		<% end %>
+
+	</div>
+</div>

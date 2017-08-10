@@ -37,5 +37,9 @@ Rails.application.routes.draw do
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 
+	get 'forside/ny-forside-tekst' => 'static_pages#new_frontpage_text', as: :ny_forside_tekst
+	get 'forside/rediger-forside-tekst/:text_id' => 'static_pages#edit_frontpage_text', as: :rediger_forside_tekst
+	post 'forside/opret-forside-tekst' => 'static_pages#create_frontpage_text', as: :opret_forside_tekst
+	patch 'forside/opdater-tekst/:id' => 'static_pages#update_frontpage_text', as: :opdater_forside_tekst 
 	root 'static_pages#frontpage'
 end

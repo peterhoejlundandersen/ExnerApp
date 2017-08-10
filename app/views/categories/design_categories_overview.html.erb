@@ -1,0 +1,10 @@
+<div class="row">
+<% @categories.each do |cat| %>
+		<div class="col-lg-4">
+	<%= link_to vaerker_path(cat.id) do %>
+			<h4 class="text-center"><%= cat.name %></h4>
+	<% end %>
+		</div>
+
+<% end %>
+</div>
