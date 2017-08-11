@@ -86,10 +86,16 @@ nav.nav.blog-nav {
 	margin: 0 auto;
 }
 
+
+.image-desc-wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
 #largeImage {
 	max-width: 100%;
-	margin: 0 auto;
-	max-height: 100vh;
+	max-height: 100%;
 }
 
 .image-draft {
@@ -183,6 +189,7 @@ nav.nav.blog-nav {
 }
 
 .vertical-center {
+	padding-bottom: 50px;
 	width: 100%;
 	text-align: center;
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */

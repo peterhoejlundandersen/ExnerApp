@@ -8,10 +8,13 @@
 		<h2 class="work-headline text-center"><%= @work.name %></h2>
 	</div>
 	<div class="vertical-center">
-	<%= image_tag "arrow-left", class: "work-arrows", id: "leftArrow" %>
+		<div class="image-desc-wrapper">
 		<%= image_tag @first_image.image, id: "largeImage", data: { pos: 1 } %>	    
-	<%= image_tag "arrow-right", class: "work-arrows", id: "rightArrow" %>
-
+			<div class="img-desc d-ib"><%= @first_image.image_description %></div>	
+		</div>
+		<%= image_tag "arrow-left", class: "work-arrows", id: "leftArrow" %>
+		<%= image_tag "arrow-right", class: "work-arrows", id: "rightArrow" %>
+	
 	</div>
 	<div class="col-lg-12 hide-it info-field-work">
 		<%= info_helper @work %>
