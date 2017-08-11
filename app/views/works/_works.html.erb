@@ -1,0 +1,41 @@
+<%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
+<%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
+<h2 class="work-headline"><%= category.name %></h2>
+<div class="row sortable">
+
+<% unless works.empty? %>
+	<% works.each do |work| %>
+			<div class="col-md-3 overview-work sortable-item" data-id="<%= work.id %>">
+		<%= link_to work_path(work) do %>
+				<% if !work.overview_img.file.nil? %>
+					<div class="overview-img-block">
+					<%= image_tag(work.overview_img, class: "overview-img") %>
+					</div>
+					<h2 class="overview-work-h2"><%= work.name %></h2>
+				<% elsif work.images.empty? %>
+					<div class="without-overview-img">
+						<span class="without-overview-text">
+
+						</span>
+					</div>
+					<h2 class="overview-work-h2"><%= work.name %></h2>
+				<% else %>
+					<div class="without-overview-img">
+						<span class="without-overview-text">
+							
+						</span>
+					</div>
+					<h2 class="overview-work-h2"><%= work.name %></h2>
+
+				<% end %>
+
+		<% end %>
+			</div>
+	<% end %>
+<% else %>
+
+<% end %><!-- works.empty? -->
+</div>
+
+
+	

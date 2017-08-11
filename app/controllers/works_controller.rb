@@ -13,6 +13,15 @@ class WorksController < ApplicationController
     end
   end  
 
+  def design_index
+    @category = Category.find(params[:vaerker_cat])
+    @category_id = "##{@category.id}"
+    @works = @category.works
+    respond_to do |format|
+      format.js 
+    end
+  end
+
   def sort
     params[:order].each do |key, value|
       Work.find(value[:id]).update(position: value[:position])

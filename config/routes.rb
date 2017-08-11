@@ -19,7 +19,8 @@ Rails.application.routes.draw do
 		end
 	end
 	get 'vaerker/:vaerker_cat' => 'works#index', as: :vaerker 
-	
+
+	get 'vaerker/design/:vaerker_cat' => 'works#design_index', as: :vaerker_design	
 
 	### PDFS ### 	
 

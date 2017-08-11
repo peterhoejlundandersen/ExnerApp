@@ -1,0 +1,2 @@
+$(".design-cat").html("<%= escape_javascript( render partial: 'works', locals: { works: @works, category: @category } ) %>");
+$("<%= escape_javascript( @category_id ) %>").addClass("active").siblings().removeClass("active");
