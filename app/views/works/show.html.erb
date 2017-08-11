@@ -10,7 +10,7 @@
 	<div class="vertical-center">
 		<div class="image-desc-wrapper">
 		<%= image_tag @first_image.image, id: "largeImage", data: { pos: 1 } %>	    
-			<div class="img-desc d-ib"><%= @first_image.image_description %></div>	
+			<div class="img-desc d-ib" id="imgDesc"><%= @first_image.image_description %></div>	
 		</div>
 		<%= image_tag "arrow-left", class: "work-arrows", id: "leftArrow" %>
 		<%= image_tag "arrow-right", class: "work-arrows", id: "rightArrow" %>
@@ -44,6 +44,7 @@
 		        				prev_img_cat, 
 		        				last_image_active=true
 		        				);
+
 		        		} else {
 		        			change_img_cat(
 		        				$(".work-navbar .nav-link").last(),last_image_active=true
@@ -101,8 +102,9 @@
 	        		var new_image_id = image_id - 1;
 	        		var next_thumb = $("#" + new_image_id);
 	        		var large_url = next_thumb.data("largeimage");
+	        		var img_desc = next_thumb.data("imgdesc"); 
 	        		add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-	        		update_large_img(large_url, new_image_id);
+	        		update_large_img(large_url, new_image_id, img_desc);
 	        	}
 			    break;
 
@@ -121,8 +123,9 @@
 		        	var new_image_id = image_id + 1;
 		        	var next_thumb = $("#" + new_image_id);
 		        	var large_url = next_thumb.data("largeimage");
+		        	var img_desc = next_thumb.data("imgdesc"); 
 		        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        	update_large_img(large_url, new_image_id);
+		        	update_large_img(large_url, new_image_id, img_desc);
 		        }
 			    break;
 
@@ -137,7 +140,8 @@ $(".thumbnaildiv").on("click", function() {
 	add_active_class_rm_siblings(this, "thumbnail-active");
 	thumb_large_url = $(this).data("largeimage");
 	thumb_id = parseInt($(this).attr("id"));
-	update_large_img( thumb_large_url, thumb_id );
+	thumb_imgdesc = $(this).data("imgdesc");
+	update_large_img( thumb_large_url, thumb_id, thumb_imgdesc );
 });
 // Skift mellem billede-kategorierne
 $(".img-cat-nav").on("click", function() {
@@ -163,16 +167,19 @@ function change_img_cat(new_img_cat, last_image_active=false) {
 	$("." + divId).show();
 	if (last_image_active) {
 		var img_child = $("." + divId).children().last();
+		var desc = img_child.data("imgdesc");
 	} else {
 		var img_child = $("." + divId).children().first(); 
+		var desc = img_child.data("imgdesc");
 	}
 	add_active_class_rm_siblings(img_child, 'thumbnail-active'); 
-	update_large_img(img_child.data("largeimage"), parseInt(img_child.attr("id"))); 
+	update_large_img(img_child.data("largeimage"), parseInt(img_child.attr("id")), desc); 
 }
 
-function update_large_img(src_attr, data_attr) {
+function update_large_img(src_attr, data_attr, img_desc="") {
 	$("#largeImage").attr("src", src_attr); 
 	$("#largeImage").data("pos", data_attr);
+	$("#imgDesc").text(img_desc);
 }
 </script>
 

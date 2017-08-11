@@ -4,7 +4,8 @@
 <div class="container-fluid thumbnail-container sortable-images <%= "hide-it" unless index == 0 %> <%= img_cat.name.parameterize %> <%= img_cat.id %>">
 	<% img_cat_length = img_cat.images.length %>
 	<% img_cat.images.each_with_index do |image, i| %>
-		<%= image_tag(image.image.thumb.url, id: position_count, class: "#{'thumbnail-active' if index == 0 && i == 0} col-lg-2 col-md-4 col-sm-6 thumbnaildiv thumbnail sortable-image-item", data: { largeimage: image.image.url, id: image.id, type: image.class.to_s, end: img_cat_length == i + 1 ? true : false, start: i == 0 ? true : false }) %>
+		<%= image_tag(image.image.thumb.url, id: position_count, class: "#{'thumbnail-active' if index == 0 && i == 0} col-lg-2 col-md-4 col-sm-6 thumbnaildiv thumbnail sortable-image-item", data: { imgdesc: image.image_description.present? ? image.image_description : " ", largeimage: image.image.url, id: image.id, type: image.class.to_s, end: img_cat_length == i + 1 ? true : false, start: i == 0 ? true : false }) %>
+
 
 		<% position_count += 1 %>
 	<% end %>

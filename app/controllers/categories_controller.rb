@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
 	private
 
 	def cat_params
-		params.require(:category).permit(:name, :image)
+		params.require(:category).permit(:name, :image, :remove_image)
 	end
 
 end
