@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
 
 
-  get 'pdfs/show'
+	get 'pdfs/show'
 
-  get 'pdfs/edit'
+	get 'pdfs/edit'
 
-  get 'pdfs/new'
+	get 'pdfs/new'
 
 	devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' } 
-	
+
 	resources :categories, except: :index
 	get '/oversigt' => 'categories#index', as: "oversigt"
-	
+
 	resources :works, except: :index do
 		put :sort, on: :collection
 		member do
@@ -38,9 +38,11 @@ Rails.application.routes.draw do
 
 	get 'om-inger-og-johannes-exner' => 'static_pages#about', as: "om"
 
+	#FORSIDE TEKST
 	get 'forside/ny-forside-tekst' => 'static_pages#new_frontpage_text', as: :ny_forside_tekst
 	get 'forside/rediger-forside-tekst/:text_id' => 'static_pages#edit_frontpage_text', as: :rediger_forside_tekst
 	post 'forside/opret-forside-tekst' => 'static_pages#create_frontpage_text', as: :opret_forside_tekst
 	patch 'forside/opdater-tekst/:id' => 'static_pages#update_frontpage_text', as: :opdater_forside_tekst 
+	# END FORSIDE TEKST
 	root 'static_pages#frontpage'
 end

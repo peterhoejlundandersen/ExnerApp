@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
+  access all: [:show, :index, :design_index], user: {except: [:destroy]}, site_admin: :all
   layout "works"  
 
   def index
