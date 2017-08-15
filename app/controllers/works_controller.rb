@@ -55,15 +55,22 @@ class WorksController < ApplicationController
 
  def show 
    @work = Work.friendly.find(params[:id])
-   unless @work.image_categories.first.images.empty?
-    @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
-    @first_image = @image_categories.order(:position).first.images.published.first
-    @work_cat = @work.category
-    render 'show'
-  else 
-      # For work without images
-      render 'show_no_images'
+   # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
+   unless @work.image_categories.first.nil?
+
+     unless @work.image_categories.first.images.empty? 
+      @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
+      @first_image = @image_categories.order(:position).first.images.published.first
+      @work_cat = @work.category
+      render 'show'
+    else 
+        # For work without images
+        render 'show_no_images'
     end 
+
+  else 
+    render 'show_no_images'
+  end
   end
 
   def sort_images
@@ -79,11 +86,10 @@ class WorksController < ApplicationController
 
   def destroy
    @work = Work.friendly.find(params[:id])
-   work_category = @work.category_id
+   work_category_id = @work.category_id
    work_name = Work.name
      if @work.destroy
-      flash[:succes] = "#{work_name} er nu blevet slettet"
-      redirect_to works_path(work_category.name.parameterize)
+      redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
     end
 
   end
