@@ -1,0 +1,10 @@
+<div class="vertical-center">
+	<div class="image-desc-wrapper">
+	<%= image_tag url, id: "largeImage", data: { pos: 1 } %>	
+		<%= content_tag :div, description, class: "img-desc d-ib", id: "imgDesc" unless description.nil? %>    
+		<%= content_tag :div, photographer, class: "img-desc d-ib", id: "imgPhoto" unless photographer.nil? %>    
+	</div>
+	<%= image_tag "arrow-left", class: "work-arrows", id: "leftArrow" %>
+	<%= image_tag "arrow-right", class: "work-arrows", id: "rightArrow" %>
+
+</div>

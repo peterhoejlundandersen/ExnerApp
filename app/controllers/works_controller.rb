@@ -2,9 +2,22 @@ class WorksController < ApplicationController
   access all: [:show, :index, :design_index], user: {except: [:destroy]}, site_admin: :all
   layout "works"  
 
+  def new_image
+    @new_image = Image.find(params[:id])
+    respond_to do |format|
+      format.js { render 'works/js/new_image' }
+    end
+  end
+
+  def new_image_category
+    @new_thumb_images = ImageCategory.find(params[:id]).images
+    respond_to do |format|
+      format.js { render 'works/js/new_image_category' }
+    end
+  end
   def index
-    if params[:vaerker_cat] == "design"
-      set_design_categories
+    if ["belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
+      set_design_categories params[:vaerker_cat]
       render 'categories/design_categories_overview'
     else
       @category = Category.friendly.find(params[:vaerker_cat])
@@ -115,11 +128,13 @@ class WorksController < ApplicationController
 
 private
 
-def set_design_categories
+def set_design_categories cat_param
+ @category = Category.friendly.find(cat_param)
  @categories = []
  @categories << Category.find(13)
  @categories << Category.find(15)
  @categories << Category.find(18)
+ @works = @category.works
 end
 
 def save_overview_img_if_checkbox_checked work

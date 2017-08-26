@@ -1,185 +1,39 @@
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "work_images", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 
-<div class="row work-row">
-	<%= logged_in_work_helper if logged_in?(:site_admin) %>
+<%= logged_in_work_helper if logged_in?(:site_admin) %>
 
-	<div class="col-lg-12">
-		<h2 class="work-headline text-center"><%= @work.name %></h2>
-	</div>
-	<div class="vertical-center">
-		<div class="image-desc-wrapper">
-		<%= image_tag @first_image.image, id: "largeImage", data: { pos: 1 } %>	    
-			<div class="img-desc d-ib" id="imgDesc"><%= @first_image.image_description %></div>	
-		</div>
-		<%= image_tag "arrow-left", class: "work-arrows", id: "leftArrow" %>
-		<%= image_tag "arrow-right", class: "work-arrows", id: "rightArrow" %>
-	
-	</div>
-	<div class="col-lg-12 hide-it info-field-work">
-		<%= info_helper @work %>
-		<div class="info-beskrivelse">
-			<%= simple_format(@work.description) if @work.description %>
-		</div>
-	</div>
-
-	<%= render partial: "img_cat_bar", locals: {image_categories: @image_categories, work_cat: @work_cat } %>
-
-	<%= render partial: "thumbnails", locals: {image_categories: @image_categories } %>
-
-
-
+<!-- LARGE IMAGE --> 
+<div class="large-image">
+	<%= render partial: "large_image", locals: {url: @first_image.image.url, description: @first_image.image_description, photographer: @first_image.photographer} %>
 </div>
+<%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "btn btn-secondary" %>
+<!-- IMG CAT NAVBAR -->
+<div class="img-nav-bar img-cat-nav-inner sortable-images">
+	<%= render partial: "img_cat_nav", locals: {img_cats: @image_categories} %> 
+</div>
+
+<!-- THUMB IMAGES -->
+<div class="thumb-images row sortable-images">
+	<%= render partial: "thumb_images", locals: {images: @image_categories.first.images, work_id_friendly: @work.friendly_id} %>
+</div>
+
 
 <script type="text/javascript">
 	
 	$(document).ready(function() {
-			$("#leftArrow").on("click", function() {
-		        var image_id = $("#largeImage").data('pos');
-		        if ( $("#" + image_id).data("start") ) {
-		        		// Hvis næste billede-kategori findes
-		        		var prev_img_cat = $(".nav-link.active").prev(".nav-link")
-		        		if ( prev_img_cat.length ) {
-		        			change_img_cat(
-		        				prev_img_cat, 
-		        				last_image_active=true
-		        				);
+		function changeLargeImage(image_id) {
+			$.ajax({
+				url: '/works/' + image_id + '/new_image',
+				type: 'GET',
+				data: {id: image_id},
+			}); 
+		}
 
-		        		} else {
-		        			change_img_cat(
-		        				$(".work-navbar .nav-link").last(),last_image_active=true
-		        				);
-		        		}
+		$("body").on("click", ".thumb-image", function() {
+			image_id = $(this).data("id");
+			changeLargeImage(image_id);
+		})
+	});
 
-		        	} else {
-		        		var new_image_id = image_id - 1;
-		        		var next_thumb = $("#" + new_image_id);
-		        		var large_url = next_thumb.data("largeimage");
-		        		add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        		update_large_img(large_url, new_image_id);
-		        	}
-		        });
-		    $("#rightArrow").on("click", function() {
-		        var image_id = $("#largeImage").data('pos');
-		        if ( $("#" + image_id).data("end") ) {
-			        	// Hvis næste billede-kategori findes
-			        	var next_img_cat = $(".nav-link.active").next(".nav-link")
-			        	if ( next_img_cat.length ) {
-			        		change_img_cat(next_img_cat);
-			        	} else {
-			        		change_img_cat($(".work-navbar .nav-link").first());
-			        	}
-
-			        } else {
-			        	var new_image_id = image_id + 1;
-			        	var next_thumb = $("#" + new_image_id);
-			        	var large_url = next_thumb.data("largeimage");
-			        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-			        	update_large_img(large_url, new_image_id);
-			        }
-		        });
-
-		// Jeg var nødt til at lave den her for at det f*cking fungerede!
-		$("body").keydown(function(e) {
-			switch(e.which) {
-	        case 37: // venstre piletast
-	        var image_id = $("#largeImage").data('pos');
-	        if ( $("#" + image_id).data("start") ) {
-	        		// Hvis næste billede-kategori findes
-	        		var prev_img_cat = $(".nav-link.active").prev(".nav-link")
-	        		if ( prev_img_cat.length ) {
-	        			change_img_cat(
-	        				prev_img_cat, 
-	        				last_image_active=true
-	        				);
-	        		} else {
-	        			change_img_cat(
-	        				$(".work-navbar .nav-link").last(),last_image_active=true
-	        				);
-	        		}
-
-	        	} else {
-	        		var new_image_id = image_id - 1;
-	        		var next_thumb = $("#" + new_image_id);
-	        		var large_url = next_thumb.data("largeimage");
-	        		var img_desc = next_thumb.data("imgdesc"); 
-	        		add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-	        		update_large_img(large_url, new_image_id, img_desc);
-	        	}
-			    break;
-
-	        case 39: // højre piletast
-	        var image_id = $("#largeImage").data('pos');
-	        if ( $("#" + image_id).data("end") ) {
-		        	// Hvis næste billede-kategori findes
-		        	var next_img_cat = $(".nav-link.active").next(".nav-link")
-		        	if ( next_img_cat.length ) {
-		        		change_img_cat(next_img_cat);
-		        	} else {
-		        		change_img_cat($(".work-navbar .nav-link").first());
-		        	}
-
-		        } else {
-		        	var new_image_id = image_id + 1;
-		        	var next_thumb = $("#" + new_image_id);
-		        	var large_url = next_thumb.data("largeimage");
-		        	var img_desc = next_thumb.data("imgdesc"); 
-		        	add_active_class_rm_siblings(next_thumb, 'thumbnail-active');
-		        	update_large_img(large_url, new_image_id, img_desc);
-		        }
-			    break;
-
-	        default: return; // exit this handler for other keys
-	    }
-	    e.preventDefault(); // prevent the default action (scroll / move caret)
-	});			/* Act on the event */
-});
-
-// Skift mellem billeder ved tryk
-$(".thumbnaildiv").on("click", function() {
-	add_active_class_rm_siblings(this, "thumbnail-active");
-	thumb_large_url = $(this).data("largeimage");
-	thumb_id = parseInt($(this).attr("id"));
-	thumb_imgdesc = $(this).data("imgdesc");
-	update_large_img( thumb_large_url, thumb_id, thumb_imgdesc );
-});
-// Skift mellem billede-kategorierne
-$(".img-cat-nav").on("click", function() {
-	change_img_cat(this);
-});
-
-// info visning
-$(".info-button").on("click", function() {
-	$(this).toggleClass("info-button-active");
-	$(".info-field-work").slideToggle("fast");
-});
-
-// FUNKTIONER
-function add_active_class_rm_siblings(object, active_class) {
-	$(object).addClass(active_class).siblings().removeClass(active_class);
-}
-
-function change_img_cat(new_img_cat, last_image_active=false) {
-	add_active_class_rm_siblings(new_img_cat, "active");
-	// Find connected thumbnail-div to img-cat-button
-	var divId = $(new_img_cat).data("divid");
-	$(".thumbnail-container").hide();
-	$("." + divId).show();
-	if (last_image_active) {
-		var img_child = $("." + divId).children().last();
-		var desc = img_child.data("imgdesc");
-	} else {
-		var img_child = $("." + divId).children().first(); 
-		var desc = img_child.data("imgdesc");
-	}
-	add_active_class_rm_siblings(img_child, 'thumbnail-active'); 
-	update_large_img(img_child.data("largeimage"), parseInt(img_child.attr("id")), desc); 
-}
-
-function update_large_img(src_attr, data_attr, img_desc="") {
-	$("#largeImage").attr("src", src_attr); 
-	$("#largeImage").data("pos", data_attr);
-	$("#imgDesc").text(img_desc);
-}
 </script>
-

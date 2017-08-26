@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 		put :sort, on: :collection
 		member do
 			put :sort_images
+			get :new_image
+			get :new_image_category
 		end
 	end
 	get 'vaerker/:vaerker_cat' => 'works#index', as: :vaerker 

@@ -234,9 +234,17 @@ img.overview-img {
 .info-button-active {
 	text-decoration: underline;
 }
-.info-button {
+.img-cat-nav-inner {
+	a {
+		display: inline-block;
+	}
+	.info-button {
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 	left: 0;
-	
 	font-size: 0.8em;
 	font-family: Corbel;
 	letter-spacing: 2px;
@@ -257,9 +265,6 @@ img.overview-img {
 		top: 12px;
 		margin-right: -13px;
 		transform: rotate(0deg);
-	}
-	&:hover {
-		text-decoration: underline;
 	}
 }
 

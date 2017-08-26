@@ -1,16 +1,7 @@
 <div class="row">
-
-<% @categories.each do |cat| %>
-		<div class="col-lg-4">
-	<%= link_to vaerker_design_path(cat.id), remote: true do %>
-			<%= image_tag cat.image if cat.image.present? %> 
-			<h4 id="<%= cat.id %>" class="cat-headlines text-center"><%= cat.name %></h4>
-	<% end %>
-		</div>
-
-<% end %>
+<%= render partial: "design_nav", locals: {categories: @categories} %>
 
 <div class="design-cat">
-
+	<%= render partial: 'works', locals: { works: @works, category: @category } %>	
 </div>
 </div>
