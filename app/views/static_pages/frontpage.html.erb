@@ -1,26 +1,47 @@
-<div class="indexwrapper">
-	<div class="indexbackground">
+<div class="indexbackground">
+</div>
+<div class="row indexwrapper">
+	<div class="col-lg-11">
+	<h4 class="text-center white">Arkitekterne</h4>
+	<h1 class="text-center white">Inger og Johannes Exner</h1>
 	</div>
-	<div class="indexareatext">
-		<div class="left leftindex">
-			<h4 class="text-center">Arkitekterne</h4>
-			<h1 class="text-center">Inger og Johannes Exner</h1>
-		</div>
-		<div class="left middleindex">
-
-		<% if @text.nil? %>
+		<div class="col-lg-11 front-page-text px-4">
+			<% if @text.nil? %>
 			<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-		<% else %>
+			<% else %>
 			<%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
 			<%= simple_format(@text.text) %>
 
-		<% end %> 
+			<% end %> 
 		</div>
-
-			<div class="left rightindex">
-				<%= link_to oversigt_path do %>
-				<div data-toggler data-animate="fade-in fade-out" class="button"><span class="kunpaamobilskaerm">Gå videre til oversigt</span></div>
-				<% end %>
-			</div>
-	</div>
+		<div class="col-lg-1 to-oversigt">
+			<%= link_to oversigt_path do %>
+			<div class="button"><span class="kunpaamobilskaerm">Gå videre til oversigt</span></div>
+			<% end %>
+		</div>
 </div>	
+
+
+<!-- trekanten skifter farve -->
+<script type="text/javascript">
+	
+	$(window).scroll(function () {
+	    console.log("BUTTON " + $(".button").offset().top);
+	    console.log("TEXT " + $(".front-page-text").offset().top);
+
+	    if ($(".button").offset().top > ($(".front-page-text").offset().top)) {
+	        $(".button").animate({
+	        	borderColor: "black"},
+	        	500, function() {
+	        		if ($(".button").offset().top < ($(".front-page-text").offset().top)) {
+	        			$(".button").animate({
+	        				borderColor: "white"},
+	        				500
+	        				);
+	        		}
+	        	}
+	        );
+	     } 
+
+	 });
+</script>

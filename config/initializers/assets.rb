@@ -7,12 +7,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
-Rails.application.config.assets.precompile += %w( works.scss )
-Rails.application.config.assets.precompile += %w( frontpage.scss )
-Rails.application.config.assets.precompile += %w( work_images.js )
-Rails.application.config.assets.precompile += %w( works.js )
-Rails.application.config.assets.precompile += %w( html.sortable.js )
-
+Rails.application.config.assets.precompile += %w( works.scss frontpage.scss work_images.js works.js html.sortable.js)
 
 ## PDF ##
 
