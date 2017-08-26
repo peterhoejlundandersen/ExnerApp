@@ -2,46 +2,52 @@
 </div>
 <div class="row indexwrapper">
 	<div class="col-lg-11">
-	<h4 class="text-center white">Arkitekterne</h4>
-	<h1 class="text-center white">Inger og Johannes Exner</h1>
-	</div>
-		<div class="col-lg-11 front-page-text px-4">
-			<% if @text.nil? %>
-			<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-			<% else %>
-			<%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-			<%= simple_format(@text.text) %>
+		<h4 class="text-center white">Arkitekterne</h4>
+		<h1 class="text-center white">Inger og Johannes Exner</h1>
+		<p class="text-center button-read-more white">Læs mere <%= fa_icon "angle-down" %></p> 
 
-			<% end %> 
-		</div>
-		<div class="col-lg-1 to-oversigt">
-			<%= link_to oversigt_path do %>
-			<div class="button"><span class="kunpaamobilskaerm">Gå videre til oversigt</span></div>
-			<% end %>
-		</div>
+	</div>
+	<div class="col-lg-11 front-page-text px-4">
+		<% if @text.nil? %>
+		<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+		<% else %>
+		<%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+		<%= simple_format(@text.text) %>
+
+		<% end %> 
+	</div>
+	<div class="col-lg-1 to-oversigt">
+		<%= link_to oversigt_path do %>
+		<div class="button"></div>
+		<% end %>
+	</div>
+	<div class="kunpaamobilskaerm">
+		<%= link_to oversigt_path do %>
+		Gå videre til oversigten
+		<% end %>
+	</div>
 </div>	
 
 
 <!-- trekanten skifter farve -->
 <script type="text/javascript">
-	
+	$(document).ready(function() {
+		$(".button-read-more").click(function (){
+			$('html, body').animate({
+				scrollTop: $(".front-page-text").offset().top
+			}, 500);
+		});
+	})
 	$(window).scroll(function () {
-	    console.log("BUTTON " + $(".button").offset().top);
-	    console.log("TEXT " + $(".front-page-text").offset().top);
+		console.log("BUTTON " + $(".button").offset().top);
+		console.log("TEXT " + $(".front-page-text").offset().top);
 
-	    if ($(".button").offset().top > ($(".front-page-text").offset().top)) {
-	        $(".button").animate({
-	        	borderColor: "black"},
-	        	500, function() {
-	        		if ($(".button").offset().top < ($(".front-page-text").offset().top)) {
-	        			$(".button").animate({
-	        				borderColor: "white"},
-	        				500
-	        				);
-	        		}
-	        	}
-	        );
-	     } 
+		if ($(".button").offset().top > ($(".front-page-text").offset().top)) {
+			$(".button").addClass('black-trans');
+		} else {
+			$(".button").removeClass('black-trans');
+		}	
 
-	 });
+
+	});
 </script>
