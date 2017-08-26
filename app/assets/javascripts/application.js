@@ -18,6 +18,6 @@
 //= require popper
 
 //= require bootstrap-sprockets
-//= require turbolinks
+// require turbolinks
 //= require cable
 

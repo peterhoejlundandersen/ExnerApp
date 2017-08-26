@@ -1,16 +1,21 @@
 <div class="row">
-
 	<% unless @categories.empty? %>
 		<% @categories.each do |cat| %>
-		<div class="col-md-6">
+		<div class="col-md-6 text-center">
 			<%= link_to vaerker_path(cat.name.parameterize) do %>
-			<%= image_tag cat.image, class: "col-md-12" %>
-			<h2 class="text-center"><%= cat.name %></h2>
-			<%= link_to "Rediger kategori", edit_category_path(cat), class: "btn btn-primary" if logged_in?(:site_admin) %>
-			<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"}, class: "btn btn-warning" if logged_in?(:site_admin) %> 
+				<%= image_tag cat.image, class: "center-block" %>
+				<h2 class="text-center"><%= cat.name %></h2>
 			<% end %>
+				<%= link_to "Rediger kategori", edit_category_path(cat), class: "" if logged_in?(:site_admin) %> / 
+				<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"}, class: "" if logged_in?(:site_admin) %> 
 		</div>
 		<% end %>
+		<div class="col-md-6 text-center">
+		<%= link_to om_path() do %>
+			<%= image_tag "om-inger-og-johannes" %>
+			<h2 class="text-center">Om Inger og Johannes</h2>
+		<% end %>
+		</div>
 	<% else %>
 
 		<h3 class="alert alert-warning text-center">Der er ikke nogle kategorier endnu. Login og opret</h3>
