@@ -169,6 +169,10 @@ nav.nav.blog-nav {
 .thumbnail-active {
 	opacity: 0.5;
 }
+
+.active-cat {
+	text-decoration: underline;
+}
 .work-row {
 	margin-bottom: 35px; 
 }
@@ -270,7 +274,9 @@ img.overview-img {
 	text-decoration: underline;
 }
 .img-cat-nav-inner {
-	a {
+	.nav-link {
+		margin-bottom: 0;
+		color: black;
 		display: inline-block;
 	}
 	.info-button {

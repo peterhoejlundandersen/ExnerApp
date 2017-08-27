@@ -1,3 +1,3 @@
 <% images.each_with_index do |image, index| %>
-	<%= content_tag :div, (image_tag image.image.thumb.url), class: "thumb-image col-lg-2 col-md-4 col-sm-6 sortable-image-item #{"thumbnail-active" if index == 0}", data: {id: image.id, type: image.class.to_s} %>
+	<%= content_tag :div, (image_tag image.image.thumb.url), class: "thumb-image col-lg-2 col-md-4 col-sm-6 sortable-image-item #{"thumbnail-active" if image.id == active_id}", data: {id: image.id, type: image.class.to_s} %>
 <% end %>

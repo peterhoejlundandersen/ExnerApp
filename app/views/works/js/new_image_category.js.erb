@@ -1,1 +1,13 @@
-$(".thumb-images").html("<%=j render partial: "thumb_images", locals: {images: @new_thumb_images} %>");
+$(".thumb-images").html("<%=j render partial: "thumb_images", locals: {images: @new_thumb_images, active_id: @first_image.id} %>");
+
+photo_desc = "<%=j render partial: "image_info", locals: {description: @first_image.image_description, photographer: @first_image.photographer} %>"
+
+function loadImage(image_url, photo_desc) {
+	var img = new Image();
+	$(img).load(function() {
+		$(".image-desc-wrapper").html(img).append(photo_desc);
+		$(img).fadeIn(300);
+	}).attr({src: image_url, id: "largeImage"});
+}
+
+loadImage('<%= @first_image.image.url %>', photo_desc);

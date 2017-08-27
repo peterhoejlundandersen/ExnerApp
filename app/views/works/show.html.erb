@@ -10,7 +10,7 @@
 <div class="col-lg-12 hide-it info-field-work">
 	<h2>Information</h2>
 	<div class="info-kort">
-	<%= content_tag :p, info_helper(@work).html_safe if info_helper @work %> 
+		<%= content_tag :p, info_helper(@work).html_safe if info_helper @work %> 
 	</div>
 	<div class="info-beskrivelse">
 		<%= simple_format(@work.description) if @work.description %>
@@ -26,16 +26,15 @@
 
 <!-- THUMB IMAGES -->
 <div class="thumb-images row sortable-images">
-	<%= render partial: "thumb_images", locals: {images: @image_categories.first.images, work_id_friendly: @work.friendly_id} %>
+	<%= render partial: "thumb_images", locals: {images: @image_categories.first.images, work_id_friendly: @work.friendly_id, active_id: @image_categories.first.images.first.id} %>
 </div>
 
 
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		// Also used in works/js/new_image.js.erb - fade-in effect
-		photo_desc = 
-		"<%=j render partial: "image_info", locals: {description: @first_image.image_description, photographer: @first_image.photographer} %>"
+		// Also used in works/js/new_image.js.erb and new_image_category- fade-in effect
+		photo_desc = "<%=j render partial: "image_info", locals: {description: @first_image.image_description, photographer: @first_image.photographer} %>"
 
 		function loadImage(image_url, photo_desc) {
 			var img = new Image();
@@ -47,6 +46,10 @@
 
 		loadImage('<%= @first_image.image.url %>', photo_desc);
 
+
+		$(".img-nav-bar .nav-link").on("click", function() {
+			changeImageCat($(this));
+		}); 
 
 		$("body").on("click", ".thumb-image", function() {
 			addActiveClass($(this), 'thumbnail-active');
@@ -63,6 +66,12 @@
 		function addActiveClass(active_object, active_class) {
 			active_object.addClass(active_class).siblings().removeClass(active_class);
 		}
+
+		function changeImageCat(cat, start_or_end) { 
+			addActiveClass(cat, 'active-cat'); 
+			changeCategory(cat.data("id"), start_or_end);
+		}
+
 		function changeLargeImage(image_id) {
 
 			$.ajax({
@@ -75,41 +84,77 @@
 					$("#largeImage").hide(); // To show loading icon
 				}
 			}); 			
-		
+
 		}
-		function changeCategory(category_id) {
+		function changeCategory(category_id, start_or_end) {
 			$.ajax({
-				url: '/works/' + image_id + '/new_image',
+				url: '/works/' + category_id + '/new_image_category',
 				cache: false,
 				type: 'GET',
-				data: {id: image_id},
+				data: {id: category_id, start_or_end: start_or_end},
 				beforeSend: function() {
-					$(".image-info").hide();
-					$("#largeImage").hide(); // To show loading icon
+
 				}
 			}); 				
 		}
 
+		function moveLeft() {
+			new_image = $('.thumbnail-active').prev('.thumb-image');
+			if ( new_image.length ) {
+				addActiveClass(new_image, 'thumbnail-active');
+				changeLargeImage(new_image.data("id")); 
+				} else { // Ikke flere billeder
+					prev_cat = $(".active-cat").prev(".nav-link");
+					if ($(".nav-link").length == 1 ) { // kun én cat
+						return
+					} else if (prev_cat.length) { // Der er en før
+						changeImageCat(prev_cat, "end");
+					} else { // gå til sidste
+						changeImageCat($(".nav-link").last(), "end");
+					}
+				}
+		}
+
+		function moveRight() {
+	        new_image = $('.thumbnail-active').next('.thumb-image');
+	        if ( new_image.length ) {
+	        	addActiveClass(new_image, 'thumbnail-active');
+	        	changeLargeImage(new_image.data("id"));
+	        } else {
+	        	next_cat = $(".active-cat").next(".nav-link");
+        		if ($(".nav-link").length == 1 ) { // kun én cat
+        			return
+        		} else if (next_cat.length) { // Der er en efter
+	        	debugger;
+        			changeImageCat(next_cat, "start");
+        		} else { // gå til først
+        			changeImageCat($(".img-nav-bar .nav-link").first(), "start");
+        		}
+        	} 
+		}
+
+		$("#leftArrow").on("click", function() {
+			moveLeft();
+		});
+
+		$("#rightArrow").on("click", function() {
+			moveRight();
+		});
+
 		$("body").keydown(function(e) {
 			switch(e.which) {
 	        case 37: // venstre piletast
-	        	new_image = $('.thumbnail-active').prev('.thumb-image');
-	        	addActiveClass(new_image, 'thumbnail-active');
-	        	image_id = new_image.data("id");
-	        	changeLargeImage(image_id); 
-		    break;
+	        	moveLeft();
+	        break;
 
 	        case 39: // højre piletast
-	        	new_image = $('.thumbnail-active').next('.thumb-image');
-	        	addActiveClass(new_image, 'thumbnail-active');
-	        	image_id = new_image.data("id");
-	        	changeLargeImage(image_id);
-		    break;
+	        	moveRight();
+        	break;
 
 	        default: return; // exit this handler for other keys
 	    }
 	    e.preventDefault(); // prevent the default action (scroll / move caret)
 	});			/* Act on the event */	
-});
+	});
 
 </script>

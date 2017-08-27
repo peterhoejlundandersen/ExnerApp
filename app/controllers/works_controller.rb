@@ -11,6 +11,11 @@ class WorksController < ApplicationController
 
   def new_image_category
     @new_thumb_images = ImageCategory.find(params[:id]).images
+    if params[:start_or_end] == "start"
+      @first_image = @new_thumb_images.first
+    else
+      @first_image = @new_thumb_images.last
+    end 
     respond_to do |format|
       format.js { render 'works/js/new_image_category' }
     end

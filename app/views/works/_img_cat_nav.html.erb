@@ -1,5 +1,5 @@
  	<span id="InfoTriangle"></span> 
 <% img_cats.each_with_index do |img_nav_cat, index| %>
 	<% num = img_cat_col_helper(@image_categories.length) %>
-	<%= link_to img_nav_cat.name, new_image_category_work_path(img_nav_cat.id), class: "nav-link sortable-image-item text-center col-md-#{num} #{"active" if index == 0}", data: { id: img_nav_cat.id, type: img_nav_cat.class.to_s }, remote: true %>
+	<%= content_tag :p, img_nav_cat.name, class: "nav-link sortable-image-item text-center col-md-#{num} #{"active-cat" if index == 0}", data: { id: img_nav_cat.id, type: img_nav_cat.class.to_s } %>
 <% end %>

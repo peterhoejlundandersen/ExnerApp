@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-3 pdf">
 	<%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if logged_in?(:site_admin) %>
 	<%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
 	<h4><%= pdf.title %></h4>

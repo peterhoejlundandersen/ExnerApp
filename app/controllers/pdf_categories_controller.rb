@@ -4,9 +4,6 @@ class PdfCategoriesController < ApplicationController
 	def index
 		@pdf_categories = PdfCategory.all
 		@pdfs = Pdf.all
-		render 'hallo'
-			# @pdf_categories = PdfCategory.all
-			# @pdfs = Pdf.all
 	end
 
 	def show_category
