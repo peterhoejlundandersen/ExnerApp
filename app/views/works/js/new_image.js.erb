@@ -1,1 +1,9 @@
-$(".large-image").html("<%=j render partial: "large_image", locals: {url: @new_image.image.url, description: @new_image.image_description, photographer: @new_image.photographer} %>")
+
+function loadImage(image_url) {
+	var img = new Image();
+	$(img).load(function() {
+		$(".image-desc-wrapper").html(img);
+		$(img).fadeIn(300);
+	}).attr({src: image_url, id: "largeImage"});
+}
+loadImage("<%= @new_image.image.url %>");

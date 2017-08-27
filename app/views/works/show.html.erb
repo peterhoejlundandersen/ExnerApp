@@ -29,15 +29,15 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		function loadImage() {
+		function loadImage(image_url) {
 			var img = new Image();
 			$(img).load(function() {
-				$(".image-desc-wrapper").removeClass('loading').append(img);
+				$(".image-desc-wrapper").html(img);
 				$(img).fadeIn(300);
-			}).attr({src: '<%= @first_image.image.url %>', id: "largeImage"});
+			}).attr({src: image_url, id: "largeImage"});
 		}
 
-		loadImage();
+		loadImage('<%= @first_image.image.url %>');
 
 
 		$("body").on("click", ".thumb-image", function() {
@@ -59,11 +59,9 @@
 				data: {id: image_id},
 				beforeSend: function() {
 					$("#largeImage").hide();
-					$("#loadGif").show();
 				}, 
 				succes: function() {
-					$("#loadGif").hide();					
-					$("#largeImage").fadeIn();
+					
 				}
 			}); 			
 		
