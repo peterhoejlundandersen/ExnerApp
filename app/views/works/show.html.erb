@@ -27,15 +27,18 @@
 
 
 <script type="text/javascript">
-	
+
 	$(document).ready(function() {
-		function changeLargeImage(image_id) {
-			$.ajax({
-				url: '/works/' + image_id + '/new_image',
-				type: 'GET',
-				data: {id: image_id},
-			}); 
+		function loadImage() {
+			var img = new Image();
+			$(img).load(function() {
+				$(".image-desc-wrapper").removeClass('loading').append(img);
+				$(img).fadeIn(300);
+			}).attr({src: '<%= @first_image.image.url %>', id: "largeImage"});
 		}
+
+		loadImage();
+
 
 		$("body").on("click", ".thumb-image", function() {
 			image_id = $(this).data("id");
@@ -46,6 +49,25 @@
 			$(this).toggleClass("info-button-active");
 			$(".info-field-work").slideToggle("fast");
 		});
+
+		function changeLargeImage(image_id) {
+
+			$.ajax({
+				url: '/works/' + image_id + '/new_image',
+				cache: false,
+				type: 'GET',
+				data: {id: image_id},
+				beforeSend: function() {
+					$("#largeImage").hide();
+					$("#loadGif").show();
+				}, 
+				succes: function() {
+					$("#loadGif").hide();					
+					$("#largeImage").fadeIn();
+				}
+			}); 			
+		
+		}
 
 	});
 
