@@ -77,7 +77,39 @@
 			}); 			
 		
 		}
+		function changeCategory(category_id) {
+			$.ajax({
+				url: '/works/' + image_id + '/new_image',
+				cache: false,
+				type: 'GET',
+				data: {id: image_id},
+				beforeSend: function() {
+					$(".image-info").hide();
+					$("#largeImage").hide(); // To show loading icon
+				}
+			}); 				
+		}
 
-	});
+		$("body").keydown(function(e) {
+			switch(e.which) {
+	        case 37: // venstre piletast
+	        	new_image = $('.thumbnail-active').prev('.thumb-image');
+	        	addActiveClass(new_image, 'thumbnail-active');
+	        	image_id = new_image.data("id");
+	        	changeLargeImage(image_id); 
+		    break;
+
+	        case 39: // højre piletast
+	        	new_image = $('.thumbnail-active').next('.thumb-image');
+	        	addActiveClass(new_image, 'thumbnail-active');
+	        	image_id = new_image.data("id");
+	        	changeLargeImage(image_id);
+		    break;
+
+	        default: return; // exit this handler for other keys
+	    }
+	    e.preventDefault(); // prevent the default action (scroll / move caret)
+	});			/* Act on the event */	
+});
 
 </script>
