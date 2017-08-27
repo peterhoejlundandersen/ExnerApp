@@ -1,4 +1,8 @@
 <div class="image-info">
-<%= content_tag :div, "Billedebeskrivelse: " + description, class: "img-desc d-ib", id: "imgDesc" unless description.empty? %>    
-<%= content_tag :div, "Fotograf: " + photographer, class: "img-desc d-ib", id: "imgPhoto" unless photographer.empty? %>    
+	<% unless description.nil? %>
+		<%= content_tag :div, description, class: "img-desc d-ib", id: "imgDesc" unless description.empty? %>    
+	<% end %>
+	<% unless photographer.nil? %>
+		<%= content_tag :div, "Fotograf: " + photographer, class: "img-desc d-ib", id: "imgPhoto" unless photographer.empty? %>    
+	<% end %>
 </div>

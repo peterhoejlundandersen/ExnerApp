@@ -8,7 +8,10 @@
 	<%= render partial: "large_image", locals: {url: @first_image.image.url, description: @first_image.image_description, photographer: @first_image.photographer} %></%>
 </div>
 <div class="col-lg-12 hide-it info-field-work">
-	<%= info_helper @work %>
+	<h2>Information</h2>
+	<div class="info-kort">
+	<%= content_tag :p, info_helper(@work).html_safe if info_helper @work %> 
+	</div>
 	<div class="info-beskrivelse">
 		<%= simple_format(@work.description) if @work.description %>
 	</div>
@@ -17,6 +20,7 @@
 <%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "btn btn-secondary" %>
 <!-- IMG CAT NAVBAR -->
 <div class="img-nav-bar img-cat-nav-inner sortable-images">
+	<%= content_tag :span, "Info", class: "info-button"	unless info_helper(@work).nil? && @work.description.empty? %>
 	<%= render partial: "img_cat_nav", locals: {img_cats: @image_categories} %> 
 </div>
 
@@ -30,7 +34,9 @@
 
 	$(document).ready(function() {
 		// Also used in works/js/new_image.js.erb - fade-in effect
-		photo_desc = "<%=j render partial: "image_info", locals: {description: @first_image.image_description, photographer: @first_image.photographer} %>"
+		photo_desc = 
+		"<%=j render partial: "image_info", locals: {description: @first_image.image_description, photographer: @first_image.photographer} %>"
+
 		function loadImage(image_url, photo_desc) {
 			var img = new Image();
 			$(img).load(function() {
@@ -43,8 +49,10 @@
 
 
 		$("body").on("click", ".thumb-image", function() {
+			addActiveClass($(this), 'thumbnail-active');
 			image_id = $(this).data("id");
 			changeLargeImage(image_id);
+
 		});
 
 		$(".info-button").on("click", function() {
@@ -52,6 +60,9 @@
 			$(".info-field-work").slideToggle("fast");
 		});
 
+		function addActiveClass(active_object, active_class) {
+			active_object.addClass(active_class).siblings().removeClass(active_class);
+		}
 		function changeLargeImage(image_id) {
 
 			$.ajax({

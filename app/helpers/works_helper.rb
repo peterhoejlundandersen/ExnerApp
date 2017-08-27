@@ -10,15 +10,13 @@ module WorksHelper
 	end
 
 	def info_helper work
-		info = "<h2>Information</h2>"
-		info << "<p>"
-		info << "Sagsnr: #{work.sagsnr.to_s}<br>" if work.sagsnr
-		info << "Adresse: #{work.address}<br>" if work.address
-		info << "Konkurrenceår: #{work.competition.to_s}<br>" if work.competition
-		info << "Indvielse: #{work.opening_year.to_s}<br>" if work.opening_year
+		info = ""
+		info << "Sagsnr: #{work.sagsnr.to_s}<br>" if work.sagsnr.present?
+		info << "Adresse: #{work.address}<br>" if work.address.present?
+		info << "Konkurrenceår: #{work.competition.to_s}<br>" if work.competition.present?
+		info << "Indvielse: #{work.opening_year.to_s}<br>" if work.opening_year.present?
 		work.infos.each {|i| info << "#{i.title} <br>" } unless work.infos.empty?
-		info << "</p>"
-		content_tag :div, info.html_safe, class: "info-kort"
+		return info
 	end
 
 	def img_cat_col_helper img_cat_num

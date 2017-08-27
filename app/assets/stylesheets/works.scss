@@ -209,7 +209,7 @@ nav.nav.blog-nav {
 	float: left;
 	width: 64%;
 	margin-left: 20px;	
-	padding-top: 56px;
+	padding-bottom: 56px;
 }
 .billede-upload {
 	display: block;
@@ -304,6 +304,7 @@ img.overview-img {
 }
 
 .info-field-work {
+	overflow: hidden;
 	display: block;
 	position: absolute;
 	bottom: 0;
