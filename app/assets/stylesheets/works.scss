@@ -94,14 +94,31 @@ nav.nav.blog-nav {
 	margin: 0 auto;
 }
 
-
+.vertical-center {
+	padding-bottom: 75px;
+	width: 100%;
+	text-align: center;
+	  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  min-height: 900px;
+  margin: 0 auto; 
+  display: flex;
+  align-items: center;
+}
+.image-info {
+    position: absolute;
+    bottom: -50px;
+    width: 50%;
+    left: 50%;
+    margin-left: -25%;
+}
 .image-desc-wrapper {
     height: 100vh; /*can be anything*/
     width: 100%; /*can be anything*/
     position: relative;
 }
 
-#largeImage, #loadGif {
+#largeImage {
 	max-height: 100%;  
     max-width: 100%; 
     width: auto;
@@ -216,18 +233,6 @@ nav.nav.blog-nav {
 
 .billede-upload-felt {
 	padding: 0px!important;
-}
-
-.vertical-center {
-	padding-bottom: 50px;
-	width: 100%;
-	text-align: center;
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
-  min-height: 900px;
-  margin: 0 auto; 
-  display: flex;
-  align-items: center;
 }
 
 .work-navbar-outer {
