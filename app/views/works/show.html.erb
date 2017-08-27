@@ -5,7 +5,7 @@
 
 <!-- LARGE IMAGE --> 
 <div class="large-image">
-	<%= render partial: "large_image", locals: {url: @first_image.image.url, description: @first_image.image_description, photographer: @first_image.photographer} %>
+	<%= render partial: "large_image", locals: {url: @first_image.image.url, description: @first_image.image_description, photographer: @first_image.photographer} %></%>
 </div>
 <div class="col-lg-12 hide-it info-field-work">
 	<%= info_helper @work %>
@@ -29,15 +29,17 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		function loadImage(image_url) {
+		// Also used in works/js/new_image.js.erb - fade-in effect
+		photo_desc = "<%=j render partial: "image_info", locals: {description: @first_image.image_description, photographer: @first_image.photographer} %>"
+		function loadImage(image_url, photo_desc) {
 			var img = new Image();
 			$(img).load(function() {
-				$(".image-desc-wrapper").html(img);
+				$(".image-desc-wrapper").html(img).append(photo_desc);
 				$(img).fadeIn(300);
 			}).attr({src: image_url, id: "largeImage"});
 		}
 
-		loadImage('<%= @first_image.image.url %>');
+		loadImage('<%= @first_image.image.url %>', photo_desc);
 
 
 		$("body").on("click", ".thumb-image", function() {
@@ -58,10 +60,8 @@
 				type: 'GET',
 				data: {id: image_id},
 				beforeSend: function() {
-					$("#largeImage").hide();
-				}, 
-				succes: function() {
-					
+					$(".image-info").hide();
+					$("#largeImage").hide(); // To show loading icon
 				}
 			}); 			
 		
