@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 	resources :works, except: :index do
 		put :sort, on: :collection
 		member do
+			put :overview_img
 			put :sort_images
 			get :new_image
 			get :new_image_category

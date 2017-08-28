@@ -63,6 +63,7 @@
 			<% if f.object.overview_img.file.nil? %>
 			<%= f.label :overview_img, "Oversigtbillede" %>
 			<p>Vælg billedet, som skal være på oversigten ved at trykke på "Vælg som oversigtsbillede"-checkboxen under billederne nedenunde.</p>
+			<strong>Det er desværre ikke muligt at uploade et billede og så vælge det som det samme som oversigtsbillede, da det først skal ligge i databasen. Altså, Opdater først værket med dit nye billede og gå så tilbage til rediger værk, hvor du kan vælge det som oversigtsbillede.</strong>
 
 			<% else %>
 			<%= image_tag f.object.overview_img.url %>

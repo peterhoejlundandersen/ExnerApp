@@ -132,7 +132,6 @@ def update
   @work = Work.friendly.find(params[:id])
 
   if @work.update(work_params)
-    binding.pry
     save_overview_img_if_checkbox_checked @work if params[:work][:image_categories_attributes].present?
 
     flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
@@ -162,6 +161,7 @@ def save_overview_img_if_checkbox_checked work
    img_cat[:images_attributes].values.each do |img|
      if img[:is_review_img] == "1"
        #Kalder den work_params, saa den vil blive redigeret
+       binding.pry
        work.overview_img = Image.find(img[:id]).image
        work.save!
        return work

@@ -1,9 +1,8 @@
 <div class="<%= "image-draft" if f.object.draft %> form-group nested-fields col-lg-3 billede-upload-box sort-this-image">
-	<%= f.label :is_review_img, "Vælg som oversigtsbillede: " %>
-	<%= f.check_box :is_review_img, class: "overview-img-checkbox" %>
-
-	
 	<% unless f.object.image.file.nil? %>
+		<span id="imgID" data-id="<%= f.object.image.model.id %>"> </span>
+		<%= f.label :is_review_img, "Vælg som oversigtsbillede: ", id: "overviewImg" %>
+		<%= f.check_box :is_review_img, class: "overview-img-checkbox" %>
 		<%= image_tag f.object.image.thumb.url %>
 	<% else %>
 		<label class="btn btn-secondary billede-upload-felt">
