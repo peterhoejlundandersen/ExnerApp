@@ -31,11 +31,16 @@
 
  @import "bootstrap";
 
-
 h1,h2,h3,h4,h5,h6 {
 	font-family: Corbel; 
 	letter-spacing: 2px;
 }
+
+.no-images {
+	font-family: "LinLibertine";
+	margin: 0 auto;
+}
+
 .devise-layout {
 	margin-top: 6%;
 }

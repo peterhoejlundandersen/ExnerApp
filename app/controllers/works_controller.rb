@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  access all: [:show, :index, :design_index], user: {except: [:destroy]}, site_admin: :all
+  access all: [:show, :index, :design_index, :new_image, :new_image_category], user: {except: [:destroy]}, site_admin: :all
   layout "works"  
 
   def new_image
@@ -11,10 +11,10 @@ class WorksController < ApplicationController
 
   def new_image_category
     @new_thumb_images = ImageCategory.find(params[:id]).images
-    if params[:start_or_end] == "start"
-      @first_image = @new_thumb_images.first
-    else
+    if params[:start_or_end] == "end"
       @first_image = @new_thumb_images.last
+    else
+      @first_image = @new_thumb_images.first
     end 
     respond_to do |format|
       format.js { render 'works/js/new_image_category' }

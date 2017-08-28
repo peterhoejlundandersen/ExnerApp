@@ -9,28 +9,22 @@
 		<%= link_to work_path(work) do %>
 				<% if !work.overview_img.file.nil? %>
 					<div class="overview-img-block">
-					<%= image_tag(work.overview_img, class: "overview-img") %>
+						<%= image_tag(work.overview_img, class: "overview-img") %>
 					</div>
 					<h2 class="overview-work-h2"><%= work.name %></h2>
 				<% elsif work.images.empty? %>
-					<div class="without-overview-img">
-						<span class="without-overview-text">
-
-						</span>
+					<div class="overview-img-block">
 					</div>
 					<h2 class="overview-work-h2"><%= work.name %></h2>
 				<% else %>
-					<div class="without-overview-img">
-						<span class="without-overview-text">
-							
-						</span>
+					<div class="overview-img-block">
 					</div>
 					<h2 class="overview-work-h2"><%= work.name %></h2>
 
 				<% end %>
 
 		<% end %>
-			</div>
+			</div><!-- overview-work -->
 	<% end %>
 <% else %>
 

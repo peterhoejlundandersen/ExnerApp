@@ -20,13 +20,7 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
-#loadGif {
-    left: 50%;
-    position: relative;
-    margin-left: -50px;
-    margin-top: 48vh;
-    margin-bottom: 48vh;
-}
+
 .work-arrows {
 	position: absolute;
 	cursor: pointer;
@@ -54,8 +48,17 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	letter-spacing: 2px;
 }
 .overview-img-block {
-	min-height: 182px;
+	width: 100%;
+	text-align: center;
+	  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+	  min-height: 100vh; /* These two lines are counted as one :-)       */
+	  min-height: 182px;
+	  margin: 0 auto; 
+	  display: flex;
+	  align-items: center;
+
 }
+
 .work-headline {
 	font-family: Corbel;
 	text-align: center;
