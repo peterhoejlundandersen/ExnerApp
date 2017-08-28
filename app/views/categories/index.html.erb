@@ -6,8 +6,10 @@
 				<%= image_tag cat.image, class: "center-block" %>
 				<h2 class="text-center"><%= cat.name %></h2>
 			<% end %>
-				<%= link_to "Rediger kategori", edit_category_path(cat), class: "" if logged_in?(:site_admin) %> / 
-				<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"}, class: "" if logged_in?(:site_admin) %> 
+			<% if logged_in?(:site_admin) %>
+				<%= link_to "Rediger kategori", edit_category_path(cat) %> / 
+				<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"} %> 
+			<% end %>
 		</div>
 		<% end %>
 		<div class="col-md-6 text-center">

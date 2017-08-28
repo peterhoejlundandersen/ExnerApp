@@ -1,3 +1,19 @@
-<h1><%= @work.name %></h1>
+<h1 class="text-center"><%= @work.name %></h1>
 <%= logged_in_work_helper if logged_in?(:site_admin) %>
-<p><%= @work.description %>
+<div class="row mt-4">
+	<div class="offset-lg-2 col-lg-8">
+		<p><%= @work.description %></p>
+	</div>
+</div>
+
+
+<div class="next-prev-back-wrapper row mt-4">
+	<% unless @prev_work.nil? %>
+	<%= link_to fa_icon("angle-left", text: " " + @prev_work.name), work_path(@prev_work.friendly_id), class: "col-lg-4 text-center" %>
+	<% else %>
+	<div class="col-lg-4"></div>
+	<% end %>
+	<%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "col-lg-4 text-center" %>
+	<%= link_to fa_icon("angle-right", text: @next_work.name + " ", right: true), work_path(@next_work.friendly_id), class: "col-lg-4 text-center" unless @next_work.nil? %>
+	
+</div>
