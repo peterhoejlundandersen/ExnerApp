@@ -14,6 +14,12 @@ html, body {
 
 $img-form-color: lighten(#B3E5FC, 10%);
 
+.work-wrapper {
+	min-height: 1600px;
+}
+.thumb-images {
+	padding-bottom: 40px;
+}
 .next-prev-back-wrapper {
 	font-family: Corbel;
 	text-transform: uppercase;
@@ -46,6 +52,13 @@ $img-form-color: lighten(#B3E5FC, 10%);
 	text-transform: uppercase;
 	font-size: 0.7em!important;
 	letter-spacing: 2px;
+}
+
+.overview-img-checkbox {
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
 }
 .overview-img-block {
 	width: 100%;
@@ -171,8 +184,8 @@ nav.nav.blog-nav {
 		opacity: 0.6;
 	}
 }
-.thumb-images {
-	min-height: 500px;
+.thumb-image {
+	padding-top: 10px;
 }
 .thumbnail-active {
 	opacity: 0.5;

@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  access all: [:show, :index, :design_index, :new_image, :new_image_category], user: {except: [:destroy]}, site_admin: :all
+  access all: [:show, :index, :design_index, :new_image, :new_image_category, :overview_img], user: {except: [:destroy]}, site_admin: :all
   layout "works"  
 
   def new_image
@@ -71,7 +71,8 @@ class WorksController < ApplicationController
    unless last_work_in_category.position.nil?
     @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
     end
-   if @work.save!
+   if @work.save! 
+    binding.pry 
 
      flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
      redirect_to @work
@@ -132,17 +133,24 @@ def update
   @work = Work.friendly.find(params[:id])
 
   if @work.update(work_params)
-    save_overview_img_if_checkbox_checked @work if params[:work][:image_categories_attributes].present?
-
     flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
     redirect_to work_path(@work)
-
-
   else
     redirect_to kategori_oversigt_path(@work.category_id)
   end
 
 
+end
+
+def overview_img
+  work = Work.find(params[:work_id])
+  image = Image.find(params[:img_id])
+  work.overview_img = image.image
+  work.save!
+  @image = work.overview_img
+  respond_to do |format|
+    format.js
+  end
 end
 
 private
@@ -154,22 +162,6 @@ def set_design_categories cat_param
  @categories << Category.find(15)
  @categories << Category.find(18)
  @works = @category.works
-end
-
-def save_overview_img_if_checkbox_checked work 
- params[:work][:image_categories_attributes].values.each do |img_cat|
-   img_cat[:images_attributes].values.each do |img|
-     if img[:is_review_img] == "1"
-       #Kalder den work_params, saa den vil blive redigeret
-       binding.pry
-       work.overview_img = Image.find(img[:id]).image
-       work.save!
-       return work
-
-     end
-   end
- end  
- 
 end
 
 def get_next_and_previous_work(works, current_work)

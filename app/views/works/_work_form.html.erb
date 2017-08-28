@@ -60,16 +60,10 @@
 		<hr>
 		<div class="form-group">
 			<h4>Oversigtsbillede</h4>
-			<% if f.object.overview_img.file.nil? %>
-			<%= f.label :overview_img, "Oversigtbillede" %>
-			<p>Vælg billedet, som skal være på oversigten ved at trykke på "Vælg som oversigtsbillede"-checkboxen under billederne nedenunde.</p>
-			<strong>Det er desværre ikke muligt at uploade et billede og så vælge det som det samme som oversigtsbillede, da det først skal ligge i databasen. Altså, Opdater først værket med dit nye billede og gå så tilbage til rediger værk, hvor du kan vælge det som oversigtsbillede.</strong>
-
-			<% else %>
-			<%= image_tag f.object.overview_img.url %>
-			<p>Vælg nyt billede ved at tjekke et nyt felt ved siden af "Vælg som oversigtbillede" over hvert billede underneden.</p>
-
-			<% end %>
+			<p>Vælg billedet, som skal være på oversigten ved at trykke på "Skift til dette som oversigtsbillede" over hvert billede nedenunde.</p>
+			<div class="oversigt-billede-wrapper">
+				<%= image_tag @work.overview_img if @work.overview_img.present? %>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -101,8 +95,18 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('body').on('change', '.overview-img-checkbox', function() {
-		    $('.overview-img-checkbox').not(this).prop('checked', false);  
+		$('body').on('click', '.overview-img-checkbox', function() {
+		    image_id = $(this).data("imgid");		  
+		    work_id = $(this).data("workid");  
+		    changeOverviewImg(image_id, work_id);
 		});
+
+		function changeOverviewImg(image_id, work_id) {
+			$.ajax({
+				url: '/works/' + image_id + '/overview_img',
+				type: 'PUT',
+				data: {img_id: image_id, work_id: work_id },
+			})			
+		}
 	});
 </script>
