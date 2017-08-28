@@ -20,6 +20,7 @@ class WorksController < ApplicationController
       format.js { render 'works/js/new_image_category' }
     end
   end
+
   def index
     if ["belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
       set_design_categories params[:vaerker_cat]
@@ -61,6 +62,15 @@ class WorksController < ApplicationController
   
   def create
    @work = Work.new(work_params)
+   if @work.image_categories.present? # En underlig fejl med manglende work_id
+     @work.image_categories.each do |img_cat|
+      img_cat.work = @work
+    end
+  end
+   last_work_in_category = Category.find(@work.category.id).works.last
+   unless last_work_in_category.position.nil?
+    @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
+    end
    if @work.save!
 
      flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
@@ -73,6 +83,11 @@ class WorksController < ApplicationController
 
  def show 
    @work = Work.friendly.find(params[:id])
+   unless @work.position.nil?
+    @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work) 
+   else 
+    @prev_work, @new_work = "", ""
+  end 
    # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
    unless @work.image_categories.first.nil?
 
@@ -84,11 +99,11 @@ class WorksController < ApplicationController
     else 
         # For work without images
         render 'show_no_images'
-    end 
+      end 
 
-  else 
-    render 'show_no_images'
-  end
+    else 
+      render 'show_no_images'
+    end
   end
 
   def sort_images
@@ -106,30 +121,30 @@ class WorksController < ApplicationController
    @work = Work.friendly.find(params[:id])
    work_category_id = @work.category_id
    work_name = Work.name
-     if @work.destroy
-      redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
-    end
-
+   if @work.destroy
+    redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
   end
 
-  def update
+end
 
-    @work = Work.friendly.find(params[:id])
-    
-    if @work.update(work_params)
+def update
 
-      save_overview_img_if_checkbox_checked @work
+  @work = Work.friendly.find(params[:id])
 
-      flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
-      redirect_to work_path(@work)
+  if @work.update(work_params)
 
+    save_overview_img_if_checkbox_checked @work
 
-    else
-      redirect_to kategori_oversigt_path(@work.category_id)
-    end
+    flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
+    redirect_to work_path(@work)
 
 
+  else
+    redirect_to kategori_oversigt_path(@work.category_id)
   end
+
+
+end
 
 private
 
@@ -157,23 +172,28 @@ def save_overview_img_if_checkbox_checked work
  
 end
 
+def get_next_and_previous_work(works, current_work)
+   next_work = works.detect { |w| w.position > current_work.position }
+   prev_work = works.reverse.detect { |w| w.position < current_work.position }
+   [prev_work, next_work]
+end
 
-  def work_params
-   params.require(:work).permit(
-    :name, 
-    :sagsnr, 
-    :category_id,
-    :description, 
-    :address,
-    :competition,
-    :opening_year,
-    :overview_img,
-    :position,
-    {infos_attributes: 
-      [:id, :work_id, :title, :_destroy]},
-      {image_categories_attributes: 
-        [:id, :work_id, :name, :_destroy,
-          images_attributes: 
-          [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]}) 
-  end
+def work_params
+ params.require(:work).permit(
+  :name, 
+  :sagsnr, 
+  :category_id,
+  :description, 
+  :address,
+  :competition,
+  :opening_year,
+  :overview_img,
+  :position,
+  {infos_attributes: 
+    [:id, :work_id, :title, :_destroy]},
+    {image_categories_attributes: 
+      [:id, :work_id, :name, :_destroy,
+        images_attributes: 
+        [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]}) 
+end
 end

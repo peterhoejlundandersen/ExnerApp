@@ -4,11 +4,7 @@
 	<h3><%= f.label :name, "Navngiv billedkategorien:" %></h3>
 	<h3 class="img-cat-name-input"><%= f.text_field :name %></h3>
 	</div>
-
-
 		<%= link_to_remove_association "Fjern billedkategori", f, class: "btn btn-warning img-cat-remove" %>
-
-
 
 		<%= f.fields_for :images do |img| %>
 			<%= render partial: "image_fields", locals: {f: img} %>

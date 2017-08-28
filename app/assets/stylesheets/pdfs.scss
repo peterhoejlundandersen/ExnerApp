@@ -3,14 +3,60 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Corbel; 
+	letter-spacing: 2px;
+}
+
+.active {
+	text-decoration: underline;
+}
+.hide-it {
+	display: none;
+}
+.pdf-categories {
+	overflow: hidden;
+}
+
+#chooseCategory {
+	cursor: pointer;
+}
+
+.pdf-cat-button {
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: 1px solid;
+}
+
+.pdf-cat-button-active {
+	background-color: #bfbfbf;
+	color: white;
+}
+
 .pdf {
-    font-family: Corbel;
-    background-color: grey;
+    font-family: LinLibertine;
+    background-color: #bfbfbf;
     color: white;
+    text-align: center;
+    box-sizing: border-box;
+    border: 18px solid white;
+    padding-top: 20px;
+    padding-bottom: 30px;
     a {
     	h4 {
-    		color: white; 
-    		text-transform: uppercase;
+			letter-spacing: 1px;
+    		font-family: LinLibertine;
+    		color: black; 
     	}
+		.pdf-udgivet {
+			color: white;
+			border-top: 1px solid darken(#bfbfbf, 15%);
+			position: absolute;
+			width: 80%;
+			left: 10%;
+			bottom: -10px; 
+		}
+
     }
 }

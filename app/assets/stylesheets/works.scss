@@ -14,7 +14,12 @@ html, body {
 
 $img-form-color: lighten(#B3E5FC, 10%);
 
-
+.next-prev-back-wrapper {
+	font-family: Corbel;
+	text-transform: uppercase;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
 #loadGif {
     left: 50%;
     position: relative;

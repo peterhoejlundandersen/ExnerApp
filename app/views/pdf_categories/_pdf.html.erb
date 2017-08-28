@@ -1,7 +1,7 @@
-<div class="col-md-3 pdf">
+<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 pdf">
 	<%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if logged_in?(:site_admin) %>
 	<%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
 	<h4><%= pdf.title %></h4>
-	<%= content_tag :p, "Udgivet: #{pdf.date.strftime("%Y")}" unless pdf.date.nil? %>
+	<%= content_tag :p, "Udgivet: #{pdf.date.strftime("%Y")}", class: "pdf-udgivet" unless pdf.date.nil? %>
 	<% end %>
 </div>

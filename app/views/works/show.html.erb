@@ -4,6 +4,7 @@
 <%= logged_in_work_helper if logged_in?(:site_admin) %>
 
 <!-- LARGE IMAGE --> 
+<h1 class="text-center"><%= @work.name %></h1>
 <div class="large-image">
 	<%= render partial: "large_image", locals: {url: @first_image.image.url, description: @first_image.image_description, photographer: @first_image.photographer} %></%>
 </div>
@@ -17,10 +18,19 @@
 	</div>
 </div>
 
-<%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "btn btn-secondary" %>
+<div class="next-prev-back-wrapper row">
+	<% unless @prev_work.nil? %>
+	<%= link_to fa_icon("angle-left", text: " " + @prev_work.name), work_path(@prev_work.friendly_id), class: "col-lg-4 text-center" %>
+	<% else %>
+	<div class="col-lg-4"></div>
+	<% end %>
+	<%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "col-lg-4 text-center" %>
+	<%= link_to fa_icon("angle-right", text: @next_work.name + " ", right: true), work_path(@next_work.friendly_id), class: "col-lg-4 text-center" unless @next_work.nil? %>
+	
+</div>
 <!-- IMG CAT NAVBAR -->
 <div class="img-nav-bar img-cat-nav-inner sortable-images">
-	<%= content_tag :span, "Info", class: "info-button"	unless info_helper(@work).nil? && @work.description.empty? %>
+	<%= content_tag :span, "Info", class: "info-button"	unless info_helper(@work).blank? && @work.description.blank? %>
 	<%= render partial: "img_cat_nav", locals: {img_cats: @image_categories} %> 
 </div>
 
