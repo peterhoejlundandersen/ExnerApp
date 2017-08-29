@@ -35,8 +35,10 @@
 </div>
 
 <!-- THUMB IMAGES -->
+<div class="container thumb-images-wrapper">
 <div class="thumb-images row sortable-images">
 	<%= render partial: "thumb_images", locals: {images: @image_categories.first.images, work_id_friendly: @work.friendly_id, active_id: @image_categories.first.images.first.id} %>
+</div>
 </div>
 
 

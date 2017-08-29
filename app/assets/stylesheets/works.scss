@@ -357,3 +357,8 @@ img.overview-img {
 	text-align: center;
 }
 
+@media screen and (min-width: 996px) {
+	.thumb-images-wrapper {
+		width: 1240px!important
+	}
+}
