@@ -185,6 +185,9 @@ nav.nav.blog-nav {
 	}
 }
 .thumb-image {
+	img {
+		max-width: 100%;
+	}
 	padding-top: 10px;
 }
 .thumbnail-active {
@@ -315,7 +318,6 @@ img.overview-img {
 	color: white;
 	cursor: pointer;
 	padding: 0.5rem 1rem;
-	margin-right: 15px;
 	#InfoTriangle {
 		position: absolute;
 		border-left: 12px solid transparent;

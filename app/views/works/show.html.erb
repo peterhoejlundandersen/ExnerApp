@@ -103,7 +103,7 @@
 				type: 'GET',
 				data: {id: category_id, start_or_end: start_or_end},
 				beforeSend: function() {
-
+					$(".thumb-images").hide();
 				}
 			}); 				
 		}
@@ -135,7 +135,6 @@
         		if ($(".nav-link").length == 1 ) { // kun én cat
         			return
         		} else if (next_cat.length) { // Der er en efter
-	        	debugger;
         			changeImageCat(next_cat, "start");
         		} else { // gå til først
         			changeImageCat($(".img-nav-bar .nav-link").first(), "start");
