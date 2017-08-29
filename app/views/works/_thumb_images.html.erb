@@ -1,3 +1,4 @@
 <% images.each_with_index do |image, index| %>
+	<% next if image.image.thumb.url.nil? %>
 	<%= content_tag :div, (image_tag image.image.thumb.url), class: "text-center thumb-image col-lg-2 col-md-3 col-6	 col-xs-6 sortable-image-item #{"thumbnail-active" if image.id == active_id}", data: {id: image.id, type: image.class.to_s} %>
 <% end %>
