@@ -2,7 +2,7 @@
 	<% unless @categories.empty? %>
 		<% @categories.each do |cat| %>
 		<div class="col-md-6 text-center">
-			<%= link_to vaerker_path(cat.name.parameterize) do %>
+			<%= link_to vaerker_path(cat.friendly_id) do %>
 				<%= image_tag cat.image, class: "center-block" %>
 				<h2 class="text-center"><%= cat.name %></h2>
 			<% end %>

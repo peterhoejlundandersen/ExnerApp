@@ -7,7 +7,7 @@
 
 	<div class="pdf-categories hide-it py-4">
 		<div class="col-md-12 pdf-cat">
-		<%= link_to show_pdf_category_path() do %>
+		<%= link_to show_pdf_category_path() do %><!-- ALLE PATHEN! -->
 			<h4 class="text-center <%= "active" if params[:kategori_id].nil? %>">Alle</h4>
 		<% end %>
 		<% @pdf_categories.each do |cat| %>
