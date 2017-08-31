@@ -11,7 +11,9 @@ html, body {
 	width: 100%;
 	margin: 0;
 }
-
+.works-wrapper {
+	max-width: 1400px;
+}
 $img-form-color: lighten(#B3E5FC, 10%);
 
 .oversigt-img {
