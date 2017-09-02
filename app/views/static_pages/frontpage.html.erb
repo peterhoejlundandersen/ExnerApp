@@ -14,7 +14,7 @@
 		<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
 		<% else %>
 		<%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-		<%= simple_format(@text.text) %>
+		<%= @text.text.html_safe %>
 
 		<% end %> 
 	</div>
