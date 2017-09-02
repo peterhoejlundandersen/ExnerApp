@@ -39,7 +39,11 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: Corbel; 
 	letter-spacing: 2px;
 }
-
+.container.work-wrapper {
+    padding: 0;
+    max-width: 1300px;
+    width: 100%;
+}
 .no-images {
 	font-family: "LinLibertine";
 	margin: 0 auto;
@@ -71,12 +75,6 @@ a {
 	}
 }
 
-.blog-nav {
-	background-color: lighten(black, 80%);
-}
-.blog-nav .active {
-	text-decoration: underline;
-}
 
 .nav-container {
 	min-width: 100%;

@@ -3,6 +3,7 @@
 		<%= content_tag :div, description, class: "img-desc d-ib", id: "imgDesc" unless description.empty? %>    
 	<% end %>
 	<% unless photographer.nil? %>
-		<%= content_tag :div, "Fotograf: " + photographer, class: "img-desc d-ib", id: "imgPhoto" unless photographer.empty? %>    
+	<!-- FJERNET INDTIL KAREN SIGER TIL -->
+		<%# content_tag :div, "Fotograf: " + photographer, class: "img-desc d-ib", id: "imgPhoto" unless photographer.empty? %>    
 	<% end %>
 </div>
