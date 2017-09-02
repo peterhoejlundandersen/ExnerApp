@@ -18,7 +18,8 @@ class CategoriesController < ApplicationController
 	end
 
 	def update
-		@category = Category.friendly.find(params[:id])		
+		@category = Category.friendly.find(params[:id])	
+		@category.remove_image! if params[:category][:image]
 		if @category.update(cat_params)
 			redirect_to oversigt_path, notice: "#{@category.name} er blevet opdateret"
 		else

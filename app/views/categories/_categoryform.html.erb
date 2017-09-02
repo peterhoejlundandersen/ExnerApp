@@ -8,17 +8,15 @@
 		<div class="form-group col-md-12">
 			<hr>
 				<%= image_tag category.image.url if category.image.url %>
-				<% if category.image.url %>
-			<div class="row">	
-			<%= f.label "Fjern billede" %>
-			<%= f.check_box :remove_image %>
-			</div>
-			<% else %>
+				<div class="row"></div>
 				<label class="btn btn-primary" style="cursor: pointer;">
-				Upload billede til oversigtsiden
+				<% if category.image.url %>
+					Upload nyt billede
+				<% else %>
+					Upload billede til oversigtsiden
+				<% end %>
 				<%= f.file_field :image, style: "display: none" %>
 				</label>
-			<% end %>
 		</div>
 		<%= f.submit submit_text, class: "btn btn-primary" %>
 	</div>
