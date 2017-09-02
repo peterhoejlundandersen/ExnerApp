@@ -43,9 +43,13 @@ class WorksController < ApplicationController
 
   def sort
     params[:order].each do |key, value|
-      Work.find(value[:id]).update(position: value[:position])
+      if value[:type] == "Category"
+        Category.find(value[:id]).update(position: value[:position]) 
+      else
+        Work.find(value[:id]).update(position: value[:position])
+      end
     end 
-    render nothing: true   
+    head :ok
   end
 
 
@@ -111,7 +115,9 @@ class WorksController < ApplicationController
     params[:order].each do |key, value|
       if value[:type] == "ImageCategory"
         ImageCategory.find(value[:id]).update(position: value[:position])
-      else
+      elsif value[:type] == "Category"
+        Category.find(value[:id]).update(position: value[:position])
+      else  
         Image.find(value[:id]).update(position: value[:position])
       end
     end

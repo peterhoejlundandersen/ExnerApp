@@ -16,6 +16,7 @@ ready = ->
       updated_order.push
         id: $(this).data("id")
         position: i + 1
+        type: $(this).data("type")
       return
     $.ajax
       type: "PUT"

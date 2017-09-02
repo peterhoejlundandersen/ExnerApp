@@ -27,7 +27,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def index
-		@categories = Category.all
+		@categories = Category.where.not(id: [15, 18, 13])
 		@header_title = "Oversigt"
 	end
 

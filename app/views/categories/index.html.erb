@@ -1,7 +1,9 @@
-<div class="row pt-4">
+<%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
+<%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
+<div class="row pt-4 sortable">
 	<% unless @categories.empty? %>
 		<% @categories.each do |cat| %>
-		<div class="col-md-6 text-center">
+		<div class="col-md-4 text-center sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
 			<%= link_to vaerker_path(cat.friendly_id) do %>
 				<%= image_tag cat.image, class: "center-block oversigt-img" %>
 				<h2 class="text-center"><%= cat.name %></h2>
@@ -12,7 +14,13 @@
 			<% end %>
 		</div>
 		<% end %>
-		<div class="col-md-6 text-center">
+		<div class="col-md-4 text-center">
+		<%= link_to show_pdf_category_path() do %>
+			<%= image_tag "", class: "oversigt-img" %>
+			<h2 class="text-center">Johannes' tekster</h2>
+		<% end %>
+		</div>
+		<div class="col-md-4 text-center">
 		<%= link_to om_path() do %>
 			<%= image_tag "om-inger-og-johannes", class: "oversigt-img" %>
 			<h2 class="text-center">Om Inger og Johannes</h2>
