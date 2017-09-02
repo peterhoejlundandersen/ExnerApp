@@ -11,8 +11,8 @@ html, body {
 	width: 100%;
 	margin: 0;
 }
-.row.sortable.works-wrapper {
-    margin: 0 auto;
+.works-wrapper {
+    margin: 0 auto!important;
 	max-width: 1400px;
 }
 $img-form-color: lighten(#B3E5FC, 10%);

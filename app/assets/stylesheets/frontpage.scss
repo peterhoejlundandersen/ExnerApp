@@ -27,8 +27,17 @@
 	cursor: pointer;
 }
 .indexwrapper {
+	.frontpage-ark {
+		padding-left: 12%;
+	}
 	h1, h4 {
 		font-family: "LinLibertine";
+	}
+	h1 {
+		font-size: 2.6rem;
+	}
+	h4 {
+		font-size: 1.7rem;
 	}
 	padding-top: 84vh;
 	width: 100%;
@@ -56,8 +65,8 @@
 
 .to-oversigt { 
 	position: fixed;
-	right: 3%;
-	width: 7%;
+	right: 2%;
+	bottom: 7%;
 	.button {
 		position: relative;
 		top: 50%;

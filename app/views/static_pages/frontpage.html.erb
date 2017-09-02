@@ -1,13 +1,15 @@
 <div class="indexbackground">
 </div>
 <div class="row indexwrapper">
-	<div class="offset-lg-1 col-lg-10">
+	<div class="offset-lg-1 col-lg-10 frontpage-ark">
 		<h4 class="text-center white">Arkitekterne</h4>
 		<h1 class="text-center white">Inger og Johannes Exner</h1>
 		<p class="text-center button-read-more white">Hvorfor denne hjemmeside? Læs mere <%= fa_icon "angle-down" %></p> 
 
 	</div>
-	<div class="col-lg-11 front-page-text px-4">
+</div><!-- indexwrapper -->
+<div class="row">
+	<div class="offset-lg-3 col-lg-6 front-page-text">
 		<% if @text.nil? %>
 		<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
 		<% else %>
@@ -16,8 +18,8 @@
 
 		<% end %> 
 	</div>
-	<div class="col-lg-1 to-oversigt">
-		<%= link_to oversigt_path do %>
+	<div class="col-lg-3 float-left to-oversigt">
+		<%= link_to oversigt_path, class: "float-right affix" do %>
 		<div class="button"></div>
 		<% end %>
 	</div>
@@ -26,7 +28,8 @@
 		Gå videre til oversigten
 		<% end %>
 	</div>
-</div>	
+
+</div><!-- row -->
 
 
 <!-- trekanten skifter farve -->
@@ -39,9 +42,6 @@
 		});
 	})
 	$(window).scroll(function () {
-		console.log("BUTTON " + $(".button").offset().top);
-		console.log("TEXT " + $(".front-page-text").offset().top);
-
 		if ($(".button").offset().top > ($(".front-page-text").offset().top)) {
 			$(".button").addClass('black-trans');
 		} else {
