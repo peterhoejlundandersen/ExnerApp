@@ -22,7 +22,8 @@ class WorksController < ApplicationController
   end
 
   def index
-    if ["belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
+    if ["design", "belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
+      params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
       set_design_categories params[:vaerker_cat]
       render 'categories/design_categories_overview'
     else
