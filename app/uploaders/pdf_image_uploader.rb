@@ -1,16 +1,18 @@
-class CategoryUploader < CarrierWave::Uploader::Base
+class PdfImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-
+  include CarrierWave::ImageOptimizer
+  include CarrierWave::MiniMagick
   # Choose what kind of storage to use for this uploader:
+
   storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "nye/ploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -20,19 +22,15 @@ class CategoryUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  process :resize_to_width
-  
 
-  def resize_to_width
-        resize_to_limit 400, 250
-  end
   # Process files as they are uploaded:
   # process scale: [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
+  process :resize_to_width
 
+  def resize_to_width
+    resize_to_limit 170, 59000
+    
+  end
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]
@@ -41,7 +39,7 @@ class CategoryUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg gif png JPEG JPG)
   end
 
   # Override the filename of the uploaded files:

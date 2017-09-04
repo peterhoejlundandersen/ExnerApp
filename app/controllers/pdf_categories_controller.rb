@@ -2,9 +2,7 @@ class PdfCategoriesController < ApplicationController
 	layout "works"
 
 	def index
-		@cat_headline = "Alle"
-		@pdf_categories = PdfCategory.all
-		@pdfs = Pdf.all
+		@pdf_categories = PdfCategory.all # Not id 1, 2 - default .not scope in model
 	end
 
 	def show_category

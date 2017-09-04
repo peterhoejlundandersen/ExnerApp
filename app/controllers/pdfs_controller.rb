@@ -20,6 +20,7 @@ class PdfsController < ApplicationController
 
 	def update
 		@pdf = Pdf.friendly.find(params[:id])
+		@pdf.remove_image! if params[:pdf][:image]
 		if @pdf.update(pdf_params)
 			flash[:notice] = "\"#{@pdf.title}\" er blevet opdateret."
 			redirect_to show_pdf_category_path("Alle", 0)
@@ -37,6 +38,6 @@ end
 private
 
 def pdf_params
-	params.require(:pdf).permit(:title, :pdf_category_id)
+	params.require(:pdf).permit(:title, :pdf_category_id, :image)
 end
 end

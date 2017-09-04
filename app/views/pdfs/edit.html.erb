@@ -7,6 +7,17 @@
 				<%= f.collection_select(:pdf_category_id, @categories, :id, :title) %>
 			</label>
 		</div>
+		<hr>
+		<%= image_tag @pdf.image.url if @pdf.image.url %>
+		<div class="row"></div>
+		<label class="btn btn-primary" style="cursor: pointer;">
+		<% if @pdf.image.url %>
+			Upload nyt billede
+		<% else %>
+			Upload billede til oversigten
+		<% end %>
+		<%= f.file_field :image, style: "display: none" %>
+		</label>
 
 		<div class="form-field text-center">
 		<%= f.label :title, "Titel:" %>

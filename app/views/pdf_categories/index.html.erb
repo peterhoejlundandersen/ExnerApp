@@ -1,38 +1,23 @@
-<div class="container">
-	<h1 class="pt-4 text-center"><%= @cat_headline %></h1>
-	<hr>
-	<div class="row text-center">
-		<div class="pdf-cat-button" id="chooseCategory">Vælg kategori</div>
-	</div>
 
-	<div class="pdf-categories hide-it py-4">
-		<div class="col-md-12 pdf-cat">
-		<%= link_to show_pdf_category_path() do %><!-- ALLE PATHEN! -->
-			<h4 class="text-center <%= "active" if params[:kategori_id].nil? %>">Alle</h4>
-		<% end %>
+
+<div class="container mt-4">
+	<div class="col-12"></div>
+	<div class="pdf-works row">
 		<% @pdf_categories.each do |cat| %>
-			<div class="col-md-12 pdf-cat">
+			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 pdf-categories">
+				<div class="col-md-12 pdf-cat-inner">
 				<%= link_to show_this_pdf_category_path(cat.friendly_id) do %>
 				<h4 class="text-center <%= "active" if params[:kategori_id] == cat.slug %>"><%= cat.title %></h4>
-				<% end %>
+				<% end %>		
+				</div>
 			</div>
 		<% end %>
-		</div><!-- pdf-cat -->
-	</div><!-- pdf-categories -->
-
-	<div class="col-sm-12"></div>
-	<div class="pdf-works row">
+	</div><!-- pdf-works -->
+</div><!-- container -->
+<hr>
+<%= content_tag :h2, @cat_headline, class: "py-4 text-center" unless @cat_headline.nil? %>
+<% unless @pdfs.blank? 	%>
+	<div class="row">
 		<%= render partial: "pdf", collection: @pdfs %>
 	</div>
-
-	
-</div>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#chooseCategory").click(function() {
-			$(this).toggleClass('pdf-cat-button-active');
-			$(".pdf-categories").slideToggle(400);
-		})
-	})
-</script>
+<% end %> 
