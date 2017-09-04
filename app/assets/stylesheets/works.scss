@@ -64,6 +64,11 @@ $img-form-color: lighten(#B3E5FC, 10%);
 		text-decoration: underline;
 	}
 }
+
+.work-without-image {
+	background-color: lighten(gray, 30%);
+}
+
 .overview-img-block {
 	width: 100%;
 	text-align: center;
@@ -177,7 +182,7 @@ nav.nav.blog-nav {
 }
 
 .loading {
-	background-image: url(image-path("exner-load.gif"));
+	background-image: url(image-path("spinner.svg"));
 	background-repeat: no-repeat;
 	background-position: center center;
 }
