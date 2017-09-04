@@ -46,6 +46,10 @@ class WorksController < ApplicationController
     params[:order].each do |key, value|
       if value[:type] == "Category"
         Category.find(value[:id]).update(position: value[:position]) 
+      elsif value[:type] == "Pdf"
+        Pdf.find(value[:id]).update(position: value[:position]) 
+      elsif value[:type] == "PdfCategory"
+        PdfCategory.find(value[:id]).update(position: value[:position]) 
       else
         Work.find(value[:id]).update(position: value[:position])
       end

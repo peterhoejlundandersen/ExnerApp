@@ -1,4 +1,5 @@
-<div class="custom-5-col col-md-3 col-sm-6 col-xs-12 pdf">
+
+<div class="custom-5-col col-md-3 col-sm-4 col-6 pdf sortable-item", data-id="<%= pdf.id %>" data-type="<%= pdf.class.to_s %>">
 	<%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if logged_in?(:site_admin) %>
 	<hr>
 	<% unless pdf.image.url.nil? %>
