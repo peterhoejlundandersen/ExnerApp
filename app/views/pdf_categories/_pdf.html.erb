@@ -1,18 +1,19 @@
 
 <div class="custom-5-col col-md-3 col-sm-4 col-6 pdf sortable-item", data-id="<%= pdf.id %>" data-type="<%= pdf.class.to_s %>">
-	<%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-	<hr>
-	<% unless pdf.image.url.nil? %>
-		<%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
-			<div class="img-wrapper">
-			<%= image_tag pdf.image.url %>
-			</div>
-			<h5 class="pt-3"><%= pdf.title %></h5>
-		<% end %>
-	<% else %>
-		<%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
-		<h5><%= pdf.title %></h5>
-		<%= content_tag :p, "Udgivet: #{pdf.date.strftime("%Y")}", class: "pdf-udgivet" unless pdf.date.nil? %>
-		<% end %>
-	<% end %>
+  <%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+  <hr>
+  <% unless pdf.image.url.nil? %>
+    <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
+      <div class="img-wrapper">
+        <%= image_tag pdf.image.url %>
+      </div>
+      <h5 class="pt-3"><%= pdf.title %></h5>
+      <%= content_tag :p, pdf.date.strftime("%Y"), class: "pdf-udgivet" unless pdf.date.nil? %>
+    <% end %>
+  <% else %>
+    <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
+      <h5><%= pdf.title %></h5>
+      <%= content_tag :p, pdf.date.strftime("%Y"), class: "pdf-udgivet" unless pdf.date.nil? %>
+    <% end %>
+  <% end %>
 </div>

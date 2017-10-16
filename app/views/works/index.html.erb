@@ -8,8 +8,8 @@
 			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-6 overview-work sortable-item" data-id="<%= work.id %>" data-type="<%= work.class.to_s %>">
 		<%= link_to work_path(work) do %>
 				<% unless work.images.empty? %>
-					<div class="overview-img-block">
-					<%= image_tag(work.overview_img, class: "overview-img") %>
+                                  <div class="overview-img-block" style="background-image: url(<%= work.overview_img %>)">
+					<%# <%= image_tag(work.overview_img, class: "overview-img") %1> %>
 					</div>
 					<h2 class="overview-work-h2"><%= work.name %></h2>
 				<% else %>

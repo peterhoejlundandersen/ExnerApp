@@ -19,6 +19,13 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
+  
+  gem 'rspec-rails'
+  gem 'capybara', '~> 2.13.0'
+  gem 'factory_girl_rails', "~> 4.0"
+  gem 'guard-rspec'
+  gem 'selenium-webdriver'
+
 end
 
 group :development do
