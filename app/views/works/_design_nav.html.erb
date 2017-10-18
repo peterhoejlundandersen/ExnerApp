@@ -1,8 +1,9 @@
 <% @categories.each do |cat| %>
-  <div class="col-lg-4 text-center">
+  <div class="col-lg-4 text-center overview-img-wrapper">
     <%= link_to vaerker_path(cat.friendly_id) do %>
-      <%= image_tag cat.image, class: "design-img" if cat.image.present? %> 
-      <h4 id="<%= cat.id %>" class="cat-headlines text-uppercase text-center <%= "active" if cat.friendly_id == params[:vaerker_cat] %>">
+      <div class="overview-img" style="background-image: url(<%= cat.image %>)">
+      </div>
+      <h4 id="<%= cat.id %>" class="overview-header pt-2 text-uppercase text-center <%= "active" if cat.friendly_id == params[:vaerker_cat] %>">
         <%= cat.name %>
       </h4>
       <% if logged_in?(:site_admin) %>
