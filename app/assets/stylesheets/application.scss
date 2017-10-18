@@ -20,64 +20,63 @@
 
  *= require_self
  */
+@import "bootstrap";
 @import 'font_calls';  // Corbel, LinLibertine, Linux Libertine C
 
- @import "bootstrap";
+p {
 
- p {
-
- 	font-family: "LinLibertine";
- }
+  font-family: "LinLibertine";
+}
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: Corbel; 
-	letter-spacing: 2px;
+  font-family: Corbel; 
+  letter-spacing: 2px;
 }
 .container.work-wrapper {
-    padding: 0;
-    max-width: 1300px;
-    width: 100%;
+  padding: 0;
+  max-width: 1300px;
+  width: 100%;
 }
 .no-images {
-	font-family: "LinLibertine";
-	margin: 0 auto;
+  font-family: "LinLibertine";
+  margin: 0 auto;
 }
 
 .devise-layout {
-	margin-top: 6%;
+  margin-top: 6%;
 }
 
 /* Navbar overwriting bootstrap default */
 a {
-	color: black;
-	&:hover {
-		color: black;
-	}
+  color: black;
+  &:hover {
+    color: black;
+  }
 }
 
 .nav-link:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 .masthead-overskrift {
-	font-family: LinLibertine;
-	color: black; 
-	margin-top: 20px;
-	a:hover {
-		color: black;
-		text-decoration: none;
-	}
+  font-family: LinLibertine;
+  color: black; 
+  margin-top: 20px;
+  a:hover {
+    color: black;
+    text-decoration: none;
+  }
 }
 
 
 .nav-container {
-	min-width: 100%;
+  min-width: 100%;
 }
- .blog-masthead.admin-nav {
-     background-color: gray;
-     padding: 10px;
-     color: white;
- }
+.blog-masthead.admin-nav {
+  background-color: gray;
+  padding: 10px;
+  color: white;
+}
 /* *** KUN TIL FORSIDE ***** */
 @mixin transition($args...) {
   -webkit-transition: $args;
@@ -89,114 +88,114 @@ a {
 
 /* MENU */
 .menu-center li{
-	display: inline-block;
+  display: inline-block;
 }
 
 /* FORSIDE */
 .indexwrapper {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .indexbackground {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: image-url("inger-og-johannes-exner.jpg") no-repeat;
-	background-size: cover;
-	background-position: 50% 50%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: image-url("inger-og-johannes-exner.jpg") no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 .indexareatext {
-	position: absolute;
-	display: flex;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: auto;
-	background: transparent;
-	color: white;
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: transparent;
+  color: white;
 }
 
 .left {
-	float: left;
-	align-items: stretch;
+  float: left;
+  align-items: stretch;
 }
 
 .leftindex { 
-	width: 40%;
-	h4 {
-		font-size: 1.8rem;
-	}
-	h1 {
-		font-size: 2.8rem;
-	}
+  width: 40%;
+  h4 {
+    font-size: 1.8rem;
+  }
+  h1 {
+    font-size: 2.8rem;
+  }
 }
 
 
 .rightindex { 
-	width: 7%;
-	.button {
-		position: relative;
-		height: 0;
-		width: 0; 
-		padding: 0;
-		border-left: 40px solid white;
-		border-top: 50px solid transparent;
-		border-bottom: 50px solid transparent;
-		background: transparent;
-		opacity: 1;
-		@include transition(opacity 1.4s);
-		&:hover {
-			opacity: 0.6;
-		}
-	}
+  width: 7%;
+  .button {
+    position: relative;
+    height: 0;
+    width: 0; 
+    padding: 0;
+    border-left: 40px solid white;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    background: transparent;
+    opacity: 1;
+    @include transition(opacity 1.4s);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 
 }
 
 .kunpaamobilskaerm {
-	display: none;
+  display: none;
 }
 @media screen and (max-width: 1024px) {
 
-	.indexwrapper {
-		overflow: scroll;
-	}
-	.indexbackground {
-		position: relative;
-		height: auto;
-		padding-bottom: 84%;
-		background-position: 70% 50%;
-	}
-	.indexareatext {
-		position: relative;
-		color: black;
-		display: block;
-		top: 0;
-		text-align: center;
-		h4 { margin-top: 10px;}
-	}
-	.left {
-		float: none;
-		align-items: none;
-	}
-	.leftindex, .middleindex, .rightindex {
-		width: 100%;
-	}
-	.rightindex .button {
-		top: 0;
-		margin-top: 0;
-		box-sizing: border-box;
-		width: 100%;
-		border: 0;
-	}
-	.kunpaamobilskaerm {
-		display: block;
-		font-size: 1.2rem;
-		padding: 20px;
-		background: #383838;
-		color: white;
-	}
+  .indexwrapper {
+    overflow: scroll;
+  }
+  .indexbackground {
+    position: relative;
+    height: auto;
+    padding-bottom: 84%;
+    background-position: 70% 50%;
+  }
+  .indexareatext {
+    position: relative;
+    color: black;
+    display: block;
+    top: 0;
+    text-align: center;
+    h4 { margin-top: 10px;}
+  }
+  .left {
+    float: none;
+    align-items: none;
+  }
+  .leftindex, .middleindex, .rightindex {
+    width: 100%;
+  }
+  .rightindex .button {
+    top: 0;
+    margin-top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    border: 0;
+  }
+  .kunpaamobilskaerm {
+    display: block;
+    font-size: 1.2rem;
+    padding: 20px;
+    background: #383838;
+    color: white;
+  }
 
 }
 

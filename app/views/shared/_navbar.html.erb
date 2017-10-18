@@ -7,7 +7,7 @@
     <%= link_to "Særlige bygninger", vaerker_path("Særlige bygninger".parameterize), class: "nav-link #{active_helper? vaerker_path("Særlige bygninger".parameterize)}" %>
     <%= link_to "Andre", vaerker_path("Andre".parameterize), class: "nav-link #{active_helper? vaerker_path("Andre".parameterize)}" %>
     <%= link_to "Kirkerestaureringer", vaerker_path("Kirkerestaureringer".parameterize), class: "nav-link #{active_helper? vaerker_path("Kirkerestaureringer".parameterize)}" %>
-    <%= link_to "Design", vaerker_path("belysning-og-andet"), class: "nav-link #{active_helper? vaerker_path("Design".parameterize)}" %>
+    <%= link_to "Design", vaerker_path("belysning-og-andet", noload: "true"), class: "nav-link #{active_helper? vaerker_path("Design".parameterize)}" %>
     <%= link_to "Ikke opført", vaerker_path("Ikke opført".parameterize), class: "nav-link #{active_helper? vaerker_path("Ikke opført".parameterize)}" %>
     <%= link_to "Johannes' tekster", show_pdf_category_path(), class: "nav-link" %>
     <%= link_to "Om", om_path, class: "nav-link #{active_helper? om_path}" %>

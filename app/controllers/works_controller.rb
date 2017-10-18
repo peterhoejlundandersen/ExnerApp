@@ -1,6 +1,6 @@
 class WorksController < ApplicationController
   access all: [:show, :index, :design_index, :new_image, :new_image_category, :overview_img], user: {except: [:destroy]}, site_admin: :all
-  layout "works"  
+  layout "works"
 
   def new_image
     @new_image = Image.find(params[:id])
@@ -15,14 +15,18 @@ class WorksController < ApplicationController
       @first_image = @new_thumb_images.last
     else
       @first_image = @new_thumb_images.first
-    end 
+    end
     respond_to do |format|
       format.js { render 'works/js/new_image_category' }
     end
   end
 
   def index
-    if ["design", "belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
+    if params[:noload] == "true" # Skal ikke vise nogle værker ved besøg af Design siden
+      params[:vaerker_cat] = "design"
+      set_design_categories params[:vaerker_cat], true
+      render 'categories/design_categories_overview'
+    elsif ["design", "belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
       params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
       set_design_categories params[:vaerker_cat]
       render 'categories/design_categories_overview'
@@ -31,29 +35,29 @@ class WorksController < ApplicationController
       @header_title = @category.name
       @works = @category.works
     end
-  end  
+  end
 
   def design_index
     @category = Category.find(params[:vaerker_cat])
     @category_id = "##{@category.id}"
     @works = @category.works
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 
   def sort
     params[:order].each do |key, value|
       if value[:type] == "Category"
-        Category.find(value[:id]).update(position: value[:position]) 
+        Category.find(value[:id]).update(position: value[:position])
       elsif value[:type] == "Pdf"
-        Pdf.find(value[:id]).update(position: value[:position]) 
+        Pdf.find(value[:id]).update(position: value[:position])
       elsif value[:type] == "PdfCategory"
-        PdfCategory.find(value[:id]).update(position: value[:position]) 
+        PdfCategory.find(value[:id]).update(position: value[:position])
       else
         Work.find(value[:id]).update(position: value[:position])
       end
-    end 
+    end
     head :ok
   end
 
@@ -68,7 +72,7 @@ class WorksController < ApplicationController
     @categories = Category.all
   end
 
-  
+
   def create
    @work = Work.new(work_params)
    if @work.image_categories.present? # En underlig fejl med manglende work_id
@@ -80,8 +84,8 @@ class WorksController < ApplicationController
    unless last_work_in_category.position.nil?
     @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
     end
-   if @work.save! 
-    binding.pry 
+   if @work.save!
+    binding.pry
 
      flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
      redirect_to @work
@@ -91,27 +95,27 @@ class WorksController < ApplicationController
 
  end
 
- def show 
+ def show
    @work = Work.friendly.find(params[:id])
    unless @work.position.nil?
-    @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work) 
-   else 
+    @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work)
+   else
     @prev_work, @new_work = "", ""
-  end 
+  end
    # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
    unless @work.image_categories.first.nil?
 
-     unless @work.image_categories.first.images.empty? 
+     unless @work.image_categories.first.images.empty?
       @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
       @first_image = @image_categories.order(:position).first.images.published.first
       @work_cat = @work.category
       render 'show'
-    else 
+    else
         # For work without images
         render 'show_no_images'
-      end 
+      end
 
-    else 
+    else
       render 'show_no_images'
     end
   end
@@ -122,7 +126,7 @@ class WorksController < ApplicationController
         ImageCategory.find(value[:id]).update(position: value[:position])
       elsif value[:type] == "Category"
         Category.find(value[:id]).update(position: value[:position])
-      else  
+      else
         Image.find(value[:id]).update(position: value[:position])
       end
     end
@@ -144,7 +148,7 @@ def update
   @work = Work.friendly.find(params[:id])
 
   if @work.update(work_params)
-    flash[:success] = "Værket #{@work.name} er nu blevet opdateret."  
+    flash[:success] = "Værket #{@work.name} er nu blevet opdateret."
     redirect_to work_path(@work)
   else
     redirect_to kategori_oversigt_path(@work.category_id)
@@ -166,13 +170,17 @@ end
 
 private
 
-def set_design_categories cat_param
- @category = Category.friendly.find(cat_param)
+def set_design_categories cat_param, noload=false
  @categories = []
  @categories << Category.find(13)
  @categories << Category.find(15)
  @categories << Category.find(18)
- @works = @category.works
+ if noload
+   @noload = true
+ else
+   @category = Category.friendly.find(cat_param)
+   @works = @category.works
+ end
 end
 
 def get_next_and_previous_work(works, current_work)
@@ -183,20 +191,20 @@ end
 
 def work_params
  params.require(:work).permit(
-  :name, 
-  :sagsnr, 
+  :name,
+  :sagsnr,
   :category_id,
-  :description, 
+  :description,
   :address,
   :competition,
   :opening_year,
   :overview_img,
   :position,
-  {infos_attributes: 
+  {infos_attributes:
     [:id, :work_id, :title, :_destroy]},
-    {image_categories_attributes: 
+    {image_categories_attributes:
       [:id, :work_id, :name, :_destroy,
-        images_attributes: 
-        [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]}) 
+        images_attributes:
+        [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]})
 end
 end

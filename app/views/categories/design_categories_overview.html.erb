@@ -1,7 +1,8 @@
 <div class="row works-wrapper mt-4 pt-4">
-<%= render partial: "design_nav", locals: {categories: @categories} %>
-
-<div class="design-cat my-4">
-	<%= render partial: 'works', locals: { works: @works, category: @category } %>	
-</div>
+  <%= render partial: "design_nav", locals: {categories: @categories} %>
+  <% unless @noload %>
+    <div class="design-cat my-4">
+      <%= render partial: 'works', locals: { works: @works, category: @category } %>	
+    </div>
+  <% end %>
 </div>
