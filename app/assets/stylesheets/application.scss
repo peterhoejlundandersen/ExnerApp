@@ -20,18 +20,12 @@
 
  *= require_self
  */
- @font-face {
-   font-family: 'Corbel';
-   src:url(asset-path('fonts/Corbel.ttf') format('truetype'));
- }
- @font-face {
-   font-family: 'LinLibertine';
-   src:url(asset-path('fonts/LinLibertineReg.ttf') format('truetype'));
- }
+@import 'font_calls';  // Corbel, LinLibertine, Linux Libertine C
 
  @import "bootstrap";
 
  p {
+
  	font-family: "LinLibertine";
  }
 

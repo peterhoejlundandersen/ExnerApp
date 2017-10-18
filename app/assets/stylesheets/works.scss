@@ -5,6 +5,8 @@
 @import "jquery-ui";
 @import "mixins/transition";
 
+$img-form-color: lighten(#B3E5FC, 10%);
+
 /* FOR IFRAME */
 html, body {
   height: 100%;
@@ -15,14 +17,15 @@ html, body {
   margin: 0 auto!important;
   max-width: 1400px;
 }
-$img-form-color: lighten(#B3E5FC, 10%);
 
-.oversigt-img {
-  max-height: 377px;
+.oversigt-img-wrapper {
+  text-align: center;
+  .oversigt-img {
+    max-height: 218px;
+    max-width: 250px;
+  }
 }
-.work-wrapper {
-  min-height: 1600px;
-}
+
 .thumb-images {
   padding-bottom: 40px;
 }
@@ -111,21 +114,15 @@ span.without-overview-text {
 }
 
 .blog-nav {
-  display: table!important;
+  flex-wrap: nowrap!important;
   font-family: Corbel;
   text-transform: uppercase;
   font-size: 14px;
-  margin-top: -8px;
   text-align: center;	
-  max-width: 1300px;
-  width: 100%;
-  margin: 0 auto;
   padding-top: 6px;
   padding-bottom: 5px;
   background-color: lighten(black, 80%);
-  .nav-link {
-    display: inline-table;
-  }
+
   .active {
     text-decoration: underline;
   }
@@ -140,10 +137,6 @@ span.without-overview-text {
     @include transition(opacity .4s ease-out);
     opacity: 0.6;
   }
-}
-nav.nav.blog-nav {
-  max-width: 1300px;
-  margin: 0 auto;
 }
 
 .vertical-center {
@@ -304,9 +297,6 @@ nav.nav.blog-nav {
   position: relative;
   margin-top: 10px;
 }
-.nav-thumbnail-con .work-navbar .nav-link:first-child {
-  margin-left: 20px!important;
-}
 
 .nav-thumbnail-con .nav-link {
   font-size: 0.8em;
@@ -316,10 +306,18 @@ nav.nav.blog-nav {
   cursor: pointer;
 }
 
-img.overview-img {
-  display: block;
+.overview-img {
+  width: 250px;
+  height: 218px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   margin: 0 auto;
   max-width: 100%; 
+}
+.overview-header {
+  font-size: 1em;
+  margin-bottom: 15.5px;
 }
 .overview-work {
   margin: 10px 0;

@@ -19,6 +19,12 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
+
+  # test enviroment
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl'
+  gem 'guard-rspec'
 end
 
 group :development do

@@ -1,34 +1,39 @@
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
-<div class="row pt-4 sortable">
-	<% unless @categories.empty? %>
-		<% @categories.each do |cat| %>
-		<div class="col-md-4 text-center sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
-			<%= link_to vaerker_path(cat.friendly_id) do %>
-				<%= image_tag cat.image, class: "center-block oversigt-img" %>
-				<h4 class="text-center text-uppercase pt-2"><%= cat.name %></h4>
-			<% end %>
-			<% if logged_in?(:site_admin) %>
-				<%= link_to "Rediger kategori", edit_category_path(cat) %> / 
-				<%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"} %> 
-			<% end %>
-		</div>
-		<% end %>
-		<div class="col-md-4 text-center">
-		<%= link_to show_pdf_category_path() do %>
-			<%= image_tag "johannes-tekster", class: "oversigt-img" %>
-			<h4 class="text-center text-uppercase pt-2 ">Johannes' tekster</h4>
-		<% end %>
-		</div>
-		<div class="col-md-4 text-center">
-		<%= link_to om_path() do %>
-			<%= image_tag "om-inger-og-johannes", class: "oversigt-img" %>
-			<h4 class="text-center text-uppercase pt-2">Om Inger og Johannes</h4>
-		<% end %>
-		</div>
-	<% else %>
+<div class="row pt-4 sortable oversigt-wrapper">
+  <% unless @categories.empty? %>
+    <% @categories.each do |cat| %>
+      <div class="col-md-4 oversigt-img-wrapper text-center sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
+        <%= link_to vaerker_path(cat.friendly_id) do %>
+          <div class="center-block overview-img" style="background-image: url(<%= cat.image %>);">
+          </div>
+          <h4 class="overview-header text-center text-uppercase pt-2"><%= cat.name %></h4>
+        <% end %>
+        <% if logged_in?(:site_admin) %>
+          <%= link_to "Rediger kategori", edit_category_path(cat) %> / 
+          <%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"} %> 
+        <% end %>
+      </div>
+    <% end %>
+    <div class="col-md-4 text-center oversigt-img-wrapper">
+      <%= link_to show_pdf_category_path() do %>
 
-		<h3 class="alert alert-warning text-center">Der er ikke nogle kategorier endnu. Login og opret</h3>
+        <div class="center-block overview-img" style="background-image: url(<%= image_url "johannes-tekster" %>);">
+        </div>
+        <h4 class="overview-header text-center text-uppercase pt-2 ">Johannes' tekster</h4>
+      <% end %>
+    </div>
+    <div class="col-md-4 text-center oversigt-img-wrapper">
+      <%= link_to om_path() do %>
 
-	<% end %>
+        <div class="center-block overview-img" style="background-image: url(<%= image_url "om-inger-og-johannes" %>);">
+        </div> 
+        <h4 class="overview-header text-center text-uppercase pt-2">Om Inger og Johannes</h4>
+      <% end %>
+    </div>
+  <% else %>
+
+    <h3 class="alert alert-warning text-center">Der er ikke nogle kategorier endnu. Login og opret</h3>
+
+  <% end %>
 </div>
