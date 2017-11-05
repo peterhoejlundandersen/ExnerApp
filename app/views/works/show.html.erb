@@ -72,7 +72,7 @@
 
     $("[data-btn='info']").on("click", function() {
       $(this).toggleClass("info-button-active");
-      $(".info-field-work").slideToggle("fast");
+      $(".info-field-work").slideToggle(400);
     });
 
     function addActiveClass(active_object, active_class) {
