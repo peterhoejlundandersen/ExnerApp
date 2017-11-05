@@ -32,6 +32,9 @@ h1,h2,h3,h4,h5,h6 {
   font-family: Corbel; 
   letter-spacing: 2px;
 }
+.hide-it {
+  display: none; 
+}
 .container.work-wrapper {
   padding: 0;
   max-width: 1300px;
@@ -67,6 +70,9 @@ a {
 }
 .nav-container {
   min-width: 100%;
+}
+.blog-nav-dropdown {
+  overflow: hidden;
 }
 .blog-masthead.admin-nav {
   background-color: gray;
