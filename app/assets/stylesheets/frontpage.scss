@@ -1,6 +1,6 @@
 
- @import "bootstrap";
- @import "font-awesome";
+@import "bootstrap";
+@import "font-awesome";
 
 
 /* *** KUN TIL FORSIDE ***** */
@@ -15,114 +15,126 @@
 /* MENU */
 
 /* FORSIDE */
+.masthead-overskrift {
+  text-align: center;
+  font-family: "LinLibertine";
+  color: white;
+}
+.masthead-overskrift-ark {
+  margin-top: 18px;
+  text-align: center;
+  font-family: "LinLibertine";
+  font-size: 1.8em;
+  color: white;
+}
 .front-page-text {
-	font-family: "LinLibertine";
+  font-family: "LinLibertine";
 }
 .white {
-	color: white;
+  color: white;
 }
 
 .button-read-more {
-	font-family: "LinLibertine"; 
-	cursor: pointer;
+  font-family: "LinLibertine"; 
+  cursor: pointer;
 }
 .indexwrapper {
-	.frontpage-ark {
-		padding-left: 14%;
-	}
-	h1, h4 {
-		letter-spacing: 1px;
-		font-family: "LinLibertine";
-	}
-	h1 {
-		font-size: 2.6rem;
-	}
-	h4 {
-		font-size: 1.7rem;
-	}
-	padding-top: 84vh;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+  .frontpage-ark {
+    padding-left: 14%;
+  }
+  h1, h4 {
+    letter-spacing: 1px;
+    font-family: "LinLibertine";
+  }
+  h1 {
+    font-size: 2.6rem;
+  }
+  h4 {
+    font-size: 1.7rem;
+  }
+  padding-top: 84vh;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 .indexbackground {
-	z-index: -999;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: image-url("inger-og-johannes-exner.jpg") no-repeat;
-	background-size: cover;
-	background-position: 50% 50%;
+  z-index: -999;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: image-url("inger-og-johannes-exner.jpg") no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 
 .black-trans {
-	border-color: black!important;
-	-webkit-transition: border-color 0.5s ease-in;
-	    -moz-transition: border-color 0.5s ease-in;
-	    -o-transition: border-color 0.5s ease-in;
-	    transition: border-color 0.5s ease-in;
+  border-color: black!important;
+  -webkit-transition: border-color 0.5s ease-in;
+  -moz-transition: border-color 0.5s ease-in;
+  -o-transition: border-color 0.5s ease-in;
+  transition: border-color 0.5s ease-in;
 }
 
 .to-oversigt { 
-	position: fixed;
-	right: 2%;
-	bottom: 7%;
-	.button {
-		position: relative;
-		top: 50%;
-		height: 0;
-		width: 0; 
-		padding: 0;
-		border-left: 40px solid white;
-		border-top: 50px solid transparent!important;
-		border-bottom: 50px solid transparent!important;
-		border-right: 0px solid transparent!important;
-		border-color: white;
-		background: transparent;
-		opacity: 1;
-		@include transition(all 1.4s);
-		&:hover {
-			opacity: 0.6;
-		}
-	}
+  position: fixed;
+  right: 2%;
+  bottom: 7%;
+  .button {
+    position: relative;
+    top: 50%;
+    height: 0;
+    width: 0; 
+    padding: 0;
+    border-left: 40px solid white;
+    border-top: 50px solid transparent!important;
+    border-bottom: 50px solid transparent!important;
+    border-right: 0px solid transparent!important;
+    border-color: white;
+    background: transparent;
+    opacity: 1;
+    @include transition(all 1.4s);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 
 }
 
 .kunpaamobilskaerm {
-	display: none;
+  display: none;
 }
 @media screen and (max-width: 1024px) {
 
-	.indexwrapper {
-		padding-top: 0;
-		overflow: scroll;
-		h4, h1 {
-			color: black;
-		}
-	}
-	.indexbackground {
-		position: relative;
-		height: auto;
-		padding-bottom: 84%;
-		background-position: 70% 50%;
-	}
-	.button {
-		display: none;
-	}
-	.kunpaamobilskaerm {
-		bottom: 0;
-		width: 100%;
-		display: block;
-		font-size: 1.2rem;
-		text-align: center;
-		padding: 20px;
-		background: #383838;
-		color: white;
-		a {
-			color: white;
-		}
-	}
+  .indexwrapper {
+    padding-top: 0;
+    overflow: scroll;
+    h4, h1 {
+      color: black;
+    }
+  }
+  .indexbackground {
+    position: relative;
+    height: auto;
+    padding-bottom: 84%;
+    background-position: 70% 50%;
+  }
+  .button {
+    display: none;
+  }
+  .kunpaamobilskaerm {
+    bottom: 0;
+    width: 100%;
+    display: block;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 20px;
+    background: #383838;
+    color: white;
+    a {
+      color: white;
+    }
+  }
 
 }
 

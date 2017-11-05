@@ -60,15 +60,11 @@ a {
 
 .masthead-overskrift {
   font-family: LinLibertine;
-  color: black; 
-  margin-top: 20px;
-  a:hover {
-    color: black;
-    text-decoration: none;
-  }
 }
-
-
+.masthead-overskrift-ark {
+  font-family: LinLibertine;
+  font-size: 1.8em;
+}
 .nav-container {
   min-width: 100%;
 }
