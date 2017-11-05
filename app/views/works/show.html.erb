@@ -4,7 +4,7 @@
 <%= logged_in_work_helper if logged_in?(:site_admin) %>
 
 <!-- LARGE IMAGE --> 
-<h1 class="text-center"><%= @work.name %></h1>
+<h1 class="work-headline text-center"><%= @work.name %></h1>
 <div class="large-image">
 	<%= render partial: "large_image", locals: {url: @first_image.image.url, description: @first_image.image_description, photographer: @first_image.photographer} %></%>
 </div>

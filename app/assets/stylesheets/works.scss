@@ -6,6 +6,7 @@
 @import "mixins/transition";
 
 $img-form-color: lighten(#B3E5FC, 10%);
+$nav-color: #e2e2e2;
 
 /* FOR IFRAME */
 html, body {
@@ -16,6 +17,7 @@ html, body {
 .works-wrapper {
   margin: 0 auto!important;
   max-width: 1400px;
+  justify-content: space-between;
 }
 
 .oversigt-img-wrapper {
@@ -60,6 +62,7 @@ html, body {
   text-transform: uppercase;
   font-size: 0.7em!important;
   letter-spacing: 2px;
+  max-width: 251px;
 }
 
 .overview-img-checkbox {
@@ -77,15 +80,12 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  width: 85%;
+  width: 251px;
   text-align: center;
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
   min-height: 182px;
   margin: 0 auto; 
-  display: flex;
-  align-items: center;
-
 }
 
 .work-headline {
@@ -114,15 +114,20 @@ span.without-overview-text {
 }
 
 .blog-nav {
+  display: flex;
   flex-wrap: nowrap!important;
+  align-items: center; 
+  justify-content: space-evenly;
   font-family: Corbel;
   text-transform: uppercase;
   font-size: 14px;
   text-align: center;	
-  padding-top: 6px;
-  padding-bottom: 5px;
-  background-color: lighten(black, 80%);
-
+  background-color: $nav-color;
+  .nav-link {
+    margin-bottom: 0;
+    color: black;
+    text-align: center;
+  }
   .active {
     text-decoration: underline;
   }
@@ -163,6 +168,9 @@ span.without-overview-text {
   position: relative;
 }
 
+.work-headline {
+  text-transform: uppercase;
+}
 #largeImage {
   max-height: 100%;  
   max-width: 100%; 
@@ -307,7 +315,7 @@ span.without-overview-text {
 }
 
 .overview-img {
-  width: 250px;
+  width: 300px;
   height: 218px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -327,47 +335,40 @@ span.without-overview-text {
 }
 
 .img-cat-nav-inner {
+  height: 58px; 
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-evenly;
   text-align: center;
   left: 0;
   font-size: 0.8em;
   font-family: Corbel;
   letter-spacing: 2px;
   text-transform: uppercase;
-  background-color: lighten(black, 75%);
+  background-color: $nav-color;
   color: white;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0 10px;
 
-  .nav-link {
-    margin-bottom: 0;
-    color: black;
-    display: inline-block;
-  }
   .info-button {
+    display: block;
     float: left;
-    background-color: white!important;
+    background-color: white;
     color: black;
-    margin-left: -10px;
-    margin-top: -3px;
+    margin-right: auto;
     line-height: 41px;
     width: 75px;
-  
-
     &:hover {
       text-decoration: underline;
     }
   }
-  #InfoTriangle {
-    position: absolute;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 17px solid black;
-    width: 0;
-    height: 0;
-    right: 0;
-    top: 12px;
-    margin-right: -13px;
-    transform: rotate(0deg);
+
+  .nav-link {
+    margin-bottom: 0;
+    color: black;
+    min-width: 75px;
+
   }
 }
 
