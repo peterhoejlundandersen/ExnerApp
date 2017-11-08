@@ -1,6 +1,6 @@
 <div class="blog-nav-wrapper">
   <nav class="blog-nav">
-    <span class="info-button" data-button="menu">Menu</span>
+    <span class="info-button" data-button="menu"><strong>Menu</strong></span>
       <% if !@category.nil? %>
         <%= link_to @category.name, vaerker_path(@category.name.parameterize), class: "nav-link text-center" %>
       <% elsif @work.present? %>
