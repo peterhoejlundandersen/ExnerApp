@@ -1,6 +1,5 @@
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
-<h2 class="work-headline"><%= @category.name %></h2>
 <div class="row sortable works-wrapper">
 
 <% unless @works.empty? %>
