@@ -35,7 +35,6 @@
 
 </div>
 <!-- IMG CAT NAVBAR -->
-<<<<<<< HEAD
   <div class="blog-nav sortable-images" data-navbar="img">
     <%= content_tag :span, "Info", class: "info-button", data: {btn: "info"} unless info_helper(@work).blank? && @work.description.blank? %>
     <%= render partial: "img_cat_nav", locals: {img_cats: @image_categories} %> 
@@ -66,11 +65,7 @@
       loadImage('<%= @first_image.image.url %>', photo_desc);
 
 
-      <<<<<<< HEAD
-      $(".img-nav-bar .nav-link").on("click", function() {
-        =======
           $("[data-navbar='img'] .nav-link").on("click", function() {
-            >>>>>>> dropdown-menu
             changeImageCat($(this));
           }); 
 
@@ -81,15 +76,9 @@
 
         });
 
-        <<<<<<< HEAD
-        $(".info-button").on("click", function() {
-          $(this).toggleClass("info-button-active");
-          $(".info-field-work").slideToggle("fast");
-          =======
             $("[data-btn='info']").on("click", function() {
               $(this).toggleClass("info-button-active");
               $(".info-field-work").slideToggle(400);
-              >>>>>>> dropdown-menu
             });
 
           function addActiveClass(active_object, active_class) {
