@@ -1,6 +1,7 @@
 
 @import "bootstrap";
 @import "font-awesome";
+@import 'font_calls';  // Corbel, LinLibertine, Linux Libertine C
 
 
 /* *** KUN TIL FORSIDE ***** */
@@ -17,25 +18,25 @@
 /* FORSIDE */
 .masthead-overskrift {
   text-align: center;
-  font-family: "LinLibertine";
+  font-family: LinLibertine;
   color: white;
 }
 .masthead-overskrift-ark {
   margin-top: 18px;
   text-align: center;
-  font-family: "LinLibertine";
+  font-family: LinLibertine;
   font-size: 1.8em;
   color: white;
 }
 .front-page-text {
-  font-family: "LinLibertine";
+  font-family: LinLibertine;
 }
 .white {
   color: white;
 }
 
 .button-read-more {
-  font-family: "LinLibertine"; 
+  font-family: LinLibertine; 
   cursor: pointer;
 }
 .indexwrapper {
@@ -44,7 +45,7 @@
   }
   h1, h4 {
     letter-spacing: 1px;
-    font-family: "LinLibertine";
+    font-family: LinLibertine;
   }
   h1 {
     font-size: 2.6rem;
