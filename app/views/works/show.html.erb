@@ -26,16 +26,12 @@
 
 <div class="next-prev-back-wrapper row">
   <% unless @prev_work.nil? %>
-    <%= link_to fa_icon("angle-left", text: " " + @prev_work.name), work_path(@prev_work.friendly_id), class: "col-lg-4 nav-link" %>
+    <%= link_to fa_icon("angle-left", text: " " + @prev_work.name), work_path(@prev_work.friendly_id), class: "col-lg-4 text-center" %>
   <% else %>
     <div class="col-lg-4"></div>
   <% end %>
-  <%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "col-lg-4 text-center nav-link" %>
-  <% unless @next_work.nil? %>
-    <%= link_to fa_icon("angle-right", text: @next_work.name + " ", right: true), work_path(@next_work.friendly_id), class: "nav-link col-lg-4 text-right " %>
-  <% else %>
-      <div class="col-lg-4"></div>
-  <% end %> 
+  <%= link_to "Gå tilbage til #{@work.category.name}", vaerker_path(@work.category.friendly_id), class: "col-lg-4 text-center" %>
+  <%= link_to fa_icon("angle-right", text: @next_work.name + " ", right: true), work_path(@next_work.friendly_id), class: "col-lg-4 text-center" unless @next_work.nil? %>
 
 </div>
 <!-- IMG CAT NAVBAR -->
