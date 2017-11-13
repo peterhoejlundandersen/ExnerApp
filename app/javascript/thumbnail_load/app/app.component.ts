@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
 import { Http, HttpModule } from '@angular/http';
 
-
 @Component({
   selector: 'thumbnail-load',
   template: `
