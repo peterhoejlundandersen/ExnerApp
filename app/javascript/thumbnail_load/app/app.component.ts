@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
 import { Http, HttpModule } from '@angular/http';
 
@@ -12,13 +12,14 @@ import { Http, HttpModule } from '@angular/http';
     </div>
     <button (click)="getThumbImages(17)"> Få alle billederne</button>
   </div>
-  `
+  `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   images: null;
   constructor( 
     public http: Http
   ) {};
+
   getThumbImages(image_category_id) {
     this.http.get('/works/images.json?image_category_id=' + image_category_id)
       .subscribe(
@@ -26,7 +27,7 @@ export class AppComponent {
         err => console.log(err)
       )
   };
-
-
-
+  ngOnInit() {
+    this.getThumbImages(147)
+  }
 }

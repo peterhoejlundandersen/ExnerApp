@@ -104,12 +104,13 @@ def show
       @prev_work, @new_work = "", ""
     end
     # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
-    unless @work.image_categories.first.nil?
 
-      unless @work.image_categories.first.images.empty?
+    unless @work.image_categories.first.nil?
+      @first_image_category = @work.image_categories.first
+      unless @first_image_category.images.empty?
         # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
         @image_categories = @work.image_categories.includes(:images).where(images: {draft: false})
-        @first_image = @image_categories.first.images.published.first
+        @first_image = @first_image_category.images.published.first
         @work_cat = @work.category
 
       else
