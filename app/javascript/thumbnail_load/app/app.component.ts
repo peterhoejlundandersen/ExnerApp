@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
     public http: Http
   ) {};
 
+
   getThumbImages(image_category_id) {
     this.http.get('/works/images.json?image_category_id=' + image_category_id)
       .subscribe(
