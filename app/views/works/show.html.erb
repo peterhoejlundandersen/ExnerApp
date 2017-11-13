@@ -41,7 +41,7 @@
 
 </div>
 <!-- IMG CAT NAVBAR -->
-  <div class="blog-nav sortable-images" data-navbar="img">
+  <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
     <%= content_tag :span, "Info", class: "info-button", data: {btn: "info"} unless info_helper(@work).blank? && @work.description.blank? %>
     <%= render partial: "img_cat_nav", locals: {img_cats: @image_categories} %> 
   </div>

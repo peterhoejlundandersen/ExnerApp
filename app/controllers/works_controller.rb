@@ -107,10 +107,11 @@ def show
     unless @work.image_categories.first.nil?
 
       unless @work.image_categories.first.images.empty?
-        # HUSK AT GØRE NOGET VED DEM HER, NÅR JSON ANGULAR VIRKER!
-        @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
-        @first_image = @image_categories.order(:position).first.images.published.first
+        # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
+        @image_categories = @work.image_categories.includes(:images).where(images: {draft: false})
+        @first_image = @image_categories.first.images.published.first
         @work_cat = @work.category
+
       else
         # For work without images
         render 'show_no_images'
@@ -120,10 +121,10 @@ def show
       render 'show_no_images'
     end
   else # unless request.format
-    image_category = ImageCategory.find(params[:image_category_id])
+    images_to_render = ImageCategory.find(params[:image_category_id]).images.published
     @json_response = []
     image_object = {}
-    @json_response = image_category.images.published.map do |img|
+    @json_response = images_to_render.map do |img|
       image_object = {id: img.id, url: img.image.thumb.url}
     end
     respond_to do |format|
