@@ -107,6 +107,7 @@ def show
     unless @work.image_categories.first.nil?
 
       unless @work.image_categories.first.images.empty?
+        # HUSK AT GØRE NOGET VED DEM HER, NÅR JSON ANGULAR VIRKER!
         @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
         @first_image = @image_categories.order(:position).first.images.published.first
         @work_cat = @work.category
@@ -122,7 +123,9 @@ def show
     image_category = ImageCategory.find(params[:image_category_id])
     @json_response = []
     image_object = {}
-    @json_response = image_category.images.map {|img| image_object = {id: img.id, url: img.image.thumb.url} }
+    @json_response = image_category.images.published.map do |img|
+      image_object = {id: img.id, url: img.image.thumb.url}
+    end
     respond_to do |format|
       format.json {
         render json: {images: @json_response }
