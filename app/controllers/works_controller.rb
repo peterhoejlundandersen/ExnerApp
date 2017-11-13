@@ -95,30 +95,38 @@ class WorksController < ApplicationController
 
  end
 
- def show
-   @work = Work.friendly.find(params[:id])
-   unless @work.position.nil?
+def show
+  @work = Work.find(12)
+  unless @work.position.nil?
     @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work)
-   else
+  else
     @prev_work, @new_work = "", ""
   end
-   # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
-   unless @work.image_categories.first.nil?
+  # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
+  unless @work.image_categories.first.nil?
 
-     unless @work.image_categories.first.images.empty?
+    unless @work.image_categories.first.images.empty?
       @image_categories = @work.image_categories.includes(:images).where(images: {draft: false}).order("images.position")
       @first_image = @image_categories.order(:position).first.images.published.first
       @work_cat = @work.category
-      render 'show'
-    else
-        # For work without images
-        render 'show_no_images'
+      @json_response = []
+      image_object = {}
+      @json_response = @image_categories.first.images.map {|img| image_object = {id: img.id, url: img.image.thumb.url} }
+      respond_to do |format|
+        format.html
+        format.json {
+          render json: {array_images: @json_response }
+        }
       end
-
     else
+      # For work without images
       render 'show_no_images'
     end
+
+  else
+    render 'show_no_images'
   end
+end
 
   def sort_images
     params[:order].each do |key, value|
