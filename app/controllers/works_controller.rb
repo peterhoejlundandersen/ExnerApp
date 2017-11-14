@@ -118,15 +118,17 @@ def show
       render 'show_no_images'
     end
   else # unless request.format
-    images_to_render = ImageCategory.find(params[:image_category_id]).images.published
-    @json_response = []
+    image_cat = ImageCategory.find(params[:image_category_id])
+    images_to_render = image_cat.images.published
+    @images = []
     image_object = {}
-    @json_response = images_to_render.map do |img|
-      image_object = {id: img.id, thumb_url: img.image.thumb.url}
+    @images = images_to_render.map do |img|
+      image_object = {id: img.id, thumb_url: img.image.thumb.url, photographer: img.photographer, description: img.image_description}
     end
+    @image_cats = image_cat.work.image_categories
     respond_to do |format|
       format.json {
-        render json: {images: @json_response }
+        render json: {images: @images, image_cats: @image_cats }
       }
     end
   end

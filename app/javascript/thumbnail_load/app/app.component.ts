@@ -1,12 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
-import { Http, HttpModule } from '@angular/http';
 
 import { ImageService } from './image.service';
+import { ImageCat } from './image_cat';
 
 @Component({
   selector: 'thumbnail-load',
   template: `
+  <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
+    <div *ngFor="let image_cat of image_cats"
+    class="nav-link sortable-image-item text-center"
+    [attr.data-id]="image_cat.id"
+    data-type="ImageCategory">
+      <div (click)="changeCategory(image_cat.id)" class="nav-link sortable-image-item text-center">
+        {{image_cat.name}}
+      </div>
+    </div>
+  </div>
+  <!-- thumbnails -->
   <div class="thumb-images row sortable-images">
     <div *ngFor="let thumb_image of thumb_images" 
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
@@ -18,14 +29,24 @@ import { ImageService } from './image.service';
 })
 export class AppComponent implements OnInit {
   thumb_images: null;
+  image_cats: null;
   constructor( 
-    public http: Http,
-    private image_service: ImageService
+    private _image_service: ImageService
   ) {};
+
+  changeCategory(img_cat_id) {
+    this._image_service.getImagesAndImageCats(img_cat_id)
+      .subscribe(data => this.thumb_images = data.images)
+  }
 
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
-    this.image_service.getThumbnailImages(img_cat_id)
-      .subscribe(data => this.thumb_images = data.images);
+    this._image_service.getImagesAndImageCats(img_cat_id)
+      .subscribe(data => {
+        this.thumb_images = data.images,
+        this.image_cats = data.image_cats
+      });
   }
+
+
 }

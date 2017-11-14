@@ -8,8 +8,9 @@ import 'rxjs/add/operator/map';
 export class ImageService {
   constructor(private http: Http) {}
 
-  getThumbnailImages(image_category_id) {
+  getImagesAndImageCats(image_category_id) {
     return this.http.get('/works/images.json?image_category_id=' + image_category_id)
       .map(response => response.json());
   }
+
 }
