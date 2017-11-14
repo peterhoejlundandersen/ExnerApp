@@ -49,9 +49,10 @@
   <!-- THUMB IMAGES -->
   <div class="">
     <!-- THUMBNAIL LOAD ANGULAR -->
-    <thumbnail-load ng-init="init(<%= @first_image_category.id %>)">Loading...</thumbnail-load>
+    <span class="hide-it" id="imgCat" data-img-cat="<%= @first_image_category.id %>"></span>
+    <thumbnail-load>Loading...</thumbnail-load>
     <%= javascript_pack_tag 'thumbnail_load' %>
-
+    <!-- THUMBNAIL LOAD ANGULAR END -->
   </div>
 
 
