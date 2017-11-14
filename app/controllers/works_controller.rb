@@ -103,21 +103,17 @@ def show
     else
       @prev_work, @new_work = "", ""
     end
-    # Når et værk bliver oprettet uden billedekategori, så får den nil i .first
-
-    unless @work.image_categories.first.nil?
+    unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
       @first_image_category = @work.image_categories.first
       unless @first_image_category.images.empty?
         # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
         @image_categories = @work.image_categories.includes(:images).where(images: {draft: false})
         @first_image = @first_image_category.images.published.first
         @work_cat = @work.category
-
       else
         # For work without images
         render 'show_no_images'
       end
-
     else
       render 'show_no_images'
     end
@@ -126,7 +122,7 @@ def show
     @json_response = []
     image_object = {}
     @json_response = images_to_render.map do |img|
-      image_object = {id: img.id, url: img.image.thumb.url}
+      image_object = {id: img.id, thumb_url: img.image.thumb.url}
     end
     respond_to do |format|
       format.json {

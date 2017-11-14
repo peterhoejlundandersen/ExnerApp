@@ -7,8 +7,10 @@ import { Http, HttpModule } from '@angular/http';
   selector: 'thumbnail-load',
   template: `
   <div class="thumb-images row sortable-images">
-    <div *ngFor="let image of images" class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item" data-id="image.id" data-type="Image">
-      <img src="{{image.url}}">
+    <div *ngFor="let image of images" 
+    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
+    [attr.data-id]="image.id" data-type="Image">
+      <img src="{{image.thumb_url}}">
     </div>
   </div>
   `,
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit {
         err => console.log(err)
       )
   };
+
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
     this.getThumbImages(img_cat_id);
