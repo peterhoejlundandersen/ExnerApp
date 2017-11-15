@@ -126,11 +126,14 @@ def show
       image_object = {id: img.id, thumb_url: img.image.thumb.url, photographer: img.photographer, description: img.image_description}
     end
     @image_cats = image_cat.work.image_categories
+    @large_image = images_to_render.first
+
     respond_to do |format|
       format.json {
-        render json: {images: @images, image_cats: @image_cats }
+        render json: {images: @images, image_cats: @image_cats, large_image: @large_image}
       }
     end
+
   end
 end
 
