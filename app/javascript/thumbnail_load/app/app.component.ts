@@ -39,29 +39,28 @@ import { ImageCat } from './image_cat';
 })
 export class AppComponent implements OnInit {
   thumb_images: null;
-  image_cats: null;
-  large_image: null;
+  image_cats: null;  
+  large_image: null; 
 
   constructor( 
     private _image_service: ImageService
   ) {};
 
-  changeCategory(img_cat_id) {
-    this._image_service.getImagesAndImageCats(img_cat_id)
-      .subscribe(data => this.thumb_images = data.images)
-  }
-
-  changeLargeImage(image_id) {
-    console.log(this.large_image);
-  }
-
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => {
-        this.thumb_images = data.images,
-        this.image_cats = data.image_cats,
-        this.large_image = data.large_image
+        this.thumb_images = data.images, this.image_cats = data.image_cats, this.large_image = data.large_image
       });
   }
+  // Kører ikke med det samme, når de er defineret sådan her!
+  changeCategory = function(img_cat_id) {
+    this._image_service.getImagesAndImageCats(img_cat_id)
+      .subscribe(data => this.thumb_images = data.images)
+  }
+
+  changeLargeImage = function(image_id) {
+    this.large_image = this.thumb_images.find(img_obj => img_obj.id == image_id )
+  }
+
 }
