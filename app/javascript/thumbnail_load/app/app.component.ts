@@ -11,7 +11,12 @@ import { ImageCat } from './image_cat';
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
+
         <img [attr.src]="large_image.image.url" id="largeImage">
+
+        <div class="work-arrows" id="leftArrow" (click)="prevImage(large_image.id)"></div>
+        <div class="work-arrows" id="rightArrow" (click)="nextImage(large_image.id)"></div>
+
       </div>
     </div>
   </div>
@@ -37,14 +42,16 @@ import { ImageCat } from './image_cat';
   </div>
   `,
 })
-export class AppComponent implements OnInit {
-  thumb_images: null;
-  image_cats: null;  
-  large_image: null; 
 
-  constructor( 
-    private _image_service: ImageService
-  ) {};
+export class AppComponent implements OnInit {
+
+  thumb_images: null;
+  image_cats: null;
+  large_image: null;
+  image_index: number = 0;
+  image_cats_index: number = 0;
+
+  constructor( private _image_service: ImageService) {};
 
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
@@ -53,14 +60,28 @@ export class AppComponent implements OnInit {
         this.thumb_images = data.images, this.image_cats = data.image_cats, this.large_image = data.large_image
       });
   }
-  // Kører ikke med det samme, når de er defineret sådan her!
-  changeCategory = function(img_cat_id) {
+
+  changeCategory = function(img_cat_id) { // Get image data from the json call 
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => this.thumb_images = data.images)
+    this.image_index = 0;
   }
 
   changeLargeImage = function(image_id) {
-    this.large_image = this.thumb_images.find(img_obj => img_obj.id == image_id )
+    this.large_image = this.thumb_images.find(img_obj => img_obj.id == image_id );
+    this.image_index = this.thumb_images.indexOf(this.large_image);
   }
 
+  nextImage = function(image_id) {
+    this.image_index++;
+    this.large_image = this.thumb_images[this.image_index];
+  }
+
+  prevImage = function(image_id) {
+    this.image_index--;
+    if (this.image_index < 0 && !this.image_cats_index) { //No other image cats, cycle
+      this.image_index = this.thumb_images.length;  
+    } 
+    this.large_image = this.thumb_images[this.image_index];
+  }
 }

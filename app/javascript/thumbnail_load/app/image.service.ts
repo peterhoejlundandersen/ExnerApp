@@ -12,5 +12,4 @@ export class ImageService {
     return this.http.get('/works/images.json?image_category_id=' + image_category_id)
       .map(response => response.json());
   }
-
 }

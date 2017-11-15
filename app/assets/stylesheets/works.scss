@@ -37,6 +37,7 @@ html, body {
 }
 
 .work-arrows {
+  z-index: 9999999;
   position: absolute;
   cursor: pointer;
 }
@@ -44,12 +45,15 @@ html, body {
   left: 0;
   width: 150px;
   height: 150px;
+  background-image: url(image-path("arrow-left"));
 }
 #rightArrow {
   right: 0;
   width: 150px;
   height: 150px;
+  background-image: url(image-path("arrow-right"));
 }
+
 .work-header {
   font-family: LinLibertine;
 }
@@ -229,6 +233,7 @@ span.without-overview-text {
   }
 }
 .thumb-image {
+  cursor: pointer;
   img {
     max-height: 180px;
     max-width: 100%;
