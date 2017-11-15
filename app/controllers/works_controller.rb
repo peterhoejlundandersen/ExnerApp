@@ -119,18 +119,14 @@ def show
     end
   else # unless request.format
     image_cat = ImageCategory.find(params[:image_category_id])
-    @images = image_cat.images.published
-    # @images = []
-    # image_object = {}
-    # @images = images_to_render.map do |img|
-    #   image_object = {id: img.id, thumb_url: img.image.thumb.url, photographer: img.photographer, description: img.image_description}
-    # end
-    @image_cats = image_cat.work.image_categories
-    @large_image = @images.first
+    images = image_cat.images.published
+    image_cats = image_cat.work.image_categories
+    image_cats_index = (image_cats.length < 2) ? -1 : 0
+    large_image = images.first
 
     respond_to do |format|
       format.json {
-        render json: {images: @images, image_cats: @image_cats, large_image: @large_image}
+        render json: {images: images, image_cats: image_cats, large_image: large_image, image_cats_index: image_cats_index}
       }
     end
 

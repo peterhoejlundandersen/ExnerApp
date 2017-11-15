@@ -57,13 +57,17 @@ export class AppComponent implements OnInit {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => {
-        this.thumb_images = data.images, this.image_cats = data.image_cats, this.large_image = data.large_image
+        this.thumb_images = data.images,
+        this.image_cats = data.image_cats,
+        this.large_image = data.large_image,
+        this.image_cats_index = data.image_cats_index
       });
   }
 
   changeCategory = function(img_cat_id) { // Get image data from the json call 
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => this.thumb_images = data.images)
+    this.image_cats_index = this.image_cats.map(function(cat_obj){ return cat_obj.id }).indexOf(img_cat_id); // Find index by the objects id
     this.image_index = 0;
   }
 
@@ -79,9 +83,12 @@ export class AppComponent implements OnInit {
 
   prevImage = function(image_id) {
     this.image_index--;
-    if (this.image_index < 0 && !this.image_cats_index) { //No other image cats, cycle
-      this.image_index = this.thumb_images.length;  
-    } 
+    if (this.image_index == -1 && this.image_cats_index == -1) { //No other image cats, cycle
+      this.image_index = this.thumb_images.length - 1;  
+    } else if ( this.image_index == -1 && this.image_cats_index > 0 ) { // TAGER IKKE HØJDE FOR, HVIS DET ER DEN SIDSTE KATEGORI!
+      this.changeCategory(this.image_cats[this.image_cats_index - 1].id); // Use the current id to find the image cat
+    }
     this.large_image = this.thumb_images[this.image_index];
+    console.log(this.image_cats_index); // PRINTING -1 :O
   }
 }
