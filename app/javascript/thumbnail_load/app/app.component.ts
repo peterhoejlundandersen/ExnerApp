@@ -32,7 +32,7 @@ import { ImageCat } from './image_cat';
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
     (click)="changeLargeImage(thumb_image.id)"
     [attr.data-id]="thumb_image.id" data-type="Image">
-      <img src="{{thumb_image.thumb_url}}">
+      <img src="{{thumb_image.image.thumb.url}}">
     </div>
   </div>
   `,
