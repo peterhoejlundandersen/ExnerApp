@@ -30,6 +30,7 @@ import { ImageCat } from './image_cat';
   <div class="thumb-images row sortable-images">
     <div *ngFor="let thumb_image of thumb_images" 
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
+    (click)="changeLargeImage(thumb_image.id)"
     [attr.data-id]="thumb_image.id" data-type="Image">
       <img src="{{thumb_image.thumb_url}}">
     </div>
@@ -37,7 +38,6 @@ import { ImageCat } from './image_cat';
   `,
 })
 export class AppComponent implements OnInit {
-
   thumb_images: null;
   image_cats: null;
   large_image: null;
@@ -50,9 +50,11 @@ export class AppComponent implements OnInit {
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => this.thumb_images = data.images)
   }
+
   changeLargeImage(image_id) {
-    console.log(image_id);
+    console.log(this.large_image);
   }
+
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
     this._image_service.getImagesAndImageCats(img_cat_id)
@@ -61,6 +63,5 @@ export class AppComponent implements OnInit {
         this.image_cats = data.image_cats,
         this.large_image = data.large_image
       });
-
   }
 }
