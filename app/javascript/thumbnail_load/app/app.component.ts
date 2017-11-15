@@ -7,6 +7,13 @@ import { ImageCat } from './image_cat';
 @Component({
   selector: 'thumbnail-load',
   template: `
+  <div class="large-image">
+    <div class="vertical-center">
+      <div class="image-desc-wrapper">
+        <img [attr.src]="large_image" id="largeImage">
+      </div>
+    </div>
+  </div>
   <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
     <div *ngFor="let image_cat of image_cats"
     class="nav-link sortable-image-item text-center"
@@ -30,6 +37,7 @@ import { ImageCat } from './image_cat';
 export class AppComponent implements OnInit {
   thumb_images: null;
   image_cats: null;
+  large_image: string;
   constructor( 
     private _image_service: ImageService
   ) {};
@@ -46,6 +54,7 @@ export class AppComponent implements OnInit {
         this.thumb_images = data.images,
         this.image_cats = data.image_cats
       });
+    this.large_image = "https://exnerbilleder.s3.amazonaws.com/nye/uploads/image/image/998/STARTL1080221.jpg"
   }
 
 
