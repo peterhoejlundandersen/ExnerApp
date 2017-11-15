@@ -9,9 +9,9 @@ import { ImageCat } from './image_cat';
   template: `
   <!-- large image -->
   <div class="large-image">
-    <div class="vertical-center">
-      <div class="">
-        <img [attr.src]="large_image.image.url">
+    <div *ngIf="large_image" class="vertical-center">
+      <div class="image-desc-wrapper">
+        <img [attr.src]="large_image.image.url" id="largeImage">
       </div>
     </div>
   </div>
@@ -50,7 +50,9 @@ export class AppComponent implements OnInit {
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => this.thumb_images = data.images)
   }
-
+  changeLargeImage(image_id) {
+    console.log(image_id);
+  }
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
     this._image_service.getImagesAndImageCats(img_cat_id)
