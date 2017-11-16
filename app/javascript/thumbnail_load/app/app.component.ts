@@ -66,9 +66,9 @@ export class AppComponent implements OnInit {
 
   onKeyUp = function(ev) {
     if (ev.key == "ArrowRight") {
-      this.changeImage(this.image_index++);
+      this.changeImage(this.image_index + 1);
     } else if (ev.key == "ArrowLeft") {
-      this.changeImage(this.image_index--);
+      this.changeImage(this.image_index - 1);
     }
   }
 
