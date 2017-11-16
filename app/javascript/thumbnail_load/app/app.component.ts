@@ -21,6 +21,7 @@ import { ImageCat } from './image_cat';
   <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
     <div *ngFor="let image_cat of image_cats; let i = index"
     class="nav-link sortable-image-item text-center"
+    [ngClass]="{'active-cat': i == image_cats_index }"
     [attr.data-id]="image_cat.id"
     data-type="ImageCategory">
       <div (click)="changeCategory(i)" class="nav-link sortable-image-item text-center">
@@ -32,6 +33,7 @@ import { ImageCat } from './image_cat';
   <div class="thumb-images row sortable-images">
     <div *ngFor="let thumb_image of thumb_images; let i = index"
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
+    [ngClass]="{'thumbnail-active': i == image_index}"
     (click)="changeImage(i)"
     [attr.data-id]="thumb_image.id" data-type="Image">
       <img src="{{thumb_image.image.thumb.url}}">
@@ -73,7 +75,20 @@ export class AppComponent implements OnInit {
   }
 
   changeCategory = function(i, last = false) { // Get image data from the json call
-    var img_cat_id = (this.image_cats[i]) ? this.image_cats[i].id : this.image_cats.length - 1;
+    if (this.image_cats[i]) {
+      var img_cat_id =  this.image_cats[i].id;
+      this.image_cats_index = i;
+    } else { 
+      var image_cats_length = this.image_cats.length -1;
+      if (i > image_cats_length) { //If last image cat, start from first
+        var img_cat_id = this.image_cats[0].id;
+        this.image_cats_index = 0;
+      } else { //If first image cat, start from last
+        var img_cat_id = this.image_cats[image_cats_length].id;
+        this.image_cats_index = image_cats_length;
+        console.log("jhasdjkhkjh");
+      }
+    }
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(
         data => this.thumb_images = data.images,
@@ -87,7 +102,6 @@ export class AppComponent implements OnInit {
           }
         }
       )
-    this.image_cats_index = i;
   }
 
   changeLargeImage = function(image_index) {
@@ -95,8 +109,8 @@ export class AppComponent implements OnInit {
       this.large_image = this.thumb_images[image_index];
     } else {
       if (image_index < 0) { // change to prev image_cat
-        this.changeCategory(this.image_cats_index - 1, true);
-      } else {
+        this.changeCategory(this.image_cats_index - 1, true); //last_image true
+      } else { // change to next image
         this.changeCategory(this.image_cats_index + 1);
       }
     }

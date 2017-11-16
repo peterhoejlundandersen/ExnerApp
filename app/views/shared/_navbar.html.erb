@@ -6,7 +6,8 @@
       <% elsif @work.present? %>
         <%= link_to @work.category.name, vaerker_path(@work.category.name.parameterize), class: "nav-link text-center" %>
         >
-        <%= link_to @work.name, vaerker_path(@work.name.parameterize), class: "nav-link text-center" %>
+        <%= link_to @work.name, work_path(@work), class: "nav-link text-center" %>
+        <h1>h</h1>
       <% else %>
         <%= link_to "Oversigt", oversigt_path, class: "nav-link" %>
       <% end %>
