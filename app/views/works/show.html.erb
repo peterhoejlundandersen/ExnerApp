@@ -33,7 +33,7 @@
 
 </div>
 <!-- IMG CAT NAVBAR -->
-    <%# <%= content_tag :span, "Info", class: "info-button", data: {btn: "info"} unless info_helper(@work).blank? && @work.description.blank? %1> %>
+    <%= content_tag :span, "Info", class: "info-button", data: {btn: "info"} unless info_helper(@work).blank? && @work.description.blank? %>
 
 <span class="hide-it" id="imgCat" data-img-cat="<%= @first_image_category.id %>"></span>
 <thumbnail-load>Loading...</thumbnail-load>

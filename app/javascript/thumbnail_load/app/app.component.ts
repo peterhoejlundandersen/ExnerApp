@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
 
 import { ImageService } from './image.service';
+import { ImageNavigatorService } from './image_navigator.service';
 import { ImageCat } from './image_cat';
 
 @Component({
@@ -12,8 +13,8 @@ import { ImageCat } from './image_cat';
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
         <img [attr.src]="large_image.image.url" id="largeImage">
-        <div class="work-arrows" id="leftArrow" (click)="changeImage(image_index - 1)"></div>
-        <div class="work-arrows" id="rightArrow" (click)="changeImage(image_index + 1)"></div>
+        <div class="work-arrows" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
+        <div class="work-arrows" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
       </div>
     </div>
   </div>
@@ -34,7 +35,7 @@ import { ImageCat } from './image_cat';
     <div *ngFor="let thumb_image of thumb_images; let i = index"
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
     [ngClass]="{'thumbnail-active': i == image_index}"
-    (click)="changeImage(i)"
+    (click)="changeLargeImage(i)"
     [attr.data-id]="thumb_image.id" data-type="Image">
       <img src="{{thumb_image.image.thumb.url}}">
     </div>
@@ -53,7 +54,10 @@ export class AppComponent implements OnInit {
   image_index: number = 0;
   image_cats_index: number = 0;
 
-  constructor( private _image_service: ImageService) {};
+  constructor( 
+    private _image_service: ImageService,
+    public _image_navigator_service: ImageNavigatorService
+  ) {};
 
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
@@ -66,59 +70,34 @@ export class AppComponent implements OnInit {
       });
   }
 
-  onKeyUp = function(ev) {
-    if (ev.key == "ArrowRight") {
-      this.changeImage(this.image_index + 1);
-    } else if (ev.key == "ArrowLeft") {
-      this.changeImage(this.image_index - 1);
+  onKeyUp = function(event) {
+    if (event.key == "ArrowRight") {
+      this.changeLargeImage(this.image_index + 1, this.thumb_images);
+    } else if (event.key == "ArrowLeft") {
+      this.changeLargeImage(this.image_index - 1, this.thumb_images);
     }
   }
 
   changeCategory = function(i, last = false) { // Get image data from the json call
-    if (this.image_cats[i]) {
-      var img_cat_id =  this.image_cats[i].id;
-      this.image_cats_index = i;
-    } else { 
-      var image_cats_length = this.image_cats.length -1;
-      if (i > image_cats_length) { //If last image cat, start from first
-        var img_cat_id = this.image_cats[0].id;
-        this.image_cats_index = 0;
-      } else { //If first image cat, start from last
-        var img_cat_id = this.image_cats[image_cats_length].id;
-        this.image_cats_index = image_cats_length;
-        console.log("jhasdjkhkjh");
-      }
-    }
-    this._image_service.getImagesAndImageCats(img_cat_id)
+    var [image_cat_id, image_cats_index] = this._image_navigator_service.categoryChangerChecker(this.image_cats, i); 
+    this.image_cats_index = image_cats_index;
+    this._image_service.getImagesAndImageCats(image_cat_id)
       .subscribe(
         data => this.thumb_images = data.images,
         err => console.log(err),
-        () => { 
-          if (last) {
-            var last_image_index = this.thumb_images.length - 1;
-            this.changeLargeImage(last_image_index);
-          } else {
-            this.changeLargeImage(0);
-          }
+        () => {  //Last image should be focused when using arrowkeys prev to another img cat
+          this.image_index = (last) ? this.thumb_images.length - 1 : 0;
+          this.changeLargeImage(this.image_index);
         }
       )
   }
 
-  changeLargeImage = function(image_index) {
-    if (this.thumb_images[image_index]) { // If index finds image in array
-      this.large_image = this.thumb_images[image_index];
-    } else {
-      if (image_index < 0) { // change to prev image_cat
-        this.changeCategory(this.image_cats_index - 1, true); //last_image true
-      } else { // change to next image
-        this.changeCategory(this.image_cats_index + 1);
-      }
+  changeLargeImage = function(i) {
+    if (this.thumb_images[i]) { // If the index is inside the scope - normal change
+      this.large_image = this.thumb_images[i], this.image_index = i;
+    } else { // If not, see if it's the end of the img_cat or the start
+      (i < 0) ? this.changeCategory(this.image_cats_index - 1, true) : this.changeCategory(this.image_cats_index + 1) 
     }
-    this.image_index = image_index;
-  }
-
-  changeImage = function(image_index) {
-    this.changeLargeImage(image_index);
   }
 
 }
