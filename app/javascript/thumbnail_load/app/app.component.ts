@@ -82,7 +82,15 @@ export class AppComponent implements OnInit {
   }
 
   changeLargeImage = function(image_index) {
-    this.large_image = this.thumb_images[image_index];
+    if (this.thumb_images[image_index]) { // If index finds image in array
+      this.large_image = this.thumb_images[image_index];
+    } else {
+      if (image_index < 0) { // change to prev image_cat
+        console.log("PREV IMAGE CAT");
+      } else {
+        console.log("NEXT IMAGE CAT");
+      }
+    }
   }
 
   changeImage = function(image_index) {
