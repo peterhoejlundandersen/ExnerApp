@@ -23,7 +23,7 @@ import { ImageCat } from './image_cat';
     class="nav-link sortable-image-item text-center"
     [attr.data-id]="image_cat.id"
     data-type="ImageCategory">
-      <div (click)="changeCategory(image_cat.id, i)" class="nav-link sortable-image-item text-center">
+      <div (click)="changeCategory(i)" class="nav-link sortable-image-item text-center">
         {{image_cat.name}}
       </div>
     </div>
@@ -72,13 +72,22 @@ export class AppComponent implements OnInit {
     }
   }
 
-  changeCategory = function(img_cat_id, index) { // Get image data from the json call
+  changeCategory = function(i, last = false) { // Get image data from the json call
+    var img_cat_id = (this.image_cats[i]) ? this.image_cats[i].id : this.image_cats.length - 1;
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(
         data => this.thumb_images = data.images,
         err => console.log(err),
-        () => { this.changeLargeImage(0); this.image_cats_index = index; this.image_index = 0; }
+        () => { 
+          if (last) {
+            var last_image_index = this.thumb_images.length - 1;
+            this.changeLargeImage(last_image_index);
+          } else {
+            this.changeLargeImage(0);
+          }
+        }
       )
+    this.image_cats_index = i;
   }
 
   changeLargeImage = function(image_index) {
@@ -86,16 +95,16 @@ export class AppComponent implements OnInit {
       this.large_image = this.thumb_images[image_index];
     } else {
       if (image_index < 0) { // change to prev image_cat
-        console.log("PREV IMAGE CAT");
+        this.changeCategory(this.image_cats_index - 1, true);
       } else {
-        console.log("NEXT IMAGE CAT");
+        this.changeCategory(this.image_cats_index + 1);
       }
     }
+    this.image_index = image_index;
   }
 
   changeImage = function(image_index) {
     this.changeLargeImage(image_index);
-    this.image_index = image_index;
   }
 
 }
