@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
 
 import { ImageService } from './image.service';
@@ -11,36 +11,36 @@ import { ImageCat } from './image_cat';
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
-
         <img [attr.src]="large_image.image.url" id="largeImage">
-
-        <div class="work-arrows" id="leftArrow" (click)="prevImage(large_image.id)"></div>
-        <div class="work-arrows" id="rightArrow" (click)="nextImage(large_image.id)"></div>
-
+        <div class="work-arrows" id="leftArrow" (click)="changeImage(image_index - 1)"></div>
+        <div class="work-arrows" id="rightArrow" (click)="changeImage(image_index + 1)"></div>
       </div>
     </div>
   </div>
   <!-- image categories -->
   <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
-    <div *ngFor="let image_cat of image_cats"
+    <div *ngFor="let image_cat of image_cats; let i = index"
     class="nav-link sortable-image-item text-center"
     [attr.data-id]="image_cat.id"
     data-type="ImageCategory">
-      <div (click)="changeCategory(image_cat.id)" class="nav-link sortable-image-item text-center">
+      <div (click)="changeCategory(image_cat.id, i)" class="nav-link sortable-image-item text-center">
         {{image_cat.name}}
       </div>
     </div>
   </div>
   <!-- thumbnails -->
   <div class="thumb-images row sortable-images">
-    <div *ngFor="let thumb_image of thumb_images" 
+    <div *ngFor="let thumb_image of thumb_images; let i = index"
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
-    (click)="changeLargeImage(thumb_image.id)"
+    (click)="changeImage(i)"
     [attr.data-id]="thumb_image.id" data-type="Image">
       <img src="{{thumb_image.image.thumb.url}}">
     </div>
   </div>
   `,
+  host: {
+    '(document:keyup)': 'onKeyUp($event)'
+  }
 })
 
 export class AppComponent implements OnInit {
@@ -58,37 +58,36 @@ export class AppComponent implements OnInit {
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => {
         this.thumb_images = data.images,
-        this.image_cats = data.image_cats,
-        this.large_image = data.large_image,
-        this.image_cats_index = data.image_cats_index
+          this.image_cats = data.image_cats,
+          this.large_image = data.large_image,
+          this.image_cats_index = data.image_cats_index
       });
   }
 
-  changeCategory = function(img_cat_id) { // Get image data from the json call 
-    this._image_service.getImagesAndImageCats(img_cat_id)
-      .subscribe(data => this.thumb_images = data.images)
-    this.image_cats_index = this.image_cats.map(function(cat_obj){ return cat_obj.id }).indexOf(img_cat_id); // Find index by the objects id
-    this.image_index = 0;
-  }
-
-  changeLargeImage = function(image_id) {
-    this.large_image = this.thumb_images.find(img_obj => img_obj.id == image_id );
-    this.image_index = this.thumb_images.indexOf(this.large_image);
-  }
-
-  nextImage = function(image_id) {
-    this.image_index++;
-    this.large_image = this.thumb_images[this.image_index];
-  }
-
-  prevImage = function(image_id) {
-    this.image_index--;
-    if (this.image_index == -1 && this.image_cats_index == -1) { //No other image cats, cycle
-      this.image_index = this.thumb_images.length - 1;  
-    } else if ( this.image_index == -1 && this.image_cats_index > 0 ) { // TAGER IKKE HØJDE FOR, HVIS DET ER DEN SIDSTE KATEGORI!
-      this.changeCategory(this.image_cats[this.image_cats_index - 1].id); // Use the current id to find the image cat
+  onKeyUp = function(ev) {
+    if (ev.key == "ArrowRight") {
+      this.changeImage(this.image_index++);
+    } else if (ev.key == "ArrowLeft") {
+      this.changeImage(this.image_index--);
     }
-    this.large_image = this.thumb_images[this.image_index];
-    console.log(this.image_cats_index); // PRINTING -1 :O
   }
+
+  changeCategory = function(img_cat_id, index) { // Get image data from the json call
+    this._image_service.getImagesAndImageCats(img_cat_id)
+      .subscribe(
+        data => this.thumb_images = data.images,
+        err => console.log(err),
+        () => { this.changeLargeImage(0); this.image_cats_index = index; this.image_index = 0; }
+      )
+  }
+
+  changeLargeImage = function(image_index) {
+    this.large_image = this.thumb_images[image_index];
+  }
+
+  changeImage = function(image_index) {
+    this.changeLargeImage(image_index);
+    this.image_index = image_index;
+  }
+
 }
