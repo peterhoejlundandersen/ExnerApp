@@ -6,7 +6,7 @@ import { ImageNavigatorService } from './image_navigator.service';
 import { ImageCat } from './image_cat';
 
 @Component({
-  selector: 'thumbnail-load',
+  selector: 'work-show',
   template: `
   <!-- large image -->
   <div class="large-image">
@@ -62,7 +62,7 @@ import { ImageCat } from './image_cat';
   }
 })
 
-export class AppComponent implements OnInit {
+export class WorkShowComponent implements OnInit {
 
   loading_procent: number = 0;
   image_loading: boolean = true;

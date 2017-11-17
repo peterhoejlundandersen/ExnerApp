@@ -4,17 +4,19 @@ import { Http, HttpModule } from '@angular/http';
 
 import { ImageService } from './image.service';
 import { ImageNavigatorService } from './image_navigator.service';
-import { AppComponent } from './app.component';
+import { WorkShowComponent } from './work_show.component';
+import { WorksIndexComponent } from './works_index.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    WorkShowComponent,
+    WorksIndexComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
   ],
   providers: [ImageService, ImageNavigatorService],
-  bootstrap: [AppComponent]
+  bootstrap: [ WorkShowComponent ]
 })
 export class AppModule { }
