@@ -22,19 +22,22 @@ class WorksController < ApplicationController
   end
 
   def index
-    if params[:noload] == "true" # Skal ikke vise nogle værker ved besøg af Design siden
-      params[:vaerker_cat] = "design"
-      set_design_categories params[:vaerker_cat], true
-      render 'categories/design_categories_overview'
-    elsif ["design", "belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
-      params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
-      set_design_categories params[:vaerker_cat]
-      render 'categories/design_categories_overview'
-    else
-      @category = Category.friendly.find(params[:vaerker_cat])
-      @header_title = @category.name
-      @works = @category.works
-    end
+      if params[:noload] == "true" # Skal ikke vise nogle værker ved besøg af Design siden
+        params[:vaerker_cat] = "design"
+        set_design_categories params[:vaerker_cat], true
+        render 'categories/design_categories_overview'
+      elsif ["design", "belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
+        params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
+        set_design_categories params[:vaerker_cat]
+        render 'categories/design_categories_overview'
+      else
+        @category = Category.friendly.find(params[:vaerker_cat])
+        @works = @category.works
+        respond_to do |format|
+          format.html
+          format.json { render json: {category: @category, works: @works} }
+        end
+      end
   end
 
   def design_index
@@ -107,8 +110,6 @@ class WorksController < ApplicationController
         @first_image_category = @work.image_categories.first
         unless @first_image_category.images.empty?
           # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
-          @image_categories = @work.image_categories.includes(:images).where(images: {draft: false})
-          @first_image = @first_image_category.images.published.first
           @work_cat = @work.category
         else
           # For work without images
@@ -134,7 +135,6 @@ class WorksController < ApplicationController
             large_image: large_image,
             image_cats_index: image_cats_index,
             work_info: {short: work_info, description: work_description}
-
           }
         }
       end

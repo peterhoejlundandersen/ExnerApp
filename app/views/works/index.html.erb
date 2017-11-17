@@ -1,5 +1,6 @@
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
+<input type="hidden" data-category-id="<%= @category.friendly_id %>" id="categoryId">
 <works-index>Loading...</works-index>
 <%= javascript_pack_tag 'works_index' %>
 
