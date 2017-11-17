@@ -19,11 +19,24 @@ import { ImageCat } from './image_cat';
       </div>
     </div>
   </div>
+  <!-- work_info -->
+  <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
+    <h2 class="col-12">Information</h2>
+    <div class="info-kort col-md-4">
+      <ul class="info-short-list">
+        <li *ngFor="let info of work_info">{{info}}</li>
+      </ul>
+    </div>
+    <div class="info-beskrivelse col-md-8">
+      <p>{{work_description}}</p>
+    </div>
+  </div>
   <!-- image categories -->
   <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
+    <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info" (click)="openInfo()">Info</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
     class="nav-link sortable-image-item text-center"
-    [ngClass]="{'active-cat': i == image_cats_index }"
+    [class.active-cat]="i == image_cats_index"
     [attr.data-id]="image_cat.id"
     data-type="ImageCategory">
       <div (click)="changeCategory(i)" class="nav-link sortable-image-item text-center">
@@ -60,6 +73,9 @@ export class AppComponent implements OnInit {
   large_image: null;
   image_index: number = 0;
   image_cats_index: number = 0;
+  work_info: null;
+  work_description: null;
+  work_info_opened: boolean = false;
 
   constructor( 
     private _image_service: ImageService,
@@ -83,10 +99,16 @@ export class AppComponent implements OnInit {
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => {
         this.thumb_images = data.images,
-          this.image_cats = data.image_cats,
-          this.large_image = data.large_image
+        this.image_cats = data.image_cats,
+        this.large_image = data.large_image,
+        this.work_info = data.work_info.short,
+        this.work_description = data.work_info.description
       });
 
+  }
+
+  openInfo = function() {
+    this.work_info_opened = (this.work_info_opened) ? false : true;
   }
 
   onKeyUp = function(event) {
@@ -94,6 +116,13 @@ export class AppComponent implements OnInit {
       this.changeLargeImage(this.image_index + 1, this.thumb_images);
     } else if (event.key == "ArrowLeft") {
       this.changeLargeImage(this.image_index - 1, this.thumb_images);
+    } 
+    if (this.work_info || this.work_description) {
+      if (event.key == "ArrowUp") {
+        this.work_info_opened = true;
+      } else if (event.key == "ArrowDown") {
+        this.work_info_opened = false;
+      }
     }
   }
 

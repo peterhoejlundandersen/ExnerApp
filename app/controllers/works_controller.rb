@@ -74,64 +74,73 @@ class WorksController < ApplicationController
 
 
   def create
-   @work = Work.new(work_params)
-   if @work.image_categories.present? # En underlig fejl med manglende work_id
-     @work.image_categories.each do |img_cat|
-      img_cat.work = @work
+    @work = Work.new(work_params)
+    if @work.image_categories.present? # En underlig fejl med manglende work_id
+      @work.image_categories.each do |img_cat|
+        img_cat.work = @work
+      end
     end
-  end
-   last_work_in_category = Category.find(@work.category.id).works.last
-   unless last_work_in_category.position.nil?
-    @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
+    last_work_in_category = Category.find(@work.category.id).works.last
+    unless last_work_in_category.position.nil?
+      @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
     end
-   if @work.save!
-    binding.pry
+    if @work.save!
+      binding.pry
 
-     flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
-     redirect_to @work
-   else
-     redirect_to works_path
-   end
-
- end
-
-def show
-  unless request.format == "json"
-    @work = Work.friendly.find(params[:id])
-    unless @work.position.nil?
-      @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work)
+      flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
+      redirect_to @work
     else
-      @prev_work, @new_work = "", ""
+      redirect_to works_path
     end
-    unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
-      @first_image_category = @work.image_categories.first
-      unless @first_image_category.images.empty?
-        # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
-        @image_categories = @work.image_categories.includes(:images).where(images: {draft: false})
-        @first_image = @first_image_category.images.published.first
-        @work_cat = @work.category
+
+  end
+
+  def show
+    unless request.format == "json"
+      @work = Work.friendly.find(params[:id])
+      unless @work.position.nil?
+        @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work)
       else
-        # For work without images
+        @prev_work, @new_work = "", ""
+      end
+      unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
+        @first_image_category = @work.image_categories.first
+        unless @first_image_category.images.empty?
+          # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
+          @image_categories = @work.image_categories.includes(:images).where(images: {draft: false})
+          @first_image = @first_image_category.images.published.first
+          @work_cat = @work.category
+        else
+          # For work without images
+          render 'show_no_images'
+        end
+      else
         render 'show_no_images'
       end
-    else
-      render 'show_no_images'
-    end
-  else # unless request.format
-    image_cat = ImageCategory.find(params[:image_category_id])
-    images = image_cat.images.published
-    image_cats = image_cat.work.image_categories
-    image_cats_index = (image_cats.length < 2) ? -1 : 0
-    large_image = images.first
+    else # unless request.format
+      image_cat = ImageCategory.find(params[:image_category_id])
+      work_info = return_work_info image_cat.work
+      work_description = image_cat.work.description
+      images = image_cat.images.published
+      image_cats = image_cat.work.image_categories
+      image_cats_index = (image_cats.length < 2) ? -1 : 0
+      large_image = images.first
 
-    respond_to do |format|
-      format.json {
-        render json: {images: images, image_cats: image_cats, large_image: large_image, image_cats_index: image_cats_index}
-      }
-    end
+      respond_to do |format|
+        format.json {
+          render json: {
+            images: images,
+            image_cats: image_cats,
+            large_image: large_image,
+            image_cats_index: image_cats_index,
+            work_info: {short: work_info, description: work_description}
 
+          }
+        }
+      end
+
+    end
   end
-end
 
   def sort_images
     params[:order].each do |key, value|
@@ -147,77 +156,87 @@ end
   end
 
   def destroy
-   @work = Work.friendly.find(params[:id])
-   work_category_id = @work.category_id
-   work_name = Work.name
-   if @work.destroy
-    redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
+    @work = Work.friendly.find(params[:id])
+    work_category_id = @work.category_id
+    work_name = Work.name
+    if @work.destroy
+      redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
+    end
+
   end
 
-end
+  def update
 
-def update
+    @work = Work.friendly.find(params[:id])
 
-  @work = Work.friendly.find(params[:id])
+    if @work.update(work_params)
+      flash[:success] = "Værket #{@work.name} er nu blevet opdateret."
+      redirect_to work_path(@work)
+    else
+      redirect_to kategori_oversigt_path(@work.category_id)
+    end
 
-  if @work.update(work_params)
-    flash[:success] = "Værket #{@work.name} er nu blevet opdateret."
-    redirect_to work_path(@work)
-  else
-    redirect_to kategori_oversigt_path(@work.category_id)
+
   end
 
-
-end
-
-def overview_img
-  work = Work.find(params[:work_id])
-  image = Image.find(params[:img_id])
-  work.overview_img = image.image
-  work.save!
-  @image = work.overview_img
-  respond_to do |format|
-    format.js
+  def overview_img
+    work = Work.find(params[:work_id])
+    image = Image.find(params[:img_id])
+    work.overview_img = image.image
+    work.save!
+    @image = work.overview_img
+    respond_to do |format|
+      format.js
+    end
   end
-end
 
-private
+  private
 
-def set_design_categories cat_param, noload=false
- @categories = []
- @categories << Category.find(13)
- @categories << Category.find(15)
- @categories << Category.find(18)
- if noload
-   @noload = true
- else
-   @category = Category.friendly.find(cat_param)
-   @works = @category.works
- end
-end
+  def set_design_categories cat_param, noload=false
+    @categories = []
+    @categories << Category.find(13)
+    @categories << Category.find(15)
+    @categories << Category.find(18)
+    if noload
+      @noload = true
+    else
+      @category = Category.friendly.find(cat_param)
+      @works = @category.works
+    end
+  end
 
-def get_next_and_previous_work(works, current_work)
-   next_work = works.detect { |w| w.position > current_work.position }
-   prev_work = works.reverse.detect { |w| w.position < current_work.position }
-   [prev_work, next_work]
-end
+  def get_next_and_previous_work(works, current_work)
+    next_work = works.detect { |w| w.position > current_work.position }
+    prev_work = works.reverse.detect { |w| w.position < current_work.position }
+    [prev_work, next_work]
+  end
 
-def work_params
- params.require(:work).permit(
-  :name,
-  :sagsnr,
-  :category_id,
-  :description,
-  :address,
-  :competition,
-  :opening_year,
-  :overview_img,
-  :position,
-  {infos_attributes:
-    [:id, :work_id, :title, :_destroy]},
+  def return_work_info work
+    info = []
+    info << "Sagsnr: #{work.sagsnr.to_s}" if work.sagsnr.present?
+    info << "Adresse: #{work.address}" if work.address.present?
+    info << "Konkurrenceår: #{work.competition.to_s}" if work.competition.present?
+    info << "Indvielse: #{work.opening_year.to_s}" if work.opening_year.present?
+    work.infos.each {|i| info << "#{i.title}" } unless work.infos.empty?
+    return info.empty? ? false : info
+  end
+
+  def work_params
+    params.require(:work).permit(
+      :name,
+      :sagsnr,
+      :category_id,
+      :description,
+      :address,
+      :competition,
+      :opening_year,
+      :overview_img,
+      :position,
+      {infos_attributes:
+       [:id, :work_id, :title, :_destroy]},
     {image_categories_attributes:
-      [:id, :work_id, :name, :_destroy,
-        images_attributes:
-        [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]})
-end
+     [:id, :work_id, :name, :_destroy,
+      images_attributes:
+      [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]})
+  end
 end
