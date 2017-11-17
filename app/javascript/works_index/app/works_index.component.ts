@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
   template: `
   <div class="row sortable works-wrapper">
     <div *ngFor="let work of works; let i = index" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
-          <img [src]="work.overview_img.url" (load)="showRealImages(i)">
+          <!--  <img [src]="work.overview_img.url" (load)="showRealImages(i)"> -->
           <div class="overview-img-block" [style.background-image]="'url(' + work.overview_img.url + ')'">
           </div>
           <h2 class="overview-work-h2">{{work.name}}</h2>
