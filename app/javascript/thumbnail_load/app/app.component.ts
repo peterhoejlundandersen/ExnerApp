@@ -12,7 +12,8 @@ import { ImageCat } from './image_cat';
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
-        <img [attr.src]="large_image.image.url" id="largeImage">
+        <div src="#" *ngIf="image_loading" class="loading"></div>
+        <img [hidden]="image_loading" (load)="onImageLoad()" [attr.src]="large_image.image.url" id="largeImage">
         <div class="work-arrows" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
         <div class="work-arrows" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
       </div>
@@ -32,12 +33,14 @@ import { ImageCat } from './image_cat';
   </div>
   <!-- thumbnails -->
   <div class="thumb-images row sortable-images">
+    <progress class="col-12 progress-bar" value="{{loading_procent}}" max="100"></progress>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
-    [ngClass]="{'thumbnail-active': i == image_index}"
     (click)="changeLargeImage(i)"
     [attr.data-id]="thumb_image.id" data-type="Image">
-      <img src="{{thumb_image.image.thumb.url}}">
+      <img (load)="thumbNailLoad()" src="{{thumb_image.image.thumb.url}}"
+      [class.thumbnail-images-loadet]="!thumbnail_loading"
+      [class.thumbnail-active]="i == image_index && !thumbnail_loading">
     </div>
   </div>
   `,
@@ -48,6 +51,10 @@ import { ImageCat } from './image_cat';
 
 export class AppComponent implements OnInit {
 
+  loading_procent: number = 0;
+  image_loading: boolean = true;
+  thumbnail_loading: boolean = true;
+  thumbnail_loading_counter: number = 0;
   thumb_images: null;
   image_cats: null;
   large_image: null;
@@ -59,15 +66,27 @@ export class AppComponent implements OnInit {
     public _image_navigator_service: ImageNavigatorService
   ) {};
 
+  thumbNailLoad = function() {
+    this.thumbnail_loading_counter = this.thumbnail_loading_counter + 1;
+    var thumbnail_length = this.thumb_images.length - 1;
+    this.loading_procent += ( 100 / thumbnail_length );
+    if (this.thumbnail_loading_counter > thumbnail_length) {
+      this.thumbnail_loading = false, this.thumbnail_loading_counter = 0, this.loading_procent = 0; //Nulstil værdierne
+    }
+  }
+  onImageLoad() {
+    this.image_loading = false;
+  }
+
   ngOnInit() {
     var img_cat_id = document.getElementById('imgCat').getAttribute("data-img-cat");
     this._image_service.getImagesAndImageCats(img_cat_id)
       .subscribe(data => {
         this.thumb_images = data.images,
           this.image_cats = data.image_cats,
-          this.large_image = data.large_image,
-          this.image_cats_index = data.image_cats_index
+          this.large_image = data.large_image
       });
+
   }
 
   onKeyUp = function(event) {
@@ -79,6 +98,7 @@ export class AppComponent implements OnInit {
   }
 
   changeCategory = function(i, last = false) { // Get image data from the json call
+    this.thumbnail_loading = true;
     var [image_cat_id, image_cats_index] = this._image_navigator_service.categoryChangerChecker(this.image_cats, i); 
     this.image_cats_index = image_cats_index;
     this._image_service.getImagesAndImageCats(image_cat_id)
@@ -93,6 +113,7 @@ export class AppComponent implements OnInit {
   }
 
   changeLargeImage = function(i) {
+    this.image_loading = true;
     if (this.thumb_images[i]) { // If the index is inside the scope - normal change
       this.large_image = this.thumb_images[i], this.image_index = i;
     } else { // If not, see if it's the end of the img_cat or the start
