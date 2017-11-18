@@ -7,12 +7,15 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'works-index',
   template: `
-  <div class="row sortable works-wrapper">
+  <progress [class.bar-white]="!loading" class="col-12 progress-bar pb-4" value="{{loading_procent}}" max="100"></progress>
+  <div class="row sortable works-wrapper" [class.show-index-works]="!loading">
     <div *ngFor="let work of works; let i = index" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
-          <!--  <img [src]="work.overview_img.url" (load)="showRealImages(i)"> -->
-          <div class="overview-img-block" [style.background-image]="'url(' + work.overview_img.url + ')'">
-          </div>
-          <h2 class="overview-work-h2">{{work.name}}</h2>
+          <img [src]="work.overview_img.url" (load)="showRealImages()" hidden>
+          <a [href]="'/works/' + work.slug">
+            <div class="overview-img-block" [style.background-image]="'url(' + work.overview_img.url + ')'">
+            </div>
+            <h2 class="overview-work-h2">{{work.name}}</h2>
+          </a>
           <!-- 
           Work WIHTOUT IMAGES
           <div class="overview-img-block work-without-image">
@@ -26,6 +29,9 @@ import 'rxjs/add/operator/map';
 export class WorksIndexComponent implements OnInit {
   works: {}[] = [];
   images_count: number;
+  new_image_counter: number = 0;
+  loading: boolean = true;
+  loading_procent: number = 0;
   constructor( private http: Http ) {}
 
   ngOnInit() {
@@ -34,18 +40,25 @@ export class WorksIndexComponent implements OnInit {
       .subscribe(
         data => this.works = data.works,
         err => console.log(err),
-        () => this.countImages()
-
+        () => {
+          this.countImages();
+          console.log(this.works);
+        }
       )
     
   }
-  showRealImages(i) {
-    console.log(i);
-
+  showRealImages() {
+    this.new_image_counter += 1;
+    this.loading_procent += (100/ this.images_count);
+    console.log(this.loading_procent);
+    if(this.new_image_counter == this.images_count - 1) {
+      this.loading = false;
+    }
+    console.log(this.new_image_counter + " == " + this.images_count);
   }
+
   countImages = function() {
     this.images_count = this.works.filter((work) => work.overview_img.url ).length;
-    console.log(this.images_count);
   }
 
   getWorks(category_id) {
