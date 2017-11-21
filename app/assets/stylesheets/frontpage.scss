@@ -2,6 +2,8 @@
 @import "bootstrap";
 @import "font-awesome";
 
+@import 'font_calls';  // Corbel, LinLibertine, Linux Libertine C
+
 
 /* *** KUN TIL FORSIDE ***** */
 @mixin transition($args...) {
