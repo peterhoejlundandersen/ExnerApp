@@ -45,6 +45,7 @@ import { ImageCat } from './image_cat';
     </div>
   </div>
   <!-- thumbnails -->
+<div class="thumb-images-wrapper">
   <div class="thumb-images row sortable-images">
     <progress class="col-12 progress-bar" value="{{loading_procent}}" max="100"></progress>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
@@ -56,6 +57,7 @@ import { ImageCat } from './image_cat';
       [class.thumbnail-active]="i == image_index && !thumbnail_loading">
     </div>
   </div>
+</div>
   `,
   host: {
     '(document:keyup)': 'onKeyUp($event)'

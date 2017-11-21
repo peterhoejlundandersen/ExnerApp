@@ -25,6 +25,10 @@ html, body {
   opacity: 1;
 }
 
+footer {
+  font-family: Corbel;
+  color: $nav-color;
+}
 .oversigt-img-wrapper {
   text-align: center;
   .oversigt-img {
@@ -32,9 +36,12 @@ html, body {
     max-width: 250px;
   }
 }
+.thumb-images-wrapper {
+
+  min-height: 400px;
+}
 
 .thumb-images {
-  min-height: 400px;
   padding-bottom: 40px;
 }
 
@@ -100,6 +107,8 @@ html, body {
 }
 
 .overview-img-block {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -109,6 +118,12 @@ html, body {
   min-height: 100vh; /* These two lines are counted as one :-)       */
   min-height: 182px;
   margin: 0 auto;
+  @include transition(-webkit-filter .4s ease-out);
+  @include transition(filter .4s ease-out);
+  &:hover {
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+  }
 }
 
 .overview-vert-img-block {
@@ -444,8 +459,3 @@ margin-top: 10px;
   text-align: center;
 }
 
-@media screen and (min-width: 996px) {
-  .thumb-images-wrapper {
-    width: 1240px!important
-  }
-}
