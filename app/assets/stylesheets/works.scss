@@ -26,6 +26,9 @@ html, body {
 }
 
 footer {
+  display: block;
+  width: 100%;
+  overflow: hidden;
   font-family: Corbel;
   color: $nav-color;
 }

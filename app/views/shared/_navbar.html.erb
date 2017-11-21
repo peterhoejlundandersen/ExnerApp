@@ -8,7 +8,11 @@
         >
         <%= link_to @work.name, work_path(@work), class: "nav-link text-center" %>
       <% else %>
-        <%= link_to "Oversigt", oversigt_path, class: "nav-link" %>
+        <% if params[:controller] == "about" %>
+          <%= link_to "Om", om_path(), class: "nav-link" %>
+        <% else %>
+          <%= link_to "Oversigt", oversigt_path, class: "nav-link" %>
+        <% end %>
       <% end %>
   </nav>
   <nav class="blog-nav-dropdown hide-it" data-dropdown="menu">
