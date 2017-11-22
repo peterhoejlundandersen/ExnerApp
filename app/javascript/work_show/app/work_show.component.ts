@@ -26,7 +26,7 @@ import { ImageCat } from './image_cat';
       <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">{{prev_work.name}}</a>
     </div>
     <div class="col-md-4 nav-link text-center">
-      <a *ngIf="parent_cat" [attr.href]="'/' + parent_cat.slug">{{parent_cat.name}}</a>
+      <a *ngIf="parent_cat" [attr.href]="'/vaerker/' + parent_cat.slug">{{parent_cat.name}}</a>
     </div>
     <div class="col-md-4 nav-link text-right ">
       <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">{{next_work.name}}</a>

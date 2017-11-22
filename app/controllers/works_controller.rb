@@ -167,7 +167,6 @@ class WorksController < ApplicationController
     if @work.destroy
       redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
     end
-
   end
 
   def update

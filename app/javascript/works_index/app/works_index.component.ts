@@ -10,18 +10,28 @@ import 'rxjs/add/operator/map';
   <progress [class.bar-white]="!loading" class="col-12 progress-bar pb-4" value="{{loading_procent}}" max="100"></progress>
   <div class="row sortable works-wrapper" [class.show-index-works]="!loading">
     <div *ngFor="let work of works; let i = index" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
-          <img [src]="work.overview_img.url" (load)="showRealImages()" hidden>
+          <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="showRealImages()" hidden>
           <a [href]="'/works/' + work.slug">
-            <div class="overview-img-block" [style.background-image]="'url(' + work.overview_img.url + ')'">
+            <div *ngIf="!work.overview_img.url" class="overview-img-block work-without-image">
+            </div>
+            <div *ngIf="work.overview_img.url" class="overview-img-block" [style.background-image]="'url(' + work.overview_img.url + ')'">
             </div>
             <h2 class="overview-work-h2">{{work.name}}</h2>
           </a>
           <!-- 
           Work WIHTOUT IMAGES
-          <div class="overview-img-block work-without-image">
-          </div>
           -->
     </div>
+    <div class="overview-work">
+      <div class="overview-img-block"></div>
+    </div>
+    <div class="overview-work">
+      <div class="overview-img-block"></div>
+    </div>
+    <div class="overview-work">
+      <div class="overview-img-block"></div>
+    </div>
+
   </div>
   `
 })
