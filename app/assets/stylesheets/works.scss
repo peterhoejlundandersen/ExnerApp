@@ -421,7 +421,6 @@ progress[value]::-webkit-progress-value {
   margin-bottom: 0;
   color: black;
   min-width: 75px;
-
 }
 
 .blog-nav-dropdown {
@@ -435,6 +434,10 @@ margin-top: 10px;
 }
 
 .info-button {
+  font-family: Corbel;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
   display: block;
   float: left;
   color: black;
