@@ -101,11 +101,6 @@ class WorksController < ApplicationController
   def show
     unless request.format == "json"
       @work = Work.friendly.find(params[:id])
-      unless @work.position.nil?
-        @prev_work, @next_work = get_next_and_previous_work(Category.find(@work.category.id).works_sort, @work)
-      else
-        @prev_work, @new_work = "", ""
-      end
       unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
         @first_image_category = @work.image_categories.first
         unless @first_image_category.images.empty?
@@ -120,13 +115,21 @@ class WorksController < ApplicationController
       end
     else # unless request.format
       image_cat = ImageCategory.find(params[:image_category_id])
-      work_info = return_work_info image_cat.work
-      work_description = image_cat.work.description
+      work = image_cat.work
+      cat = work.category
+      work_info = return_work_info work
+      work_description = work.description
       images = image_cat.images.published
-      image_cats = image_cat.work.image_categories
+      image_cats = work.image_categories
       image_cats_index = (image_cats.length < 2) ? -1 : 0
       large_image = images.first
 
+      unless work.position.nil?
+        prev_work, next_work = get_next_and_previous_work(cat.works, work)
+      else
+        prev_work, new_work = "", ""
+      end
+      parent_cat_slug = cat.slug
       respond_to do |format|
         format.json {
           render json: {
@@ -134,7 +137,9 @@ class WorksController < ApplicationController
             image_cats: image_cats,
             large_image: large_image,
             image_cats_index: image_cats_index,
-            work_info: {short: work_info, description: work_description}
+            work_info: {short: work_info, description: work_description},
+            pagination: {prev: prev_work, next: next_work},
+            parent_cat: {slug: cat.slug, name: cat.name}
           }
         }
       end

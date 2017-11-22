@@ -20,6 +20,19 @@ import { ImageCat } from './image_cat';
     </div>
   </div>
   <!-- work_info -->
+
+  <div class="next-prev-back-wrapper row">
+    <div class="col-md-4 nav-link">
+      <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">{{prev_work.name}}</a>
+    </div>
+    <div class="col-md-4 nav-link text-center">
+      <a *ngIf="parent_cat" [attr.href]="'/' + parent_cat.slug">{{parent_cat.name}}</a>
+    </div>
+    <div class="col-md-4 nav-link text-right ">
+      <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">{{next_work.name}}</a>
+    </div>
+  </div>
+  
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <h2 class="col-12">Information</h2>
     <div class="info-kort col-md-4">
@@ -66,6 +79,9 @@ import { ImageCat } from './image_cat';
 
 export class WorkShowComponent implements OnInit {
 
+  parent_cat: null;
+  prev_work: null;
+  next_work: null;
   loading_procent: number = 0;
   image_loading: boolean = true;
   thumbnail_loading: boolean = true;
@@ -104,7 +120,10 @@ export class WorkShowComponent implements OnInit {
         this.image_cats = data.image_cats,
         this.large_image = data.large_image,
         this.work_info = data.work_info.short,
-        this.work_description = data.work_info.description
+        this.work_description = data.work_info.description,
+        this.next_work = data.pagination.next,
+        this.prev_work = data.pagination.prev,
+        this.parent_cat = data.parent_cat
       });
 
   }
