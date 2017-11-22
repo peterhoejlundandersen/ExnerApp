@@ -62,6 +62,18 @@ footer {
   top: 50vh;
   margin-top: -75px;
 }
+.small-arrow-left {
+  left: 0;
+  width: 15px; 
+  height: 15px;
+  background-image: url(image-path("arrow-left"));
+}
+.small-arrow-right {
+  right: 0;
+  width: 15px;
+  height: 15px;
+  background-image: url(image-path("arrow-right"));
+}
 #leftArrow {
   left: 0;
   width: 150px;

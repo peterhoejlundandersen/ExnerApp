@@ -22,13 +22,14 @@ import 'rxjs/add/operator/map';
           Work WIHTOUT IMAGES
           -->
     </div>
+    <!-- FIXED FLEXBOX FLOAT LEFT ISSUE -->
     <div class="overview-work">
       <div class="overview-img-block"></div>
     </div>
-    <div class="overview-work">
+    <div class="overview-work hidden-md-down">
       <div class="overview-img-block"></div>
     </div>
-    <div class="overview-work">
+    <div class="overview-work hidden-md-down">
       <div class="overview-img-block"></div>
     </div>
 
