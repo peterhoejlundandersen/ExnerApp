@@ -69,8 +69,9 @@
         2.
         <%= f.label :overview_img, "Vælg ved at trykke på \"Skift til dette som oversigtsbillede\" over billederne nedenunder." %>
         <hr>
-        <input type="button" onclick="getOverviewImg(122)">KLIK FOR AT FÅ BILLEDE</input>
+        <%# <input type="button" onclick="getOverviewImg(122)">KLIK FOR AT FÅ BILLEDE</input> %>
         <div class="oversigt-billede-wrapper">
+          <%= content_tag :h5, "Nuværende oversigtsbillede:" if @work.overview_img.present? %>
           <%= image_tag @work.overview_img if @work.overview_img.present? %>
         </div>
       </div>
@@ -121,7 +122,9 @@
 
     var getOverviewImg = function(image_id) {
       $.get('/works/' + image_id + '/get_overview_img.json', function(data, status){
-        console.log(data);
+        var img = $('<img src="' + data.image.url + '" width="223" height="170">');
+        $('.oversigt-billede-wrapper').html(img);
+        console.log(data.image.url);
       })
     }
 
@@ -130,10 +133,8 @@
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          $('.oversigt-billede-wrapper img')
-            .attr('src', e.target.result)
-            .width(223)
-            .height(170);
+          var img = $('<img src="' + e.target.result + '" width="223" height="170">');
+          $('.oversigt-billede-wrapper').html(img);
         };
 
         reader.readAsDataURL(input.files[0]);
