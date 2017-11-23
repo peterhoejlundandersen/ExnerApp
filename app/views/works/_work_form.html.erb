@@ -69,6 +69,7 @@
         2.
         <%= f.label :overview_img, "Vælg ved at trykke på \"Skift til dette som oversigtsbillede\" over billederne nedenunder." %>
         <hr>
+        <input type="button" onclick="getOverviewImg(122)">KLIK FOR AT FÅ BILLEDE</input>
         <div class="oversigt-billede-wrapper">
           <%= image_tag @work.overview_img if @work.overview_img.present? %>
         </div>
@@ -95,7 +96,6 @@
       <div class="col-md-12">
 
         <%= f.submit submit_button_text, class: "btn btn-primary" %>
-
       </div>
     </div>
   </div>
@@ -118,6 +118,12 @@
     }
 
   });
+
+    var getOverviewImg = function(image_id) {
+      $.get('/works/' + image_id + '/get_overview_img.json', function(data, status){
+        console.log(data);
+      })
+    }
 
     var readUrl = function(input) {
       if (input.files && input.files[0]) {

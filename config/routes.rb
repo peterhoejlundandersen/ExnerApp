@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       put :overview_img
       put :sort_images
+      get :get_overview_img
       get :new_image
       get :new_image_category
     end

@@ -183,6 +183,13 @@ class WorksController < ApplicationController
 
   end
 
+  def get_overview_img
+    image = Image.find(params[:id])
+    respond_to do |format|
+      format.json {render json: image}
+    end
+  end
+
   def overview_img
     work = Work.find(params[:work_id])
     image = Image.find(params[:img_id])
