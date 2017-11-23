@@ -1,112 +1,137 @@
 <h3 class="text-center"><%= submit_button_text %></h3>
 <hr>
 <%= form_for(work) do |f| %>
-<div class="row">
-	<div class="col-lg-6">
-		<div class="form-group">
-			<label class="btn btn-secondary">
-				Vælg kategori: (Hvilken side)
-				<%= f.collection_select(:category_id, categories, :id, :name) %>
-			</label>
-		</div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="btn btn-secondary">
+          Vælg kategori: (Hvilken side)
+          <%= f.collection_select(:category_id, categories, :id, :name) %>
+        </label>
+      </div>
 
-		<%= f.hidden_field :position %>
+      <%= f.hidden_field :position %>
 
-		<div class="form-group">
-			<%= f.label :name, "Navn:" %>
-			<%= f.text_field :name, class: "form-control" %>
-		</div>
+      <div class="form-group">
+        <%= f.label :name, "Navn:" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-		<div class="form-group">
-			<%= f.label :sagsnr, "Sagsnr:" %>
-			<%= f.number_field :sagsnr, class: "form-control" %>
-		</div>
+      <div class="form-group">
+        <%= f.label :sagsnr, "Sagsnr:" %>
+        <%= f.number_field :sagsnr, class: "form-control" %>
+      </div>
 
-		<div class="form-group">
-			<%= f.label :address, "Adresse:" %>
-			<%= f.text_field :address, class: "form-control" %>
-		</div>
+      <div class="form-group">
+        <%= f.label :address, "Adresse:" %>
+        <%= f.text_field :address, class: "form-control" %>
+      </div>
 
-		<div class="form-group">
-			<%= f.label :competition, "Konkurrenceår:" %>
-			<%= f.number_field :competition, class: "form-control" %>
-		</div>
-		<div class="form-group ">
-			<%= f.label :opening_year, "Indvielsesår:" %>
-			<%= f.number_field :opening_year, class: "form-control" %>
-		</div>
-	</div>
-	<div class="col-lg-6">
-		<hr>
-		<div class="form-group">
-			<p>Her kan du tilføje information til værket, altså den tekst, som vises under adresse og sagsnr.</p>
-			<%= f.fields_for :infos do |info| %>
-				<%= render partial: "info_fields", locals: {f: info} %>
-			<% end %>
-			<div>
-			<%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
-			</div>
-		</div>
-	</div>
+      <div class="form-group">
+        <%= f.label :competition, "Konkurrenceår:" %>
+        <%= f.number_field :competition, class: "form-control" %>
+      </div>
+      <div class="form-group ">
+        <%= f.label :opening_year, "Indvielsesår:" %>
+        <%= f.number_field :opening_year, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <hr>
+      <div class="form-group">
+        <p>Her kan du tilføje information til værket, altså den tekst, som vises under adresse og sagsnr.</p>
+        <%= f.fields_for :infos do |info| %>
+          <%= render partial: "info_fields", locals: {f: info} %>
+        <% end %>
+        <div>
+          <%= link_to_add_association "Tilføj info", f, :infos, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
 
 
-	<div class="col-md-8">
-		<div class="form-group">
- 			<%= f.label :description, "Beskrivelse" %>
-			<%= f.text_area :description, class: "form-control", rows: 12 %>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<hr>
-		<div class="form-group">
-			<h4>Oversigtsbillede</h4>
-			<p>Vælg billedet, som skal være på oversigten ved at trykke på "Skift til dette som oversigtsbillede" over hvert billede nedenunde.</p>
-			<div class="oversigt-billede-wrapper">
-				<%= image_tag @work.overview_img if @work.overview_img.present? %>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label :description, "Beskrivelse" %>
+        <%= f.text_area :description, class: "form-control", rows: 12 %>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <hr>
+      <div class="form-group">
+        <h4>Oversigtsbillede</h4>
+        <small>Du kan vælge oversigtsbillede på følgende to måder:</small><br>
+        <hr>
+        1.<br>
+        <%= f.label :overview_img, "Vælg selv billede fra computer" %>
+        <%= f.file_field :overview_img, class: "form-control", type: "file", onchange: "readUrl(this)" %>
+        <hr>
+        2.
+        <%= f.label :overview_img, "Vælg ved at trykke på \"Skift til dette som oversigtsbillede\" over billederne nedenunder." %>
+        <hr>
+        <div class="oversigt-billede-wrapper">
+          <%= image_tag @work.overview_img if @work.overview_img.present? %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
 
-		<%= f.submit submit_button_text, class: "btn btn-primary" %>
+      <%= f.submit submit_button_text, class: "btn btn-primary" %>
 
-	</div>
-	<div class="container">
-		<hr>
-			<%= f.fields_for :image_categories do |cat| %>
-			<%= render partial: "image_category_fields", locals: {f: cat} %>
-			<% end %>
-	</div>
+    </div>
+    <div class="container">
+      <hr>
+      <%= f.fields_for :image_categories do |cat| %>
+        <%= render partial: "image_category_fields", locals: {f: cat} %>
+      <% end %>
+    </div>
 
-		<div class="container">	<!-- Ved ikke hvorfor! -->
-			<div class="col-md-12">
+    <div class="container">	<!-- Ved ikke hvorfor! -->
+      <div class="col-md-12">
 
-				<%= link_to_add_association "Tilføj billedekategori", f, :image_categories, class: "btn btn-secondary" %>
-			</div>
-			<hr>
-			<div class="col-md-12">
+        <%= link_to_add_association "Tilføj billedekategori", f, :image_categories, class: "btn btn-secondary" %>
+      </div>
+      <hr>
+      <div class="col-md-12">
 
-				<%= f.submit submit_button_text, class: "btn btn-primary" %>
+        <%= f.submit submit_button_text, class: "btn btn-primary" %>
 
-			</div>
-		</div>
-	</div>
-	<% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('body').on('click', '.overview-img-checkbox', function() {
-		    image_id = $(this).data("imgid");		  
-		    work_id = $(this).data("workid");  
-		    changeOverviewImg(image_id, work_id);
-		});
+  $(document).ready(function() {
+    $('body').on('click', '.overview-img-checkbox', function() {
+      image_id = $(this).data("imgid");		  
+      work_id = $(this).data("workid");  
+      changeOverviewImg(image_id, work_id);
+    });
 
-		function changeOverviewImg(image_id, work_id) {
-			$.ajax({
-				url: '/works/' + image_id + '/overview_img',
-				type: 'PUT',
-				data: {img_id: image_id, work_id: work_id },
-			})			
-		}
-	});
+    function changeOverviewImg(image_id, work_id) {
+      $.ajax({
+        url: '/works/' + image_id + '/overview_img',
+        type: 'PUT',
+        data: {img_id: image_id, work_id: work_id },
+      })			
+    }
+
+  });
+
+    var readUrl = function(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('.oversigt-billede-wrapper img')
+            .attr('src', e.target.result)
+            .width(223)
+            .height(170);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
 </script>
