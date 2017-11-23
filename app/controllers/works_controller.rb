@@ -186,7 +186,6 @@ class WorksController < ApplicationController
   def overview_img
     work = Work.find(params[:work_id])
     image = Image.find(params[:img_id])
-    binding.pry
     work.overview_img = image.image
     work.save!
     @image = work.overview_img
