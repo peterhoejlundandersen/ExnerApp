@@ -6,8 +6,8 @@ Rails.application.routes.draw do
 
   resources :works, except: :index do
     put :sort, on: :collection
+    put 'save_overview_img/:image_id' => 'works#save_overview_img', as: :save_overview_img
     member do
-      put :overview_img
       put :sort_images
       get :get_overview_img
       get :new_image

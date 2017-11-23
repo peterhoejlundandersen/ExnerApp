@@ -88,8 +88,6 @@ class WorksController < ApplicationController
       @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
     end
     if @work.save!
-      binding.pry
-
       flash[:succes] = "Dit værk #{@work.name} er nu blevet oprettet."
       redirect_to @work
     else
@@ -190,15 +188,11 @@ class WorksController < ApplicationController
     end
   end
 
-  def overview_img
+  def save_overview_img
     work = Work.find(params[:work_id])
-    image = Image.find(params[:img_id])
+    image = Image.find(params[:image_id])
     work.overview_img = image.image
     work.save!
-    @image = work.overview_img
-    respond_to do |format|
-      format.js
-    end
   end
 
   private

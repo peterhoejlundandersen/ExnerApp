@@ -2,7 +2,8 @@
   <% unless f.object.image.file.nil? %>
     <%= content_tag :div, "Skift til dette som oversigtsbillede",
       class: "pb-4 text-center overview-img-checkbox",
-      data: {imgid: f.object.image.model.id, workid: @work.id } %>
+      onclick: "getOverviewImg(#{@work.id}, #{f.object.image.model.id})"
+    %>
     <%= image_tag f.object.image.thumb.url %>
   <% else %>
     <label class="btn btn-secondary billede-upload-felt">

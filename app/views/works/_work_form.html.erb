@@ -103,42 +103,34 @@
 <% end %>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('body').on('click', '.overview-img-checkbox', function() {
-      image_id = $(this).data("imgid");		  
-      work_id = $(this).data("workid");  
-      changeOverviewImg(image_id, work_id);
-    });
-
-    function changeOverviewImg(image_id, work_id) {
-      $.ajax({
-        url: '/works/' + image_id + '/overview_img',
-        type: 'PUT',
-        data: {img_id: image_id, work_id: work_id },
-      })			
-    }
-
-  });
-
-    var getOverviewImg = function(image_id) {
-      $.get('/works/' + image_id + '/get_overview_img.json', function(data, status){
-        var img = $('<img src="' + data.image.url + '" width="223" height="170">');
-        $('.oversigt-billede-wrapper').html(img);
-        console.log(data.image.url);
-      })
-    }
-
-    var readUrl = function(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          var img = $('<img src="' + e.target.result + '" width="223" height="170">');
-          $('.oversigt-billede-wrapper').html(img);
-        };
-
-        reader.readAsDataURL(input.files[0]);
+  // Bruges under "Skift til dette som oversigtsbillede" til at hente og vise billedet.
+  var getOverviewImg = function(work_id, image_id) {
+    $.ajax({
+      url: '/works/' + work_id + '/save_overview_img/' + image_id,
+      type: "PUT",
+      success: function(data) {
+        getNewImage(image_id);
+        console.log(data);
       }
-    }
+    });
+  }
+
+  var getNewImage = function(image_id) {
+    $.get('/works/' + image_id + '/get_overview_img.json', function(data, status){
+      var img = $('<img src="' + data.image.url + '" width="223" height="170">');
+      $('.oversigt-billede-wrapper').html(img);
+    });;
+  }
+// Bruges til at vise billedet, når det bliver uploadet fra computeren
+var readUrl = function(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = $('<img src="' + e.target.result + '" width="223" height="170">');
+      $('.oversigt-billede-wrapper').html(img);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
 </script>
