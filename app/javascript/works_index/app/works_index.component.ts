@@ -8,13 +8,14 @@ import 'rxjs/add/operator/map';
   selector: 'works-index',
   template: `
   <progress [class.bar-white]="!loading" class="col-12 progress-bar pb-4" value="{{loading_procent}}" max="100"></progress>
-  <div class="row sortable works-wrapper" [class.show-index-works]="!loading">
+  <div class="row sortable works-wrapper"> 
     <div *ngFor="let work of works; let i = index" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
-          <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="showRealImages()" hidden>
+          <!-- skal assigne billedets vædri, så snart at billedet er loadet -->
+          <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
           <a [href]="'/works/' + work.slug">
-            <div *ngIf="!work.overview_img.url" class="overview-img-block work-without-image">
+            <div *ngIf="!work.overview_img.url" class="overview-img-block overview-img-block-show work-without-image">
             </div>
-            <div *ngIf="work.overview_img.url" class="overview-img-block" [style.background-image]="'url(' + work.overview_img.url + ')'">
+            <div *ngIf="work.overview_img.url" class="overview-img-block" [attr.id]="'imageId' + i">
             </div>
             <h2 class="overview-work-h2">{{work.name}}</h2>
           </a>
@@ -58,6 +59,12 @@ export class WorksIndexComponent implements OnInit {
       )
     
   }
+  assignImageValue = function(i, image_url) {
+    var image = document.getElementById('imageId' + i);
+    image.setAttribute("style", "background-image: url(" + image_url + ");");
+    image.classList.add("overview-img-block-show");
+  }
+
   showRealImages() {
     this.new_image_counter += 1;
     this.loading_procent += (100/ this.images_count);

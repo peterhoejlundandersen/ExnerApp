@@ -18,11 +18,15 @@ html, body {
   margin: 0 auto!important;
   max-width: 1400px;
   justify-content: space-between;
-  opacity: 0;
-  @include transition(opacity .4s linear);
-}
-.show-index-works {
-  opacity: 1;
+  .overview-work {
+  }
+  .overview-img-block {
+    opacity: 0;
+    @include transition(opacity .4s linear);
+  }
+  .overview-img-block-show {
+    opacity: 1;
+  }
 }
 
 footer {
