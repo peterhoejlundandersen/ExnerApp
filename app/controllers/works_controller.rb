@@ -25,18 +25,18 @@ class WorksController < ApplicationController
       if params[:noload] == "true" # Skal ikke vise nogle værker ved besøg af Design siden
         params[:vaerker_cat] = "design"
         set_design_categories params[:vaerker_cat], true
-        render 'categories/design_categories_overview'
+        render_design = true
       elsif ["design", "belysning-og-andet", "kirkeinventar", "orgler"].include? params[:vaerker_cat]
         params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
         set_design_categories params[:vaerker_cat]
-        render 'categories/design_categories_overview'
+        render_design = true
       else
         @category = Category.friendly.find(params[:vaerker_cat])
         @works = @category.works
-        respond_to do |format|
-          format.html
-          format.json { render json: {category: @category, works: @works} }
-        end
+      end
+      respond_to do |format|
+        format.html { render render_design ? "categories/design_categories_overview" : "works/index" }
+        format.json { render json: {category: @category, works: @works} }
       end
   end
 

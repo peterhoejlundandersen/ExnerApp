@@ -3,11 +3,8 @@
 
 <%= logged_in_work_helper if logged_in?(:site_admin) %>
 
-<!-- LARGE IMAGE --> 
 <h1 class="work-headline text-center"><%= @work.name %></h1>
 
-<!-- IMG CAT NAVBAR -->
-
 <span class="hide-it" id="imgCat" data-img-cat="<%= @first_image_category.id %>"></span>
-  <work-show class="large-loading" >Loading...</work-show>
+  <work-show class="large-loading" ></work-show>
 <%= javascript_pack_tag 'work_show' %>

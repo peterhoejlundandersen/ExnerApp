@@ -1,4 +1,6 @@
-  <%= render partial: "design_nav", locals: {categories: @categories, noload: @noload} %>
-  <% unless @noload %>
-      <%= render partial: 'works', locals: { works: @works, category: @category } %>	
-  <% end %>
+<%= render partial: "design_nav", locals: {categories: @categories, noload: @noload} %>
+<% unless @noload %>
+  <input type="hidden" data-category-id="<%= @category.friendly_id %>" id="categoryId">
+  <works-index></works-index>
+  <%= javascript_pack_tag 'works_index' %>
+<% end %>
