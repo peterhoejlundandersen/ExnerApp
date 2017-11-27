@@ -60,7 +60,9 @@ import { ImageCat } from './image_cat';
   <!-- thumbnails -->
 <div class="thumb-images-wrapper">
   <div class="thumb-images row sortable-images">
-    <progress class="col-12 progress-bar" value="{{loading_procent}}" max="100"></progress>
+    <div class="col-12">
+      <div class="loading-bar" [style.width]="loading_procent + '%'"></div>
+    </div>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
     (click)="changeLargeImage(i)"

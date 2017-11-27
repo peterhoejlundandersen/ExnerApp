@@ -251,18 +251,11 @@ span.without-overview-text {
 .bar-white {
   background-color: white!important;
 }
-progress {
-  background-color: white!important;
-}
 
-progress[value]::-webkit-progress-bar {
-  background-color: white;
-  border-radius: 2px;
-  box-shadow: none;
-}
-
-progress[value]::-webkit-progress-value {
+.loading-bar {
   background-color: $nav-color;
+  height: 20px;
+  display: block;
 }
 
 .large-loading {

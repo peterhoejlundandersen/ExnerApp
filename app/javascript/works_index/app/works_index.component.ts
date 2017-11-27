@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'works-index',
   template: `
-  <progress [class.bar-white]="!loading" class="col-12 progress-bar pb-4" value="{{loading_procent}}" max="100"></progress>
   <div class="row sortable works-wrapper"> 
     <div *ngFor="let work of works; let i = index" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
           <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
