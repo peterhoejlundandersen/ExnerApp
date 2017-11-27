@@ -23,13 +23,21 @@ import { ImageCat } from './image_cat';
 
   <div class="next-prev-back-wrapper row">
     <div class="col-md-4 nav-link">
-      <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug"><span class="small-arrow-left"></span>{{prev_work.name}}</a>
+      <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">
+        <span class="pagination-arrows prev-work"></span>
+        {{prev_work.name}}
+      </a>
     </div>
     <div class="col-md-4 nav-link text-center">
-      <a *ngIf="parent_cat" [attr.href]="'/vaerker/' + parent_cat.slug">{{parent_cat.name}}</a>
+      <a *ngIf="parent_cat" [attr.href]="'/vaerker/' + parent_cat.slug">
+        {{parent_cat.name}}
+      </a>
     </div>
     <div class="col-md-4 nav-link text-right ">
-      <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">{{next_work.name}}<span class="small-arrow-right"></span></a>
+      <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">
+        {{next_work.name}}
+        <span class="pagination-arrows next-work">
+      </span></a>
     </div>
   </div>
   

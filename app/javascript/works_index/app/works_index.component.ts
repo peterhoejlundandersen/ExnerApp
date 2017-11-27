@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
   selector: 'works-index',
   template: `
   <div class="row sortable works-wrapper"> 
-    <div *ngFor="let work of works; let i = index" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
+    <div *ngFor="let work of works; let i = index" [class.vertical-image]="organs" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
           <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
           <a [href]="'/works/' + work.slug">
             <div *ngIf="!work.overview_img.url" class="overview-img-block overview-img-block-show work-without-image">
@@ -19,13 +19,13 @@ import 'rxjs/add/operator/map';
           </a>
     </div>
     <!-- FIXED FLEXBOX FLOAT LEFT ISSUE -->
-    <div class="overview-work">
+    <div [class.vertical-image]="organs" class="overview-work">
       <div class="overview-img-block"></div>
     </div>
-    <div class="overview-work hidden-md-down">
+    <div [class.vertical-image]="organs" class="overview-work hidden-md-down">
       <div class="overview-img-block"></div>
     </div>
-    <div class="overview-work hidden-md-down">
+    <div [class.vertical-image]="organs" class="overview-work hidden-md-down">
       <div class="overview-img-block"></div>
     </div>
 
@@ -34,6 +34,7 @@ import 'rxjs/add/operator/map';
 })
 
 export class WorksIndexComponent implements OnInit {
+  organs: boolean = false;
   works: {}[] = [];
   constructor( private http: Http ) {}
 
@@ -41,7 +42,10 @@ export class WorksIndexComponent implements OnInit {
     var category_friendly_id = document.getElementById('categoryId').getAttribute('data-category-id');
     this.getWorks(category_friendly_id)
       .subscribe(
-        data => this.works = data.works,
+        data => {
+          this.works = data.works,
+          this.organs = data.organs
+        },
         err => console.log(err),
       )
     

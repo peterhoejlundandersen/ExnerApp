@@ -8,11 +8,22 @@
 $img-form-color: lighten(#B3E5FC, 10%);
 $nav-color: #e2e2e2;
 
+/* MY OWN IMPORTS */
+@import "imports/arrows";
+/* MY OWN END */
+
 /* FOR IFRAME */
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
+}
+.vertical-image {
+  min-width: 20%;
+}
+.vertical-image .overview-img-block {
+    height: 182px;
+    width: 132px;
 }
 .works-wrapper {
   margin: 0 auto!important;
@@ -50,47 +61,6 @@ footer {
 
 .thumb-images {
   padding-bottom: 40px;
-}
-
-
-.next-prev-back-wrapper {
-  font-family: Corbel;
-  text-transform: uppercase;
-}
-
-.work-arrows {
-  z-index: 9999999;
-  position: absolute;
-  cursor: pointer;
-  top: 45%;
-  top: 50vh;
-  margin-top: -75px;
-}
-.small-arrow-left {
-  left: 0;
-  width: 15px; 
-  height: 15px;
-  background-image: url(image-path("arrow-left"));
-}
-.small-arrow-right {
-  right: 0;
-  width: 15px;
-  height: 15px;
-  background-image: url(image-path("arrow-right"));
-}
-#leftArrow {
-  left: 0;
-  width: 150px;
-  height: 150px;
-  margin-left: -150px;
-  background-image: url(image-path("arrow-left"));
-}
-#rightArrow {
-  right: 0;
-  width: 150px;
-  height: 150px;
-  margin-right: -150px;
-  background-image: url(image-path("arrow-right"));
 }
 
 .work-header {
@@ -235,6 +205,9 @@ span.without-overview-text {
 
 .work-headline {
   text-transform: uppercase;
+}
+.large-image {
+  min-height: 100vh;  
 }
 #largeImage {
   max-height: 100%;
