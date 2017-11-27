@@ -1,4 +1,4 @@
- # # config/initializers/carrierwave.rb
+# config/initializers/carrierwave.rb
 
 CarrierWave.configure do |config|
 config.ignore_integrity_errors = true
@@ -7,8 +7,21 @@ config.ignore_integrity_errors = true
   config.fog_credentials = {
     provider:              'AWS',                        # required
     aws_access_key_id:     ENV["AWS_ACCESS_KEY_ID"],        # required
-    aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"], 
+    aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
     region: 'eu-west-2'       # required
   }
   config.fog_directory  = ENV["S3_BUCKET_NAME"]              # required
+
+end
+# put this in config/initializers/carrierwave.rb
+module CarrierWave
+  module MiniMagick
+    def quality(percentage)
+      manipulate! do |img|
+        img.quality(percentage.to_s)
+        img = yield(img) if block_given?
+        img
+      end
+    end
+  end
 end

@@ -72,7 +72,8 @@
         <%# <input type="button" onclick="getOverviewImg(122)">KLIK FOR AT FÅ BILLEDE</input> %>
         <div class="oversigt-billede-wrapper">
           <%= content_tag :h5, "Nuværende oversigtsbillede:" if @work.overview_img.present? %>
-          <%= image_tag @work.overview_img if @work.overview_img.present? %>
+          <%= content_tag :div, nil, class: "work-form-overview-img",
+            style: "background-image: url(#{@work.overview_img.url});" if @work.overview_img.present? %>
         </div>
       </div>
     </div>
@@ -117,7 +118,7 @@
 
   var getNewImage = function(image_id) {
     $.get('/works/' + image_id + '/get_overview_img.json', function(data, status){
-      var img = $('<img src="' + data.image.url + '" width="223" height="170">');
+      var img = $('<div style="background-image:url(' + data.image.url + ');" class="work-form-overview-img"></div>');
       $('.oversigt-billede-wrapper').html(img);
     });;
   }
@@ -126,7 +127,7 @@ var readUrl = function(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      var img = $('<img src="' + e.target.result + '" width="223" height="170">');
+      var img = $('<div style="background-image:url(' + e.target.result + ');" class="work-form-overview-img"></div>');
       $('.oversigt-billede-wrapper').html(img);
     };
     reader.readAsDataURL(input.files[0]);

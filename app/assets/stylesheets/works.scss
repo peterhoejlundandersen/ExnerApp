@@ -12,6 +12,13 @@ $nav-color: #e2e2e2;
 @import "imports/arrows";
 /* MY OWN END */
 
+.work-form-overview-img {
+  width: 250px; 
+  height: 182px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
 /* FOR IFRAME */
 html, body {
   height: 100%;

@@ -20,22 +20,14 @@ class OverviewUploader < CarrierWave::Uploader::Base
     "nye/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
-  
+
   process :resize_to_width
-  
 
   def resize_to_width
-        resize_to_limit 255, 170
+    resize_to_limit 250, 182
   end
 
-  
+
   # process :optimize_image
 
   # def optimize_image
@@ -54,7 +46,7 @@ class OverviewUploader < CarrierWave::Uploader::Base
   #     img
   #   end
 
-    
+
   # end
   # def scale
 
@@ -72,17 +64,17 @@ class OverviewUploader < CarrierWave::Uploader::Base
   #   if file.original_filename.include? "START" #scope in image.rb
   #     return true
   #   end
-  # end 
+  # end
 
   #   if file && model
   #   if image_width > image_height
   #   process resize_to_fit: [1200, nil]
   #   else
-  #   process resize_to_fit: [nil, 900] 
+  #   process resize_to_fit: [nil, 900]
   #   end
   #   binding.pry
   # end
-  
+
   # def scale
   #   if model["width"] > model["height"]
   #     resize_to_fit: [1200, nil]
