@@ -24,7 +24,7 @@ class OverviewUploader < CarrierWave::Uploader::Base
   process :resize_to_width
 
   def resize_to_width
-    resize_to_limit 250, 182
+    resize_to_limit 250, 99999
   end
 
 
