@@ -1,5 +1,8 @@
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
+<categories-index>...</categories-index>
+<%= javascript_pack_tag 'categories_index' %>
+
 <div class="pt-4 sortable oversigt-wrapper">
   <% unless @categories.empty? %>
     <% @categories.each do |cat| %>
