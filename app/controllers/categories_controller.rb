@@ -30,9 +30,11 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.where.not(id: [15, 18, 13])
     @header_title = "Oversigt"
+    logged_in = current_user
+    default_categories = get_default_categories
     respond_to do |format|
       format.html
-      format.json { render json: { categories: @categories } }
+      format.json { render json: { categories: @categories, user_logged_in: logged_in, cat_default: default_categories } }
     end
   end
 
@@ -48,6 +50,20 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def get_default_categories
+    default_categories = {
+       image: ActionController::Base.helpers.asset_path('johannes-tekster'),
+       slug: "johannes-exners-tekster/vis-alle",
+       name: "Johannes' tekster"
+      },
+      {
+         image: ActionController::Base.helpers.asset_path('om-inger-og-johannes'),
+         slug: "om-inger-og-johannes-exner",
+         name: "Om Inger og Johannes"
+      }
+      return default_categories
+  end
 
   def cat_params
     params.require(:category).permit(:name, :image, :remove_image)

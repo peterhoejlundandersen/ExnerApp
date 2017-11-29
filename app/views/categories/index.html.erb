@@ -3,40 +3,40 @@
 <categories-index>...</categories-index>
 <%= javascript_pack_tag 'categories_index' %>
 
-<div class="pt-4 sortable oversigt-wrapper">
-  <% unless @categories.empty? %>
-    <% @categories.each do |cat| %>
-      <div class="oversigt-img-wrapper text-center sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
-        <%= link_to vaerker_path(cat.friendly_id) do %>
-          <div class="center-block overview-img" style="background-image: url(<%= cat.image %>);">
-          </div>
-          <h4 class="overview-header text-center text-uppercase pt-2"><%= cat.name %></h4>
-        <% end %>
-        <% if logged_in?(:site_admin) %>
-          <%= link_to "Rediger kategori", edit_category_path(cat) %> / 
-          <%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"} %> 
-        <% end %>
-      </div>
-    <% end %>
-    <div class="text-center oversigt-img-wrapper">
-      <%= link_to show_pdf_category_path() do %>
+<%# <div class="pt-4 sortable oversigt-wrapper"> %>
+<%#   <% unless @categories.empty? %1> %>
+<%#     <% @categories.each do |cat| %1> %>
+<%#       <div class="oversigt-img-wrapper text-center sortable-item" data-id="<%= cat.id %1>" data-type="<%= cat.class.to_s %1>"> %>
+<%#         <%= link_to vaerker_path(cat.friendly_id) do %1> %>
+<%#           <div class="center-block overview-img" style="background-image: url(<%= cat.image %1>);"> %>
+<%#           </div> %>
+<%#           <h4 class="overview-header text-center text-uppercase pt-2"><%= cat.name %1></h4> %>
+<%#         <% end %1> %>
+<%#         <% if logged_in?(:site_admin) %1> %>
+<%#           <%= link_to "Rediger kategori", edit_category_path(cat) %1> / %> 
+<%#           <%= link_to "Slet kategori", category_path(cat), method: :delete, data: {confirm: "Er du sikker på at du vil slette kategorien?"} %1> %> 
+<%#         <% end %1> %>
+<%#       </div> %>
+<%#     <% end %1> %>
+<%#     <div class="text-center oversigt-img-wrapper"> %>
+<%#       <%= link_to show_pdf_category_path() do %1> %>
 
-        <div class="center-block overview-img" style="background-image: url(<%= image_url "johannes-tekster" %>);">
-        </div>
-        <h4 class="overview-header text-center text-uppercase pt-2 ">Johannes' tekster</h4>
-      <% end %>
-    </div>
-    <div class="text-center oversigt-img-wrapper">
-      <%= link_to om_path() do %>
+<%#         <div class="center-block overview-img" style="background-image: url(<%= image_url "johannes-tekster" %1>);"> %>
+<%#         </div> %>
+<%#         <h4 class="overview-header text-center text-uppercase pt-2 ">Johannes' tekster</h4> %>
+<%#       <% end %1> %>
+<%#     </div> %>
+<%#     <div class="text-center oversigt-img-wrapper"> %>
+<%#       <%= link_to om_path() do %1> %>
 
-        <div class="center-block overview-img" style="background-image: url(<%= image_url "om-inger-og-johannes" %>);">
-        </div> 
-        <h4 class="overview-header text-center text-uppercase pt-2">Om Inger og Johannes</h4>
-      <% end %>
-    </div>
-  <% else %>
+<%#         <div class="center-block overview-img" style="background-image: url(<%= image_url "om-inger-og-johannes" %1>);"> %>
+<%#         </div> %> 
+<%#         <h4 class="overview-header text-center text-uppercase pt-2">Om Inger og Johannes</h4> %>
+<%#       <% end %1> %>
+<%#     </div> %>
+<%#   <% else %1> %>
 
-    <h3 class="alert alert-warning text-center">Der er ikke nogle kategorier endnu. Login og opret</h3>
+<%#     <h3 class="alert alert-warning text-center">Der er ikke nogle kategorier endnu. Login og opret</h3> %>
 
-  <% end %>
-</div>
+<%#   <% end %1> %>
+<%# </div> %>
