@@ -5,7 +5,7 @@ class PdfsController < ApplicationController
 		pdf_viewer = "/pdfjs/web/viewer.html?file="
 		pdf = Pdf.friendly.find(params[:id])
 		@pdf_category = pdf.pdf_category
-		pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1) 
+    pdf.id == 151  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1)
 		pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
 		@pdf_url = pdf_viewer + pdf.file
 		@pdf_file_url = pdf.file # For printinh
@@ -14,7 +14,7 @@ class PdfsController < ApplicationController
 
 	def edit
 		@pdf = Pdf.friendly.find(params[:id])
-		@category = @pdf.pdf_category
+		@pdf_category = @pdf.pdf_category
 		@categories = PdfCategory.all
 	end
 

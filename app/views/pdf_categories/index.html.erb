@@ -1,23 +1,21 @@
-<%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
-<%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
 <div class="container mt-4">
-	<div class="col-12"></div>
-	<div class="pdf-works row sortable">
-		<% @pdf_categories.each do |cat| %>
-			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 pdf-categories sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
-				<div class="col-md-12 pdf-cat-inner"">
-				<%= link_to show_this_pdf_category_path(cat.friendly_id) do %>
-				<h4 class="text-center <%= "active" if params[:kategori_id] == cat.slug %>"><%= cat.title %></h4>
-				<% end %>		
-				</div>
-			</div>
-		<% end %>
-	</div><!-- pdf-works -->
+  <div class="col-12"></div>
+  <div class="pdf-works row sortable">
+    <% @pdf_categories.each do |cat| %>
+      <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 pdf-categories sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
+        <div class="col-md-12 pdf-cat-inner"">
+          <%= link_to show_this_pdf_category_path(cat.friendly_id) do %>
+            <h4 class="text-center <%= "active" if params[:kategori_id] == cat.slug %>"><%= cat.title %></h4>
+          <% end %>		
+        </div>
+      </div>
+    <% end %>
+  </div><!-- pdf-works -->
 </div><!-- container -->
 <hr>
 <%= content_tag :h2, @cat_headline, class: "py-4 text-center" unless @cat_headline.nil? %>
 <% unless @pdfs.blank? 	%>
-	<div class="row sortable">
-		<%= render partial: "pdf", collection: @pdfs %>
-	</div>
+  <div class="row sortable">
+    <%= render partial: "pdf", collection: @pdfs %>
+  </div>
 <% end %> 
