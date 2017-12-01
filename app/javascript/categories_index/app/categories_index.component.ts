@@ -9,17 +9,19 @@ import 'rxjs/add/operator/map';
   selector: 'categories-index', 
   template: `
   <div class="pt-4 sortable oversigt-wrapper">
-      <div *ngFor="let category of categories"
-      class="oversigt-img-wrapper text-center sortable-item"
-      [attr.data-id]="category.id" data-type="Category">
-          <div class="center-block overview-img" [style.background-image]="safeUrl(category.image.url)">
-          </div>
-          <h4 class="overview-header text-center text-uppercase pt-2">{{category.name}}</h4>
+      <div *ngFor="let category of categories; let i = index" class="oversigt-img-wrapper text-center sortable-item" [attr.data-id]="category.id" data-type="Category">
+          <a [attr.href]="'vaerker/' + category.slug">
+            <img *ngIf="category.image.url" [src]="category.image.url" (load)="assignImageValue(category.image.url, i)" hidden>
+            <div class="center-block overview-img" [attr.id]="'overviewImage' + i">
+            </div>
+            <h4 class="overview-header text-center text-uppercase pt-2">{{category.name}}</h4>
+          </a>
         <a *ngIf="logged_in" [attr.href]="'/categories/' + category.slug + '/edit'">Rediger kategori</a>
       </div>
     <div *ngFor="let def_category of categories_default" class="text-center oversigt-img-wrapper">
         <a [attr.href]="def_category.slug">
-          <div class="center-block overview-img" [style.background-image]="safeUrl(def_category.image)">
+        <img [src]="def_category.image" (load)="assignImageValue(def_category.image, def_category.id)" hidden>
+          <div class="center-block overview-img" [attr.id]="'overviewImage' + def_category.id">
           </div>
           <h4 class="overview-header text-center text-uppercase pt-2 ">{{def_category.name}}</h4>
         </a>
@@ -47,6 +49,12 @@ export class CategoriesIndexComponent implements OnInit {
         },
         err => console.log(err),
       )
+  }
+
+  assignImageValue = function(image_url, i) {
+    var image = document.getElementById('overviewImage' + i);
+    image.setAttribute("style", "background-image: url(" + image_url + ");");
+    image.classList.add("overview-img-show");
   }
 
   safeUrl = function(image_url) {

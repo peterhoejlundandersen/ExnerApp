@@ -1,5 +1,8 @@
+@import 'imports/mixins';
+
 .oversigt-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  @include flex;
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
+  min-height: 805px;
 }

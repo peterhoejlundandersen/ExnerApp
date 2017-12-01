@@ -21,8 +21,8 @@
  *= require_self
  */
 @import "bootstrap";
-@import 'font_calls';  // Corbel, LinLibertine, Linux Libertine C
-
+@import 'imports/font_calls';  // Corbel, LinLibertine, Linux Libertine C
+@import 'imports/mixins';
 p {
 
   font-family: "LinLibertine";
@@ -79,15 +79,6 @@ a {
   padding: 10px;
   color: white;
 }
-/* *** KUN TIL FORSIDE ***** */
-@mixin transition($args...) {
-  -webkit-transition: $args;
-  -moz-transition: $args;
-  -ms-transition: $args;
-  -o-transition: $args;
-  transition: $args;
-}
-
 /* MENU */
 .menu-center li{
   display: inline-block;

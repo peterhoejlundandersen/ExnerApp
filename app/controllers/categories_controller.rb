@@ -55,12 +55,14 @@ class CategoriesController < ApplicationController
     default_categories = {
        image: ActionController::Base.helpers.asset_path('johannes-tekster'),
        slug: "johannes-exners-tekster/vis-alle",
-       name: "Johannes' tekster"
+       name: "Johannes' tekster",
+       id: 999 # For image load in angular
       },
       {
          image: ActionController::Base.helpers.asset_path('om-inger-og-johannes'),
          slug: "om-inger-og-johannes-exner",
-         name: "Om Inger og Johannes"
+         name: "Om Inger og Johannes",
+         id: 9999 # For image load in angular
       }
       return default_categories
   end

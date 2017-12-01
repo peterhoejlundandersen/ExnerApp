@@ -287,12 +287,10 @@ span.without-overview-text {
   cursor: pointer;
   padding-top: 10px;
   img {
+    @include transition(opacity .4s linear);
     opacity: 0;
     max-height: 180px;
     max-width: 100%;
-    transition: opacity .4s linear;
-    -webkit-transition: opacity .4s linear;
-    -moz-transition: opacity .4s linear;
   }
   .thumbnail-active {
     opacity: 0.5!important;
@@ -381,6 +379,8 @@ span.without-overview-text {
 }
 
 .overview-img {
+  @include transition(opacity .4s ease-out);
+  opacity: 0;
   width: 300px;
   height: 218px;
   background-size: cover;
@@ -388,6 +388,9 @@ span.without-overview-text {
   background-position: center;
   margin: 0 auto;
   max-width: 100%;
+}
+.overview-img-show {
+  opacity: 1;
 }
 .overview-header {
   font-size: 1em;
