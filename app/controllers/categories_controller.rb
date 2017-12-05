@@ -59,12 +59,11 @@ class CategoriesController < ApplicationController
        id: 999 # For image load in angular
       },
       {
-         image: ActionController::Base.helpers.asset_path('om-inger-og-johannes'),
-         slug: "om-inger-og-johannes-exner",
-         name: "Om Inger og Johannes",
-         id: 9999 # For image load in angular
+       image: ActionController::Base.helpers.asset_path('om-inger-og-johannes'),
+       slug: "om-inger-og-johannes-exner",
+       name: "Om Inger og Johannes",
+       id: 9999 # For image load in angular
       }
-      return default_categories
   end
 
   def cat_params

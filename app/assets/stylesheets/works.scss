@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 @import "jquery-ui";
-@import "mixins/transition";
+@import "imports/mixins";
 
 $img-form-color: lighten(#B3E5FC, 10%);
 $nav-color: #e2e2e2;
@@ -36,7 +36,10 @@ html, body {
   margin: 0 auto!important;
   max-width: 1400px;
   padding-top: 28px;
-  justify-content: space-between;
+  @include justify-content(space-between);
+  @media screen and (max-width: 1000px) {
+    @include justify-content(space-around);
+  }
   .overview-work {
   }
   .overview-img-block {

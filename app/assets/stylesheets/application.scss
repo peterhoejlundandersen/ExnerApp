@@ -72,6 +72,7 @@ a {
   min-width: 100%;
 }
 .blog-nav-dropdown {
+  @include no-padding-left-right;
   overflow: hidden;
 }
 .blog-masthead.admin-nav {

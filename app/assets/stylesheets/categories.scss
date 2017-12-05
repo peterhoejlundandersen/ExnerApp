@@ -6,22 +6,42 @@
   @include justify-content(space-between);
   min-height: 805px;
 }
+.normal-menu-wrapper {
+  @include flex;
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
+  .oversigt-normal-menu {
+    @media screen and (max-width: 1200px) {
+      width: 100%!important;
+    }
+  }
+  .menu-box {
+    width: 22%;
+    @media screen and (max-width: 1200px) {
+      width: 26%;
+    }
+    @media screen and (max-width: 1000px) {
+      width: 50%;
+    }
+    a {
+      @include no-padding-left-right;
+    }
+  }
+}
 .oversigt-menu-wrapper {
-  display: flex;
+  @include flex;
   @include flex-wrap(wrap);
   @include justify-content(space-between);
   .oversigt-om {
     width: 100%;
     a {
-      padding-left: 0;
-      padding-right: 0;
+      @include no-padding-left-right;
     }
   }
   .oversigt-menu {
     width: 27%;
     a {
-      padding-left: 0;
-      padding-right: 0;
+      @include no-padding-left-right;
     }
 
   }
