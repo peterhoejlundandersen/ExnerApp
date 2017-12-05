@@ -35,6 +35,7 @@ html, body {
 .works-wrapper {
   margin: 0 auto!important;
   max-width: 1400px;
+  padding-top: 28px;
   justify-content: space-between;
   .overview-work {
   }
@@ -284,6 +285,8 @@ span.without-overview-text {
 }
 
 .thumb-image {
+  margin: 14.5px 0px;
+  padding-top: 0px;
   cursor: pointer;
   padding-top: 10px;
   img {

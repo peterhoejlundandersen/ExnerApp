@@ -54,7 +54,7 @@ import { ImageCat } from './image_cat';
   </div>
   <!-- image categories -->
   <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
-    <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info" (click)="openInfo()">Info</span>
+    <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button" (click)="openInfo()">Info</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
     class="nav-link sortable-image-item text-center"
     [class.active-cat]="i == image_cats_index"
