@@ -6,3 +6,24 @@
   @include justify-content(space-between);
   min-height: 805px;
 }
+.oversigt-menu-wrapper {
+  display: flex;
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
+  .oversigt-om {
+    width: 100%;
+    a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  .oversigt-menu {
+    width: 27%;
+    a {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+  }
+}
+

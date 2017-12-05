@@ -1,0 +1,40 @@
+<div class="oversigt-menu-wrapper">
+  <div class="oversigt-om">
+    <%= link_to "Oversigt", oversigt_path,
+      class: "nav-link #{active_helper? oversigt_path}" 
+    %>
+  </div>
+  <div class="oversigt-menu">
+    <%= link_to "Kirker og sognegårde", vaerker_path("Kirker og sognegårde".parameterize),
+      class: "nav-link #{active_helper? vaerker_path("Kirker og sognegårde".parameterize)}" 
+    %>
+    <%= link_to "Koldinghus", vaerker_path("Koldinghus".parameterize),
+      class: "nav-link #{active_helper? vaerker_path("Koldinghus".parameterize)}" 
+    %>
+    <%= link_to "Særlige bygninger", vaerker_path("Særlige bygninger".parameterize),
+      class: "nav-link #{active_helper? vaerker_path("Særlige bygninger".parameterize)}" 
+    %>
+  </div>
+  <div class="oversigt-menu ">
+    <%= link_to "Andre", vaerker_path("Andre".parameterize),
+      class: "nav-link #{active_helper? vaerker_path("Andre".parameterize)}" 
+    %>
+    <%= link_to "Kirkerestaureringer", vaerker_path("Kirkerestaureringer".parameterize),
+      class: "nav-link #{active_helper? vaerker_path("Kirkerestaureringer".parameterize)}" 
+    %>
+    <%= link_to "Design", vaerker_path("belysning-og-andet", noload: "true"),
+      class: "nav-link #{active_helper? vaerker_path("Design".parameterize)}" 
+    %>
+  </div>
+  <div class="oversigt-menu">
+    <%= link_to "Ikke opført", vaerker_path("Ikke opført".parameterize),
+      class: "nav-link #{active_helper? vaerker_path("Ikke opført".parameterize)}" 
+    %>
+    <%= link_to "Johannes' tekster", show_pdf_category_path(),
+      class: "nav-link" 
+    %>
+    <%= link_to "Om", om_path,
+      class: "nav-link #{active_helper? om_path}" 
+    %>
+  </div>
+</div>
