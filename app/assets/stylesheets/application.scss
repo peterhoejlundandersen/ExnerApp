@@ -16,13 +16,13 @@
  *= require categories
  *= require pdf_categories
  *= require pdfs
+ *= require about
  *= require font-awesome
-
  *= require_self
  */
 @import "bootstrap";
-@import 'font_calls';  // Corbel, LinLibertine, Linux Libertine C
-
+@import 'imports/font_calls';  // Corbel, LinLibertine, Linux Libertine C
+@import 'imports/mixins';
 p {
 
   font-family: "LinLibertine";
@@ -72,6 +72,7 @@ a {
   min-width: 100%;
 }
 .blog-nav-dropdown {
+  @include no-padding-left-right;
   overflow: hidden;
 }
 .blog-masthead.admin-nav {
@@ -79,15 +80,6 @@ a {
   padding: 10px;
   color: white;
 }
-/* *** KUN TIL FORSIDE ***** */
-@mixin transition($args...) {
-  -webkit-transition: $args;
-  -moz-transition: $args;
-  -ms-transition: $args;
-  -o-transition: $args;
-  transition: $args;
-}
-
 /* MENU */
 .menu-center li{
   display: inline-block;

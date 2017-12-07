@@ -28,13 +28,12 @@ class PdfImageUploader < CarrierWave::Uploader::Base
   process :resize_to_width
 
   def resize_to_width
-    resize_to_limit 170, 59000
-    
+    resize_to_limit 600, 59000
   end
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
+  version :thumb do
+    process resize_to_limit: [170, 99999]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

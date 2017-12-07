@@ -1,0 +1,45 @@
+.next-prev-back-wrapper {
+  font-family: Corbel;
+  text-transform: uppercase;
+}
+
+.pagination-arrows {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 16px;
+  height: 15px;
+  background-repeat: no-repeat;
+  background-position: 0px 4px;
+}
+
+.prev-work {
+  background-image: url(image-path("arrow-left"));
+}
+.next-work {
+  background-image: url(image-path("arrow-right"));
+}
+
+.work-arrows {
+  z-index: 9999999;
+  position: absolute;
+  cursor: pointer;
+  top: 45%;
+  top: 50vh;
+  margin-top: -75px;
+}
+
+#leftArrow {
+  left: 0;
+  width: 150px;
+  height: 150px;
+  margin-left: -150px;
+  background-image: url(image-path("arrow-left"));
+}
+#rightArrow {
+  right: 0;
+  width: 150px;
+  height: 150px;
+  margin-right: -150px;
+  background-image: url(image-path("arrow-right"));
+}

@@ -1,28 +1,32 @@
 <%= javascript_include_tag "html.sortable", 'data-turbolinks-track' => true if logged_in?(:site_admin) %>
 <%= javascript_include_tag "works", 'data-turbolinks-track' => true  if logged_in?(:site_admin) %>
-<div class="row sortable works-wrapper">
+<input type="hidden" data-category-id="<%= @category.friendly_id %>" id="categoryId">
+<works-index></works-index>
+<%= javascript_pack_tag 'works_index' %>
 
-  <% unless @works.empty? %>
-    <% @works.each do |work| %>
-      <div class="overview-work sortable-item" data-id="<%= work.id %>" data-type="<%= work.class.to_s %>">
-        <%= link_to work_path(work) do %>
-          <% unless work.images.empty? %>
-            <div class="overview-img-block" style="background-image: url(<%= work.overview_img %>)">
-              <%# <%= image_tag(work.overview_img, class: "overview-img") %1> %>
-            </div>
-            <h2 class="overview-work-h2"><%= work.name %></h2>
-          <% else %>
-            <div class="overview-img-block work-without-image">
-            </div>
-            <h2 class="overview-work-h2"><%= work.name %></h2>
-          <% end %>
+<%# <div class="row sortable works-wrapper"> %>
+
+<%#   <% unless @works.empty? %1> %>
+<%#     <% @works.each do |work| %1> %>
+<%#       <div class="overview-work sortable-item" data-id="<%= work.id %1>" data-type="<%= work.class.to_s %1>"> %>
+<%#         <%= link_to work_path(work) do %1> %>
+<%#           <% unless work.images.empty? %1> %>
+<%#             <div class="overview-img-block" style="background-image: url(<%= work.overview_img %1>)"> %>
+<%#               <1%# <%= image_tag(work.overview_img, class: "overview-img") %2> %1> %>
+<%#             </div> %>
+<%#             <h2 class="overview-work-h2"><%= work.name %1></h2> %>
+<%#           <% else %1> %>
+<%#             <div class="overview-img-block work-without-image"> %>
+<%#             </div> %>
+<%#             <h2 class="overview-work-h2"><%= work.name %1></h2> %>
+<%#           <% end %1> %>
 
 
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+<%#         <% end %1> %>
+<%#       </div> %>
+<%#     <% end %1> %>
+<%#   <% end %1> %>
+<%# </div> %>
 
 
 

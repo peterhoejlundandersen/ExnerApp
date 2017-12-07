@@ -2,6 +2,8 @@
 @import "bootstrap";
 @import "font-awesome";
 
+@import 'imports/font_calls';  // Corbel, LinLibertine, Linux Libertine C
+
 
 /* *** KUN TIL FORSIDE ***** */
 @mixin transition($args...) {
@@ -13,7 +15,6 @@
 }
 
 /* MENU */
-
 /* FORSIDE */
 .masthead-overskrift {
   text-align: center;
