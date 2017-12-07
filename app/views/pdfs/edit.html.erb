@@ -25,7 +25,7 @@
       </div>
 
       <div class="form-field mt-4">
-        <%= link_to "Tilbage", pdf_categories_path(@category), class: "btn btn-secondary" %>
+        <%= link_to "Tilbage", show_this_pdf_category_path(@pdf_category.id), class: "btn btn-secondary" %>
         <%= f.submit "Gem", class: "btn btn-primary" %>
       <% end %>
       </div>

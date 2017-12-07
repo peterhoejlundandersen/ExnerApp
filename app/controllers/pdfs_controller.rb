@@ -27,7 +27,7 @@ class PdfsController < ApplicationController
     @pdf.remove_image! if params[:pdf][:image]
     if @pdf.update(pdf_params)
       flash[:notice] = "\"#{@pdf.title}\" er blevet opdateret."
-      redirect_to show_pdf_category_path("Alle", 0)
+      redirect_to show_this_pdf_category_path(@pdf.pdf_category_id)
     else
       flash[:notice] = "Der gik noget galt. Prøv igen."
       render "edit"
