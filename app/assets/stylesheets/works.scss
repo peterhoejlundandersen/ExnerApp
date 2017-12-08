@@ -46,10 +46,11 @@ html, body {
     opacity: 0;
     @include transition(opacity .4s linear);
   }
-  .overview-img-block-show {
-    opacity: 1;
-  }
 }
+
+  .overview-img-block-show {
+    opacity: 1!important;
+  }
 
 footer {
   display: block;

@@ -4,7 +4,7 @@
     <%= link_to vaerker_path(cat.friendly_id) do %>
       <div class="overview-design-wrapper">
         <% if noload %><!-- Skal ikke vises, når værkerne er trykket frem -->
-          <div class="overview-img" style="background-image: url(<%= cat.image %>)">
+          <div class="overview-img overview-img-block-show" style="background-image: url(<%= cat.image %>)">
           </div>
         <% end %>
           <h4 id="<%= cat.id %>" class="overview-header pt-2 text-uppercase text-center 
