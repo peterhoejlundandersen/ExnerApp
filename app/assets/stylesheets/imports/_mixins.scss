@@ -47,6 +47,13 @@
   justify-content: $value;
 }
 
+@mixin align-items($align) {
+  -webkit-align-items: $align;
+     -moz-align-items: $align;
+      -ms-align-items: $align;
+          align-items: $align;
+}
+
 @mixin border-radius($radius) {
   -moz-border-radius: $radius;
   -o-border-radius: $radius;
