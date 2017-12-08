@@ -8,6 +8,11 @@
   padding-right: 0;
 }
 
+@mixin filter($effect) {
+  -webkit-filter: $effect;
+  filter: $effect;
+}
+
 /* https://github.com/mastastealth/sass-flex-mixin/blob/master/_flex.scss */
 @mixin flex-wrap($value: nowrap) {
   // No Webkit Box fallback.

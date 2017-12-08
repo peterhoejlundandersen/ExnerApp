@@ -107,8 +107,7 @@ footer {
 }
 
 .overview-img-block {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
+  @include filter(grayscale(100%));
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -118,11 +117,8 @@ footer {
   min-height: 100vh; /* These two lines are counted as one :-)       */
   min-height: 182px;
   margin: 0 auto;
-  @include transition(-webkit-filter .4s ease-out);
-  @include transition(filter .4s ease-out);
   &:hover {
-    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(0%);
+    @include filter(grayscale(0%));
   }
 }
 
@@ -386,6 +382,7 @@ span.without-overview-text {
 
 .overview-img {
   @include transition(opacity .4s ease-out);
+  @include filter(grayscale(100%));
   opacity: 0;
   width: 300px;
   height: 218px;
@@ -394,6 +391,9 @@ span.without-overview-text {
   background-position: center;
   margin: 0 auto;
   max-width: 100%;
+  &:hover {
+    @include filter(grayscale(0%));
+  }
 }
 .overview-img-show {
   opacity: 1;
