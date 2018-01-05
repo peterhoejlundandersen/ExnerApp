@@ -1,24 +1,31 @@
 <%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" %>
 <% if @videos.any? %>
-<h1>Videoer</h1>
-  <% @videos.each do |vid| %>
-    <% if vid.only_link %>
-      Vis 
-      <a href="<%= vid.link %>" target="_blank">
-        <%= vid.title %>
-      </a>
-    <% else %><!-- hvis det ikke kun er link -->
-      <h2> <%= vid.title %> </h2>
-      <iframe class=" float-left"
-              src="<%= vid.video_url %>?rel=0&amp;showinfo=0"
-              frameborder="0"
-              allowfullscreen="allowfullscreen"
-              mozallowfullscreen="mozallowfullscreen" 
-              msallowfullscreen="msallowfullscreen" 
-              oallowfullscreen="oallowfullscreen" 
-              webkitallowfullscreen="webkitallowfullscreen"
-              >
-      </iframe>
-    <% end %><!-- only_link -->
-  <% end %><!-- each -->
-<% end %><!-- any? -->
+  <h1>Videoer</h1>
+  <div class="">
+    <% @videos.each do |vid| %>
+      <div class="videoes">
+        <% if vid.only_link %>
+          <h2>
+            Gå til <a href="<%= vid.link %>" target="_blank"> <%= vid.title %>  &#8594; </a>
+          </h2>
+        <% else %><!-- hvis det ikke kun er link -->
+          <h2 class=""> <%= vid.title %> </h2>
+          <div class="iframe-wrapper row">
+            <iframe class="col-md-6"
+                    src="<%= vid.video_url %>?rel=0&amp;showinfo=0"
+                    frameborder="0"
+                    allowfullscreen="allowfullscreen"
+                    mozallowfullscreen="mozallowfullscreen" 
+                    msallowfullscreen="msallowfullscreen" 
+                    oallowfullscreen="oallowfullscreen" 
+                    webkitallowfullscreen="webkitallowfullscreen"
+                    >
+            </iframe>
+            <div class="col-md-6 description"><%= vid.description if vid.description? %></div>
+          </div>
+        <% end %><!-- only_link -->
+        <hr>
+      </div><!-- video-show -->
+    <% end %><!-- each -->
+  <% end %><!-- any? -->
+  </div>
