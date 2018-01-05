@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'om' => 'about#index', as: "om"
   resources :videos, path: 'om/videoer'
   resources :facts, except: [:index],  path: 'om/facts'
+  get 'om/artikler' => 'about#artikler', as: :artikler
   ### END OM ###
 
   #FORSIDE TEKST

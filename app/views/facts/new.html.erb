@@ -4,21 +4,6 @@
 <div class="row">
   <div class="offset-lg-2 col-lg-8">
     <%= render partial: 'fact_form' %>
-    <%= form_for @fact do |f| %>
-
-      <div class="form-field pt-4">
-        <%= f.label :title, "Titel" %><small> * skal udfyldes</small>
-        <%= f.text_field :title, class: "form-control" %>
-      </div>
-      <hr>
-      <div class="form-fields">
-        <%= f.label "Tekst" %><small> * skal udfyldes</small>
-        <%= f.text_area :text, cols: 40, rows: 20, class: "tinymce" %>
-      </div>
-      <hr>
-      <%= f.submit "Gem tekst", class: "btn btn-primary" %>
-    <% end %>
-
   </div>
 </div>
 
