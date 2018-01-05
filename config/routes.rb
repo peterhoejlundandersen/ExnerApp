@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' }
 
   resources :categories, except: :index
@@ -32,9 +33,12 @@ Rails.application.routes.draw do
   get "johannes-exners-tekster/:kategori_id" => "pdf_categories#show_category", as: "show_this_pdf_category"
   get 'pdf-views/show' => 'pdf_views#show', as: 'pdf_view'
 
-  ### PDFS END ###
+  ### END PDFS ###
 
-  get 'om-inger-og-johannes-exner' => 'about#index', as: "om"
+  ### OM ###
+  get 'om' => 'about#index', as: "om"
+  resources :videos, path: 'om/videoer'
+  ### END OM ###
 
   #FORSIDE TEKST
   get 'forside/ny-forside-tekst' => 'static_pages#new_frontpage_text', as: :ny_forside_tekst

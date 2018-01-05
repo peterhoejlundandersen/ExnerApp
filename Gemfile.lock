@@ -105,8 +105,6 @@ GEM
     erubi (1.7.0)
     excon (0.60.0)
     execjs (2.7.0)
-    factory_girl (4.9.0)
-      activesupport (>= 3.0.0)
     ffi (1.9.18)
     fog-aws (2.0.0)
       fog-core (~> 1.38)
@@ -346,7 +344,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise (~> 4.3)
   dotenv-rails
-  factory_girl
   fog-aws
   font-awesome-rails
   foreman

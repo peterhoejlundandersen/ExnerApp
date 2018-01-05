@@ -18,7 +18,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl'
+  # gem 'factory_girl' # FEJL, NÅR JEG PRØVER AT FÅ VIST ROUTES, TAGET UD FOR NU
   gem 'guard-rspec'
 end
 
