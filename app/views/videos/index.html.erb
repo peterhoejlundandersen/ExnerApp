@@ -1,2 +1,24 @@
 <%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" %>
+<% if @videos.any? %>
 <h1>Videoer</h1>
+  <% @videos.each do |vid| %>
+    <% if vid.only_link %>
+      Vis 
+      <a href="<%= vid.link %>" target="_blank">
+        <%= vid.title %>
+      </a>
+    <% else %><!-- hvis det ikke kun er link -->
+      <h2> <%= vid.title %> </h2>
+      <iframe class=" float-left"
+              src="<%= vid.video_url %>?rel=0&amp;showinfo=0"
+              frameborder="0"
+              allowfullscreen="allowfullscreen"
+              mozallowfullscreen="mozallowfullscreen" 
+              msallowfullscreen="msallowfullscreen" 
+              oallowfullscreen="oallowfullscreen" 
+              webkitallowfullscreen="webkitallowfullscreen"
+              >
+      </iframe>
+    <% end %><!-- only_link -->
+  <% end %><!-- each -->
+<% end %><!-- any? -->

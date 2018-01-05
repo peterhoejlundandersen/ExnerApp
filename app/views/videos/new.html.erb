@@ -1,14 +1,14 @@
 <%= link_to "&#x2190;".html_safe + " Tilbage til videooversigt", videos_path() %>
 <h2 class="text-center">Opret video</h2>
-<%= form_for :video do |f| %>
+<%= form_for :video, url: videos_path do |f| %>
 
   <p>Er det et link til en anden side eller en video, der skal vises på siden?</p>
   <div class="only-link-wrapper form-group">
     <div class="only-link ">
-      <%= f.radio_button :only_link, 'Video', checked: 'checked', data: {class: "show-if-video"}, class: "only-link-radio" %><p>Video</p>
+      <%= f.radio_button :only_link, '0', checked: 'checked', data: {class: "show-if-video"}, class: "only-link-radio" %><p>Video</p>
     </div>
     <div class="only-link ">
-      <%= f.radio_button :only_link, 'Link', checked: 'unchecked', data: {class: "show-if-link"}, class: "only-link-radio" %><p>Link</p>
+      <%= f.radio_button :only_link, '1', checked: 'unchecked', data: {class: "show-if-link"}, class: "only-link-radio" %><p>Link</p>
     </div>
   </div>
   <hr>
@@ -28,12 +28,16 @@
   <hr>
   
   <div class="video-description form-group">
-    <%= f.label :title, "Titel" %>
+    <%= f.label :title, "Titel*" %><small>* Skal udfyldes</small>
     <%= f.text_field :title, class: "form-control" %>
     <br>
     <%= f.label :description, "Beskrivelse" %><br>
     <%= f.text_area :description, class: "form-control" %>
   </div>
+  <hr>
+
+  <%= f.submit "Gem video", class: "btn btn-primary"%>
+
 <% end %>
 
 
