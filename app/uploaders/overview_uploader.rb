@@ -4,6 +4,8 @@ class OverviewUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
+  storage :fog
+
   # Choose what kind of storage to use for this uploader:
   include CarrierWave::ImageOptimizer
   include CarrierWave::MiniMagick

@@ -54,3 +54,5 @@ gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'tinymce-rails'
 gem 'webpacker', '~> 3.0'
 gem 'foreman'
+
+gem 'dotenv-rails', groups: [:development, :test]

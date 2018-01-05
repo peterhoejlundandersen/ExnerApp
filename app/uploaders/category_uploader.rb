@@ -6,6 +6,7 @@ class CategoryUploader < CarrierWave::Uploader::Base
   include CarrierWave::ImageOptimizer
   include CarrierWave::MiniMagick
 
+  storage :fog
   # Choose what kind of storage to use for this uploader:
 
   # Override the directory where uploaded files will be stored.

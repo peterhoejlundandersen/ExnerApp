@@ -1,52 +1,47 @@
-<div class="indexbackground">
+<div class="indexbackground"><!-- billede -->
 </div>
 <div class="row indexwrapper">
-	<div class="offset-lg-1 col-lg-10 frontpage-ark">
-      <div class="h4 masthead-overskrift-ark">Arkitekterne</div><div class="h1 masthead-overskrift">Inger og Johannes Exner</div>
-		<p class="text-center button-read-more white">Hvorfor denne hjemmeside? Læs mere <%= fa_icon "angle-down" %></p> 
+  <div class="offset-lg-1 col-lg-10 frontpage-ark">
+    <div class="h4 masthead-overskrift-ark">Arkitekterne</div><div class="h1 masthead-overskrift">Inger og Johannes Exner</div>
+    <p class="text-center button-read-more white">Hvorfor denne hjemmeside? Læs mere <%= fa_icon "angle-down" %></p> 
 
-	</div>
+  </div>
 </div><!-- indexwrapper -->
 <div class="row">
-	<div class="offset-lg-3 col-lg-6 front-page-text">
-		<% if @text.nil? %>
-		<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-		<% else %>
-		<%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-		<%= @text.text.html_safe %>
-
-		<% end %> 
-	</div>
-	<div class="col-lg-3 float-left to-oversigt">
-		<%= link_to oversigt_path, class: "float-right affix" do %>
-		<div class="button"></div>
-		<% end %>
-	</div>
-	<div class="kunpaamobilskaerm">
-		<%= link_to oversigt_path do %>
-		Gå videre til oversigten
-		<% end %>
-	</div>
+  <div class="offset-lg-3 col-lg-6 front-page-text">
+    <% if @text.nil? %>
+      <%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+    <% else %>
+      <%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+      <%= @text.text.html_safe %>
+    <% end %> 
+  </div>
+  <div class="col-lg-3 float-left to-oversigt">
+    <%= link_to oversigt_path, class: "float-right affix" do %>
+      <div class="button"></div>
+    <% end %>
+  </div>
+  <div class="kunpaamobilskaerm">
+    <%= link_to oversigt_path do %>
+      Gå videre til oversigten
+    <% end %>
+  </div>
 
 </div><!-- row -->
-
-
 <!-- trekanten skifter farve -->
 <script type="text/javascript">
-	$(document).ready(function() {
-		$(".button-read-more").click(function (){
-			$('html, body').animate({
-				scrollTop: $(".front-page-text").offset().top
-			}, 500);
-		});
-	})
-	$(window).scroll(function () {
-		if ($(".button").offset().top > ($(".front-page-text").offset().top)) {
-			$(".button").addClass('black-trans');
-		} else {
-			$(".button").removeClass('black-trans');
-		}	
-
-
-	});
+  $(document).ready(function() {
+    $(".button-read-more").click(function (){
+      $('html, body').animate({
+        scrollTop: $(".front-page-text").offset().top
+      }, 500);
+    });
+  })
+$(window).scroll(function () {
+  if ($(".button").offset().top > ($(".front-page-text").offset().top)) {
+    $(".button").addClass('black-trans');
+  } else {
+    $(".button").removeClass('black-trans');
+  }	
+});
 </script>
