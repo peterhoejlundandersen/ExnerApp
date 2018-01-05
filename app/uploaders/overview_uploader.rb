@@ -11,7 +11,6 @@ class OverviewUploader < CarrierWave::Uploader::Base
 
   # process :store_dimension #Hvad er billedets højde og bredde?
   # Choose what kind of storage to use for this uploader:
-  storage :fog
   # storage :fog
   # Override the directory where uploaded files will be stored.
 

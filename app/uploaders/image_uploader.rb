@@ -11,7 +11,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # process :store_dimension #Hvad er billedets højde og bredde?
   # Choose what kind of storage to use for this uploader:
-  storage :fog
   # storage :fog
   # Override the directory where uploaded files will be stored.
 
@@ -27,9 +26,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   #
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
-  
+
   process :resize_to_width
-  
+
 
   def resize_to_width
   image_width, image_height = ::MiniMagick::Image.open(file.file)[:dimensions]
@@ -40,7 +39,7 @@ class ImageUploader < CarrierWave::Uploader::Base
       end
   end
 
-  
+
   # process :optimize_image
 
   # def optimize_image
@@ -59,7 +58,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #     img
   #   end
 
-    
+
   # end
   # def scale
 
@@ -72,17 +71,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   if file.original_filename.include? "START" #scope in image.rb
   #     return true
   #   end
-  # end 
+  # end
 
   #   if file && model
   #   if image_width > image_height
   #   process resize_to_fit: [1200, nil]
   #   else
-  #   process resize_to_fit: [nil, 900] 
+  #   process resize_to_fit: [nil, 900]
   #   end
   #   binding.pry
   # end
-  
+
   # def scale
   #   if model["width"] > model["height"]
   #     resize_to_fit: [1200, nil]

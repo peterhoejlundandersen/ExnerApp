@@ -7,7 +7,6 @@ class CategoryUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -23,7 +22,7 @@ class CategoryUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
   process :resize_to_width
-  
+
 
   def resize_to_width
         resize_to_limit 400, 250
