@@ -1,4 +1,16 @@
 <h1 class="text-center pt-4">Om</h1>
 
-<%= link_to "Videoer", videos_path() %>
+<p>
+  <%= link_to "Videoer", videos_path() %>
+</p>
+
+<% if @fact.nil? %>
+  <p>
+    <%= link_to "Opret 'Fakta om Inger og Johannes Exner'", new_fact_path() %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to @fact.title, fact_path(@fact.id) %>
+  </p>
+<% end %>
 

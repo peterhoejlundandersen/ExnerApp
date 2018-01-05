@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-6">
+    <%= link_to "&#8592;".html_safe + "Gå tilbage", om_path() %>
+  </div>
+  <div class="col-6">
+    <%= link_to "Rediger tekst", edit_fact_path(), class: "" if user_signed_in? %>
+  </div>
+</div>
+<hr>
+<div class="facts">
+  <% unless @fact.nil? %>
+    <h1 class="pb-4 text-center"><%= @fact.title %></h1>
+    <%= @fact.text.html_safe unless @fact.nil? %>
+  <% end %>
+</div>
