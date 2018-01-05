@@ -1,4 +1,4 @@
-<%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" %>
+<%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" if user_signed_in? %>
 <% if @videos.any? %>
   <h1>Videoer</h1>
   <div class="">
@@ -24,6 +24,9 @@
             <div class="col-md-6 description"><%= vid.description if vid.description? %></div>
           </div>
         <% end %><!-- only_link -->
+        <%= link_to "Rediger video", edit_video_path(vid.id), class: "" if user_signed_in? %> / 
+        <%= link_to "Slet video", video_path(vid.id), method: :delete, class: "", data: {confirm: "Er du sikker på, at du vil slette videoen?"} if user_signed_in? %>
+
         <hr>
       </div><!-- video-show -->
     <% end %><!-- each -->

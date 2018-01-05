@@ -7,7 +7,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     if @video.save
-      flash[:notice] = "#{@video.title} er blevet oprettet."
+      flash[:notice] = "'#{@video.title}' er blevet oprettet."
       redirect_to videos_path()
     else
       flash.now[:notice] = "Noget gik galt, prøv igen. Er titlen skrevet ind?"
@@ -16,10 +16,32 @@ class VideosController < ApplicationController
   end
 
   def edit
+    @video = Video.find(params[:id])
+  end
+
+  def update
+    @video = Video.find(params[:id])
+    if @video.update(video_params)
+      flash[:notice] = "'#{@video.title}' er opdateret"
+      redirect_to videos_path();
+    else
+      flash.now[:notice] = "Noget gik galt, prøv igen."
+      render :edit
+    end
   end
 
   def index
     @videos = Video.all
+  end
+
+  def destroy
+    @video = Video.find(params[:id])
+    if @video.destroy
+      flash[:alert] = "'#{@video.title}' er blevet slettet."
+      redirect_to videos_path()
+    else
+      flash.now[:notice] = "Noget gik galt, prøv igen."
+    end
   end
 
   private
