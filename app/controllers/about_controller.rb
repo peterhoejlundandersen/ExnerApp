@@ -8,4 +8,15 @@ class AboutController < ApplicationController
     @artikler = Pdf.where(id: [1,2])
   end
 
+  def tidslinje
+  end
+
+  def haandtegninger
+  end
+
+  def trehuse
+  end
+
+  def fotos
+  end
 end

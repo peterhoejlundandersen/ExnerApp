@@ -1,22 +1,19 @@
-<h1 class="text-center pt-4">Om</h1>
-
+<h2 class="text-center pt-4">Om</h2>
 
 <% if @fact.nil? %>
   <p> <%= link_to "Opret 'Fakta om Inger og Johannes Exner'", new_fact_path() %> </p>
 <% else %>
-  <h3>1. <%= link_to @fact.title, fact_path(@fact.id) %> </h3>
+  <h3>1. <%= link_to @fact.title, facts_path() %> </h3>
 <% end %>
 
 <h3>2. <%= link_to "Artikler", artikler_path() %> </h3>
 
-<h3> 3. Tidslinje </h3>
+<h3>3. <%= link_to "Tidslinje", tidslinje_path() %> </h3>
 
-<h3>
-  4. Håndtegninger
-</h3>
+<h3>4. <%= link_to 'Håndtegninger', haandtegninger_path() %> </h3>
 
-<h3> 5. Fotos </h3>
+<h3>5. <%= link_to "Fotos", fotos_path() %></h3>
 
-<h3> 6. Livet i tre huse </h3>
+<h3>6. <%= link_to "Livet i tre huse", tre_huse_path() %> </h3>
 
-<h3> 7. <%= link_to "Videoer", videos_path() %>  </h3>
+<h3>7. <%= link_to "Videoer", videos_path() %>  </h3>

@@ -1,4 +1,5 @@
 class FactsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   layout 'works'
   def new
     @fact = Fact.new
@@ -8,7 +9,7 @@ class FactsController < ApplicationController
     @fact = Fact.new(fact_params)
     if @fact.save!
       flash[:notice] = "'#{@fact.title}' er blevet oprettet."
-      redirect_to fact_path(@fact.id)
+      redirect_to facts_path()
     else
       flash.now[:alert] = "Noget gik galt, har du udfyld titlen?"
       render :new
@@ -23,14 +24,14 @@ class FactsController < ApplicationController
     @fact = Fact.first
     if @fact.update(fact_params)
       flash[:notice] = "'#{@fact.title}' er blevet opdateret"
-      redirect_to fact_path(@fact.id)
+      redirect_to facts_path()
     else
       flash.now[:alert] = "Noget gik galt. Har du udfyldt titlen. Prøv igen."
       render :edit
     end
   end
 
-  def show
+  def index
     @fact = Fact.first
   end
 

@@ -60,7 +60,7 @@ class CategoriesController < ApplicationController
       },
       {
        image: ActionController::Base.helpers.asset_path('om-inger-og-johannes'),
-       slug: "om-inger-og-johannes-exner",
+       slug: "om",
        name: "Om Inger og Johannes",
        id: 9999 # For image load in angular
       }

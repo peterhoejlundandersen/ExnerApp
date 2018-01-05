@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   layout 'works'
   def new
     @video = Video.new

@@ -1,0 +1,17 @@
+<div class="next-prev-back-wrapper row">
+  <div class="col-md-4 nav-link">
+    <%= link_to eval(prev[:path]) do %>
+      <span class="pagination-arrows prev-work"></span>
+      <%= prev[:title] %>
+    <% end %>
+  </div>
+  <div class="col-md-4 nav-link text-center">
+    <%= link_to "Om", om_path() %>
+  </div>
+  <div class="col-md-4 nav-link text-right">
+    <%= link_to eval(next_w[:path]) do %>
+      <%= next_w[:title] %>
+      <span class="pagination-arrows next-work"></span>
+    <% end %>
+  </div>
+</div><!-- next-prev-wrapper -->
