@@ -17,8 +17,10 @@ $(document).ready(function() {
       $(this).addClass("time-line-image-show"); // transition in about.scss
     });
   });
-  $(".to-top").click(function() {
+  $(".to-top").click(function(e) {
+    e.preventDefault();
     $(this).removeClass('to-top-show');
+    window.scrollTo(0, 0);
   });
 
 });
