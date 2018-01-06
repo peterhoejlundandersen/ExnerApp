@@ -11,7 +11,19 @@
   </div>
   <hr>
   <div class="show-if-link hide-it form-group">
-    <div class="link-text-field">
+    <div class="form-group">
+      <%= f.label :link_image, "Billede til link" %><br><small>Bliver lavet til 540x300px</small><br>
+      <% unless @video.link_image.url.nil? %>
+        <%= image_tag @video.link_image.thumb.url %><br>
+        <small>Vælg nyt billede </small><br>
+        <%= f.file_field :link_image %>
+      <% else %>
+        <small>Upload billede</small>
+        <%= f.file_field :link_image %>
+      <% end %>
+    </div>
+    <hr>
+    <div class="link-text-field form-group">
       <%= f.label "Link" %><br><small>Indtastet linket til den hjemmeside, hvor videoen bliver vist.</small><br>
       <%= f.text_field :link, class: "form-control" %>
     </div>

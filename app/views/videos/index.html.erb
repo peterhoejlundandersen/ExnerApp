@@ -1,19 +1,14 @@
 <%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" if user_signed_in? %>
+
 <%= render partial: 'about/pagination',
   locals: { prev: { title: 'Livet i tre huse', path: 'tre_huse_path()'},
             next_w: { title: 'Fakta', path: 'facts_path()'} } %><!-- passer ikke -->
 
 <% if @videos.any? %>
-
 <h2 class="py4 text-center">Videoer</h2>
   <div class="">
     <% @videos.each do |vid| %>
       <div class="videoes">
-        <% if vid.only_link %>
-          <h2>
-            Gå til <a href="<%= vid.link %>" target="_blank"> <%= vid.title %>  &#8594; </a>
-          </h2>
-        <% else %><!-- hvis det ikke kun er link -->
           <h2 class=""> <%= vid.title %> </h2>
           <div class="iframe-wrapper row">
             <iframe class="col-md-6"
@@ -28,12 +23,31 @@
             </iframe>
             <div class="col-md-6 description"><%= vid.description if vid.description? %></div>
           </div>
-        <% end %><!-- only_link -->
         <%= link_to "Rediger video / ", edit_video_path(vid.id), class: "" if user_signed_in? %>
         <%= link_to "Slet video", video_path(vid.id), method: :delete, class: "", data: {confirm: "Er du sikker på, at du vil slette videoen?"} if user_signed_in? %>
-
         <hr>
       </div><!-- video-show -->
     <% end %><!-- each -->
   <% end %><!-- any? -->
-  </div>
+</div>
+
+
+<% if @links.any? %>
+<h2 class="py4 text-center">Links til videoer på andres hjemmesider</h2>
+  <div class="">
+    <% @links.each do |link| %>
+      <div class="videoes">
+          <h3 class=""> <%= link_to link.title, link.link, target: "_blank" %> </h3>
+          <div class="iframe-wrapper row">
+            <%= image_tag link.link_image.thumb.url, class: "col-md-6" unless link.link_image.url.nil? %>
+            <div class="col-md-6 description"><%= link.description if link.description? %></div>
+          </div>
+          <h4 class="pt-3"><%= link_to "Gå til #{link.title}", link.link, target: "_blank" %></h4>
+        <%= link_to "Rediger link / ", edit_video_path(link.id), class: "" if user_signed_in? %>
+        <%= link_to "Slet link", video_path(link.id), method: :delete,
+          class: "", data: {confirm: "Er du sikker på, at du vil slette linket?"} if user_signed_in? %>
+        <hr>
+      </div><!-- -->
+    <% end %><!-- each -->
+</div>
+<% end %><!-- any? -->

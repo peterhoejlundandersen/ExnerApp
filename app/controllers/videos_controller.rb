@@ -1,6 +1,12 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   layout 'works'
+
+  def index
+    @videos = Video.where(only_link: false)
+    @links = Video.where(only_link: true)
+  end
+
   def new
     @video = Video.new
   end
@@ -31,9 +37,6 @@ class VideosController < ApplicationController
     end
   end
 
-  def index
-    @videos = Video.all
-  end
 
   def destroy
     @video = Video.find(params[:id])
@@ -47,6 +50,6 @@ class VideosController < ApplicationController
 
   private
   def video_params
-    params.require(:video).permit(:title, :description, :only_link, :video_url, :link)
+    params.require(:video).permit(:title, :description, :only_link, :video_url, :link_image)
   end
 end
