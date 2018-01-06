@@ -3,18 +3,35 @@
             next_w: { title: 'Håndtegninger', path: 'haandtegninger_path()'} } %>
 
   <h2 class="text-center">Tidslinje</h2>
+  <a href="#" class="to-top" id="toTop"><span class="to-top-text">Til toppen</span></a>
   <% 15.times do |i| %>
     <% i = i + 1 %>
     <% this_image_url = image_url 'tidslinje/' + i.to_s + '_del.jpg' %>
     <%= image_tag this_image_url, class: 'time-line-image img_' + i.to_s%>
   <% end %>
 
-  <script>
-    $(document).ready(function() {
-      $(".time-line-image").each(function(image) {
-        $(this).on("load", function() {
-          $(this).addClass("time-line-image-show"); // transition in about.scss
-        });
-      });
+<script>
+$(document).ready(function() {
+  $(".time-line-image").each(function(image) {
+    $(this).on("load", function() {
+      $(this).addClass("time-line-image-show"); // transition in about.scss
     });
-  </script>
+  });
+  $(".to-top").click(function() {
+    $(this).removeClass('to-top-show');
+  });
+
+});
+// GODE GAMLE JAVASCRIPT!
+var to_top = document.getElementById('toTop');
+var showToTop = function() {
+  var y = window.scrollY;
+  if (y > window.outerHeight) {
+    to_top.classList.add("to-top-show");
+  } else {
+    to_top.classList.remove("to-top-show");
+  }
+}
+
+window.addEventListener("scroll", showToTop);
+</script>

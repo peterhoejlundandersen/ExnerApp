@@ -1,14 +1,47 @@
 @import 'imports/mixins';
+@import 'imports/font_calls';
 
 .facts p {
   width: 60%;
   min-width: 400px;
   margin: 0 auto;
 }
-
-
+.to-top {
+  @include transition(opacity .6s ease-in);
+  background-image: url(image-path("arrow-top"));
+  cursor: pointer;
+  left: 10px;
+  top: 96%;
+  margin-top: -75px;
+  height: 100px;
+  opacity: 0;
+  width: 100px;
+  text-align: center;
+  position: fixed;
+  z-index: 9999;
+}
+/* SKAL FJERNES PÅ MOBIL !*/
+.to-top-show {
+  opacity: 1;
+  &:hover {
+    opacity: 0.6;
+  }
+  &:hover .to-top-text {
+    opacity: 1;
+  }
+}
+.to-top-text {
+  @include transition(opacity .4s linear);
+  font-family: Corbel;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  font-size: 12.8px;
+  text-align: center;
+}
 .time-line-image {
   @include transition(opacity 1.6s ease-out);
+  width: 100%;
   opacity: 0;
   margin: 0 auto;
   min-height: 300px;
