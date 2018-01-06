@@ -2,5 +2,19 @@
   locals: { prev: { title: 'Artikler', path: 'artikler_path()'},
             next_w: { title: 'Håndtegninger', path: 'haandtegninger_path()'} } %>
 
-<h2 class="text-center">Tidslinje</h2>
-<small>Glæder mig til billede</small>
+  <h2 class="text-center">Tidslinje</h2>
+  <% 15.times do |i| %>
+    <% i = i + 1 %>
+    <% this_image_url = image_url 'tidslinje/' + i.to_s + '_del.jpg' %>
+    <%= image_tag this_image_url, class: 'time-line-image img_' + i.to_s%>
+  <% end %>
+
+  <script>
+    $(document).ready(function() {
+      $(".time-line-image").each(function(image) {
+        $(this).on("load", function() {
+          $(this).addClass("time-line-image-show"); // transition in about.scss
+        });
+      });
+    });
+  </script>
