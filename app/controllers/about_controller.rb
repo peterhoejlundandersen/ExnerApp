@@ -5,7 +5,7 @@ class AboutController < ApplicationController
   end
 
   def artikler
-    @artikler = Pdf.where(id: [1,2])
+    @artikler = Pdf.where.not(pdf_category_id: [1,2])
   end
 
   def tidslinje
