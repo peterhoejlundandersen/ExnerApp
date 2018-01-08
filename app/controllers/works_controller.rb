@@ -30,11 +30,15 @@ class WorksController < ApplicationController
         params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
         is_organs = true if params[:vaerker_cat] == "orgler"
         set_design_categories params[:vaerker_cat] #Setting @works, @categories, @category and @onload
+        @breadcrumb_child = {title: @category.name, path: 'vaerker_path("' + @category.name.parameterize + '")'}
         render_design = true
       else
         @category = Category.friendly.find(params[:vaerker_cat])
         @works = @category.works
       end
+      @breadcrumb_parent = render_design ?
+        {title: "Design", path: 'vaerker_path("belysning-og-andet", noload: "true")'} :
+        {title: @category.name, path: 'vaerker_path("' + @category.name.parameterize + '")'}
       respond_to do |format|
         format.html { render render_design ? "categories/design_categories_overview" : "works/index" }
         format.json { render json: {category: @category, works: @works, organs: is_organs} }
@@ -102,6 +106,10 @@ class WorksController < ApplicationController
       @work = Work.friendly.find(params[:id])
       unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
         @first_image_category = @work.image_categories.first
+        category = @work.category
+        @breadcrumb_parent = {title: category.name, path: "vaerker_path('#{category.name.parameterize}')"}
+        @breadcrumb_child = {title: @work.name, path: "work_path('#{@work.friendly_id}')" }
+
         unless @first_image_category.images.empty?
           # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
           @work_cat = @work.category
@@ -123,12 +131,8 @@ class WorksController < ApplicationController
       image_cats_index = (image_cats.length < 2) ? -1 : 0
       large_image = images.first
 
-      unless work.position.nil?
-        prev_work, next_work = get_next_and_previous_work(cat.works, work)
-      else
-        prev_work, new_work = "", ""
-      end
-      parent_cat_slug = cat.slug
+      prev_work, next_work = work.position.nil? ? ["", ""] : get_next_and_previous_work(cat.works, work)
+
       respond_to do |format|
         format.json {
           render json: {

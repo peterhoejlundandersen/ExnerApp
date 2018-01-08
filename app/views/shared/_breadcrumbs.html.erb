@@ -1,0 +1,7 @@
+<% title_par, title_child =
+  helper_breadcrumb_default params if title_par.nil? && title_child.nil? %><!-- overwriting if none of it has been set -->
+<%= link_to title_par[:title], eval(title_par[:path]),
+  class: "nav-link text-center" unless title_par.nil? %>
+<% unless title_child.nil? %>
+  > <%= link_to title_child[:title], eval(title_child[:path]), class: "nav-link text-center" %>
+<% end %>

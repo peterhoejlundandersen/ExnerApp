@@ -1,30 +1,8 @@
 <div class="blog-nav-wrapper">
   <nav class="blog-nav">
     <span class="info-button" data-button="menu">Menu</span>
-    <% if !@category.nil? %>
-
-      <%= link_to @category.name, vaerker_path(@category.name.parameterize), class: "nav-link text-center" %>
-
-    <% elsif @work.present? %>
-
-      <%= link_to @work.category.name, vaerker_path(@work.category.name.parameterize), class: "nav-link text-center" %>
-      >
-      <%= link_to @work.name, work_path(@work), class: "nav-link text-center" %>
-
-    <% elsif params[:controller] == "pdf_categories" %>
-
-      <%= link_to "Johannes' værker", show_pdf_category_path(), class: "nav-link text-center" %>
-
-      <% if @pdf_cat.present? %>
-        > 
-        <%= link_to @pdf_cat.title, show_this_pdf_category_path(@pdf_cat.friendly_id), class: "nav-link text-center" %>
-      <% end %>
-
-    <% else %>
-
-      <%= link_to "Om", om_path(), class: "nav-link text-center" %>
-
-    <% end %>
+    <%= render partial: 'shared/breadcrumbs',
+      locals: {title_par: @breadcrumb_parent, title_child: @breadcrumb_child } %>
   </nav>
   <nav class="blog-nav-dropdown hide-it" data-dropdown="menu">
     <% if params[:controller] == "categories" %><!-- hvis det er oversigtssiden, som bliver vist -->

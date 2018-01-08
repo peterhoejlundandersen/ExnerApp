@@ -19,7 +19,6 @@ import 'rxjs/add/operator/map';
         <a *ngIf="logged_in" [attr.href]="'/categories/' + category.slug + '/edit'">Rediger kategori</a>
       </div>
     <div *ngFor="let def_category of categories_default" class="text-center oversigt-img-wrapper">
-        {{def_category.slug}}
         <a [attr.href]="def_category.slug">
         <img [src]="def_category.image" (load)="assignImageValue(def_category.image, def_category.id)" hidden>
           <div class="center-block overview-img" [attr.id]="'overviewImage' + def_category.id">
