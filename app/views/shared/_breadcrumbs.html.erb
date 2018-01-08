@@ -1,5 +1,8 @@
 <% title_par, title_child =
   helper_breadcrumb_default params if title_par.nil? && title_child.nil? %><!-- overwriting if none of it has been set -->
+<% if ["Kirkeinventar", "Nye orgler", "Belysning og andet"].include? title_par[:title] %>
+  <%= link_to "Design", vaerker_path('belysning-og-andet', noload: true), class: "nav-link text-center" %> > 
+<% end %>
 <%= link_to title_par[:title], eval(title_par[:path]),
   class: "nav-link text-center" unless title_par.nil? %>
 <% unless title_child.nil? %>

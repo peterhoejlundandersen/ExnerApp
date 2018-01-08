@@ -30,7 +30,7 @@ class WorksController < ApplicationController
         params[:vaerker_cat] = "belysning-og-andet" if params[:vaerker_cat] == "design"
         is_organs = true if params[:vaerker_cat] == "orgler"
         set_design_categories params[:vaerker_cat] #Setting @works, @categories, @category and @onload
-        @breadcrumb_child = {title: @category.name, path: 'vaerker_path("' + @category.name.parameterize + '")'}
+        @breadcrumb_child = {title: @category.name, path: 'vaerker_path("' + @category.slug + '")'}
         render_design = true
       else
         @category = Category.friendly.find(params[:vaerker_cat])
@@ -107,7 +107,7 @@ class WorksController < ApplicationController
       unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
         @first_image_category = @work.image_categories.first
         category = @work.category
-        @breadcrumb_parent = {title: category.name, path: "vaerker_path('#{category.name.parameterize}')"}
+        @breadcrumb_parent = {title: category.name, path: "vaerker_path('#{category.slug}')"}
         @breadcrumb_child = {title: @work.name, path: "work_path('#{@work.friendly_id}')" }
 
         unless @first_image_category.images.empty?
