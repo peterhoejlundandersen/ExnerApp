@@ -33,7 +33,7 @@ class WorksController < ApplicationController
         set_design_categories params[:vaerker_cat] #Setting @works, @categories, @category and @onload
         @breadcrumb_child = {title: @category.name, path: 'vaerker_path("' + @category.slug + '")'}
         render_design = true
-      elsif ["handtegninger", "fotos", "livet i tre huse"].include? params[:vaerker_cat]
+      elsif ["handtegninger", "fotos", "livet-i-tre-huse"].include? params[:vaerker_cat]
         @pagination = true
         set_about_categories params[:vaerker_cat] # @prev, @category, and @next
         @works = @category.works
