@@ -1,9 +1,8 @@
-<%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" if user_signed_in? %>
-
 <%= render partial: 'about/pagination',
   locals: { prev: { title: 'Livet i tre huse', path: 'tre_huse_path()'},
             next_w: { title: 'Fakta', path: 'facts_path()'} } %><!-- passer ikke -->
 
+<%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" if user_signed_in? %>
 <% if @videos.any? %>
 <h2 class="py4 text-center">Videoer</h2>
   <div class="">
