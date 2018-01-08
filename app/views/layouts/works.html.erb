@@ -24,7 +24,9 @@
       <%= render partial: "shared/masthead" %>
       <%= render partial: "shared/navbar", locals: {categories: @categories} %>
 
-      <%= yield %>
+      <div class="container-yield">
+        <%= yield %>
+      </div>
       <%= render partial: "shared/footer" %>
 
     </div>

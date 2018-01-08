@@ -24,6 +24,11 @@
 @import "bootstrap";
 @import 'imports/font_calls';  // Corbel, LinLibertine, Linux Libertine C
 @import 'imports/mixins';
+
+.container-yield {
+    min-height: 500px;
+}
+
 p {
 
   font-family: "LinLibertine";

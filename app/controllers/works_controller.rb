@@ -1,4 +1,5 @@
 class WorksController < ApplicationController
+
   access all: [:show, :index, :design_index, :new_image, :new_image_category, :overview_img], user: {except: [:destroy]}, site_admin: :all
   layout "works"
 
@@ -32,6 +33,10 @@ class WorksController < ApplicationController
         set_design_categories params[:vaerker_cat] #Setting @works, @categories, @category and @onload
         @breadcrumb_child = {title: @category.name, path: 'vaerker_path("' + @category.slug + '")'}
         render_design = true
+      elsif ["handtegninger", "fotos", "livet i tre huse"].include? params[:vaerker_cat]
+        @pagination = true
+        set_about_categories params[:vaerker_cat] # @prev, @category, and @next
+        @works = @category.works
       else
         @category = Category.friendly.find(params[:vaerker_cat])
         @works = @category.works
@@ -89,7 +94,9 @@ class WorksController < ApplicationController
       end
     end
     last_work_in_category = Category.find(@work.category.id).works.last
-    unless last_work_in_category.position.nil?
+    if last_work_in_category.nil? || last_work_in_category.position.nil?
+      @work.position = 1
+    else
       @work.position = last_work_in_category.position + 1 # Den bliver lagt oven i de andre værker, så den får en position
     end
     if @work.save!
@@ -173,17 +180,13 @@ class WorksController < ApplicationController
   end
 
   def update
-
     @work = Work.friendly.find(params[:id])
-
     if @work.update(work_params)
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."
       redirect_to work_path(@work)
     else
       redirect_to kategori_oversigt_path(@work.category_id)
     end
-
-
   end
 
   def get_overview_img
@@ -201,6 +204,24 @@ class WorksController < ApplicationController
   end
 
   private
+
+  def set_about_categories cat_params
+    @next, @prev = [{}, {}]
+    case cat_params
+    when 'handtegninger'
+      @prev = {title: "Tidslinje", path: "tidslinje_path()"}
+      @next = {title: "Fotos", path: "vaerker_path('fotos')"}
+      @category = Category.friendly.find(cat_params)
+    when 'fotos'
+      @prev = {title: "Håndtegninger", path: "vaerker_path('handtegninger')"}
+      @next = {title: "Livet i tre huse", path: "vaerker_path('livet-i-tre-huse')"}
+      @category = Category.friendly.find(cat_params)
+    else
+      @prev = {title: "Fotos", path: "vaerker_path('fotos')"}
+      @next = {title: "Videoer", path: 'videos_path()'}
+      @category = Category.friendly.find(cat_params)
+    end
+  end
 
   def set_design_categories cat_param, noload=false
     @categories = []

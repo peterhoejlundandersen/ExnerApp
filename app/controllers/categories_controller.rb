@@ -4,6 +4,7 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
   end
+
   def edit
     @category = Category.friendly.find(params[:id])
   end
@@ -28,7 +29,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.where.not(id: [15, 18, 13])
+    @categories = Category.where.not(id: [15, 18, 13, 21])
     @header_title = "Oversigt"
     logged_in = current_user
     default_categories = get_default_categories

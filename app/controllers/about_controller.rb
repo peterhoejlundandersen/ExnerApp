@@ -16,7 +16,13 @@ class AboutController < ApplicationController
   end
 
   def haandtegninger
+    @category = Category.find(21)
+    @works = @category.works
     @breadcrumb_child = {title: "Håndtegninger", path: "haandtegninger_path()"}
+    respond_to do |format|
+      format.html
+      format.json { render json: {category: @category, works: @works} }
+    end
   end
 
   def trehuse

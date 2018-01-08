@@ -3,9 +3,11 @@ class Category < ApplicationRecord
 	mount_uploader :image, CategoryUploader
 
 	friendly_id :name, use: :slugged
+
 	has_many :works, -> { order(:position) }
 
 	default_scope { order(:position) }
+
 	def works_sort
 		works.order(position: :asc)
 	end
