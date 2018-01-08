@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'danmarkskort' => 'static_pages#danmarkskort'
 
   devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' }
 

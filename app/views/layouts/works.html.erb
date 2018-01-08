@@ -9,6 +9,9 @@
     <% if content_for? :head %>
       <%= yield :head  %>
     <% end %>
+    <% if content_for? :custom_calls %>
+      <%= yield :custom_calls %>
+    <% end %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>

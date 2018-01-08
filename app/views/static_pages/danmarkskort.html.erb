@@ -1,0 +1,18 @@
+<% content_for :custom_calls do %>
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
+<% end %>
+<h2 class="py4 text-center">Danmarkskort</h2>
+<div id="danmarkskort">
+
+</div>
+
+<script>
+
+mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJob2VqbHVuZCIsImEiOiJjamM2YnRmOWYxZjdnMzNtbWdkYnJyZHpuIn0.YA23PjVD-QDVseZEEVTflQ';
+var map = new mapboxgl.Map({
+container: 'danmarkskort',
+style: 'mapbox://styles/mapbox/light-v9'
+});
+
+</script>
