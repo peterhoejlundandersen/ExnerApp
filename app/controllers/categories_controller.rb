@@ -29,7 +29,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.where.not(id: [15, 18, 13, 21])
+    @categories = Category.where.not(id: [15, 18, 13, 21, 22, 23]) # Not design and om categories
     @header_title = "Oversigt"
     logged_in = current_user
     default_categories = get_default_categories
