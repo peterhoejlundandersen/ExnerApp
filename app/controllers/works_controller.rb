@@ -245,7 +245,7 @@ class WorksController < ApplicationController
   def return_work_info work
     info = []
     info << "Sagsnr: #{work.sagsnr.to_s}" unless work.sagsnr.nil?
-    info << "Adresse: #{work.address}" unless work.address.nil?
+    info << "Adresse: #{work.address}" unless work.address.empty?
     info << "Konkurrenceår: #{work.competition.to_s}" unless work.competition.nil?
     info << "Indvielse: #{work.opening_year.to_s}" unless work.opening_year.nil?
     work.infos.each {|i| info << "#{i.title}" } unless work.infos.empty?

@@ -5,6 +5,27 @@ h1,h2,h3,h4,h5,h6 {
 	letter-spacing: 1px;
 }
 
+.pdf-cat-container {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  width: 20%;
+}
+.pdf-title {
+  font-size: 14px;
+}
+#pdfWrapper {
+  padding-left: 0!important;
+}
+.pdfs-container {
+  position: relative;
+  float: left;
+  width: 80%;
+}
+.pdf-works {
+  position: fixed;
+}
+
 .active {
 	text-decoration: underline;
 }
@@ -14,21 +35,9 @@ h1,h2,h3,h4,h5,h6 {
 .pdf-udgivet {
   font-family: Corbel;
 }
-.pdf-categories {   
-	overflow: hidden;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    .pdf-cat-inner {
-        padding-top: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid black;
-        min-height: 100px;
-        h4 {
-        }
-
-    }
+.pdf-cat-inner {
+  width: 100%;
+  display: block;
 }
 
 .pdf {

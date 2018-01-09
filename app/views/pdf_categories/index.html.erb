@@ -1,21 +1,39 @@
-<div class="container mt-4">
-  <div class="col-12"></div>
-  <div class="pdf-works row sortable">
-    <% @pdf_categories.each do |cat| %>
-      <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12 pdf-categories sortable-item" data-id="<%= cat.id %>" data-type="<%= cat.class.to_s %>">
-        <div class="col-md-12 pdf-cat-inner"">
-          <%= link_to show_this_pdf_category_path(cat.friendly_id) do %>
-            <h4 class="text-center <%= "active" if params[:kategori_id] == cat.slug %>"><%= cat.title %></h4>
-          <% end %>		
+<div class="row">
+  <div class="col-3" id="pdfWrapper">
+    <div class="fixme" id="pdfScroll"><!-- add pdf-works when scrolling -->
+      <% @pdf_categories.each do |cat| %>
+        <div class="pdf-cat-inner"">
+          <%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id),
+            class: "nav-link #{'active' if params[:kategori_id] == cat.slug}" %>
         </div>
-      </div>
-    <% end %>
-  </div><!-- pdf-works -->
-</div><!-- container -->
+      <% end %>
+    </div>
+  </div>
 <hr>
-<%= content_tag :h2, @cat_headline, class: "py-4 text-center" unless @cat_headline.nil? %>
 <% unless @pdfs.blank? 	%>
-  <div class="row sortable">
+  <div class="col-9 row">
+  <%= content_tag :h2, @cat_headline, class: "col-12 py-4 text-center" unless @cat_headline.nil? %>
     <%= render partial: "pdf", collection: @pdfs %>
   </div>
 <% end %> 
+</div><!-- container -->
+  <script>
+var fixmeTop = $('.fixme').offset().top;       // get initial position of the element
+$(window).scroll(function() {                  // assign scroll event listener
+    var currentScroll = $(window).scrollTop(); // get current position
+    if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+    width = $("#pdfWrapper").width();
+    left = $("#pdfWrapper").offset().left;
+      $('.fixme').css({                      // scroll to that element or below it
+          position: 'fixed',
+          top: '0',
+          left: left + 'px',
+          width: width + 'px'
+      });
+    } else {                                   // apply position: static
+      $('.fixme').css({                      // if you scroll above it
+          position: 'static'
+      });
+    }
+
+});</script>
