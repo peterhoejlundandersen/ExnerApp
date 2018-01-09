@@ -1,5 +1,15 @@
 <div class="indexbackground"><!-- billede -->
+   <img src="<%= image_url('inger-og-johannes-exner.jpg') %>" id="hiddenImage" hidden />
 </div>
+  <script>
+    $("#hiddenImage").on('load', function() {
+      image_src = $(this).attr('src');
+      $(".indexbackground").css({
+        "background-image": 'url(' + image_src + ')',
+        "background-size": 'cover' // The load icon shoudn't cover the while screen
+      });
+    });
+  </script>
 <div class="row indexwrapper">
   <div class="offset-lg-1 col-lg-10 frontpage-ark">
     <div class="h4 masthead-overskrift-ark">Arkitekterne</div><div class="h1 masthead-overskrift">Inger og Johannes Exner</div>
