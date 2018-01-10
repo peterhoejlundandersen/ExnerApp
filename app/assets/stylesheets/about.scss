@@ -2,15 +2,26 @@
 @import 'imports/font_calls';
 @import 'imports/colors';
 /* OM FORSIDE */
-.image-responsive {
-}
 .om-head {
-  padding-bottom: 0px!important;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 5px 5px 2px 5px!important;
+  padding-bottom: 2px!important;
+  background-color: white;
   font-size: 20px;
   margin-bottom: 0!important;
 }
-
+.image-responsive:hover {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+.image-responsive {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
 .om-box {
+  position: relative;
   line-height: 20px;
   overflow: hidden;
   padding-right: 0!important;
