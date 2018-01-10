@@ -25,6 +25,7 @@ class PdfsController < ApplicationController
   def update
     @pdf = Pdf.friendly.find(params[:id])
     @pdf.remove_image! if params[:pdf][:image]
+    params[:pdf][:date] = Time.new(params[:pdf][:date].to_i, 10, 10) unless params[:pdf][:date].empty?
     if @pdf.update(pdf_params)
       flash[:notice] = "\"#{@pdf.title}\" er blevet opdateret."
       redirect_to show_this_pdf_category_path(@pdf.pdf_category_id)
@@ -41,6 +42,7 @@ class PdfsController < ApplicationController
 
   def create
     @pdf = Pdf.new(pdf_params)
+    @pdf.date = Time.new(params[:pdf][:date].to_i) unless params[:pdf][:date].empty?
     if @pdf.save
       flash[:notice] = "Din artikel blev gemt"
       redirect_to show_this_pdf_category(@pdf.pdf_category_id)
@@ -53,6 +55,6 @@ class PdfsController < ApplicationController
   private
 
   def pdf_params
-    params.require(:pdf).permit(:title, :pdf_category_id, :image, :show_not)
+    params.require(:pdf).permit(:title, :pdf_category_id, :image, :show_not, :date)
   end
 end
