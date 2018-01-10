@@ -49,7 +49,7 @@ import { ImageCat } from './image_cat';
       </ul>
     </div>
     <div class="info-beskrivelse col-md-8">
-      <p>{{work_description}}</p>
+      <p [innerHTML]="returnWorkDescription(work_description)"></p>
     </div>
   </div>
   <!-- image categories -->
@@ -118,6 +118,10 @@ export class WorkShowComponent implements OnInit {
       this.thumbnail_loading = false, this.thumbnail_loading_counter = 0, this.loading_procent = 0; //Nulstil værdierne
     }
   }
+  returnWorkDescription(work_des) { // Linebreaks i beskrivelsen!
+    return work_des.replace(new RegExp('\n', 'g'), "<br />");
+  }
+
   onImageLoad() {
     this.image_loading = false;
   }

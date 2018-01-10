@@ -4,7 +4,7 @@
       <% @pdf_categories.each do |cat| %>
         <div class="pdf-cat-inner"">
           <%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id),
-            class: "nav-link #{'active' if params[:kategori_id] == cat.slug}" %>
+            class: "nav-link #{'active' if @pdf_cat.id == cat.id}" %>
         </div>
       <% end %>
     </div>

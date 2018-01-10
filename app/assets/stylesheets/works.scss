@@ -323,7 +323,7 @@ span.without-overview-text {
   @include transition(height .5s linear);
 }
 .show-info {
-  height: 200px;
+  height: auto;
 }
 .info-short-list {
   padding-left: 0;
