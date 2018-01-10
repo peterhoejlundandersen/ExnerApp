@@ -1,19 +1,66 @@
 <h2 class="text-center pt-4">Om</h2>
 
-<% if @fact.nil? %>
-  <p> <%= link_to "Opret 'Fakta om Inger og Johannes Exner'", new_fact_path() %> </p>
-<% else %>
-  <h3>1. <%= link_to @fact.title, facts_path() %> </h3>
+<div class="container-fluid"><!-- have no .. -->
+  <div class="row">
+  <% if @fact.nil? %>
+    <p> <%= link_to "Opret 'Fakta om Inger og Johannes Exner'", new_fact_path() %> </p>
+  <% else %>
+    <%= link_to facts_path(), class: "col-md-8 om-box" do %>
+      <%= image_tag "fakta.jpg", class: "image-responsive" %>
+      <h3 class="text-center text-uppercase om-head">
+      Fakta</h3>
+    <% end %>
+  <% end %>
+  
+  <%= link_to artikler_path(), class: "col-md-4 om-box" do %>
+    <%= image_tag "artikler.jpg", class: "image-responsive" %>
+    <h3 class="text-center text-uppercase om-head">
+      Artikler
+    </h3>
+  <% end %>
+  
+  
+  <%= link_to vaerker_path('handtegninger'), class: "col-md-4 om-box" do %>
+    <%= image_tag "handtegninger.JPG", class: "image-responsive" %>
+  <h3 class="text-center text-uppercase om-head handtegninger">
+    Håndtegninger
+  </h3>
+  <% end %>
+  
+  <%= link_to vaerker_path('fotos'), class: "col-md-8 om-box fotos-box" do %>
+    <%= image_tag "fotos.jpg", class: "image-responsive" %>
+  <h3 class="text-center text-uppercase fotos om-head">
+    Fotos
+  </h3>
+<% end %>
+  
+
+<%= link_to tidslinje_path(), class: "col-md-4 om-box tidslinje-box" do %>
+
+  <%= image_tag "tidslinje", class: "image-responsive" %>
+  <h3 class="text-center text-uppercase tidslinje om-head">
+    Tidslinje
+  </h3>
+
 <% end %>
 
-<h3>2. <%= link_to "Artikler", artikler_path() %> </h3>
+<%= link_to videos_path(), class: "col-md-8 om-box" do %>
+  <%= image_tag 'videos', class: "image-responsive" %>
+  <h3 class="text-center text-uppercase om-head">
+    Videoer
+  </h3>
+<% end %>
 
-<h3>3. <%= link_to "Tidslinje", tidslinje_path() %> </h3>
+<%= link_to vaerker_path("livet-i-tre-huse"), class: "col-md-12 om-box tre-huse-box" do %>
+  <%= image_tag 'tre-huse', class: "image-responsive" %>
 
-<h3>4. <%= link_to 'Håndtegninger', vaerker_path('handtegninger') %> </h3>
+  <h3 class="text-center text-uppercase tre-huse om-head">
+    Livet i tre huse
+  </h3>
 
-<h3>5. <%= link_to "Fotos", vaerker_path('fotos') %></h3>
+<% end %>
 
-<h3>6. <%= link_to "Livet i tre huse", vaerker_path('livet-i-tre-huse') %> </h3>
+  
+  </div><!-- row -->
+</div>
 
-<h3>7. <%= link_to "Videoer", videos_path() %>  </h3>
