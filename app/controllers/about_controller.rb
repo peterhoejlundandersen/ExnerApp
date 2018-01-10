@@ -7,7 +7,7 @@ class AboutController < ApplicationController
   end
 
   def artikler
-    @artikler = Pdf.where.not(pdf_category_id: [1,2])
+    @artikler = Pdf.where(pdf_category_id: [1,2])
     @breadcrumb_child = {title: "Artikler", path: "artikler_path()"}
   end
 

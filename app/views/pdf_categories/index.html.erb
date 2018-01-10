@@ -7,6 +7,12 @@
             class: "nav-link #{'active' if @pdf_cat.id == cat.id}" %>
         </div>
       <% end %>
+      <br>
+      <br>
+        <div class="pdf-cat-inner"">
+          <%= link_to "Til andres tekster &#8594;".html_safe, artikler_path(), class: "nav-link" %>
+
+        </div>
     </div>
   </div>
 <hr>
