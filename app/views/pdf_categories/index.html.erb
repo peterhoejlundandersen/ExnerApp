@@ -18,7 +18,7 @@
 <hr>
 <% unless @pdfs.blank? 	%>
   <div class="col-9 row">
-  <%= content_tag :h2, @cat_headline, class: "col-12 py-4 text-center" unless @cat_headline.nil? %>
+  <%= content_tag :h2, @cat_headline, class: "col-12 py-4 pdf-cat-headline" unless @cat_headline.nil? %>
     <%= render partial: "pdf", collection: @pdfs %>
   </div>
 <% end %> 

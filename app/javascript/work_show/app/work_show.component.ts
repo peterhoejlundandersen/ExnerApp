@@ -42,7 +42,6 @@ import { ImageCat } from './image_cat';
   </div>
   
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
-    <h2 class="col-12">Information</h2>
     <div class="info-kort col-md-4">
       <ul class="info-short-list">
         <li *ngFor="let info of work_info">{{info}}</li>
