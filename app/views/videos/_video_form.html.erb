@@ -24,7 +24,11 @@
     </div>
     <hr>
     <div class="link-text-field form-group">
-      <%= f.label "Link" %><br><small>Indtastet linket til den hjemmeside, hvor videoen bliver vist.</small><br>
+      <%= f.label :link_anker, "Link anker" %><br><small>Det som linket skal ramme. (Hvad man trykker på, for at gå til videoen)</small><br>
+      <%= f.text_field :link_anker, class: "form-control" %>
+    </div>
+    <div class="link-text-field form-group">
+      <%= f.label :link, "Link" %><br><small>Indtastet linket til den hjemmeside, hvor videoen bliver vist.</small><br>
       <%= f.text_field :link, class: "form-control" %>
     </div>
   </div>
@@ -42,6 +46,15 @@
     <br>
     <%= f.label :description, "Beskrivelse" %><br>
     <%= f.text_area :description, class: "form-control" %>
+  </div>
+  <hr>
+  <div class="form-group">
+    <%= f.label :year, "Vælg år" %>
+      <% if @video.year.nil? %>
+        <%= f.select :year, (Date.today.year-70)..(Date.today.year), :selected => @video.year, :include_blank => '-intet-valgt-' %>
+      <% else %>
+        <%= f.select :year, (Date.today.year-70)..(Date.today.year), :selected => @video.year %>
+      <% end %>
   </div>
   <hr>
 

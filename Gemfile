@@ -1,4 +1,4 @@
-ruby '2.4.0'
+ruby '2.4.1'
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -18,23 +18,22 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'capybara'
-  # gem 'factory_girl' # FEJL, NÅR JEG PRØVER AT FÅ VIST ROUTES, TAGET UD FOR NU
   gem 'guard-rspec'
 end
 
 group :development do
   gem 'rails_real_favicon'
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'listen', '>= 3.0.5', '< 3.2' # Hvad er du?
+  gem 'spring' # Hvad er du? 
+  gem 'spring-watcher-listen', '~> 2.0.0' #Hvad er du?
 end
 
 group :production do 
-  gem 'rails_12factor', group: :production
+  gem 'rails_12factor', group: :production # Er du stadig nødvendig?
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Hvad er du?
 
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
@@ -55,4 +54,3 @@ gem 'tinymce-rails'
 gem 'webpacker', '~> 3.0'
 gem 'foreman'
 
-gem 'dotenv-rails', groups: [:development, :test]

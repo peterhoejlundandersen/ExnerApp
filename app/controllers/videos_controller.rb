@@ -3,8 +3,8 @@ class VideosController < ApplicationController
   layout 'works'
 
   def index
-    @videos = Video.where(only_link: false)
-    @links = Video.where(only_link: true)
+    @videos = Video.all
+    #@videos = Video.where(only_link: false)
   end
 
   def new
@@ -12,6 +12,7 @@ class VideosController < ApplicationController
   end
 
   def create
+    params[:video][:year] = Time.new(params[:video][:year].to_i, 10, 10) unless params[:video][:year].empty?
     @video = Video.new(video_params)
     if @video.save
       flash[:notice] = "'#{@video.title}' er blevet oprettet."
@@ -28,6 +29,7 @@ class VideosController < ApplicationController
 
   def update
     @video = Video.find(params[:id])
+    params[:video][:year] = Time.new(params[:video][:year].to_i, 10, 10) unless params[:video][:year].empty?
     if @video.update(video_params)
       flash[:notice] = "'#{@video.title}' er opdateret"
       redirect_to videos_path();
@@ -50,6 +52,6 @@ class VideosController < ApplicationController
 
   private
   def video_params
-    params.require(:video).permit(:title, :description, :only_link, :video_url, :link_image)
+    params.require(:video).permit(:title, :description, :only_link, :video_url, :link_image, :link, :link_anker, :year)
   end
 end
