@@ -23,6 +23,11 @@
         <%= f.label :title, "Titel:" %>
         <%= f.text_field :title, style: "width: 100%" %>
       </div>
+      <hr>
+      <div class="form-field">
+        <%= f.label :show_not, "Vis ikke" %><br>
+        <%= f.check_box :show_not, class: " form-control" %>
+      </div>
 
       <div class="form-field mt-4">
         <%= link_to "Tilbage", show_this_pdf_category_path(@pdf_category.id), class: "btn btn-secondary" %>

@@ -4,5 +4,5 @@ class Pdf < ApplicationRecord
 	friendly_id :title, use: [:slugged, :finders]
 	belongs_to :pdf_category
 
-	default_scope {order(:position)}
+  default_scope { order(date: :asc)  }
 end

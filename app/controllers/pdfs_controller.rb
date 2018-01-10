@@ -35,13 +35,24 @@ class PdfsController < ApplicationController
   end
 
   def new
+    @pdf_category = PdfCategory.find(params[:pdf_category_id])
     @pdf = Pdf.new()
   end
 
+  def create
+    @pdf = Pdf.new(pdf_params)
+    if @pdf.save
+      flash[:notice] = "Din artikel blev gemt"
+      redirect_to show_this_pdf_category(@pdf.pdf_category_id)
+    else
+      flash.now[:alert] = "Noget gik galt, prøv igen"
+      render :new
+    end
+  end
 
   private
 
   def pdf_params
-    params.require(:pdf).permit(:title, :pdf_category_id, :image)
+    params.require(:pdf).permit(:title, :pdf_category_id, :image, :show_not)
   end
 end

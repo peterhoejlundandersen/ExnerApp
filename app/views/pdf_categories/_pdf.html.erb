@@ -1,4 +1,7 @@
-<div class=" col-md-3 col-4 pdf">
+<div class=" col-md-3 col-4 pdf <%= 'pdf-not-shown' if pdf.show_not %>">
+  <% if pdf.show_not %>
+    <small>Bliver ikke vist til besøgende</small>
+  <% end%>
   <%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if logged_in?(:site_admin) %>
   <hr>
     <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
