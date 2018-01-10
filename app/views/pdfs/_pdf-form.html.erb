@@ -25,7 +25,6 @@
       </div>
       <hr>
       <%= @pdf.date unless @pdf.date.nil? %>
-      
       <div class="form-field text-center">
         <%= f.label :date, "Vælg år" %>
         <% if @pdf.date.nil? %>
@@ -38,7 +37,7 @@
       <hr>
       <div class="form-field">
         <%= f.label :show_not, "Vis ikke" %><br>
-        <%= f.check_box :show_not, class: " form-control" %>
+        <%= f.check_box :show_not, {class: "form-control"}, "true", "false"  %>
       </div>
 
       <div class="form-field mt-4">

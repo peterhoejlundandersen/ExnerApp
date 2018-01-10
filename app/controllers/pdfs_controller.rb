@@ -26,7 +26,8 @@ class PdfsController < ApplicationController
     @pdf = Pdf.friendly.find(params[:id])
     @pdf.remove_image! if params[:pdf][:image]
     params[:pdf][:date] = Time.new(params[:pdf][:date].to_i, 10, 10) unless params[:pdf][:date].empty?
-    if @pdf.update(pdf_params)
+    byebug
+    if @pdf.update!(pdf_params)
       flash[:notice] = "\"#{@pdf.title}\" er blevet opdateret."
       redirect_to show_this_pdf_category_path(@pdf.pdf_category_id)
     else
