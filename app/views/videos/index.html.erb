@@ -25,6 +25,7 @@
             </iframe>
             <% end %>
             <div class="col-md-6 description">
+              <%= content_tag :p, 'År ' + vid.year.strftime("%Y") unless vid.year.nil? %>
               <%= simple_format vid.description if vid.description? %><br>
               <p><%= link_to "#{vid.link_anker} &#8594;".html_safe, vid.link, target: "_blank" unless vid.only_link.blank? || vid.link_anker.nil? %></p>
             </div>

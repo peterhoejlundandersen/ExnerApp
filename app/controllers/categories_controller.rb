@@ -54,17 +54,18 @@ class CategoriesController < ApplicationController
 
   def get_default_categories
     default_categories = {
-       image: ActionController::Base.helpers.asset_path('johannes-tekster'),
+       image: view_context.image_path('johannes-tekster'),
        slug: "johannes-exners-tekster/vis-alle",
        name: "Johannes' tekster",
        id: 999 # For image load in angular
       },
       {
-       image: ActionController::Base.helpers.asset_path('om-inger-og-johannes'),
+       image: view_context.image_path('om-inger-og-johannes'),
        slug: "om",
        name: "Om Inger og Johannes",
        id: 9999 # For image load in angular
       }
+      return default_categories
   end
 
   def cat_params
