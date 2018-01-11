@@ -1,7 +1,7 @@
 <%= render partial: 'about/pagination',
   locals: { prev: { title: 'Fakta', path: 'facts_path()'},
             next_w: { title: 'Tidslinje', path: 'tidslinje_path()'} } %>
-<h2 class="py4 text-center">Artikler</h2>
+<h2 class="py-4 text-center">Artikler</h2>
 <div class="row">
-  <%= render partial: "artikle", collection: @artikler %>
+   <%= render partial: "pdf_categories/pdf", collection: @artikler %>
 </div>

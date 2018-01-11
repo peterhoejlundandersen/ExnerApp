@@ -1,4 +1,5 @@
 <div class="row">
+  <% if with_cats %>
   <div class="col-3" id="pdfWrapper">
     <div class="fixme" id="pdfScroll"><!-- add pdf-works when scrolling -->
       <% @pdf_categories.each do |cat| %>
@@ -14,8 +15,9 @@
 
         </div>
     </div>
-  </div>
+  </div><!-- pdfWrapper -->
 <hr>
+<% end %>
 <% unless @pdfs.blank? 	%>
   <div class="col-9 row">
   <%= content_tag :h2, @cat_headline, class: "col-12 py-4 pdf-cat-headline" unless @cat_headline.nil? %>
