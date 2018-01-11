@@ -19,13 +19,13 @@ import 'rxjs/add/operator/map';
           </a>
     </div>
     <!-- FIXED FLEXBOX FLOAT LEFT ISSUE -->
-    <div [class.vertical-image]="organs" class="overview-work">
+    <div [class.vertical-image]="organs" *ngIf="works.length !== 3" class="overview-work">
       <div class="overview-img-block"></div>
     </div>
-    <div [class.vertical-image]="organs" class="overview-work hidden-md-down">
+    <div [class.vertical-image]="organs"  *ngIf="works.length != 3" class="overview-work hidden-md-down">
       <div class="overview-img-block"></div>
     </div>
-    <div [class.vertical-image]="organs" class="overview-work hidden-md-down">
+    <div [class.vertical-image]="organs"  *ngIf="works.length != 3" class="overview-work hidden-md-down">
       <div class="overview-img-block"></div>
     </div>
 

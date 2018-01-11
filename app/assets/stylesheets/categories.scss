@@ -4,7 +4,6 @@
   @include flex;
   @include flex-wrap(wrap);
   @include justify-content(space-between);
-  min-height: 805px;
 }
 .normal-menu-wrapper {
   @include flex;

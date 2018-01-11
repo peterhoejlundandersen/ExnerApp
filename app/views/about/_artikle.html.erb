@@ -1,9 +1,0 @@
-<div class="custom-5-col col-md-3 col-sm-4 col-6 pdf">
-  <%= link_to "Rediger", edit_pdf_category_pdf_path(artikle.pdf_category_id, artikle), class: "btn btn-secondary" if logged_in?(:site_admin) %>
-  <hr>
-    <%= link_to pdf_category_pdf_path(artikle.pdf_category_id, artikle)  do %>
-      <%= content_tag :div, (image_tag artikle.image.thumb.url), class:"img-wrapper" unless artikle.image.thumb.url.nil? %>
-      <h5 class="pt-3"><%= artikle.title %></h5>
-      <%= content_tag :p, artikle.date.strftime("%Y"), class: "pdf-udgivet" unless artikle.date.nil? %>
-    <% end %>
-</div>

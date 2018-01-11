@@ -8,13 +8,13 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'categories-index', 
   template: `
-  <div class="pt-4 sortable oversigt-wrapper">
+  <div class="oversigt-wrapper">
       <div *ngFor="let category of categories; let i = index" class="oversigt-img-wrapper text-center sortable-item" [attr.data-id]="category.id" data-type="Category">
           <a [attr.href]="'vaerker/' + category.slug">
             <img *ngIf="category.image.url" [src]="category.image.url" (load)="assignImageValue(category.image.url, i)" hidden>
             <div class="center-block overview-img" [attr.id]="'overviewImage' + i">
             </div>
-            <h2 class="overview-header text-center text-uppercase pt-2">{{category.name}}</h2>
+            <h2 class="overview-header text-center text-uppercase">{{category.name}}</h2>
           </a>
         <a *ngIf="logged_in" [attr.href]="'/categories/' + category.slug + '/edit'">Rediger kategori</a>
       </div>

@@ -35,12 +35,9 @@ html, body {
 .works-wrapper {
   margin: 0 auto!important;
   max-width: 1400px;
-  padding-top: 28px;
   @include justify-content(space-between);
   @media screen and (max-width: 1000px) {
     @include justify-content(space-around);
-  }
-  .overview-work {
   }
   .overview-img-block {
     opacity: 0;
@@ -405,7 +402,7 @@ span.without-overview-text {
 }
 .overview-work {
   padding: 0;
-  margin: 10px 0;
+  margin: 0px 0 10px 0;
 }
 .overview-work-vert {
   min-width: 20%;
