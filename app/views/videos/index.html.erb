@@ -4,7 +4,6 @@
 
 <%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" if user_signed_in? %>
 <% if @videos.any? %>
-<h2 class="py4 text-center">Videoer</h2>
   <div class="">
     <% @videos.each do |vid| %>
       <div class="videoes">

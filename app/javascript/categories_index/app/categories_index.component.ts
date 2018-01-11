@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
             <img *ngIf="category.image.url" [src]="category.image.url" (load)="assignImageValue(category.image.url, i)" hidden>
             <div class="center-block overview-img" [attr.id]="'overviewImage' + i">
             </div>
-            <h4 class="overview-header text-center text-uppercase pt-2">{{category.name}}</h4>
+            <h2 class="overview-header text-center text-uppercase pt-2">{{category.name}}</h2>
           </a>
         <a *ngIf="logged_in" [attr.href]="'/categories/' + category.slug + '/edit'">Rediger kategori</a>
       </div>
@@ -23,7 +23,7 @@ import 'rxjs/add/operator/map';
         <img [src]="def_category.image" (load)="assignImageValue(def_category.image, def_category.id)" hidden>
           <div class="center-block overview-img" [attr.id]="'overviewImage' + def_category.id">
           </div>
-          <h4 class="overview-header text-center text-uppercase pt-2 ">{{def_category.name}}</h4>
+          <h2 class="overview-header text-center text-uppercase pt-2 ">{{def_category.name}}</h2>
         </a>
     </div>
   </div><!-- oversigt-wrapper -->

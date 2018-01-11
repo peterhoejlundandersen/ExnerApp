@@ -1,3 +1,4 @@
+@import 'imports/font_calls';
 @import 'imports/mixins';
 
 .pdf-cat-headline {
@@ -21,7 +22,7 @@ h1,h2,h3,h4,h5,h6 {
   width: 20%;
 }
 .pdf-title {
-  font-size: 14px;
+  font-family: "LinLibertine";
 }
 #pdfWrapper {
   padding-left: 0!important;

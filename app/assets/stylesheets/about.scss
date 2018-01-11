@@ -38,6 +38,10 @@
   min-width: 400px;
   margin: 0 auto;
 }
+.facts-edit {
+  @extend .om-head;
+  top: 0;
+}
 .to-top {
   @include transition(opacity .6s ease-in);
   background-image: url(image-path("arrow-top"));

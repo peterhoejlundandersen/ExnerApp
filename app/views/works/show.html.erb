@@ -1,6 +1,6 @@
 <%= logged_in_work_helper if logged_in?(:site_admin) %>
 
-<h1 class="work-headline text-center"><%= @work.name %></h1>
+<h1 class="text-center"><%= @work.name %></h1>
 
 <span class="hide-it" id="imgCat" data-img-cat="<%= @first_image_category.id %>"></span>
   <work-show class="large-loading" ></work-show>

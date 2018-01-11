@@ -21,7 +21,7 @@ class FactsController < ApplicationController
   end
 
   def update
-    @fact = Fact.first
+    @fact = Fact.last
     if @fact.update(fact_params)
       flash[:notice] = "'#{@fact.title}' er blevet opdateret"
       redirect_to facts_path()
@@ -32,7 +32,7 @@ class FactsController < ApplicationController
   end
 
   def index
-    @fact = Fact.first
+    @fact = Fact.last
   end
 
   private

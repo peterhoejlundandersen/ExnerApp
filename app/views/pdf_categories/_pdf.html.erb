@@ -7,6 +7,6 @@
     <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
       <%= content_tag :p, pdf.date.strftime("%Y"), class: "pdf-udgivet pdf-title" unless pdf.date.nil? %>
       <%= content_tag :div, (image_tag pdf.image.thumb.url), class:"img-wrapper" unless pdf.image.thumb.url.nil? %>
-      <h5 class="pt-3 pdf-title"><%= pdf.title %></h5>
+      <p class="pt-3 pdf-title"><%= pdf.title %></p>
     <% end %>
 </div>

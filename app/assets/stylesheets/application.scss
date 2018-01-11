@@ -29,15 +29,6 @@
     min-height: 500px;
 }
 
-p {
-
-  font-family: "LinLibertine";
-}
-
-h1,h2,h3,h4,h5,h6 {
-  font-family: Corbel; 
-  letter-spacing: 2px;
-}
 .hide-it {
   display: none; 
 }
@@ -53,18 +44,6 @@ h1,h2,h3,h4,h5,h6 {
 
 .devise-layout {
   margin-top: 6%;
-}
-
-/* Navbar overwriting bootstrap default */
-a {
-  color: black;
-  &:hover {
-    color: black;
-  }
-}
-
-.nav-link:hover {
-  text-decoration: underline;
 }
 
 .masthead-overskrift {
