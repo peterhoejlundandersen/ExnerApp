@@ -19,7 +19,7 @@
     <p> <%= link_to "Opret 'Fakta om Inger og Johannes Exner'", new_fact_path() %> </p>
   <% else %>
     <%= link_to facts_path(), class: "col-md-4 om-box " do %>
-      <%= image_tag "fakta.jpg", class: "image-responsive" %>
+      <%= image_tag "fakta-ny.jpg", class: "image-responsive" %>
       <h2 class=" text-uppercase om-head">
         <%= @fact.title %>
       </h2>
@@ -34,6 +34,14 @@
 <% end %>
   
 
+
+<%= link_to videos_path(), class: "col-md-8 om-box" do %>
+  <%= image_tag 'videos', class: "image-responsive" %>
+  <h2 class=" text-uppercase om-head">
+    Videoer
+  </h2>
+<% end %>
+
 <%= link_to tidslinje_path(), class: "col-md-4 om-box tidslinje-box" do %>
 
   <%= image_tag "tidslinje", class: "image-responsive" %>
@@ -41,13 +49,6 @@
     Tidslinje
   </h2>
 
-<% end %>
-
-<%= link_to videos_path(), class: "col-md-8 om-box" do %>
-  <%= image_tag 'videos', class: "image-responsive" %>
-  <h2 class=" text-uppercase om-head">
-    Videoer
-  </h2>
 <% end %>
 
 <%= link_to vaerker_path("livet-i-tre-huse"), class: "col-md-12 mb-4 om-box tre-huse-box" do %>
