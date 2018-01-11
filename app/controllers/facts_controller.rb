@@ -17,7 +17,7 @@ class FactsController < ApplicationController
   end
 
   def edit
-    @fact = Fact.first # Der bliver kun lavet ét!
+    @fact = Fact.last # Der bliver kun lavet ét!
   end
 
   def update

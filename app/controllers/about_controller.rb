@@ -3,7 +3,7 @@ class AboutController < ApplicationController
   before_action :set_parent_breadcrumb
 
   def index
-    @fact = Fact.first unless Fact.first.nil?
+    @fact = Fact.last unless Fact.last.nil?
   end
 
   def artikler
