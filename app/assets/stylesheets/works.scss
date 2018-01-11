@@ -154,20 +154,20 @@ span.without-overview-text {
 }
 
 .blog-nav {
-  height: 58px;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-evenly;
-  text-align: center;
-  left: 0;
-  font-size: 0.8em;
-  font-family: Corbel;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  @include justify-content(flex-end);
+  @include flex;
+  @include flex-wrap(nowrap);
+  @include align-items(center);
   background-color: $nav-color;
   color: white;
   cursor: pointer;
+  font-size: 0.8em;
+  font-family: Corbel;
+  left: 0;
+  letter-spacing: 2px;
+  height: 58px;
+  text-align: center;
+  text-transform: uppercase;
   padding: 0 10px;
   .active {
     text-decoration: underline;
