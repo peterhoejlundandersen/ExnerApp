@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula'; // Here
 
 import { WorksIndexComponent } from './works_index.component';
 
@@ -11,6 +12,7 @@ import { WorksIndexComponent } from './works_index.component';
   imports: [
     BrowserModule,
     HttpModule,
+    DragulaModule
   ],
   providers: [],
   bootstrap: [ WorksIndexComponent ]

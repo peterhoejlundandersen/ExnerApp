@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'works-index',
   template: `
-  <div class="row sortable works-wrapper"> 
+  <div class="row sortable works-wrapper" [dragula]='"first-bag"'> 
     <div *ngFor="let work of works; let i = index" [class.vertical-image]="organs" class="overview-work sortable-item" [attr.data-id]="work.id" [attr.data-type]="">
           <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
           <a [href]="'/works/' + work.slug">
