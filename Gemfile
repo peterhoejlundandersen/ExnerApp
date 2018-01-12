@@ -14,7 +14,6 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'dotenv-rails'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'capybara'
@@ -54,3 +53,5 @@ gem 'tinymce-rails'
 gem 'webpacker', '~> 3.0'
 gem 'foreman'
 
+# Oh my fucking god - if"
+gem 'angular_rails_csrf'

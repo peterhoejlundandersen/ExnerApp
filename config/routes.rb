@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'danmarkskort' => 'static_pages#danmarkskort'
 
+  post 'sorting-objects' => 'application#sorting_objects'
+
   devise_for :users, path: '', path_names: { sign_in: 'log-in', sign_up: 'opret-bruger' }
 
   resources :categories, except: :index
