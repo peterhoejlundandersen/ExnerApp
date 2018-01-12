@@ -54,7 +54,8 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     </div>
   </div>
   <!-- image categories -->
-  <div class="blog-nav img-cat-nav" data-navbar="img">
+  <div class="blog-nav img-cat-nav" data-navbar="img"
+    [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button" (click)="openInfo()">Info</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
     class="nav-link text-center"
