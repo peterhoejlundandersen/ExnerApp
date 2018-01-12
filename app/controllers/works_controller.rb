@@ -35,6 +35,7 @@ class WorksController < ApplicationController
         render_design = true
       elsif ["handtegninger", "fotos", "livet-i-tre-huse"].include? params[:vaerker_cat]
         @pagination = true
+        @no_padding_top = true
         set_about_categories params[:vaerker_cat] # @prev, @category, and @next
         @works = @category.works
       else
@@ -137,6 +138,7 @@ class WorksController < ApplicationController
       image_cats = work.image_categories
       image_cats_index = (image_cats.length < 2) ? -1 : 0
       large_image = images.first
+      work_title = work.name
 
       prev_work, next_work = work.position.nil? ? ["", ""] : get_next_and_previous_work(cat.works, work)
 
@@ -149,7 +151,8 @@ class WorksController < ApplicationController
             image_cats_index: image_cats_index,
             work_info: {short: work_info, description: work_description},
             pagination: {prev: prev_work, next: next_work},
-            parent_cat: {slug: cat.slug, name: cat.name}
+            parent_cat: {slug: cat.slug, name: cat.name},
+            work_title: work_title
           }
         }
       end

@@ -1,3 +1,4 @@
+<% content_for :padding_top_container, "false" if @no_padding_top %>
 <%= render partial: 'about/pagination',
   locals: { prev: { title: @prev[:title], path: @prev[:path]},
               next_w: { title: @next[:title], path: @next[:path] } } unless @pagination.nil? %>

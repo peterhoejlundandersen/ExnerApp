@@ -24,7 +24,7 @@
       <%= render partial: "shared/masthead" %>
       <%= render partial: "shared/navbar", locals: {categories: @categories} %>
 
-      <div class="container-yield">
+      <div class="container-yield <%= 'container-p-top' unless content_for?(:padding_top_container) %>">
         <%= yield %>
       </div>
       <%= render partial: "shared/footer" %>

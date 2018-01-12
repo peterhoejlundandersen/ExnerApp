@@ -1,3 +1,4 @@
+<% content_for :padding_top_container, "false" %>
 <%= render partial: 'about/pagination',
   locals: { prev: { title: 'Videoer', path: 'videos_path()'},
             next_w: { title: 'Artikler', path: 'artikler_path()'} } %>
@@ -7,9 +8,34 @@
   </div>
 </div>
 <hr>
+<a href="#" class="to-top" id="toTop"><span class="to-top-text">Til toppen</span></a>
 <div class="facts">
   <% unless @fact.nil? %>
     <h1 class="pb-4 text-center"><%= @fact.title %></h1>
     <%= @fact.text.html_safe unless @fact.nil? %>
   <% end %>
 </div>
+
+
+  <script>
+$(document).ready(function() {
+  $(".to-top").click(function(e) {
+    e.preventDefault();
+    $(this).removeClass('to-top-show');
+    window.scrollTo(0, 0);
+  });
+
+});
+// GODE GAMLE JAVASCRIPT!
+var to_top = document.getElementById('toTop');
+var showToTop = function() {
+  var y = window.scrollY;
+  if (y > window.outerHeight) {
+    to_top.classList.add("to-top-show");
+  } else {
+    to_top.classList.remove("to-top-show");
+  }
+}
+
+window.addEventListener("scroll", showToTop);
+</script>

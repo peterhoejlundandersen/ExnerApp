@@ -70,10 +70,18 @@ footer {
 
 .thumb-images {
   padding-bottom: 40px;
+  img {
+    position: relative;
+    -webkit-backface-visibility: hidden; // https://stackoverflow.com/questions/12980153/image-moves-on-hover-chrome-opacity-issue
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    transform: rotate(0);
+  }
 }
 
 .work-header {
   font-family: LinLibertine;
+
 }
 
 .overview-work-h2 {
@@ -128,15 +136,6 @@ footer {
   height: 251px;
 }
 
-.work-headline {
-  font-family: Corbel;
-  text-align: center;
-  font-weight: 400;
-  text-transform: uppercase;
-  font-size: 1.7em!important;
-  letter-spacing: 2px;
-  margin-top: 20px;
-}
 
 span.without-overview-text {
   height: 100%;
@@ -208,9 +207,6 @@ span.without-overview-text {
   position: relative;
 }
 
-.work-headline {
-  text-transform: uppercase;
-}
 .large-image {
   min-height: 100vh;  
 }

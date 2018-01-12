@@ -5,15 +5,17 @@ class PdfsController < ApplicationController
     pdf_viewer = "/pdfjs/web/viewer.html?file="
     pdf = Pdf.friendly.find(params[:id])
     @pdf_category = pdf.pdf_category
-    if @pdf = Pdf.exists?(pdf.id + 1)
-      pdf == Pdf.last  ? @next_pdf = Pdf.first : @next_pdf = Pdf.find(pdf.id + 1)
-    end
-    if @pdf = Pdf.exists?(pdf.id - 1)
-      pdf == Pdf.first ? @prev_pdf = Pdf.last : @prev_pdf = Pdf.find(pdf.id - 1)
-    end
+    pdfs = @pdf_category.pdfs.where.not(show_not: true)
+    @prev_pdf, @next_pdf = get_next_and_previous_pdf(pdfs, pdf)
     @pdf_url = pdf_viewer + pdf.file
     @pdf_file_url = pdf.file # For printinh
     @header_title = pdf.title
+  end
+
+  def get_next_and_previous_pdf(pdfs, current_pdf)
+    prev_pdf = pdfs.reverse.detect { |w| w.id < current_pdf.id }
+    next_pdf = pdfs.detect { |w| w.id > current_pdf.id }
+    [prev_pdf, next_pdf]
   end
 
   def edit

@@ -11,6 +11,23 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   selector: 'work-show',
   template: `
   <!-- large image -->
+  <div class="next-prev-back-wrapper row">
+    <div class="col-md-4 nav-link">
+      <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">
+        <span class="pagination-arrows prev-work"></span>
+        {{prev_work.name}}
+      </a>
+    </div>
+    <div class="col-md-4 nav-link text-center">
+    </div>
+    <div class="col-md-4 nav-link text-right ">
+      <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">
+        {{next_work.name}}
+        <span class="pagination-arrows next-work">
+      </span></a>
+    </div>
+  </div>
+  <h1 class="text-center">{{work_title}}</h1>
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
@@ -23,25 +40,6 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   </div>
   <!-- work_info -->
 
-  <div class="next-prev-back-wrapper row">
-    <div class="col-md-4 nav-link">
-      <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">
-        <span class="pagination-arrows prev-work"></span>
-        {{prev_work.name}}
-      </a>
-    </div>
-    <div class="col-md-4 nav-link text-center">
-      <a *ngIf="parent_cat" [attr.href]="'/vaerker/' + parent_cat.slug">
-        {{parent_cat.name}}
-      </a>
-    </div>
-    <div class="col-md-4 nav-link text-right ">
-      <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">
-        {{next_work.name}}
-        <span class="pagination-arrows next-work">
-      </span></a>
-    </div>
-  </div>
   
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <div class="info-kort col-md-4">
@@ -107,6 +105,7 @@ export class WorkShowComponent implements OnInit {
   work_info: null;
   work_description: null;
   work_info_opened: boolean = false;
+  work_title: string = "";
 
   constructor( 
     private http: Http,
@@ -160,7 +159,8 @@ export class WorkShowComponent implements OnInit {
         this.work_description = data.work_info.description,
         this.next_work = data.pagination.next,
         this.prev_work = data.pagination.prev,
-        this.parent_cat = data.parent_cat
+        this.parent_cat = data.parent_cat,
+        this.work_title = data.work_title
       });
 
   }

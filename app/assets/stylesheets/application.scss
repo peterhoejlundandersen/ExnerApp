@@ -27,8 +27,10 @@
 @import 'imports/mixins';
 
 .container-yield {
-  padding-top: 34px;
   min-height: 500px;
+}
+.container-p-top {
+  padding-top: 34px;
 }
 
 .hide-it {

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :authenticate_user!, only: [:sorting_objects] #Or else it is on all
 
   def sorting_objects
     params[:_json].each do |dataset|
