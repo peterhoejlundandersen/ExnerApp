@@ -212,17 +212,18 @@ class WorksController < ApplicationController
     @next, @prev = [{}, {}]
     case cat_params
     when 'handtegninger'
-      @prev = {title: "Tidslinje", path: "tidslinje_path()"}
-      @next = {title: "Fotos", path: "vaerker_path('fotos')"}
+      @prev = {title: "Livet i tre huse", path: "vaerker_path('livet-i-tre-huse')"}
+      @next = {title: "Artikler", path: "artikler_path()"}
       @category = Category.friendly.find(cat_params)
     when 'fotos'
-      @prev = {title: "Håndtegninger", path: "vaerker_path('handtegninger')"}
-      @next = {title: "Livet i tre huse", path: "vaerker_path('livet-i-tre-huse')"}
+      @prev = {title: "Fakta", path: "facts_path()"}
+      @next = {title: "Video", path: "videos_path()"}
       @category = Category.friendly.find(cat_params)
     else
-      @prev = {title: "Fotos", path: "vaerker_path('fotos')"}
-      @next = {title: "Videoer", path: 'videos_path()'}
-      @category = Category.friendly.find(cat_params)
+      @prev = {title: "Tidslinje", path: 'tidslinje_path()'}
+      @next = {title: "Håndtegninger", path: "vaerker_path('handtegninger')"}
+			@category = Category.friendly.find(cat_params)
+
     end
   end
 

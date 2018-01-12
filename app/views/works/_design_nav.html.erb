@@ -5,11 +5,10 @@
           <% if noload %><!-- Skal ikke vises, når værkerne er trykket frem -->
             <div class="center-block overview-img overview-img-show" style="background-image: url(<%= cat.image %>)">
             </div>
-          <% end %>
-          <h2 id="<%= cat.id %>" class="overview-header pt-2 text-uppercase text-center 
-            <%= "active" if cat.friendly_id == params[:vaerker_cat] %>">
+            <h2 id="<%= cat.id %>" class="<%= "active" if cat.friendly_id == params[:vaerker_cat] %>">
               <%= cat.name %>
             </h2>
+          <% end %>
       <% end %><!-- link_to vaerker_pat -->
         <% if logged_in?(:site_admin) %>
           <%= link_to "Rediger kategori", edit_category_path(cat) %> / 

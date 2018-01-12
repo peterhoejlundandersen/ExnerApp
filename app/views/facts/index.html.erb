@@ -1,13 +1,12 @@
 <% content_for :padding_top_container, "false" %>
 <%= render partial: 'about/pagination',
-  locals: { prev: { title: 'Videoer', path: 'videos_path()'},
-            next_w: { title: 'Artikler', path: 'artikler_path()'} } %>
+  locals: { prev: { title: 'Artikler', path: 'artikler_path()' },
+            next_w: { title: 'Fotos', path: "vaerker_path('fotos')" } } %>
 <div class="row">
   <div class="col-6">
     <%= link_to "Rediger tekst", edit_fact_path(@fact.id), class: "btn btn-primary" if user_signed_in? %>
   </div>
 </div>
-<hr>
 <a href="#" class="to-top" id="toTop"><span class="to-top-text">Til toppen</span></a>
 <div class="facts">
   <% unless @fact.nil? %>

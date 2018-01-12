@@ -14,7 +14,7 @@ module ApplicationHelper
       title_child = nil
     when 'videos'
       title_par[:title], title_par[:path] = 'Om', 'om_path()'
-      title_child[:title], title_child[:path] = 'Videoer', 'videos_path()'
+      title_child[:title], title_child[:path] = 'Video', 'videos_path()'
     else
       title_par[:title], title_par[:path] = 'Oversigt', 'oversigt_path()'
       title_child = nil

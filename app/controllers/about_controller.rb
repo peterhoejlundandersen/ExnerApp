@@ -13,7 +13,7 @@ class AboutController < ApplicationController
   end
 
   def tidslinje
-    @breadcrumb_child = {title: "Artikler", path: "tidslinje_path()"}
+    @breadcrumb_child = {title: "Tidslinje", path: "tidslinje_path()"}
   end
 
   def haandtegninger

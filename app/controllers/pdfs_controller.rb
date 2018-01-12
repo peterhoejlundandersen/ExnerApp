@@ -42,6 +42,17 @@ class PdfsController < ApplicationController
     @pdf = Pdf.new()
   end
 
+	def destroy
+		@pdf = Pdf.find(params[:id])
+		if @pdf.destroy
+			flash[:notice] = "'#{@pdf.title}' er blevet slettet"
+      redirect_to show_this_pdf_category(@pdf.pdf_category_id)
+		else
+			flash.now[:alert] = "Der gik noget galt. Prøv igen. "
+			render :edit
+		end
+	end
+
   def create
     @pdf = Pdf.new(pdf_params)
     @pdf.date = Time.new(params[:pdf][:date].to_i) unless params[:pdf][:date].empty?

@@ -1,7 +1,7 @@
 <% content_for :padding_top_container, "false" %>
 <%= render partial: 'about/pagination',
-  locals: { prev: { title: 'Livet i tre huse', path: 'tre_huse_path()'},
-            next_w: { title: 'Fakta', path: 'facts_path()'} } %><!-- passer ikke -->
+  locals: { prev: { title: 'Fotos', path: "vaerker_path('fotos')"},
+            next_w: { title: 'Tidslinje', path: 'tidslinje_path()'} } %>
 
 <%= link_to "Opret ny video", new_video_path(), class: "btn btn-secondary" if user_signed_in? %>
 <% if @videos.any? %>

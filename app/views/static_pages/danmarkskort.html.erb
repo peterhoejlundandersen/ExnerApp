@@ -1,6 +1,12 @@
 <% content_for :custom_calls do %>
-<script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+	 crossorigin=""></script>
+
 <% end %>
 <h2 class="py4 text-center">Danmarkskort</h2>
 <%= hidden_field_tag :email, "peter@hej.com" %>
@@ -10,10 +16,19 @@
 
 <script>
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJob2VqbHVuZCIsImEiOiJjamM2YnRmOWYxZjdnMzNtbWdkYnJyZHpuIn0.YA23PjVD-QDVseZEEVTflQ';
-var map = new mapboxgl.Map({
-container: 'danmarkskort',
-style: 'mapbox://styles/mapbox/light-v9'
-});
+var mymap = L.map('danmarkskort').setView([55.861948, 10.624085], 7.4);
 
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoicGV0ZXJob2VqbHVuZCIsImEiOiJjamM2YnRmOWYxZjdnMzNtbWdkYnJyZHpuIn0.YA23PjVD-QDVseZEEVTflQ'
+}).addTo(mymap);
+var marker = L.marker([56.466837,10.016423 ]).addTo(mymap);
+
+
+marker.bindPopup("<b>Sct. Clements. Kirke</b><br>Randers<br><a href='https://inger-exner.herokuapp.com/works/09-sct-clemens-kirke-4f736889-dad0-42fa-9dd8-ee0a9a66a465'>Gå til kirke</a>").openPopup();
+// mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJob2VqbHVuZCIsImEiOiJjamM2YnRmOWYxZjdnMzNtbWdkYnJyZHpuIn0.YA23PjVD-QDVseZEEVTflQ';
+//var map = new mapboxgl.Map({
+//	container: 'danmarkskort',
+// });
 </script>
