@@ -44,6 +44,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <div class="info-kort col-md-4">
       <ul class="info-short-list">
+        <li>{{work_title}}</li>
         <li *ngFor="let info of work_info">{{info}}</li>
       </ul>
     </div>
