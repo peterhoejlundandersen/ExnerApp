@@ -1,9 +1,10 @@
 class StaticPagesController < ApplicationController
+	require 'json'
 	layout "works", except: [:frontpage]
 
-  def danmarkskort
-
-  end
+	def danmarkskort
+		@data = File.read('app/assets/javascripts/geo_data.json')
+	end
 
 	def frontpage
 		if FrontpageText.all.any?
@@ -14,45 +15,44 @@ class StaticPagesController < ApplicationController
 		render layout: "frontpage"
 	end
 
-  	def contact
+	def contact
 
-  	end
+	end
 
-  	def about
+	def about
 		@header_title = "Om Inger & Johannes"
- 	end
+	end
 
- 	def new_frontpage_text
- 		@text = FrontpageText.new()
- 	end
+	def new_frontpage_text
+		@text = FrontpageText.new()
+	end
 
- 	def edit_frontpage_text
+	def edit_frontpage_text
 		@text = FrontpageText.find(params[:text_id])
- 	end
+	end
 
- 	def create_frontpage_text
- 		@text = FrontpageText.new(frontpage_text_params)
- 		if @text.save
- 			redirect_to root_path
- 		else
- 			redirect_to root_path, notice: "Noget gik galt!"
- 		end
- 	end
- 	def update_frontpage_text
- 		@text = FrontpageText.find(params[:id])
- 		if @text.update(frontpage_text_params)
- 			redirect_to root_path
- 		else
- 			redirect_to root_path, notice: "Noget gik galt!"
- 		end
+	def create_frontpage_text
+		@text = FrontpageText.new(frontpage_text_params)
+		if @text.save
+			redirect_to root_path
+		else
+			redirect_to root_path, notice: "Noget gik galt!"
+		end
+	end
+	def update_frontpage_text
+		@text = FrontpageText.find(params[:id])
+		if @text.update(frontpage_text_params)
+			redirect_to root_path
+		else
+			redirect_to root_path, notice: "Noget gik galt!"
+		end
+	end
 
- 	end
 
+	private
 
- 	private
-
- 	def frontpage_text_params
- 		params.require(:frontpage_text).permit(:text)
- 	end
+	def frontpage_text_params
+		params.require(:frontpage_text).permit(:text)
+	end
 
 end

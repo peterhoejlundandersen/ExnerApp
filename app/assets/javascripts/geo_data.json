@@ -2,9 +2,11 @@
   "type": "Feature",
   "geometry": {
     "type": "Point",
-    "coordinates": [125.6, 10.1]
+    "coordinates": [10.016423,56.466837,]
   },
   "properties": {
-    "name": "Dinagat Islands"
+  	"color": "#444444",
+    "description": "Der var engang en kirke, den var smuk.",
+    "name": "Sct. Clements Kirke"
   }
 }
