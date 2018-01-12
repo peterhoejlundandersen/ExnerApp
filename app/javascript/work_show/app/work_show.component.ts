@@ -1,9 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
-
+import { Http, HttpModule, Response, Headers, RequestOptions } from '@angular/http';
 import { ImageService } from './image.service';
 import { ImageNavigatorService } from './image_navigator.service';
 import { ImageCat } from './image_cat';
+
+import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({
   selector: 'work-show',
@@ -52,28 +54,29 @@ import { ImageCat } from './image_cat';
     </div>
   </div>
   <!-- image categories -->
-  <div class="blog-nav img-cat-nav sortable-images" data-navbar="img">
+  <div class="blog-nav img-cat-nav" data-navbar="img">
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button" (click)="openInfo()">Info</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
-    class="nav-link sortable-image-item text-center"
+    class="nav-link text-center"
     [class.active-cat]="i == image_cats_index"
     [attr.data-id]="image_cat.id"
-    data-type="ImageCategory">
-      <div (click)="changeCategory(i)" class="nav-link sortable-image-item text-center">
+    data-type="image-cat">
+      <div (click)="changeCategory(i)" class="nav-link text-center">
         {{image_cat.name}}
       </div>
     </div>
   </div>
   <!-- thumbnails -->
 <div class="thumb-images-wrapper">
-  <div class="thumb-images row sortable-images">
+  <div class="thumb-images row sortable-images"
+    [dragula]='"first-bag"' [dragulaModel]='thumb_images' >
     <div class="col-12">
       <div class="loading-bar" [style.width]="loading_procent + '%'"></div>
     </div>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
     (click)="changeLargeImage(i)"
-    [attr.data-id]="thumb_image.id" data-type="Image">
+    [attr.data-id]="thumb_image.id" data-type="image">
       <img (load)="thumbNailLoad()" src="{{thumb_image.image.thumb.url}}"
       [class.thumbnail-images-loadet]="!thumbnail_loading"
       [class.thumbnail-active]="i == image_index && !thumbnail_loading">
@@ -105,9 +108,29 @@ export class WorkShowComponent implements OnInit {
   work_info_opened: boolean = false;
 
   constructor( 
+    private http: Http,
     private _image_service: ImageService,
-    public _image_navigator_service: ImageNavigatorService
-  ) {};
+    public _image_navigator_service: ImageNavigatorService,
+    private dragulaService: DragulaService
+  ) {
+    dragulaService.drop.subscribe((value) => {
+      var element = value.slice(1)[0];
+      var children = [].slice.call(element.parentElement.children);
+      var sorting_data = new Array();
+      children.forEach(function(div, index) {
+        let index_of_div = children.indexOf(div);
+        sorting_data.push({id: div.dataset.id, order_i: index_of_div, type: div.dataset.type});
+      });
+      var url = "/sorting-objects";
+      var body = JSON.stringify(sorting_data);
+      let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+      let options = new RequestOptions({ headers: headers }); // Create a request option
+      this.http.post(url, body, options).subscribe(
+          data => { }, err => { console.log(err); }
+        )
+    });
+
+  };
 
   thumbNailLoad = function() {
     this.thumbnail_loading_counter = this.thumbnail_loading_counter + 1;

@@ -10,15 +10,16 @@ import 'rxjs/add/operator/map';
   selector: 'works-index',
   template: `
   <div class="row works-wrapper" [dragula]='"first-bag"' [dragulaModel]='works'> 
-    <div *ngFor="let work of works; let i = index" [class.vertical-image]="organs" class="overview-work" data-type="work" [attr.data-id]="work.id" [attr.data-type]="">
-          <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
-          <a [href]="'/works/' + work.slug">
-            <div *ngIf="!work.overview_img.url" class="overview-img-block overview-img-block-show work-without-image">
-            </div>
-            <div *ngIf="work.overview_img.url" class="overview-img-block" [attr.id]="'imageId' + i">
-            </div>
-            <h2 class="overview-work-h2">{{work.name}}</h2>
-          </a>
+    <div *ngFor="let work of works; let i = index" [class.vertical-image]="organs"
+    class="overview-work" data-type="work" [attr.data-id]="work.id">
+      <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
+      <a [href]="'/works/' + work.slug">
+        <div *ngIf="!work.overview_img.url" class="overview-img-block overview-img-block-show work-without-image">
+        </div>
+        <div *ngIf="work.overview_img.url" class="overview-img-block" [attr.id]="'imageId' + i">
+        </div>
+        <h2 class="overview-work-h2">{{work.name}}</h2>
+      </a>
     </div>
     <!-- FIXED FLEXBOX FLOAT LEFT ISSUE -->
     <div [class.vertical-image]="organs" [class.no-drag]="binding" *ngIf="works.length !== 3" class="overview-work">
