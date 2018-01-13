@@ -3,8 +3,10 @@ class StaticPagesController < ApplicationController
 	layout "works", except: [:frontpage]
 
 	def danmarkskort
-		@data = File.read('app/assets/javascripts/geo_data.json')
+		data = get_geo_json MapInfo.all
+		@json_data = data.to_json
 	end
+
 
 	def frontpage
 		if FrontpageText.all.any?
@@ -12,7 +14,15 @@ class StaticPagesController < ApplicationController
 		else
 			@text = nil
 		end
-		render layout: "frontpage"
+		if !user_signed_in?
+			redirect_to not_yet_path()
+		else
+			render layout: "frontpage"
+		end
+	end
+
+	def not_yet
+		render layout: false
 	end
 
 	def contact
@@ -50,6 +60,27 @@ class StaticPagesController < ApplicationController
 
 
 	private
+
+	def get_geo_json records
+		new_data = records.map do |f|
+			next if f.lat_y.blank? || f.lat_x.blank?
+			{
+				id: f.id,
+				type: "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [f.lat_y,f.lat_x]
+				},
+				"properties": {
+					"description": f.text,
+					"title": f.title,
+					"sagsnr": f.sagsnr,
+					"link": f.link
+				}
+			}
+		end
+		return new_data.compact # remove nil objects made by next
+	end
 
 	def frontpage_text_params
 		params.require(:frontpage_text).permit(:text)

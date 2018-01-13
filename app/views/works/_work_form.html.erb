@@ -91,10 +91,29 @@
 
     <div class="container">	<!-- Ved ikke hvorfor! -->
       <div class="col-md-12">
-
         <%= link_to_add_association "Tilføj billedekategori", f, :image_categories, class: "btn btn-secondary" %>
       </div>
       <hr>
+
+			<div class="row">
+				<h3>Kort info</h3>
+				<%= f.fields_for :map_info do |mi| %>
+			<div class="col-md-12">
+					<%= mi.label :text, "Teksten, der kommer frem i pop-up feltet" %>
+					<%= mi.text_area :text, class: "form-control" %>
+			</div>
+				<div class="col-12"> <h4>Koordinater</h4> </div>
+					<div class="col-sm-6">
+						<%= mi.label :lat_x, "Koordinater for X" %>
+						<%= mi.number_field :lat_x, step: :any, class: "form-control" %>
+					</div>
+					<div class="col-sm-6">
+						<%= mi.label :lat_y, "Koordinater for Y" %>
+						<%= mi.number_field :lat_y, step: :any, class: "form-control" %>
+					</div>
+				<% end %>
+			</div><!-- row -->
+
       <div class="col-md-12">
 
         <%= f.submit submit_button_text, class: "btn btn-primary" %>

@@ -78,17 +78,22 @@ class WorksController < ApplicationController
 
   def new
     @work = Work.new()
+		@work.map_info = MapInfo.new if @work.map_info.nil?
     @categories = Category.all
   end
 
   def edit
     @work = Work.friendly.find(params[:id])
+		if @work.map_info.nil?
+			@work.map_info = MapInfo.new
+		end
     @categories = Category.all
   end
 
 
   def create
     @work = Work.new(work_params)
+		set_map_info params[:work][:map_info_attributes]
     if @work.image_categories.present? # En underlig fejl med manglende work_id
       @work.image_categories.each do |img_cat|
         img_cat.work = @work
@@ -184,6 +189,7 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.friendly.find(params[:id])
+		set_map_info params[:work][:map_info_attributes]
     if @work.update(work_params)
       flash[:success] = "Værket #{@work.name} er nu blevet opdateret."
       redirect_to work_path(@work)
@@ -191,6 +197,12 @@ class WorksController < ApplicationController
       redirect_to kategori_oversigt_path(@work.category_id)
     end
   end
+
+	def set_map_info map_params
+		map_params[:title] = @work.name
+		map_params[:sagsnr] = @work.sagsnr unless @work.sagsnr.nil?
+		map_params[:link] = work_path(@work.friendly_id)
+	end
 
   def get_overview_img
     image = Image.find(params[:id])
@@ -272,6 +284,9 @@ class WorksController < ApplicationController
     {image_categories_attributes:
      [:id, :work_id, :name, :_destroy,
       images_attributes:
-      [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]})
+      [:id, :image, :photographer, :image_description, :is_review_img, :draft, :_destroy]]},
+		{map_info_attributes:
+		[:text, :lat_x, :lat_y, :title, :image, :address, :sagsnr, :link, :_destroy]}
+		)
   end
 end

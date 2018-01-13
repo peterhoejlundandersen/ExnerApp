@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110184840) do
+ActiveRecord::Schema.define(version: 20180113114909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,21 @@ ActiveRecord::Schema.define(version: 20180110184840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "work_id"
+  end
+
+  create_table "map_infos", force: :cascade do |t|
+    t.text "text"
+    t.decimal "lat_x", precision: 8, scale: 6
+    t.decimal "lat_y", precision: 8, scale: 6
+    t.string "link"
+    t.string "image"
+    t.bigint "work_id"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.integer "sagsnr"
+    t.index ["work_id"], name: "index_map_infos_on_work_id"
   end
 
   create_table "pdf_categories", force: :cascade do |t|
@@ -149,4 +164,5 @@ ActiveRecord::Schema.define(version: 20180110184840) do
     t.index ["slug"], name: "index_works_on_slug", unique: true
   end
 
+  add_foreign_key "map_infos", "works"
 end

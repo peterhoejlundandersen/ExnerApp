@@ -16,9 +16,9 @@
 
 <script>
 
-	var map_data = <%= @data.html_safe %>;
+var map_data = <%= @json_data.html_safe %>;
 debugger;
-var mymap = L.map('danmarkskort').setView([55.861948, 10.624085], 7.4);
+var mymap = L.map('danmarkskort').setView([55.861948, 10.624085], 7.6);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	maxZoom: 18,
@@ -31,7 +31,11 @@ L.geoJSON(map_data, {
 		return {color: feature.properties.color};
 	}
 }).bindPopup(function (layer) {
-	return "<b>" + layer.feature.properties.name + "</b>" + "<br>" + layer.feature.properties.description;
+	link = (layer.feature.properties.link != null) ? "<br><a href='" + layer.feature.properties.link + "'>Gå til</a>" : ""
+	sagsnr = (layer.feature.properties.sagsnr != null) ? "<br>Sagsnr: " + layer.feature.properties.sagsnr : ""
+	return "<b>" + layer.feature.properties.title + "</b>"
+		+ "<br>" + layer.feature.properties.description
+		+  sagsnr + link;
 }).addTo(mymap);
 
 

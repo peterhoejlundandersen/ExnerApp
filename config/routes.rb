@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'danmarkskort' => 'static_pages#danmarkskort'
+	get 'not-yet' => 'static_pages#not_yet', as: :not_yet
 
   post 'sorting-objects' => 'application#sorting_objects'
 
