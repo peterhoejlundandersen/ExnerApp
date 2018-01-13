@@ -16,9 +16,12 @@
 
 <script>
 
+var work_id = decodeURIComponent((new RegExp('[?|&]' + "id" + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+
 var map_data = <%= @json_data.html_safe %>;
-debugger;
-var mymap = L.map('danmarkskort').setView([55.861948, 10.624085], 7.6);
+var mymap = L.map('danmarkskort', {
+	scrollWheelZoom: false // Så man ikke kan scrolle med musen!
+}).setView([55.861948, 10.624085], 7.6);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
 	maxZoom: 18,
@@ -26,17 +29,30 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 	accessToken: 'pk.eyJ1IjoicGV0ZXJob2VqbHVuZCIsImEiOiJjamM2YnRmOWYxZjdnMzNtbWdkYnJyZHpuIn0.YA23PjVD-QDVseZEEVTflQ'
 }).addTo(mymap);
 
-L.geoJSON(map_data, {
-	style: function (feature) {
-		return {color: feature.properties.color};
-	}
-}).bindPopup(function (layer) {
-	link = (layer.feature.properties.link != null) ? "<br><a href='" + layer.feature.properties.link + "'>Gå til</a>" : ""
-	sagsnr = (layer.feature.properties.sagsnr != null) ? "<br>Sagsnr: " + layer.feature.properties.sagsnr : ""
-	return "<b>" + layer.feature.properties.title + "</b>"
-		+ "<br>" + layer.feature.properties.description
-		+  sagsnr + link;
-}).addTo(mymap);
+var geoJSONLayers = L.geoJSON(map_data, { }).addTo(mymap);
+
+//geoJSONLayers.eachLayer(function (layer) {
+//    layer.options.title = 'feature-' + layer.feature.properties.id;
+// });
+if (work_id) {
+	geoJSONLayers.bindPopup(function (layer) {
+		link = (layer.feature.properties.link != null) ? "<br><a href='" + layer.feature.properties.link + "'>Gå til</a>" : ""
+		sagsnr = (layer.feature.properties.sagsnr != null) ? "<br>Sagsnr: " + layer.feature.properties.sagsnr : ""
+		return "<h3 class='min-popup-" + layer.feature.properties.id + "'>" + layer.feature.properties.title + "</h3>"
+			+ "<p>" + layer.feature.properties.description + "<br>" + 
+			"Adresse: " + layer.feature.properties.address +  sagsnr + "<br>"
+			+ link + "</p>";
+	}).openPopup().addTo(mymap);
+} else {
+	geoJSONLayers.bindPopup(function (layer) {
+		link = (layer.feature.properties.link != null) ? "<br><a href='" + layer.feature.properties.link + "'>Gå til</a>" : ""
+		sagsnr = (layer.feature.properties.sagsnr != null) ? "<br>Sagsnr: " + layer.feature.properties.sagsnr : ""
+		return "<h3 class='min-popup-" + layer.feature.properties.id + "'>" + layer.feature.properties.title + "</h3>"
+			+ "<p>" + layer.feature.properties.description + "<br>" + 
+			"Adresse: " + layer.feature.properties.address +  sagsnr + "<br>"
+			+ link + "</p>";
+	}).addTo(mymap);
+}
 
 
 </script>

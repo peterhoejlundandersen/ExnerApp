@@ -3,7 +3,16 @@ class StaticPagesController < ApplicationController
 	layout "works", except: [:frontpage]
 
 	def danmarkskort
-		data = get_geo_json MapInfo.all
+		if params[:id].nil?
+			data = get_geo_json MapInfo.all
+			@no_popup = true
+		else
+			map_info = Work.find(params[:id]).map_info
+			arr = []
+			arr << map_info
+			arr += MapInfo.where.not(id: map_info.id)
+			data = get_geo_json arr
+		end
 		@json_data = data.to_json
 	end
 
@@ -65,17 +74,18 @@ class StaticPagesController < ApplicationController
 		new_data = records.map do |f|
 			next if f.lat_y.blank? || f.lat_x.blank?
 			{
-				id: f.id,
 				type: "Feature",
 				"geometry": {
 					"type": "Point",
 					"coordinates": [f.lat_y,f.lat_x]
 				},
 				"properties": {
+					"id": f.id,
 					"description": f.text,
 					"title": f.title,
 					"sagsnr": f.sagsnr,
-					"link": f.link
+					"link": f.link,
+					"address": f.address
 				}
 			}
 		end

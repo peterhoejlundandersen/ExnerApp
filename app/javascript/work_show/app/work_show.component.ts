@@ -27,7 +27,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       </span></a>
     </div>
   </div>
-  <h1 class="text-center">{{work_title}}</h1>
+  <h1 class="text-center">{{work.title}}</h1>
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
@@ -39,13 +39,14 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     </div>
   </div>
   <!-- work_info -->
-
-  
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <div class="info-kort col-md-4">
       <ul class="info-short-list">
-        <li>{{work_title}}</li>
+        <li>{{work.title}}</li>
         <li *ngFor="let info of work_info">{{info}}</li>
+				<li *ngIf="work.map_info">
+					<a [attr.href]="'/danmarkskort?id=' + work.id" target="_blank"> Vis på kort &#8594; </a>
+				</li>
       </ul>
     </div>
     <div class="info-beskrivelse col-md-8">
@@ -106,7 +107,7 @@ export class WorkShowComponent implements OnInit {
   work_info: null;
   work_description: null;
   work_info_opened: boolean = false;
-  work_title: string = "";
+  work: null;
 
   constructor( 
     private http: Http,
@@ -161,7 +162,7 @@ export class WorkShowComponent implements OnInit {
         this.next_work = data.pagination.next,
         this.prev_work = data.pagination.prev,
         this.parent_cat = data.parent_cat,
-        this.work_title = data.work_title
+        this.work = data.work
       });
 
   }

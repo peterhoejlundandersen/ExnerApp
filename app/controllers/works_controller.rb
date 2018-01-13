@@ -144,6 +144,7 @@ class WorksController < ApplicationController
       image_cats_index = (image_cats.length < 2) ? -1 : 0
       large_image = images.first
       work_title = work.name
+			map_info = (work.map_info.nil? || work.map_info.lat_x.nil?) ? "" : "true"
 
       prev_work, next_work = work.position.nil? ? ["", ""] : get_next_and_previous_work(cat.works, work)
 
@@ -157,7 +158,7 @@ class WorksController < ApplicationController
             work_info: {short: work_info, description: work_description},
             pagination: {prev: prev_work, next: next_work},
             parent_cat: {slug: cat.slug, name: cat.name},
-            work_title: work_title
+						work: {title: work_title, id: work.id, map_info: map_info}
           }
         }
       end
@@ -165,23 +166,9 @@ class WorksController < ApplicationController
     end
   end
 
-  def sort_images
-    params[:order].each do |key, value|
-      if value[:type] == "ImageCategory"
-        ImageCategory.find(value[:id]).update(position: value[:position])
-      elsif value[:type] == "Category"
-        Category.find(value[:id]).update(position: value[:position])
-      else
-        Image.find(value[:id]).update(position: value[:position])
-      end
-    end
-    render nothing: true
-  end
-
   def destroy
     @work = Work.friendly.find(params[:id])
     work_category_id = @work.category_id
-    work_name = Work.name
     if @work.destroy
       redirect_to vaerker_path(work_category_id), notice: "#{@work.name} er nu blevet slettet."
     end
@@ -202,6 +189,7 @@ class WorksController < ApplicationController
 		map_params[:title] = @work.name
 		map_params[:sagsnr] = @work.sagsnr unless @work.sagsnr.nil?
 		map_params[:link] = work_path(@work.friendly_id)
+		map_params[:address] = @work.address
 	end
 
   def get_overview_img
@@ -261,7 +249,7 @@ class WorksController < ApplicationController
   def return_work_info work
     info = []
     info << "Sagsnr: #{work.sagsnr.to_s}" unless work.sagsnr.nil?
-    info << "Adresse: #{work.address}" unless work.address.empty?
+		info << "Adresse: #{work.address}" unless work.address.empty?
     info << "Konkurrenceår: #{work.competition.to_s}" unless work.competition.nil?
     info << "Indvielse: #{work.opening_year.to_s}" unless work.opening_year.nil?
     work.infos.each {|i| info << "#{i.title}" } unless work.infos.empty?
