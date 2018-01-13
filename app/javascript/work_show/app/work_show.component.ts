@@ -12,15 +12,13 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   template: `
   <!-- large image -->
   <div class="next-prev-back-wrapper row">
-    <div class="col-md-4 nav-link">
+    <div class="col-md-6 nav-link">
       <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">
         <span class="pagination-arrows prev-work"></span>
         {{prev_work.name}}
       </a>
     </div>
-    <div class="col-md-4 nav-link text-center">
-    </div>
-    <div class="col-md-4 nav-link text-right ">
+    <div class="col-md-6 nav-link text-right ">
       <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">
         {{next_work.name}}
         <span class="pagination-arrows next-work">

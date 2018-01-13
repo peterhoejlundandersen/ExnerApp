@@ -1,8 +1,10 @@
 <div class="oversigt-menu-wrapper">
   <div class="oversigt-om">
     <%= link_to "Oversigt", oversigt_path,
-      class: "nav-link #{active_helper? oversigt_path}" 
+      class: "menu-same-line nav-link #{active_helper? oversigt_path}" 
     %>
+		<%= link_to "Danmarkskort", danmarkskort_path(),
+			class: "menu-same-line nav-link #{active_helper? danmarkskort_path()}" %>
   </div>
   <div class="oversigt-menu">
     <%= link_to "Kirker og sognegårde", vaerker_path("Kirker og sognegårde".parameterize),

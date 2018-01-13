@@ -1,12 +1,37 @@
+@import 'imports/colors';
+@import 'imports/font_calls';
+#danmarkskort {
+  max-width: 1140px;
+  height: 1100px;
+  width: 100%;
+}
 .leaflet-popup-content-wrapper {
 	border-radius: 0px;
 	box-shadow: none; 
 	p {
 		margin-top: 0px;
 		margin-bottom: 0px;
+		font-size: 14px;
 	a {
 		text-decoration: underline;
 		color: black;
 	}
 	}
+}
+.leaflet-touch .leaflet-bar {
+   border: 0px solid white;
+ }
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+		background-color: white;
+		font-family: Corbel;
+		font-weight: 100;
+}
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+		background-color: white;
+		font-family: Corbel;
+		font-weight: 100;
 }

@@ -3,6 +3,8 @@
     <%= link_to "Oversigt", oversigt_path,
       class: "nav-link #{active_helper? oversigt_path}" 
     %>
+		<%= link_to "Danmarkskort", danmarkskort_path(),
+			class: "nav-link #{active_helper? danmarkskort_path()}" %>
   </div>
   <div class="menu-box">
     <%= link_to "Kirker og sognegårde", vaerker_path("Kirker og sognegårde".parameterize),
