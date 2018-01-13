@@ -186,7 +186,11 @@ class WorksController < ApplicationController
   end
 
 	def set_map_info map_params
-		map_params[:title] = @work.name
+		if @work.id == 15 # Hvis det er Udvendige facader - kun ét punkt for kolding hus
+			map_params[:title] = "Koldinghus"
+		else
+			map_params[:title] = @work.name
+		end
 		map_params[:sagsnr] = @work.sagsnr unless @work.sagsnr.nil?
 		map_params[:link] = work_path(@work.friendly_id)
 		map_params[:address] = @work.address
