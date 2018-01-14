@@ -33,7 +33,7 @@ end
 # end
 
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Timezones
-# gem 'petergate', '~> 1.7', '>= 1.7.5'
+gem 'petergate', '~> 1.7', '>= 1.7.5'
 
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
