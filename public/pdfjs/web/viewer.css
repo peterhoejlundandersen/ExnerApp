@@ -13,9 +13,55 @@
  * limitations under the License.
  */
 /* JEG HAR FJERNET NOGLE TING */
-#openFile, #viewThumbnail, #viewOutline, #viewBookmark, #secondaryToolbarToggle {
+#scaleSelectContainer, #viewFind, #openFile, #viewThumbnail, #viewOutline, #viewBookmark, #secondaryToolbarToggle {
   display: none;
 }
+.splitToolbarButton > .toolbarButton:focus {
+	box-shadow: none!important;
+	background-color: white!important;
+}
+.splitToolbarButtonSeparator {
+	background-color: black!important;
+}
+.toolbarButton {
+	border-radius: 0px!important;
+}
+.toolbarButton.zoomIn::before {
+	content: "+"!important;
+}
+.toolbarButton.zoomOut::before {
+    content: "-"!important;
+}
+#viewer {
+	background-color: white!important;
+}
+#sidebarContent {
+	background-color: #e2e2e2;
+}
+#loadingBar {
+    position: relative;
+    width: 100%;
+    height: 20px!important;
+    background-color: white!important;
+		border-bottom: 0px solid white!important;
+}
+#loadingBar .progress {
+    background-color: #e2e2e2!important;
+
+}
+
+input#pageNumber {
+    margin-top: 0px!important;
+    border-radius: 0!important;
+}
+
+#toolbarContainer, .findbar, .secondaryToolbar, #toolbarSidebar  {
+	box-shadow: none!important;
+}
+.toolbarButton:focus {
+	border: 0px solid white!important;
+}
+/* MY OWN !!! */ 
 
 * {
   padding: 0;
@@ -773,7 +819,8 @@ html[dir="rtl"] .secondaryToolbarButton::before {
 }
 
 .toolbarButton#secondaryToolbarToggle::before {
-  content: url(images/toolbarButton-secondaryToolbarToggle.png);
+  content: '+';
+	font-size: 26px;
 }
 
 html[dir='ltr'] .toolbarButton.findPrevious::before {

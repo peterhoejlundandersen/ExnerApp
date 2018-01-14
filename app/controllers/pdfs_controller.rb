@@ -1,5 +1,6 @@
 class PdfsController < ApplicationController
   layout "works", except: :show
+	layout 'pdf_show', only: :show
 
   def show
     pdf_viewer = "/pdfjs/web/viewer.html?file="

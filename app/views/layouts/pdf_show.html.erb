@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= header_title_helper %></title>
+    <%= render 'application/favicon' %>
+    <meta name="keywords" content="<%= @seo_keywords %>" />
+    <% if content_for? :head %>
+      <%= yield :head  %>
+    <% end %>
+    <% if content_for? :custom_calls %>
+      <%= yield :custom_calls %>
+    <% end %>
+    <%= stylesheet_link_tag    "pdfs" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+		<div class="pdf-container">
+			<%= yield %>
+		</div>
+  </body>
+</html>

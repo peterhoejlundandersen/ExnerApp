@@ -15,9 +15,8 @@
 			</div>
 			<br>
 			<br>
-			<div class="pdf-cat-inner"">
+			<div class="pdf-cat-inner">
 				<%= link_to "Til andres tekster &#8594;".html_safe, artikler_path(), class: "nav-link" %>
-
 			</div>
 		</div>
 	</div>
@@ -35,7 +34,7 @@
 		</div>
 	<% end %> 
 </div><!-- container -->
-		<%= link_to "Opret ny intro tekst", new_text_path(), class: "btn secondary" if user_signed_in? && @text.nil? %>
+		<%= link_to "Opret ny intro tekst", new_text_path(), class: "btn btn-secondary" if user_signed_in? && @text.nil? %>
 <script>
 	var fixmeTop = $('.fixme').offset().top;       // get initial position of the element
 $(window).scroll(function() {                  // assign scroll event listener

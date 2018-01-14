@@ -1,6 +1,25 @@
+/* ONLY FOR THE PDF#SHOW VIEW */
+@import 'bootstrap';
 @import 'imports/font_calls';
 @import 'imports/mixins';
+@import 'imports/mixins';
+@import 'imports/arrows';
 
+body, html {
+	height: 100%;
+	width: 100%;
+}
+
+.pdf-container {
+	height: 100%;
+}
+#viewFind {
+	display: none;
+}
+.pdf-iframe {
+	width: 100%;
+	height: 100%;
+}
 .pdf-cat-headline {
   text-transform: uppercase;
   padding-left: 63px!important;
@@ -10,9 +29,18 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: Corbel; 
 	letter-spacing: 1px;
 }
-
 .pdf-not-shown {
   background-color: lighten(gray, 10%);
+}
+.nav-link {
+  font-size: 0.8em;
+  font-family: Corbel;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.pdf-navigation {
+	font-family: Corbel;
 }
 
 .pdf-cat-container {
@@ -32,51 +60,6 @@ h1,h2,h3,h4,h5,h6 {
   position: relative;
   float: left;
   width: 80%;
-}
-.pdf-works {
-  position: fixed;
-}
-
-.active {
-	text-decoration: underline;
-}
-.hide-it {
-	display: none;
-}
-.pdf-udgivet {
-  font-family: Corbel;
-}
-.pdf-cat-inner {
-  width: 100%;
-  display: block;
-}
-
-.pdf {
-    font-family: Corbel;
-    text-align: center;
-    box-sizing: border-box;
-    border: 10px solid white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    a {
-        .img-wrapper {
-          min-height: 250px;
-          @include flex;
-          @include justify-content(center);
-          @include align-items(center);
-            img {
-              margin: 0 auto;
-            }
-        }
-    	h4 {
-    		vertical-align: middle;
-    		min-height: 100px;
-    		padding: 10px 25px;
-			letter-spacing: 1px;
-    		font-family: LinLibertine;
-    		color: black; 
-    	}
-    }
 }
 
 

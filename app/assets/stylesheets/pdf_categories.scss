@@ -1,4 +1,50 @@
+@import 'imports/mixins';
 // Place all the styles related to the pdf_categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.pdf-works {
+  position: fixed;
+}
+
+.active {
+	text-decoration: underline;
+}
+.hide-it {
+	display: none;
+}
+.pdf-udgivet {
+  font-family: Corbel;
+}
+.pdf-cat-inner {
+  width: 100%;
+  display: block;
+}
+
+.pdf {
+    font-family: Corbel;
+    text-align: center;
+    box-sizing: border-box;
+    border: 10px solid white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    a {
+        .img-wrapper {
+          min-height: 250px;
+          @include flex;
+          @include justify-content(center);
+          @include align-items(center);
+            img {
+              margin: 0 auto;
+            }
+        }
+    	h4 {
+    		vertical-align: middle;
+    		min-height: 100px;
+    		padding: 10px 25px;
+			letter-spacing: 1px;
+    		font-family: LinLibertine;
+    		color: black; 
+    	}
+    }
+}

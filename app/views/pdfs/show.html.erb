@@ -2,20 +2,33 @@
 <head>
 	<title><%= "Johannes' værker | #{@header_title}" %></title>
 </head>
-<% unless @prev_pdf.nil? %>
-<%= link_to truncate(@prev_pdf.title, length: 45), pdf_category_pdf_path(@prev_pdf.pdf_category, @prev_pdf), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center" %>
-<% else %>
-	<div style="width: 33%; float: left; height: 10px;"></div>
-<% end %>
-<%= link_to @pdf_category.title, show_this_pdf_category_path(@pdf_category.friendly_id), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center" %>
+<div class="next-prev-back-wrapper row">
+	<div class="col-md-4 nav-link">
+		<span class="pagination-arrows prev-work"></span>
+		<%= link_to @prev_pdf.title, pdf_category_pdf_path(@prev_pdf.pdf_category, @prev_pdf) unless @prev_pdf.nil? %>
+	</div>
+	<div class="col-md-4 nav-link text-center">
+		<%= link_to @pdf_category.title, show_this_pdf_category_path(@pdf_category.friendly_id) %>
+	</div>
+	<div class="col-md-4 nav-link text-right ">
+		<%= link_to @next_pdf.title, pdf_category_pdf_path(@next_pdf.pdf_category, @next_pdf) unless @next_pdf.nil? %>
+		<span class="pagination-arrows next-work"></span>
+	</div>
+</div>
+<%# <% unless @prev_pdf.nil? %1> %>
+<%# <%= link_to truncate(@prev_pdf.title, length: 45), pdf_category_pdf_path(@prev_pdf.pdf_category, @prev_pdf), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center", class: "pdf-navigation pdf-prev" %1> %>
+<%# <% else %1> %>
+<%# 	<div style="width: 33%; float: left; height: 10px;"></div> %>
+<%# <% end %1> %>
+<%# <%= link_to @pdf_category.title, show_this_pdf_category_path(@pdf_category.friendly_id), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center", class: "pdf-navigation" %1> %>
 
-<% unless @next_pdf.nil? %>
-<%= link_to truncate(@next_pdf.title, length: 45), pdf_category_pdf_path(@next_pdf.pdf_category, @next_pdf), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center" %>
-<% else %>
-<div style="width: 33%; float: left; height: 10px;"></div>
-<% end %>
+<%# <% unless @next_pdf.nil? %1> %>
+<%# <%= link_to truncate(@next_pdf.title, length: 45), pdf_category_pdf_path(@next_pdf.pdf_category, @next_pdf), style: "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: normal; line-height: 1.5; color: black!important; float: left; width: 33%; text-align: center", class: "pdf-navigation pdf-next" %1> %>
+<%# <% else %1> %>
+<%# <div style="width: 33%; float: left; height: 10px;"></div> %>
+<%# <% end %1> %>
 
-<iframe src="<%= @pdf_url %>" style="left: 0; border: 0; width: 100%; height: 95%; position: absolute; top: 30px" frameborder="0" scrolling="no" crossorigin="anonymous">
+<iframe src="<%= @pdf_url %>" class="pdf-iframe" frameborder="0" scrolling="no" crossorigin="anonymous">
 </iframe> 
 
 
