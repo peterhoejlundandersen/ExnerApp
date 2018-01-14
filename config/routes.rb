@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :texts
   get 'danmarkskort' => 'static_pages#danmarkskort'
 	get 'not-yet' => 'static_pages#not_yet', as: :not_yet
 
