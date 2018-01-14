@@ -34,6 +34,22 @@
   padding-top: 34px;
 }
 
+.menu-button {
+	line-height: 55px;
+	font-family: Corbel;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: block;
+	float: left;
+	color: black;
+	margin-right: auto;
+	line-height: 41px;
+	width: 75px;
+  &:hover {
+	text-decoration: underline;
+	}
+}
 .hide-it {
   display: none; 
 }

@@ -55,9 +55,10 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   <div class="blog-nav img-cat-nav" data-navbar="img"
     [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button" (click)="openInfo()">Info</span>
+		<span *ngIf="image_cats.length > 1" class="info-button hidden-md-up selected-image-cat">{{selected_cat}}</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
 		[class.no-drag]="!logged_in"
-    class="nav-link text-center"
+    class="nav-link text-center hidden-md-down"
     [class.active-cat]="i == image_cats_index"
     [attr.data-id]="image_cat.id"
     data-type="image-cat">
@@ -65,6 +66,12 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
         {{image_cat.name}}
       </div>
     </div>
+		<select *ngIf="image_cats.length > 1" (change)="triggerChangeCategory($event)" name="image-cat" class="hidden-md-up image-cat-dropdown">
+			<option selected>Skift billedekategori</option>
+			<option *ngFor="let image_cat of image_cats; let i = index" [value]="i">
+				{{image_cat.name}}
+			</option>
+		</select>
   </div>
   <!-- thumbnails -->
 <div class="thumb-images-wrapper">
@@ -101,6 +108,7 @@ export class WorkShowComponent implements OnInit {
   thumbnail_loading_counter: number = 0;
   thumb_images: null;
   image_cats: null;
+	selected_cat: string = "";
   large_image: null;
   image_index: number = 0;
   image_cats_index: number = 0;
@@ -163,6 +171,7 @@ export class WorkShowComponent implements OnInit {
       .subscribe(data => {
         this.thumb_images = data.images,
         this.image_cats = data.image_cats,
+				this.selected_cat = data.image_cats[0].name,
         this.large_image = data.large_image,
         this.work_info = data.work_info.short,
         this.work_description = data.work_info.description,
@@ -197,6 +206,7 @@ export class WorkShowComponent implements OnInit {
   changeCategory = function(i, last = false) { // Get image data from the json call
     this.thumbnail_loading = true;
     var [image_cat_id, image_cats_index] = this._image_navigator_service.categoryChangerChecker(this.image_cats, i); 
+		this.selected_cat = this.image_cats[image_cats_index].name;
     this.image_cats_index = image_cats_index;
     this._image_service.getImagesAndImageCats(image_cat_id)
       .subscribe(
@@ -208,6 +218,11 @@ export class WorkShowComponent implements OnInit {
         }
       )
   }
+
+	triggerChangeCategory = function(e) {
+		let int = Number(e.target.value);
+		this.changeCategory(int);
+	}
 
   changeLargeImage = function(i) {
     this.image_loading = true;

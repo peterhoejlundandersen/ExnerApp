@@ -3,6 +3,9 @@
 .fixme-button {
 	display: none;
 }
+.hidden-md-up {
+	display: none;
+}
 /* Er fundet under oversigt, da billederne breaker */
 @media screen and (max-width: 992px) {
 	.om-box img {
@@ -10,6 +13,30 @@
 	}
 }
 @media screen and (max-width: 768px) {
+	.hidden-md-up {
+		display: block;
+	}
+	.hidden-md-down {
+		display: none!important;
+	}
+	.selected-image-cat {
+		cursor: default!important;
+		text-decoration: none!important;
+	}
+.image-cat-dropdown {
+    font-family: Corbel;
+		letter-spacing: 2px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 14px;
+		text-align-last:center;
+}
+	.info-button {
+		width: 50%!important;
+	}
+.menu-button {
+	width: 100%!important;
+}
 .oversigt-img-wrapper {
 	width: 48%;
 	h2 {
@@ -21,7 +48,17 @@
 	width: 100%;
 	height: auto;
 }
-
+.facts p {
+    width: 99%;
+    min-width: auto;
+    margin: 0 auto;
+}
+.to-top {
+	background-color: white;
+	.to-top-text {
+		opacity: 1!important;
+	}
+}
 .blog-nav {
 	@include flex-wrap(wrap);
 	@include justify-content(center);
@@ -38,9 +75,6 @@
 .normal-menu-wrapper .menu-box, .oversigt-menu-wrapper .oversigt-menu, .menu-same-line {
     width: 100%;
 		text-align: center;
-}
-.next-prev-back-wrapper { //Pagination under work
-	display: none;
 }
 /* PDF */
 .pdf-cat-headline {
@@ -69,10 +103,14 @@
 #pdfWrapper {
 	padding: 0px!important;
 }
+.container {
+    max-width: 100%!important;
+}
 }
 
 
 @media screen and (max-width: 540px) {
+	/* Her kommer CSS for en meget sej løsning! */ 
 
 .h1.masthead-overskrift {
     font-size: 2em;
