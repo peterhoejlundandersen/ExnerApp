@@ -4,6 +4,11 @@
 	display: none;
 }
 /* Er fundet under oversigt, da billederne breaker */
+@media screen and (max-width: 992px) {
+	.om-box img {
+		width: 100%;
+	}
+}
 @media screen and (max-width: 768px) {
 .oversigt-img-wrapper {
 	width: 48%;

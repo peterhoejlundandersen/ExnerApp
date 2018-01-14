@@ -1,7 +1,7 @@
 <% content_for :title do %>
 	<title><%= "Johannes' værker | #{@header_title}" %></title>
 <% end %>
-<div class="back-button row">
+<div class="back-button row remove-margin">
 	<div class="col-md-12 nav-link text-center">
 		<%= link_to "Tilbage", show_this_pdf_category_path(@pdf_category.friendly_id) %>
 	</div>

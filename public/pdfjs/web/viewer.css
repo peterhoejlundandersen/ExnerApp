@@ -32,6 +32,9 @@
 .toolbarButton.zoomOut::before {
     content: "-"!important;
 }
+#pageNumber {
+	margin-bottom: 0px!important;
+}
 #viewer {
 	background-color: white!important;
 }
