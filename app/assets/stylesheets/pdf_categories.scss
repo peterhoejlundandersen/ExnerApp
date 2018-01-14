@@ -3,10 +3,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.fixme {
+	z-index: 999999;
+}
+.pdf-row {
+	padding-right: 0!important;
+}
 .pdf-works {
   position: fixed;
 }
 
+.andres-tekster {
+	margin-top: 45px;
+}
 .active {
 	text-decoration: underline;
 }
@@ -30,10 +39,11 @@
     padding-bottom: 10px;
     a {
         .img-wrapper {
-          min-height: 250px;
           @include flex;
           @include justify-content(center);
           @include align-items(center);
+					min-height: 263px;
+					padding-bottom: 12%;
             img {
               margin: 0 auto;
             }

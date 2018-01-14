@@ -62,16 +62,16 @@ h1,h2,h3,h4,h5,h6 {
   width: 80%;
 }
 
+	.back-button {
+		display: none;
+	}
 
-@media screen and (min-width: 768px) {
-
-    .custom-5-col {
-        -webkit-box-flex: 0!important;
-        -ms-flex: 0 0 20%!important;
-        flex: 0 0 20%!important;
-        max-width: 20%!important;
-    }
-
-
-
+@media screen and (max-width: 768px) {
+	.next-prev-back-wrapper { //Pagination under work
+		display: none;
+	}
+	.back-button {
+		display: block;
+	}
 }
+

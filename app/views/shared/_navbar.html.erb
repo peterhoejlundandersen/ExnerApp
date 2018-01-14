@@ -15,6 +15,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("[data-button='menu']").click(function () {
+		$(this).toggleClass("active");
     $("[data-dropdown='menu']").slideToggle(400);
   });
   });

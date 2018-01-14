@@ -1,42 +1,48 @@
+<script>
+	$(document).ready(function() {
+		$("[data-type='button']").click(function() {
+		  $(this).toggleClass("active");
+		  
+			target_class = $(this).data('target');
+			$("." + target_class).slideToggle(400);
+		});
+	});
+</script>
 <div class="row">
-	<div class="col-3" id="pdfWrapper">
+	<div class="col-md-3" id="pdfWrapper">
 		<div class="fixme" id="pdfScroll"><!-- add pdf-works when scrolling -->
+			<h2 class="text-center fixme-button" data-target="pdf-cat-inner" data-type="button">Se kategorier</h2>
 			<div class="pdf-cat-inner"">
 				<%= link_to "Intro", show_this_pdf_category_path(0), class: "nav-link #{'active' unless @text.nil? }" %>
 				<% @pdf_categories.each do |cat| %>
 					<% unless @pdf_cat.nil? %>
-						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id),
-							class: "nav-link #{'active' if @pdf_cat.id == cat.id}" %>
+						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id), class: "nav-link #{'active' if @pdf_cat.id == cat.id}" %>
 					<% else %>
-						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id),
-							class: "nav-link" %>
+						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id), class: "nav-link" %>
 					<% end %>
 				<% end %>
 			</div>
-			<br>
-			<br>
 			<div class="pdf-cat-inner">
-				<%= link_to "Til andres tekster &#8594;".html_safe, artikler_path(), class: "nav-link" %>
+				<%= link_to "Til andres tekster &#8594;".html_safe, artikler_path(), class: "nav-link andres-tekster" %>
 			</div>
 		</div>
 	</div>
-	<hr>
 	<% if @pdfs.blank? && @text.present? %>
-		<div class="col-9 row">
-			<%= content_tag :h2, @cat_headline, class: "col-12 pb-4 pt-1 pdf-cat-headline" unless @cat_headline.nil? %>
+		<div class="col-md-9 pdf-row row">
+			<%= content_tag :h2, @cat_headline, class: "col-12 py-4 pt-1 pdf-cat-headline" unless @cat_headline.nil? %>
 			<%= @text.text.html_safe %><br>
 		</div>
-		  <%= link_to "Rediger Intro tekst", edit_text_path(@text.id), class: "btn btn-secondary" if user_signed_in? %>
+		<%= link_to "Rediger Intro tekst", edit_text_path(@text.id), class: "btn btn-secondary" if user_signed_in? %>
 	<% else %>
-		<div class="col-9 row">
-			<%= content_tag :h2, @cat_headline, class: "col-12 pb-4 pt-1 pdf-cat-headline" unless @cat_headline.nil? %>
+		<div class="col-md-9 pdf-row row">
+			<%= content_tag :h2, @cat_headline, class: "col-12 py-4 pt-1 pdf-cat-headline" unless @cat_headline.nil? %>
 			<%= render partial: "pdf", collection: @pdfs %>
 		</div>
 	<% end %> 
-</div><!-- container -->
-		<%= link_to "Opret ny intro tekst", new_text_path(), class: "btn btn-secondary" if user_signed_in? && @text.nil? %>
+</div>
+<%= link_to "Opret ny intro tekst", new_text_path(), class: "btn btn-secondary" if user_signed_in? && @text.nil? %>
 <script>
-	var fixmeTop = $('.fixme').offset().top;       // get initial position of the element
+var fixmeTop = $('.fixme').offset().top;       // get initial position of the element
 $(window).scroll(function() {                  // assign scroll event listener
 var currentScroll = $(window).scrollTop() + 18; // get current position
 if (currentScroll >= fixmeTop) {           // apply position: fixed if you
@@ -44,9 +50,9 @@ width = $("#pdfWrapper").width();
 left = $("#pdfWrapper").offset().left;
 $('.fixme').css({                      // scroll to that element or below it
 position: 'fixed',
-	top: '18px',
-	left: left + 'px',
-	width: width + 'px'
+top: '18px',
+left: left + 'px',
+width: width + 'px'
 });
 } else {                                   // apply position: static
 $('.fixme').css({                      // if you scroll above it

@@ -6,13 +6,15 @@ class StaticPagesController < ApplicationController
 		if params[:id].nil?
 			data = get_geo_json MapInfo.all
 			@no_popup = true
-		else
+		else #
 			map_info = Work.find(params[:id]).map_info
 			arr = []
 			arr << map_info
 			arr += MapInfo.where.not(id: map_info.id)
 			data = get_geo_json arr
+			@breadcrumb_child = {title: map_info.title, path: "danmarkskort_path(#{map_info.id})"}
 		end
+			@breadcrumb_parent = {title: "Danmarkskort", path: "danmarkskort_path()"}
 		@json_data = data.to_json
 	end
 

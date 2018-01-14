@@ -1,5 +1,8 @@
 @import 'imports/mixins';
 
+.fixme-button {
+	display: none;
+}
 /* Er fundet under oversigt, da billederne breaker */
 @media screen and (max-width: 768px) {
 .oversigt-img-wrapper {
@@ -34,7 +37,33 @@
 .next-prev-back-wrapper { //Pagination under work
 	display: none;
 }
+/* PDF */
+.pdf-cat-headline {
+	width: 100%;
+	text-align: center;
 }
+.pdf a .img-wrapper {
+	min-height: 150px;
+}
+.img-wrapper img {
+	width: 100%;
+}
+.pdf-cat-inner { // To disable scroll for menu 
+	display: none;
+	text-align: center;
+}
+.fixme-button {
+	display: block;
+	cursor: pointer;
+	line-height: 20px;
+}
+.fixme {
+	margin-top: -18px;
+	background-color: white;
+	width: 100%!important;
+}
+}
+
 
 @media screen and (max-width: 540px) {
 
