@@ -19,15 +19,25 @@
 .active {
 	text-decoration: underline;
 }
+.remove-margin {
+	margin-right: 0px!important;
+	margin-left: 0px!important;
+}
 .hide-it {
 	display: none;
 }
 .pdf-udgivet {
   font-family: Corbel;
 }
+#pdfWrapper {
+	padding-left: 0px!important;
+}
 .pdf-cat-inner {
   width: 100%;
   display: block;
+	.nav-link {
+		padding-left: 0px!important;
+	}
 }
 
 .pdf {
