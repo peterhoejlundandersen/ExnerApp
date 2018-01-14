@@ -28,15 +28,15 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0' #Hvad er du?
 end
 
-group :production do 
-  gem 'rails_12factor', group: :production # Er du stadig nødvendig?
-end
+# group :production do 
+#   gem 'rails_12factor', group: :production # Er du stadig nødvendig?
+# end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Hvad er du?
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Timezones
+# gem 'petergate', '~> 1.7', '>= 1.7.5'
 
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
-gem 'foundation-rails'
 gem 'fog-aws'
 gem 'aws-sdk', '~> 2'
 gem 'jquery-rails'
@@ -44,7 +44,6 @@ gem 'friendly_id', '~> 5.1.0', :require => "friendly_id"
 gem 'mini_magick'
 gem 'devise', '~> 4.3'
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
-gem 'petergate', '~> 1.7', '>= 1.7.5'
 gem 'cocoon', '~> 1.2', '>= 1.2.10'
 gem 'font-awesome-rails'
 gem 'rake'
@@ -53,6 +52,6 @@ gem 'tinymce-rails'
 gem 'webpacker', '~> 3.0'
 gem 'foreman'
 gem 'json'
-
+gem 'derailed'
 # Oh my fucking god - if"
 gem 'angular_rails_csrf'
