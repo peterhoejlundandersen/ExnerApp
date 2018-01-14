@@ -36,9 +36,6 @@ html, body {
   margin: 0 auto!important;
   max-width: 1400px;
   @include justify-content(space-between);
-  @media screen and (max-width: 1000px) {
-    @include justify-content(space-around);
-  }
   .overview-img-block {
     opacity: 0;
     @include transition(opacity .4s linear);
@@ -252,10 +249,6 @@ span.without-overview-text {
   height: 400px;
 }
 
-
-// .fade-in-image {
-// 	opacity: 0.2;
-// }
 .image-draft {
   background-color: #dadada!important;
 }

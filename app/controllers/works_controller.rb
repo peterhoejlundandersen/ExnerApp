@@ -42,12 +42,13 @@ class WorksController < ApplicationController
         @category = Category.friendly.find(params[:vaerker_cat])
         @works = @category.works
       end
+			logged_in = user_signed_in? ? "true" : ""
       @breadcrumb_parent = render_design ?
         {title: "Design", path: 'vaerker_path("belysning-og-andet", noload: "true")'} :
         {title: @category.name, path: 'vaerker_path("' + @category.name.parameterize + '")'}
       respond_to do |format|
         format.html { render render_design ? "categories/design_categories_overview" : "works/index" }
-        format.json { render json: {category: @category, works: @works, organs: is_organs} }
+				format.json { render json: {category: @category, works: @works, organs: is_organs, logged_in: logged_in} }
       end
   end
 
@@ -145,6 +146,7 @@ class WorksController < ApplicationController
       large_image = images.first
       work_title = work.name
 			map_info = (work.map_info.nil? || work.map_info.lat_x.nil?) ? "" : "true"
+			logged_in = user_signed_in? ? "true" : ""
 
       prev_work, next_work = work.position.nil? ? ["", ""] : get_next_and_previous_work(cat.works, work)
 
@@ -158,7 +160,8 @@ class WorksController < ApplicationController
             work_info: {short: work_info, description: work_description},
             pagination: {prev: prev_work, next: next_work},
             parent_cat: {slug: cat.slug, name: cat.name},
-						work: {title: work_title, id: work.id, map_info: map_info}
+						work: {title: work_title, id: work.id, map_info: map_info},
+						logged_in: logged_in
           }
         }
       end

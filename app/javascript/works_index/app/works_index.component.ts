@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
   template: `
   <div class="row works-wrapper" [dragula]='"first-bag"' [dragulaModel]='works'> 
     <div *ngFor="let work of works; let i = index" [class.vertical-image]="organs"
+		[class.no-drag]="!logged_in"
     class="overview-work" data-type="work" [attr.data-id]="work.id">
       <img *ngIf="work.overview_img.url" [src]="work.overview_img.url" (load)="assignImageValue(i, work.overview_img.url)" hidden>
       <a [href]="'/works/' + work.slug">
@@ -38,6 +39,7 @@ import 'rxjs/add/operator/map';
 export class WorksIndexComponent implements OnInit {
   organs: boolean = false;
   works: {}[] = [];
+	logged_in: string = "";
   constructor( 
     private http: Http,
     private dragulaService: DragulaService
@@ -58,6 +60,9 @@ export class WorksIndexComponent implements OnInit {
         data => { }, err => { console.log(err); }
       )
     });
+	dragulaService.setOptions('first-bag', {
+		moves: (el, source, handle, sibling) => !el.classList.contains('no-drag')
+	});
   }
 
   ngOnInit() {
@@ -66,7 +71,8 @@ export class WorksIndexComponent implements OnInit {
       .subscribe(
         data => {
           this.works = data.works,
-          this.organs = data.organs
+					this.organs = data.organs,
+					this.logged_in = data.logged_in
         },
         err => console.log(err),
       )

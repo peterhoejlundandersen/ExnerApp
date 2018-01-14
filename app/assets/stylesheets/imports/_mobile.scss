@@ -1,0 +1,60 @@
+@import 'imports/mixins';
+
+/* Er fundet under oversigt, da billederne breaker */
+@media screen and (max-width: 768px) {
+.oversigt-img-wrapper {
+	width: 48%;
+	h2 {
+		font-size: 0.8em!important;
+	}
+}
+.overview-img {
+	padding-bottom: 63%;
+	width: 100%;
+	height: auto;
+}
+
+.blog-nav {
+	@include flex-wrap(wrap);
+	@include justify-content(center);
+	height: auto;
+	.info-button {
+		line-height: 55px;
+		width: 100%;
+	}
+	.nav-link {
+		display: initial;
+		font-size: 11.2px!important;
+	}
+}
+.normal-menu-wrapper .menu-box, .oversigt-menu-wrapper .oversigt-menu, .menu-same-line {
+    width: 100%;
+		text-align: center;
+}
+.next-prev-back-wrapper { //Pagination under work
+	display: none;
+}
+}
+
+@media screen and (max-width: 540px) {
+
+.h1.masthead-overskrift {
+    font-size: 2em;
+}
+.masthead-overskrift-ark {
+	font-size: 1.5em;
+}
+.overview-img-block {
+	width: 100%;
+	text-align: center;
+	min-height: 100%;
+	padding-bottom: 51%!important;
+}
+
+.overview-work {
+    width: 49%;
+    height: auto;
+    padding: 0;
+    margin: 0px 0px 35px 0;
+}
+}

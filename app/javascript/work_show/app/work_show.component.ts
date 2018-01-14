@@ -25,7 +25,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       </span></a>
     </div>
   </div>
-  <h1 class="text-center">{{work.title}}</h1>
+  <h1 *ngIf="work.title" class="text-center">{{work.title}}</h1>
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
@@ -40,7 +40,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <div class="info-kort col-md-4">
       <ul class="info-short-list">
-        <li>{{work.title}}</li>
+        <li *ngIf="work.title">{{work.title}}</li>
         <li *ngFor="let info of work_info">{{info}}</li>
 				<li *ngIf="work.map_info">
 					<a [attr.href]="'/danmarkskort?id=' + work.id" target="_blank"> Vis på kort &#8594; </a>
@@ -56,6 +56,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button" (click)="openInfo()">Info</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
+		[class.no-drag]="!logged_in"
     class="nav-link text-center"
     [class.active-cat]="i == image_cats_index"
     [attr.data-id]="image_cat.id"
@@ -73,6 +74,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       <div class="loading-bar" [style.width]="loading_procent + '%'"></div>
     </div>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
+		[class.no-drag]="!logged_in" 
     class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
     (click)="changeLargeImage(i)"
     [attr.data-id]="thumb_image.id" data-type="image">
@@ -106,6 +108,7 @@ export class WorkShowComponent implements OnInit {
   work_description: null;
   work_info_opened: boolean = false;
   work: null;
+	logged_in: boolean = false;
 
   constructor( 
     private http: Http,
@@ -129,7 +132,13 @@ export class WorkShowComponent implements OnInit {
           data => { }, err => { console.log(err); }
         )
     });
+	dragulaService.setOptions('first-bag', {
+		moves: (el, source, handle, sibling) => !el.classList.contains('no-drag')
+	});
 
+	dragulaService.setOptions('cat-bag', {
+		moves: (el, source, handle, sibling) => !el.classList.contains('no-drag')
+	});
   };
 
   thumbNailLoad = function() {
@@ -160,7 +169,8 @@ export class WorkShowComponent implements OnInit {
         this.next_work = data.pagination.next,
         this.prev_work = data.pagination.prev,
         this.parent_cat = data.parent_cat,
-        this.work = data.work
+				this.work = data.work,
+				this.logged_in = data.logged_in
       });
 
   }
