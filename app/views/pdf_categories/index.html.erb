@@ -16,9 +16,10 @@
 				<%= link_to "Intro", show_this_pdf_category_path(0), class: "nav-link #{'active' unless @text.nil? }" %>
 				<% @pdf_categories.each do |cat| %>
 					<% unless @pdf_cat.nil? %>
+						<%= cat.id %>
 						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id), class: "nav-link #{'active' if @pdf_cat.id == cat.id}" %>
 					<% else %>
-						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id), class: "nav-link" %>
+						<%= link_to cat.title, show_this_pdf_category_path(cat.friendly_id), class: "nav-link"  %>
 					<% end %>
 				<% end %>
 			</div>
