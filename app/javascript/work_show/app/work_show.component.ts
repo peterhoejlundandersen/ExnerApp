@@ -38,6 +38,11 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       </div>
     </div>
   </div>
+
+	<div class="work-arrows-mobile-wrapper ar-hidden-md-up">
+		<div class="work-arrows work-arrows-mobile" id="leftArrow" (click)="changeLargeImage(image_index - 1)">Forrige billede</div>
+		<div class="work-arrow work-arrows-mobile" id="rightArrow" (click)="changeLargeImage(image_index + 1)">Næste billede</div>
+	</div>
   <!-- work_info -->
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <div class="info-kort col-md-4">
@@ -55,10 +60,6 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   </div>
   <!-- image categories -->
 
-	<div class="work-arrows-mobile-wrapper ar-hidden-md-up">
-		<div class="work-arrows work-arrows-mobile" id="leftArrow" (click)="changeLargeImage(image_index - 1)">Forrige billede</div>
-		<div class="work-arrow work-arrows-mobile" id="rightArrow" (click)="changeLargeImage(image_index + 1)">Næste billede</div>
-	</div>
   <div class="blog-nav img-cat-nav" data-navbar="img"
     [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button no-drag" (click)="openInfo()">Info</span>

@@ -1,0 +1,45 @@
+@import 'imports/mixins';
+
+@media screen and (max-width: 1024px) {
+	.masthead-overskrift-ark, .masthead-overskrift {
+		color: black;
+	}
+.overskrift-wrapper {
+	margin-top: 0px;
+}
+	.hidden-md-down {
+		display: none;
+	}
+	.hidden-md-up {
+		display: block;
+	}
+	.oversigt-button-wrapper {
+		border-top: 1px solid black;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		background-color: white;
+		z-index: 999999;
+		.oversigt-button {
+			display: block;
+			width: 100%;
+			font-family: Corbel;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			text-align: center;
+
+		}
+	}
+	.indexwrapper {
+		padding-top: 10px;
+	.frontpage-ark {
+				margin-left: 0px;
+		}
+	}
+	.front-page-text {
+		padding: 0 40px;
+	}
+}

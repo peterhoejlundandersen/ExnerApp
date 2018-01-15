@@ -10,15 +10,16 @@
       });
     });
   </script>
-<div class="row indexwrapper">
-  <div class="offset-1 col-10 frontpage-ark">
+	<div class="oversigt-button-wrapper hidden-md-up"><%= link_to "Gå til oversigt &#8594;".html_safe, oversigt_path(), class: "oversigt-button" %></div>
+<div class="row indexwrapper overskrift-wrapper remove-margin">
+  <div class="col-md-12 frontpage-ark">
     <div class="h4 masthead-overskrift-ark">Arkitekterne</div><div class="h1 masthead-overskrift">Inger og Johannes Exner</div>
-    <p class="text-center button-read-more white">Hvorfor denne hjemmeside? Læs mere <%= fa_icon "angle-down" %></p> 
+    <p class="text-center button-read-more white hidden-md-down">Hvorfor denne hjemmeside? Læs mere <%= fa_icon "angle-down" %></p> 
 
   </div>
 </div><!-- indexwrapper -->
-<div class="row">
-  <div class="offset-lg-3 col-lg-6 front-page-text">
+<div class="row remove-margin">
+  <div class="offset-lg-3 col-lg-6 offset-md-1 col-md-10 front-page-text">
     <% if @text.nil? %>
       <%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
     <% else %>
@@ -29,11 +30,6 @@
   <div class="col-lg-3 float-left to-oversigt">
     <%= link_to oversigt_path, class: "float-right affix" do %>
       <div class="button"></div>
-    <% end %>
-  </div>
-  <div class="kunpaamobilskaerm">
-    <%= link_to oversigt_path do %>
-      Gå videre til oversigten
     <% end %>
   </div>
 
