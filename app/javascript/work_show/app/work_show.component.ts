@@ -31,8 +31,8 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       <div class="image-desc-wrapper">
         <div src="#" *ngIf="image_loading" class="loading"></div>
         <img [hidden]="image_loading" (load)="onImageLoad()" [attr.src]="large_image.image.url" id="largeImage">
-        <div class="work-arrows" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
-        <div class="work-arrows" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
+        <div class="work-arrows ar-hidden-md-down large-arrow-left" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
+        <div class="work-arrows ar-hidden-md-down large-arrow-right" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
       </div>
     </div>
   </div>
@@ -52,9 +52,14 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     </div>
   </div>
   <!-- image categories -->
+
+	<div class="work-arrows-mobile-wrapper ar-hidden-md-up">
+		<div class="work-arrows work-arrows-mobile" id="leftArrow" (click)="changeLargeImage(image_index - 1)">Forrige billede</div>
+		<div class="work-arrow work-arrows-mobile" id="rightArrow" (click)="changeLargeImage(image_index + 1)">Næste billede</div>
+	</div>
   <div class="blog-nav img-cat-nav" data-navbar="img"
     [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
-    <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button" (click)="openInfo()">Info</span>
+    <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button no-drag" (click)="openInfo()">Info</span>
 		<span *ngIf="image_cats.length > 1" class="info-button hidden-md-up selected-image-cat">{{selected_cat}}</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
 		[class.no-drag]="!logged_in"
@@ -66,7 +71,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
         {{image_cat.name}}
       </div>
     </div>
-		<select *ngIf="image_cats.length > 1" (change)="triggerChangeCategory($event)" name="image-cat" class="hidden-md-up image-cat-dropdown">
+		<select *ngIf="image_cats.length > 1" (change)="triggerChangeCategory($event)" name="image-cat" class="no-drag hidden-md-up image-cat-dropdown">
 			<option selected>Skift billedekategori</option>
 			<option *ngFor="let image_cat of image_cats; let i = index" [value]="i">
 				{{image_cat.name}}
@@ -82,7 +87,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     </div>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
 		[class.no-drag]="!logged_in" 
-    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-xs-6 sortable-image-item"
+    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-sm-4 sortable-image-item hvor-er-jeg"
     (click)="changeLargeImage(i)"
     [attr.data-id]="thumb_image.id" data-type="image">
       <img (load)="thumbNailLoad()" src="{{thumb_image.image.thumb.url}}"

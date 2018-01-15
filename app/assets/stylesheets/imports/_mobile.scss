@@ -6,6 +6,46 @@
 .hidden-md-up {
 	display: none;
 }
+.ar-hidden-md-up {
+	display: none;
+}
+@media screen and (max-width: 1300px) {
+	.ar-hidden-md-down {
+		display: none;
+	}
+	.ar-hidden-md-up {
+		display: block;
+	}
+
+.work-arrows-mobile-wrapper {
+	margin-bottom: 15px;
+	width: 100%;
+	position: relative;
+	height: 40px;
+	#rightArrow {
+		text-align: right;
+		padding-right: 40px;
+		background-position-x: right;
+	}
+	#leftArrow {
+		padding-left: 40px;
+	}
+	.work-arrows-mobile {
+		cursor: pointer;
+		font-family: Corbel;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		top: auto;
+		width: 50%!important;
+		margin-top: 0px!important;
+		position: relative;
+		background-repeat: no-repeat;
+		float: left;
+		height: 40px!important;
+		line-height: 45px;
+	}
+}
+}
 /* Er fundet under oversigt, da billederne breaker */
 @media screen and (max-width: 992px) {
 	.om-box img {
@@ -28,11 +68,11 @@
 		letter-spacing: 2px;
     width: 100%;
     text-align: center;
-    padding-bottom: 14px;
+    padding: 14px 0px;
 		text-align-last:center;
+		display: block;
 }
 	.info-button {
-		width: 50%!important;
 	}
 .menu-button {
 	width: 100%!important;
@@ -59,13 +99,19 @@
 		opacity: 1!important;
 	}
 }
+.img-cat-nav {
+	@include justify-content(space-around!important);
+.info-button {
+	width: auto;
+	margin-right: 0px;
+}
+}
 .blog-nav {
 	@include flex-wrap(wrap);
 	@include justify-content(center);
 	height: auto;
 	.info-button {
 		line-height: 55px;
-		width: 100%;
 	}
 	.nav-link {
 		display: initial;
@@ -106,11 +152,28 @@
 .container {
     max-width: 100%!important;
 }
+/* large-image */
+.vertical-center {
+	min-height: 0px;
+	padding-bottom: 25px;
+}
+.image-desc-wrapper {
+		height: 100%;
+    height: 100vh;
+}
+.large-image {
+	min-height: 0px;
+}
 }
 
 
 @media screen and (max-width: 540px) {
 	/* Her kommer CSS for en meget sej løsning! */ 
+
+.work-arrows-mobile {
+	font-size: 0.6em;
+	line-height: 41px;
+}
 
 .h1.masthead-overskrift {
     font-size: 2em;

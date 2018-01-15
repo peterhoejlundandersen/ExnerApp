@@ -25,19 +25,23 @@
   position: absolute;
   cursor: pointer;
   top: 45%;
-  top: 50vh;
   margin-top: -75px;
 }
 
 #leftArrow {
-  left: 0;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   background-image: url(image-path("arrow-left"));
 }
 #rightArrow {
-  right: 0;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   background-image: url(image-path("arrow-right"));
+}
+.large-arrow-right {
+	right: -116px;
+}
+
+.large-arrow-left {
+	left: -116px;
 }

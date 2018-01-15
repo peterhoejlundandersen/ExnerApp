@@ -181,12 +181,11 @@ span.without-overview-text {
 }
 
 .vertical-center {
+	position: relative;
   padding-bottom: 75px;
   width: 100%;
   text-align: center;
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
-  min-height: 900px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -201,12 +200,10 @@ span.without-overview-text {
 .image-desc-wrapper {
   height: 100vh; /*can be anything*/
   width: 100%; /*can be anything*/
+	max-height: 900px;
   position: relative;
 }
 
-.large-image {
-  min-height: 100vh;  
-}
 #largeImage {
   max-height: 100%;
   max-width: 100%;
