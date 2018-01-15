@@ -25,11 +25,7 @@ class StaticPagesController < ApplicationController
 		else
 			@text = nil
 		end
-		if !user_signed_in?
-			redirect_to not_yet_path()
-		else
 			render layout: "frontpage"
-		end
 	end
 
 	def not_yet
