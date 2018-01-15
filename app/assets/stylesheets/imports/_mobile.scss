@@ -9,12 +9,15 @@
 .ar-hidden-md-up {
 	display: none;
 }
-@media screen and (max-width: 1300px) {
+.ar-work-hidden-md-up {
+	display: none; 
+}
+@media screen and (max-width: 1100px) {
 	.ar-hidden-md-down {
 		display: none;
 	}
 	.ar-hidden-md-up {
-		display: block;
+		display: inline-block;
 	}
 
 .work-arrows-mobile-wrapper {
@@ -31,6 +34,7 @@
 		padding-left: 40px;
 	}
 	.work-arrows-mobile {
+		font-size: 12.8px;
 		cursor: pointer;
 		font-family: Corbel;
 		letter-spacing: 2px;
@@ -53,6 +57,14 @@
 	}
 }
 @media screen and (max-width: 768px) {
+
+.ar-work-hidden-md-up {
+	display: inline-block;; 
+}
+
+.ar-work-hidden-md-down {
+	display: none;
+}
 	.hidden-md-up {
 		display: block;
 	}

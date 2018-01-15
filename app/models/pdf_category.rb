@@ -3,5 +3,5 @@ class PdfCategory < ApplicationRecord
 	friendly_id :title, use: [:slugged]
 
 	has_many :pdfs
-  scope :not_about, -> { where.not(id: [1, 2]) }
+	scope :not_about, -> { where.not(id: [1, 2]).order(position: :asc) }
 end
