@@ -23,6 +23,7 @@ class PdfsController < ApplicationController
     @pdf = Pdf.friendly.find(params[:id])
     @pdf_category = @pdf.pdf_category
     @categories = PdfCategory.all
+		render 'edit', layout: 'works'
   end
 
   def update

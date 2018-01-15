@@ -13,19 +13,19 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   <!-- large image -->
   <div class="next-prev-back-wrapper row">
     <div class="col-md-6 nav-link">
-      <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work.slug">
+      <a [attr.href]="'/works/' + prev_work?.slug">
         <span class="pagination-arrows prev-work"></span>
-        {{prev_work.name}}
+        {{prev_work?.name}}
       </a>
     </div>
     <div class="col-md-6 nav-link text-right ">
-      <a *ngIf="next_work" [attr.href]="'/works/' + next_work.slug">
-        {{next_work.name}}
+      <a [attr.href]="'/works/' + next_work?.slug">
+        {{next_work?.name}}
         <span class="pagination-arrows next-work">
       </span></a>
     </div>
   </div>
-  <h1 *ngIf="work.title" class="text-center">{{work.title}}</h1>
+  <h1 class="text-center">{{work?.title}}</h1>
   <div class="large-image">
     <div *ngIf="large_image" class="vertical-center">
       <div class="image-desc-wrapper">
@@ -40,7 +40,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
     <div class="info-kort col-md-4">
       <ul class="info-short-list">
-        <li *ngIf="work.title">{{work.title}}</li>
+        <li *ngIf="work.title">{{work?.title}}</li>
         <li *ngFor="let info of work_info">{{info}}</li>
 				<li *ngIf="work.map_info">
 					<a [attr.href]="'/danmarkskort?id=' + work.id" target="_blank"> Vis på kort &#8594; </a>
@@ -60,7 +60,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   <div class="blog-nav img-cat-nav" data-navbar="img"
     [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button no-drag" (click)="openInfo()">Info</span>
-		<span *ngIf="image_cats.length > 1" class="info-button hidden-md-up selected-image-cat">{{selected_cat}}</span>
+		<span *ngIf="image_cats?.length > 1" class="info-button hidden-md-up selected-image-cat">{{selected_cat}}</span>
     <div *ngFor="let image_cat of image_cats; let i = index"
 		[class.no-drag]="!logged_in"
     class="nav-link text-center hidden-md-down"
@@ -71,7 +71,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
         {{image_cat.name}}
       </div>
     </div>
-		<select *ngIf="image_cats.length > 1" (change)="triggerChangeCategory($event)" name="image-cat" class="no-drag hidden-md-up image-cat-dropdown">
+		<select *ngIf="image_cats?.length > 1" (change)="triggerChangeCategory($event)" name="image-cat" class="no-drag hidden-md-up image-cat-dropdown">
 			<option selected>Skift billedekategori</option>
 			<option *ngFor="let image_cat of image_cats; let i = index" [value]="i">
 				{{image_cat.name}}
@@ -82,15 +82,15 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 <div class="thumb-images-wrapper">
   <div class="thumb-images row sortable-images"
     [dragula]='"first-bag"' [dragulaModel]='thumb_images' >
-    <div class="col-12">
+    <div class="col-12 no-drag">
       <div class="loading-bar" [style.width]="loading_procent + '%'"></div>
     </div>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
 		[class.no-drag]="!logged_in" 
-    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-sm-4 sortable-image-item hvor-er-jeg"
+    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-sm-4 sortable-image-item"
     (click)="changeLargeImage(i)"
-    [attr.data-id]="thumb_image.id" data-type="image">
-      <img (load)="thumbNailLoad()" src="{{thumb_image.image.thumb.url}}"
+    [attr.data-id]="thumb_image?.id" data-type="image">
+      <img (load)="thumbNailLoad()" src="{{thumb_image?.image.thumb.url}}"
       [class.thumbnail-images-loadet]="!thumbnail_loading"
       [class.thumbnail-active]="i == image_index && !thumbnail_loading">
     </div>
@@ -132,9 +132,12 @@ export class WorkShowComponent implements OnInit {
     dragulaService.drop.subscribe((value) => {
       var element = value.slice(1)[0];
       var children = [].slice.call(element.parentElement.children);
+			console.log(element.dataset.id);
       var sorting_data = new Array();
       children.forEach(function(div, index) {
+				if (div.dataset.id == null) { return }
         let index_of_div = children.indexOf(div);
+				console.log("Index: " + index_of_div + "### id: " + div.dataset.id);
         sorting_data.push({id: div.dataset.id, order_i: index_of_div, type: div.dataset.type});
       });
       var url = "/sorting-objects";
@@ -142,7 +145,7 @@ export class WorkShowComponent implements OnInit {
       let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
       let options = new RequestOptions({ headers: headers }); // Create a request option
       this.http.post(url, body, options).subscribe(
-          data => { }, err => { console.log(err); }
+          data => { }, err => { console.log("FEJL:" + err); }
         )
     });
 	dragulaService.setOptions('first-bag', {
