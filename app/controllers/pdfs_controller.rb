@@ -42,6 +42,7 @@ class PdfsController < ApplicationController
   def new
     @pdf_category = PdfCategory.find(params[:pdf_category_id])
     @pdf = Pdf.new()
+		render 'new', layout: 'works'
   end
 
 	def destroy
