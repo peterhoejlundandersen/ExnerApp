@@ -53,5 +53,6 @@ gem 'webpacker', '~> 3.0'
 gem 'foreman'
 gem 'json'
 gem 'derailed'
+gem 'normalize-rails'
 # Oh my fucking god - if"
 gem 'angular_rails_csrf'

@@ -39,9 +39,11 @@
   background-image: url(image-path("arrow-right"));
 }
 .large-arrow-right {
-	right: -120px;
+	right: -74px;
+	background-position: -90px;
 }
 
 .large-arrow-left {
-	left: -120px;
+	left: -74px;
+	background-position: 90px;
 }
