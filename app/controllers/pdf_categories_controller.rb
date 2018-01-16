@@ -1,4 +1,5 @@
 class PdfCategoriesController < ApplicationController
+	before_action :authenticate_user!, except: :show_category
 	layout "works"
 
 	def show_category

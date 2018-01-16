@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+	before_action :authenticate_user!, except: [:danmarkskort, :frontpage, :about, :get_geo_json]
 	require 'json'
 	layout "works", except: [:frontpage]
 
@@ -28,12 +29,7 @@ class StaticPagesController < ApplicationController
 			render layout: "frontpage"
 	end
 
-	def not_yet
-		render layout: false
-	end
-
 	def contact
-
 	end
 
 	def about

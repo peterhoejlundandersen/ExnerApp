@@ -1,13 +1,13 @@
 <div class="container-fluid"><!-- have no .. -->
   <div class="row">
-  <%= link_to vaerker_path('handtegninger'), class: "col-md-8 om-box" do %>
+  <%= link_to vaerker_path('handtegninger'), class: "col-sm-8 om-box" do %>
     <%= image_tag "handtegninger-ny", class: "image-responsive" %>
   <h2 class=" text-uppercase om-head handtegninger">
     Håndtegninger
   </h2>
   <% end %>
   
-  <%= link_to artikler_path(), class: "col-md-4 om-box" do %>
+  <%= link_to artikler_path(), class: "col-sm-4 om-box" do %>
     <%= image_tag "artikler-ny.jpg", class: "image-responsive" %>
     <h2 class=" text-uppercase om-head">
       Artikler
@@ -18,7 +18,7 @@
   <% if @fact.nil? %>
     <p> <%= link_to "Opret 'Fakta om Inger og Johannes Exner'", new_fact_path() %> </p>
   <% else %>
-    <%= link_to facts_path(), class: "col-md-4 om-box " do %>
+    <%= link_to facts_path(), class: "col-sm-4 om-box " do %>
       <%= image_tag "fakta-ny.jpg", class: "image-responsive" %>
       <h2 class=" text-uppercase om-head">
         <%= @fact.title %>
@@ -26,7 +26,7 @@
     <% end %>
   <% end %>
   
-  <%= link_to vaerker_path('fotos'), class: "col-md-8 om-box fotos-box" do %>
+  <%= link_to vaerker_path('fotos'), class: "col-sm-8 om-box fotos-box" do %>
     <%= image_tag "fotos.jpg", class: "image-responsive" %>
   <h2 class=" text-uppercase fotos om-head">
     Fotos
@@ -35,14 +35,14 @@
   
 
 
-<%= link_to videos_path(), class: "col-md-8 om-box" do %>
+<%= link_to videos_path(), class: "col-sm-8 om-box" do %>
   <%= image_tag 'videos', class: "image-responsive" %>
   <h2 class=" text-uppercase om-head">
     Video
   </h2>
 <% end %>
 
-<%= link_to tidslinje_path(), class: "col-md-4 om-box tidslinje-box" do %>
+<%= link_to tidslinje_path(), class: "col-sm-4 om-box tidslinje-box" do %>
 
   <%= image_tag "tidslinje", class: "image-responsive" %>
   <h2 class=" text-uppercase tidslinje om-head">
@@ -51,7 +51,7 @@
 
 <% end %>
 
-<%= link_to vaerker_path("livet-i-tre-huse"), class: "col-md-12 mb-4 om-box tre-huse-box" do %>
+<%= link_to vaerker_path("livet-i-tre-huse"), class: "col-sm-12 om-box tre-huse-box" do %>
   <%= image_tag 'tre-huse', class: "image-responsive" %>
 
   <h2 class=" text-uppercase tre-huse om-head">

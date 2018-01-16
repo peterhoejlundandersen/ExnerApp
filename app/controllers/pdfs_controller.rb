@@ -1,4 +1,5 @@
 class PdfsController < ApplicationController
+	before_action :authenticate_user!, except: [:show, :get_next_and_previous_pdf ]
   layout "works", except: :show
 	layout 'pdf_show', only: :show
 

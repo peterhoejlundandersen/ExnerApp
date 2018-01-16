@@ -1,6 +1,5 @@
 class WorksController < ApplicationController
-
-  access all: [:show, :index, :design_index, :new_image, :new_image_category, :overview_img], user: {except: [:destroy]}, site_admin: :all
+	before_action :authenticate_user!, except: [:show, :index, :design_index, :return_work_info, :get_next_and_previous_work, :set_design_categories, :set_about_categories, :get_overview_img, :set_map_info]
   layout "works"
 
   def new_image
@@ -128,11 +127,14 @@ class WorksController < ApplicationController
           # HUSK AT GØRE NOGET VED DEM HER, NÅR JSOr ANGULAR VIRKER!
           @work_cat = @work.category
         else
-          # For work without images
+          # For værker med en billedekategori men uden billeder i
+
+					@prev_work, @next_work = @work.position.nil? ? ["", ""] : get_next_and_previous_work(category.works, @work)
           render 'show_no_images'
         end
       else
-        render 'show_no_images'
+					@prev_work, @next_work = @work.position.nil? ? ["", ""] : get_next_and_previous_work(category.works, @work)
+				render 'show_no_images' # For værker uden en billedekategori
       end
     else # unless request.format
       image_cat = ImageCategory.find(params[:image_category_id])
@@ -230,7 +232,6 @@ class WorksController < ApplicationController
       @prev = {title: "Tidslinje", path: 'tidslinje_path()'}
       @next = {title: "Håndtegninger", path: "vaerker_path('handtegninger')"}
 			@category = Category.friendly.find(cat_params)
-
     end
   end
 

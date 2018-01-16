@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+	before_action :authenticate_user!, only: :sorting_objects
   protect_from_forgery with: :exception
 
   def sorting_objects

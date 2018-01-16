@@ -1,20 +1,21 @@
 class ImageUploadersController < ApplicationController
+	before_action :authenticate_user!
 	layout "works"
 	access site_admin: :all
 
 
 	def uploader
-		
+
 	end
 
-	def create	
+	def create
 
-		Dir.foreach(path) do |category_folder|  
+		Dir.foreach(path) do |category_folder|
 			next if folder_or_file_excluded? category_folder
 
 			category = Category.new(name: category_folder)
 
-			Dir.foreach(path + "/" + category_folder) do |work_folder|  
+			Dir.foreach(path + "/" + category_folder) do |work_folder|
 				next if folder_or_file_excluded? work_folder
 				next if is_text_document? work_folder
 				@work = create_work work_folder, category, category_folder
@@ -22,13 +23,13 @@ class ImageUploadersController < ApplicationController
 				image_categories = []
 				work_folder_path = "#{path}/#{category_folder}/#{work_folder}"
 
-				Dir.foreach(work_folder_path) do |image_category_folder| 
+				Dir.foreach(work_folder_path) do |image_category_folder|
 					next if folder_or_file_excluded? image_category_folder
 					next if is_text_document? image_category_folder
 					next if images_accepted? image_category_folder.split(".")[-1]
-				  image_categories << image_category_folder 
+				  image_categories << image_category_folder
 
-				end 
+				end
 
 				if image_categories.empty?
 					image_category = ImageCategory.new(name: "Alle")
@@ -40,15 +41,15 @@ class ImageUploadersController < ApplicationController
 					  next unless images_accepted? image_path.split(".")[-1]
 					  image = Image.new
 					  image.image_category = image_category
-					
+
 					  	File.open("#{work_folder_path}/#{image_path}") do |f|
 					  	  image.image = f
 					  	end
 					  	if image_path.include? "START"
 						  	File.open("#{work_folder_path}/#{image_path}") do |f|
-						  	  @work.overview_img = f 
+						  	  @work.overview_img = f
 						  	  @work.save!
-						  	  
+
 						  	end
 					  	end
 
@@ -63,7 +64,7 @@ class ImageUploadersController < ApplicationController
 					  Dir.foreach("#{work_folder_path}/#{image_category_path}") do |image_file|
 					    next if folder_or_file_excluded? image_file
 					    next if is_text_document? image_file
-					    next if image_file.empty? 
+					    next if image_file.empty?
 
 					    image = Image.new
 					   	image.image_category = image_category
@@ -75,9 +76,9 @@ class ImageUploadersController < ApplicationController
 
 				      	if image_file.include? "START"
 				    	  	File.open("#{work_folder_path}/#{image_category_path}/#{image_file}") do |f|
-				    	  	  @work.overview_img = f 
+				    	  	  @work.overview_img = f
 				    	  	  @work.save!
-				    	  	  
+
 				    	  	end
 				      	end
 
@@ -100,12 +101,12 @@ class ImageUploadersController < ApplicationController
 		work = Work.new()
 		words = folder.split(" ")
 		if is_an_integer? words[0]
-			work.sagsnr = words[0].to_i 		
+			work.sagsnr = words[0].to_i
 			work.name = words[1..-1].join(" ")
 		else
 			work.name = words.join(" ")
 		end
-		work.category = parent_category 
+		work.category = parent_category
 		look_for_description folder, "#{path}/#{parent_category_folder}"
 		work.description = @description
 		work.address = @address
@@ -127,7 +128,7 @@ class ImageUploadersController < ApplicationController
 				file_name = file_name.join(".") # Sæt sammen igen (Hvis der nu er "." i et navn)
 				# Nulstil!
 					if folder.downcase == file_name.downcase #hvis identisk navn, tilføj beskrivelse
-						# Den fucking ENCODING LØSTE FUCKING PROBLEMET - OMG! 
+						# Den fucking ENCODING LØSTE FUCKING PROBLEMET - OMG!
 
 						@description = ""
 						File.foreach(file, encoding: 'iso-8859-1') do |line|
@@ -142,7 +143,7 @@ class ImageUploadersController < ApplicationController
 						end
 					end
 				end
-	end 
+	end
 
 	def path
 	"/Users/bruger/Desktop/EXNER FORSØG 2"
@@ -150,13 +151,13 @@ class ImageUploadersController < ApplicationController
 
 	def is_text_document? folder_or_file
 		if folder_or_file.split(".")[-1] == "txt" || folder_or_file.split(".")[-1] == "text"
-			true 
+			true
 		end
 	end
 
 	def folder_or_file_excluded? folder_file
 		list = %w(Fravalgt Fravalg Valgt fra fravalg fravalgt JPEG . .git DS_Store .. .DS_Store image_upload.rb)
-		list.include? folder_file	
+		list.include? folder_file
 	end
 
 	def images_accepted? image_file_ending

@@ -205,13 +205,6 @@ export class WorkShowComponent implements OnInit {
     } else if (event.key == "ArrowLeft") {
       this.changeLargeImage(this.image_index - 1, this.thumb_images);
     } 
-    if (this.work_info || this.work_description) {
-      if (event.key == "ArrowUp") {
-        this.work_info_opened = true;
-      } else if (event.key == "ArrowDown") {
-        this.work_info_opened = false;
-      }
-    }
   }
 
   changeCategory = function(i, last = false) { // Get image data from the json call

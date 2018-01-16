@@ -1,4 +1,5 @@
 class TextsController < ApplicationController
+	before_action :authenticate_user!
 	layout 'works'
 	def new
 		if Text.last.nil?  # Der kan kun være én

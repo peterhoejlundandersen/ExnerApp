@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  access all: [:show, :index], user: {except: [:destroy]}, site_admin: :all
+	before_action :authenticate_user!, except: [:index, :get_default_categories]
   layout "works"
   def new
     @category = Category.new
