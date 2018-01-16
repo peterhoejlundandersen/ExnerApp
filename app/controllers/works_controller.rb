@@ -128,12 +128,13 @@ class WorksController < ApplicationController
           @work_cat = @work.category
         else
           # For værker med en billedekategori men uden billeder i
-
+					@info = return_work_info @work
 					@prev_work, @next_work = @work.position.nil? ? ["", ""] : get_next_and_previous_work(category.works, @work)
           render 'show_no_images'
         end
       else
-					@prev_work, @next_work = @work.position.nil? ? ["", ""] : get_next_and_previous_work(category.works, @work)
+				@info = return_work_info @work
+				@prev_work, @next_work = @work.position.nil? ? ["", ""] : get_next_and_previous_work(category.works, @work)
 				render 'show_no_images' # For værker uden en billedekategori
       end
     else # unless request.format
@@ -256,12 +257,12 @@ class WorksController < ApplicationController
 
   def return_work_info work
     info = []
-    info << "Sagsnr: #{work.sagsnr.to_s}" unless work.sagsnr.nil?
-		info << "Adresse: #{work.address}" unless work.address.empty?
-    info << "Konkurrenceår: #{work.competition.to_s}" unless work.competition.nil?
-    info << "Indvielse: #{work.opening_year.to_s}" unless work.opening_year.nil?
-    work.infos.each {|i| info << "#{i.title}" } unless work.infos.empty?
-    return info.empty? ? false : info
+    info << "Sagsnr: #{work.sagsnr.to_s}" unless work.sagsnr.blank?
+		info << "Adresse: #{work.address}" unless work.address.blank?
+    info << "Konkurrenceår: #{work.competition.to_s}" unless work.competition.blank?
+    info << "Indvielse: #{work.opening_year.to_s}" unless work.opening_year.blank?
+    work.infos.each {|i| info << "#{i.title}" } unless work.infos.blank?
+    return info.blank? ? false : info
   end
 
   def work_params
