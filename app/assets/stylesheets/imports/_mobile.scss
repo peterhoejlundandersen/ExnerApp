@@ -17,7 +17,7 @@
 		display: none;
 	}
 	.ar-hidden-md-up {
-		display: inline-block;
+		@include flex;
 	}
 
 .work-arrows-mobile-wrapper {
@@ -126,6 +126,7 @@
 		line-height: 55px;
 	}
 	.nav-link {
+		cursor: pointer;
 		display: initial;
 		font-size: 11.2px!important;
 	}

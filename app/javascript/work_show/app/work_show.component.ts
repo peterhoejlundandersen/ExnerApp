@@ -10,7 +10,6 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 @Component({
   selector: 'work-show',
   template: `
-  <!-- large image -->
   <div class="next-prev-back-wrapper row">
     <div class="col-6 nav-link">
       <a *ngIf="prev_work" [attr.href]="'/works/' + prev_work?.slug">
@@ -39,9 +38,15 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     </div>
   </div>
 
-	<div class="work-arrows-mobile-wrapper ar-hidden-md-up">
-		<div class="work-arrows work-arrows-mobile" id="leftArrow" (click)="changeLargeImage(image_index - 1)">Forrige billede</div>
-		<div class="work-arrow work-arrows-mobile" id="rightArrow" (click)="changeLargeImage(image_index + 1)">Næste billede</div>
+	<div class="row ar-hidden-md-up">
+    <div class="col-6 nav-link" (click)="changeLargeImage(image_index - 1)">
+        <span class="pagination-arrows prev-work"></span>
+				<span>Forrige billede</span>
+		</div>
+			<div class="col-6 nav-link text-right" (click)="changeLargeImage(image_index + 1)">
+				<span>Næste billede</span>
+        <span class="pagination-arrows next-work"></span>
+		</div>
 	</div>
   <!-- work_info -->
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
