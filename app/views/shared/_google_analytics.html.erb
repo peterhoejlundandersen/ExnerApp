@@ -1,9 +1,11 @@
+<% unless user_signed_in? %><!-- Google Analyics skal ikke tælle besøgende af folk, som er logget ind -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83009453-4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-83009453-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-  gtag('config', 'UA-83009453-4');
-</script>
+		gtag('config', 'UA-83009453-4');
+	</script>
+<% end %>
