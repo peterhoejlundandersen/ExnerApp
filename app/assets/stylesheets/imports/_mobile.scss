@@ -12,6 +12,16 @@
 .ar-work-hidden-md-up {
 	display: none; 
 }
+
+@media screen and (max-width: 1200px) {
+	.vertical-image {
+		min-width: 25%;
+		h2 {
+			max-width: none;
+		}
+	}
+}
+
 @media screen and (max-width: 1100px) {
 	.ar-hidden-md-down {
 		display: none;
@@ -54,6 +64,10 @@
 @media screen and (max-width: 992px) {
 	.om-box img {
 		width: 100%;
+	}
+
+	.vertical-image {
+		min-width: 33%;
 	}
 }
 @media screen and (max-width: 768px) {
@@ -180,6 +194,11 @@
 }
 
 
+@media screen and (max-width: 654px) {
+	.vertical-image {
+		min-width: 50%;
+	}
+}
 @media screen and (max-width: 540px) {
 	/* Her kommer CSS for en meget sej løsning! */ 
 
