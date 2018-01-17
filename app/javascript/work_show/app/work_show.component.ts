@@ -38,7 +38,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
     </div>
   </div>
 
-	<div class="row ar-hidden-md-up">
+	<div class="row next-prev-back-wrapper ar-hidden-md-up">
     <div class="col-6 nav-link" (click)="changeLargeImage(image_index - 1)">
         <span class="pagination-arrows prev-work"></span>
 				<span>Forrige billede</span>

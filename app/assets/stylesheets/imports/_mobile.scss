@@ -72,6 +72,14 @@
 }
 @media screen and (max-width: 768px) {
 
+.next-prev-back-wrapper .nav-link {
+	&:first-child {
+		padding-right: 0px!important;
+	}
+	&:last-child {
+		padding-left: 0px!important;
+	}
+}
 .ar-work-hidden-md-up {
 	display: inline-block;; 
 }
