@@ -56,3 +56,5 @@ gem 'derailed'
 gem 'normalize-rails'
 # Oh my fucking god - if"
 gem 'angular_rails_csrf'
+
+gem 'newrelic_rpm'
