@@ -6,11 +6,7 @@ class Work < ActiveRecord::Base
 	has_many :infos
 	has_many :image_categories, -> { order(position: :asc) }
 	has_many :images, through: :image_categories
-	has_one :map_info, -> {
-		unless store_product.price.nil?
-			self.price = store_product.price
-		end
-		}, dependent: :destroy
+	has_one :map_info, dependent: :destroy
 	# accepts_nested_attributes_for :map_info, reject_if: proc { |attributes| attributes['lat_x'].blank? }
 	accepts_nested_attributes_for :map_info, allow_destroy: true
 	accepts_nested_attributes_for :image_categories, allow_destroy: true
