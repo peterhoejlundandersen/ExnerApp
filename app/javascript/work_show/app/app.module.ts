@@ -7,6 +7,7 @@ import { ImageNavigatorService } from './image_navigator.service';
 import { WorkShowComponent } from './work_show.component';
 
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
+
 @NgModule({
   declarations: [
     WorkShowComponent
