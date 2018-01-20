@@ -19,6 +19,11 @@ h3, h3 span {
 	@extend h2;
 	font-size: 12.8px!important;
 }
+/* Tinymce */
+.MsoNormal a {
+	text-decoration: underline;
+}
+
 .hidden-md-up {
 	display: none;
 }
