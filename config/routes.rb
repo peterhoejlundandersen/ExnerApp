@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'errors/show'
+
   resources :texts
   get 'danmarkskort' => 'static_pages#danmarkskort'
 	get 'not-yet' => 'static_pages#not_yet', as: :not_yet
@@ -54,4 +56,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#frontpage'
   # END FORSIDE TEKST
+	# error pages
+  %w( 404 422 500 503 ).each do |code|
+    get code, :to => "errors#show", :code => code
+  end
 end

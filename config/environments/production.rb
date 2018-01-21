@@ -1,11 +1,14 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+	# Added by me
+  # Eager load code on boot. This eager loads most of Rails and
+	config.exceptions_app = self.routes
 
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  # Eager load code on boot. This eager loads most of Rails and
+
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
@@ -90,7 +93,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  #Javascript not working on heroku 
+  #Javascript not working on heroku
   config.assets.compile = true
 
   #Jeg har min public js viewer, som ikke bliver opdateret
