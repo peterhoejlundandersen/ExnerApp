@@ -68,20 +68,29 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   </div>
   <!-- image categories -->
 
-  <div class="blog-nav img-cat-nav" data-navbar="img"
-    [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
+	<div class="blog-nav img-cat-nav" data-navbar="img">
     <span *ngIf="work_info" [class.active-cat]="work_info_opened" class="info-button no-drag" (click)="openInfo()">Info</span>
 		<span *ngIf="image_cats?.length > 1" class="info-button hidden-md-up selected-image-cat">{{selected_cat}}</span>
-    <div *ngFor="let image_cat of image_cats; let i = index"
-		[class.no-drag]="!logged_in"
-    class="nav-link text-center hidden-md-down"
-    [class.active-cat]="i == image_cats_index"
-    [attr.data-id]="image_cat.id"
-    data-type="image-cat">
-      <div (click)="changeCategory(i)" class="nav-link text-center">
-        {{image_cat.name}}
-      </div>
-    </div>
+		<div *ngIf="logged_in" class="image-cat-wrapper" [dragula]='"cat-bag"' [dragulaModel]='image_cats'>
+			<div *ngFor="let image_cat of image_cats; let i = index"
+			class="nav-link text-center hidden-md-down"
+			[class.active-cat]="i == image_cats_index"
+			[attr.data-id]="image_cat.id"
+			data-type="image-cat">
+				<div (click)="changeCategory(i)" class="nav-link text-center">
+					{{image_cat.name}}
+				</div>
+			</div>
+		</div>
+		<div *ngIf="!logged_in" class="image-cat-wrapper">
+			<div *ngFor="let image_cat of image_cats; let i = index"
+			class="nav-link text-center hidden-md-down"
+			[class.active-cat]="i == image_cats_index">
+				<div (click)="changeCategory(i)" class="nav-link text-center">
+					{{image_cat.name}}
+				</div>
+			</div>
+		</div>
 		<select *ngIf="image_cats?.length > 1" (change)="triggerChangeCategory($event)" name="image-cat" class="no-drag hidden-md-up image-cat-dropdown">
 			<option selected>Skift billedekategori</option>
 			<option *ngFor="let image_cat of image_cats; let i = index" [value]="i">
@@ -91,14 +100,15 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
   </div>
   <!-- thumbnails -->
 <div class="thumb-images-wrapper">
+	<div class="col-12">
+		<div class="loading-bar" [style.width]="loading_procent + '%'"></div>
+	</div>
+	<ng-container *ngIf="logged_in">
   <div class="thumb-images row sortable-images"
-    [dragula]='"first-bag"' [dragulaModel]='thumb_images' >
-    <div class="col-12 no-drag">
-      <div class="loading-bar" [style.width]="loading_procent + '%'"></div>
-    </div>
+    [dragula]='"first-bag"' [dragulaModel]='thumb_images'>
     <div *ngFor="let thumb_image of thumb_images; let i = index"
 		[class.no-drag]="!logged_in" 
-    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-sm-4 sortable-image-item"
+    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-sm-4"
     (click)="changeLargeImage(i)"
     [attr.data-id]="thumb_image?.id" data-type="image">
       <img (load)="thumbNailLoad()" src="{{thumb_image?.image.thumb.url}}"
@@ -106,6 +116,18 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       [class.thumbnail-active]="i == image_index && !thumbnail_loading">
     </div>
   </div>
+	</ng-container>
+	<ng-container *ngIf="!logged_in">
+	<div class="thumb-images row sortable-images">
+    <div *ngFor="let thumb_image of thumb_images; let i = index"
+    class="text-center thumb-image col-lg-2 col-md-3 col-6 col-sm-4"
+		(click)="changeLargeImage(i)">
+      <img (load)="thumbNailLoad()" src="{{thumb_image?.image.thumb.url}}"
+      [class.thumbnail-images-loadet]="!thumbnail_loading"
+      [class.thumbnail-active]="i == image_index && !thumbnail_loading">
+    </div>
+  </div>
+	</ng-container>
 </div>
   `,
   host: {
@@ -140,6 +162,7 @@ export class WorkShowComponent implements OnInit {
     public _image_navigator_service: ImageNavigatorService,
     private dragulaService: DragulaService
   ) {
+
     dragulaService.drop.subscribe((value) => {
       var element = value.slice(1)[0];
       var children = [].slice.call(element.parentElement.children);
@@ -159,13 +182,8 @@ export class WorkShowComponent implements OnInit {
           data => { }, err => { console.log("FEJL:" + err); }
         )
     });
-	dragulaService.setOptions('first-bag', {
-		moves: (el, source, handle, sibling) => !el.classList.contains('no-drag')
-	});
 
-	dragulaService.setOptions('cat-bag', {
-		moves: (el, source, handle, sibling) => !el.classList.contains('no-drag')
-	});
+
   };
 
   thumbNailLoad = function() {
@@ -200,7 +218,6 @@ export class WorkShowComponent implements OnInit {
 				this.work = data.work,
 				this.logged_in = data.logged_in
       });
-
   }
 
   openInfo = function() {
