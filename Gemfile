@@ -28,13 +28,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0' #Hvad er du?
 end
 
-# group :production do 
-#   gem 'rails_12factor', group: :production # Er du stadig nødvendig?
-# end
-
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Timezones
-# gem 'petergate', '~> 1.7', '>= 1.7.5' # Removed all petergate content - i hope!
-
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
 gem 'fog-aws'
@@ -50,9 +43,9 @@ gem 'rake'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'tinymce-rails'
 gem 'webpacker', '~> 3.0'
-# gem 'json' # Removed because i didn't use it!
 gem 'derailed'
 gem 'normalize-rails'
-gem 'angular_rails_csrf' # Oh my fucking god - if"
-# Heroko tools for memory bloat
+gem 'angular_rails_csrf' # Oh my fucking god - if only i knew
+
+# Heroko tool for memory bloat
 gem 'scout_apm'

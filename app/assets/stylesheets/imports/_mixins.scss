@@ -3,6 +3,14 @@
   display: flex;
 }
 
+@mixin flex-grow($int: 0) {
+	-webkit-box-flex: $int;
+	-webkit-flex-grow: $int;
+	-moz-flex-grow: $int;
+	-ms-flex-positive: $int;
+	flex-grow: $int;
+}
+
 @mixin rotate($degrees) {
     -webkit-transform: rotate($degrees);
     -moz-transform: rotate($degrees);

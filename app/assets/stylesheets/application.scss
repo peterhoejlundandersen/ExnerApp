@@ -46,16 +46,17 @@
 }
 
 .menu-button {
-	line-height: 55px;
+	@include flex-grow(1);
+	cursor: pointer;
+	text-align: left;
+	padding: 0.5rem 1rem;
+	display: block;
 	font-family: Corbel;
 	letter-spacing: 2px;
+	line-height: 55px;
 	text-transform: uppercase;
-	cursor: pointer;
-	display: block;
 	float: left;
 	color: black;
-	margin-right: auto;
-	line-height: 41px;
 	width: 75px;
   &:hover {
 	text-decoration: underline;
