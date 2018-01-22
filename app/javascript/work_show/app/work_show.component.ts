@@ -83,6 +83,10 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 			</div>
 		</div>
 		<div *ngIf="!logged_in" class="image-cat-wrapper">
+			<div *ngIf="image_cats.length < 2" class="row hidden-md-up">
+				<div class="nav-link text-center">Alle</div>
+			</div>
+
 			<div *ngFor="let image_cat of image_cats; let i = index"
 			class="nav-link text-center hidden-md-down"
 			[class.active-cat]="i == image_cats_index">
