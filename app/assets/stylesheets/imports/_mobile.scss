@@ -69,6 +69,12 @@
 	.vertical-image {
 		min-width: 33%;
 	}
+	.blog-nav.img-cat-nav {
+    justify-content: space-between;
+	}
+	.image-cat-wrapper .nav-link {
+		padding: 0.5em;
+	}
 }
 @media screen and (max-width: 768px) {
 

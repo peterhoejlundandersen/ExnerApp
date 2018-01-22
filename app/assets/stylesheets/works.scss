@@ -26,9 +26,13 @@ html, body {
   margin: 0;
 }
 .image-cat-wrapper {
+	@include justify-content(flex-end);
 	display: inherit;
 	width: 100%;
 	align-items: center;
+	.nav-link {
+		@include flex;
+	}
 }
 .vertical-image {
   min-width: 20%;
@@ -228,10 +232,13 @@ span.without-overview-text {
   background-color: white!important;
 }
 
-.loading-bar {
-  background-color: $nav-color;
-  height: 20px;
-  display: block;
+.loading-bar-wrapper {
+	padding: 0px!important;
+	.loading-bar {
+		background-color: $nav-color;
+		height: 20px;
+		display: block;
+	}
 }
 
 .large-loading {

@@ -99,8 +99,8 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 		</select>
   </div>
   <!-- thumbnails -->
-<div class="thumb-images-wrapper row">
-	<div class="col-12">
+<div class="thumb-images-wrapper">
+	<div class="col-12 loading-bar-wrapper">
 		<div class="loading-bar" [style.width]="loading_procent + '%'"></div>
 	</div>
 	<ng-container *ngIf="logged_in">
