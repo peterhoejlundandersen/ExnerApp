@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
 	before_action :authenticate_user!, except: [:danmarkskort, :frontpage, :about, :get_geo_json]
-	require 'json'
 	layout "works", except: [:frontpage]
 
 	def danmarkskort

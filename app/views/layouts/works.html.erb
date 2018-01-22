@@ -19,13 +19,13 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container no-padding-x">
       <%= alert_notice_helper %>
-      <%= render partial: "admin/navbar" if logged_in?(:site_admin) %>
+			<%= render partial: "admin/navbar" if user_signed_in? %>
       <%= render partial: "shared/masthead" %>
       <%= render partial: "shared/navbar", locals: {categories: @categories} %>
 
-      <div class="container-yield <%= 'container-p-top' unless content_for?(:padding_top_container) %>">
+      <div class="container-yield no-padding-x <%= 'container-p-top' unless content_for?(:padding_top_container) %>">
         <%= yield %>
       </div>
       <%= render partial: "shared/footer" %>

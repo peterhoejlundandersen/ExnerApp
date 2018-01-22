@@ -20,9 +20,10 @@
 <div class="row remove-margin">
   <div class="offset-lg-3 col-lg-6 offset-md-1 col-md-10 front-page-text">
     <% if @text.nil? %>
-      <%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+			<%= link_to "Opret tekst", ny_forside_tekst_path(), class: "btn btn-secondary" if user_signed_in? %>
     <% else %>
-      <%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if logged_in?(:site_admin) %>
+      <%= link_to "Rediger teksten", rediger_forside_tekst_path(@text.id), class: "btn btn-secondary" if user_signed_in? %>
+
       <%= @text.text.html_safe %>
     <% end %> 
   </div>

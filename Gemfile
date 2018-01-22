@@ -33,7 +33,7 @@ end
 # end
 
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Timezones
-gem 'petergate', '~> 1.7', '>= 1.7.5'
+# gem 'petergate', '~> 1.7', '>= 1.7.5' # Removed all petergate content - i hope!
 
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
@@ -50,13 +50,9 @@ gem 'rake'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'tinymce-rails'
 gem 'webpacker', '~> 3.0'
-gem 'foreman'
-gem 'json'
+# gem 'json' # Removed because i didn't use it!
 gem 'derailed'
 gem 'normalize-rails'
-# Oh my fucking god - if"
-gem 'angular_rails_csrf'
-
-# Heroko tools for memero blouds
-gem 'newrelic_rpm'
+gem 'angular_rails_csrf' # Oh my fucking god - if"
+# Heroko tools for memory bloat
 gem 'scout_apm'

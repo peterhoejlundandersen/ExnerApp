@@ -5,7 +5,7 @@
 					
 
 <h1 class="text-center"><%= @work.name %></h1>
-<%= logged_in_work_helper if logged_in?(:site_admin) %>
+<%= logged_in_work_helper if user_signed_in? %>
 <div class="row mt-4">
 	<div class="offset-lg-2 col-lg-8">
 		<p><%= @work.description %></p>

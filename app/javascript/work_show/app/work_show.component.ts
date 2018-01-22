@@ -99,7 +99,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 		</select>
   </div>
   <!-- thumbnails -->
-<div class="thumb-images-wrapper">
+<div class="thumb-images-wrapper row">
 	<div class="col-12">
 		<div class="loading-bar" [style.width]="loading_procent + '%'"></div>
 	</div>

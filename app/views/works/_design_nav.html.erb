@@ -10,7 +10,7 @@
             </h2>
           <% end %>
       <% end %><!-- link_to vaerker_pat -->
-        <% if logged_in?(:site_admin) %>
+        <% if  user_signed_in? %>
           <%= link_to "Rediger kategori", edit_category_path(cat) %> / 
           <%= link_to "Slet kategori", category_path(cat), method: :delete,
             data: {confirm: "Er du sikker på at du vil slette kategorien?"} %> 

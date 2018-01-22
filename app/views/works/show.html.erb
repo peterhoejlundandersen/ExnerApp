@@ -3,4 +3,5 @@
 <span class="hide-it" id="imgCat" data-img-cat="<%= @first_image_category.id %>"></span>
   <work-show class="large-loading" ></work-show>
 <%= javascript_pack_tag 'work_show' %>
-<%= logged_in_work_helper if logged_in?(:site_admin) %>
+<%= logged_in_work_helper if user_signed_in? %>
+
