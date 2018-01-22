@@ -57,4 +57,6 @@ gem 'normalize-rails'
 # Oh my fucking god - if"
 gem 'angular_rails_csrf'
 
+# Heroko tools for memero blouds
 gem 'newrelic_rpm'
+gem 'scout_apm'
