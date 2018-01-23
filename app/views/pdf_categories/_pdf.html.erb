@@ -8,5 +8,5 @@
         <%= "#{pdf.date.strftime("%Y")} <br>".html_safe unless pdf.date.nil? %>
       <%= pdf.title %></p>
     <% end %>
-  <%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if  logged_in?(:site_admin) %>
+  <%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if user_signed_in? %>
 </div>
