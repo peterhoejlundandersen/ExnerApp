@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :get_default_categories]
   layout "works"
+
   def new
     @category = Category.new
   end
@@ -53,7 +54,8 @@ class CategoriesController < ApplicationController
   private
 
   def get_default_categories
-    default_categories = {
+    default_categories =
+			{
        image: view_context.image_path('johannes-tekster'),
        slug: "johannes-exners-tekster/0",
        name: "Johannes' tekster",
