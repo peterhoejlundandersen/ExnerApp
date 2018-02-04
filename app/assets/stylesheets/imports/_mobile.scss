@@ -30,35 +30,35 @@
 		@include flex;
 	}
 
-.work-arrows-mobile-wrapper {
-	margin-bottom: 15px;
-	width: 100%;
-	position: relative;
-	height: 40px;
-	#rightArrow {
-		text-align: right;
-		padding-right: 40px;
-		background-position-x: right;
-	}
-	#leftArrow {
-		padding-left: 40px;
-	}
-	.work-arrows-mobile {
-		font-size: 12.8px;
-		cursor: pointer;
-		font-family: Corbel;
-		letter-spacing: 2px;
-		text-transform: uppercase;
-		top: auto;
-		width: 50%!important;
-		margin-top: 0px!important;
+	.work-arrows-mobile-wrapper {
+		margin-bottom: 15px;
+		width: 100%;
 		position: relative;
-		background-repeat: no-repeat;
-		float: left;
-		height: 40px!important;
-		line-height: 45px;
+		height: 40px;
+		#rightArrow {
+			text-align: right;
+			padding-right: 40px;
+			background-position-x: right;
+		}
+		#leftArrow {
+			padding-left: 40px;
+		}
+		.work-arrows-mobile {
+			font-size: 12.8px;
+			cursor: pointer;
+			font-family: Corbel;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			top: auto;
+			width: 50%!important;
+			margin-top: 0px!important;
+			position: relative;
+			background-repeat: no-repeat;
+			float: left;
+			height: 40px!important;
+			line-height: 45px;
+		}
 	}
-}
 }
 /* Er fundet under oversigt, da billederne breaker */
 @media screen and (max-width: 992px) {
@@ -70,7 +70,7 @@
 		min-width: 33%;
 	}
 	.blog-nav.img-cat-nav {
-    justify-content: space-between;
+		justify-content: space-between;
 	}
 	.image-cat-wrapper .nav-link {
 		padding: 0.5em;
@@ -78,21 +78,21 @@
 }
 @media screen and (max-width: 768px) {
 
-.next-prev-back-wrapper .nav-link {
-	&:first-child {
-		padding-right: 0px!important;
+	.next-prev-back-wrapper .nav-link {
+		&:first-child {
+			padding-right: 0px!important;
+		}
+		&:last-child {
+			padding-left: 0px!important;
+		}
 	}
-	&:last-child {
-		padding-left: 0px!important;
+	.ar-work-hidden-md-up {
+		display: inline-block;; 
 	}
-}
-.ar-work-hidden-md-up {
-	display: inline-block;; 
-}
 
-.ar-work-hidden-md-down {
-	display: none;
-}
+	.ar-work-hidden-md-down {
+		display: none;
+	}
 	.hidden-md-up {
 		display: block;
 	}
@@ -103,110 +103,111 @@
 		cursor: default!important;
 		text-decoration: none!important;
 	}
-.image-cat-dropdown {
-    font-family: Corbel;
+	.image-cat-dropdown {
+		font-family: Corbel;
 		letter-spacing: 2px;
-    width: 100%;
-    text-align: center;
-    padding: 14px 0px;
+		width: 100%;
+		text-align: center;
+		padding: 14px 0px;
 		text-align-last:center;
 		display: block;
-}
+	}
 	.info-button {
 	}
-.menu-button {
-	text-align: center!important;
-	line-height: 55px!important;
-	width: 100%!important;
-}
-.oversigt-img-wrapper {
-	width: 48%;
-	h2 {
-		font-size: 0.8em!important;
+	.menu-button {
+		text-align: center!important;
+		line-height: 55px!important;
+		width: 100%!important;
 	}
-}
-.overview-img {
-	padding-bottom: 63%;
-	width: 100%;
-	height: auto;
-}
-.facts p {
-    width: 99%;
-    min-width: auto;
-    margin: 0 auto;
-}
-.to-top {
-	background-color: white;
-	.to-top-text {
-		opacity: 1!important;
+	.oversigt-img-wrapper {
+		width: 48%;
+		h2 {
+			font-size: 0.8em!important;
+		}
 	}
-}
-.img-cat-nav {
-	@include justify-content(space-around!important);
-.info-button {
-	width: auto;
-	margin-right: 0px;
-}
-}
-.blog-nav {
-	@include flex-wrap(wrap);
-	@include justify-content(center);
-	height: auto;
-	.info-button {
-		line-height: 55px;
+	.overview-img {
+		padding-bottom: 63%;
+		width: 100%;
+		height: auto;
 	}
-	.nav-link {
-		cursor: pointer;
-		display: initial;
-		font-size: 11.2px!important;
+	.facts p {
+		width: 99%;
+		min-width: auto;
+		margin: 0 auto;
 	}
-}
-.normal-menu-wrapper .menu-box, .oversigt-menu-wrapper .oversigt-menu, .menu-same-line {
-    width: 100%;
+	.to-top {
+		background-color: white;
+		.to-top-text {
+			opacity: 1!important;
+		}
+	}
+	.img-cat-nav {
+		padding-bottom: 10px;
+		@include justify-content(space-around!important);
+		.info-button {
+			width: auto;
+			margin-right: 0px;
+		}
+	}
+	.blog-nav {
+		@include flex-wrap(wrap);
+		@include justify-content(center);
+		height: auto;
+		.info-button {
+			line-height: 55px;
+		}
+		.nav-link {
+			cursor: pointer;
+			display: initial;
+			font-size: 11.2px!important;
+		}
+	}
+	.normal-menu-wrapper .menu-box, .oversigt-menu-wrapper .oversigt-menu, .menu-same-line {
+		width: 100%;
 		text-align: center;
-}
-/* PDF */
-.pdf-cat-headline {
-	width: 100%;
-	text-align: center;
-}
-.pdf a .img-wrapper {
-	min-height: 150px;
-}
-.img-wrapper img {
-	width: 100%;
-}
-.pdf-cat-inner { // To disable scroll for menu 
-	display: none;
-	text-align: center;
-}
-.fixme-button {
-	display: block;
-	cursor: pointer;
-	line-height: 40px;
-}
-.fixme {
-	margin-top: -18px;
-	background-color: white;
-}
-#pdfWrapper {
-	padding: 0px!important;
-}
-.container {
-    max-width: 100%!important;
-}
-/* large-image */
-.vertical-center {
-	min-height: 0px;
-	padding-bottom: 40px;
-}
-.image-desc-wrapper {
+	}
+	/* PDF */
+	.pdf-cat-headline {
+		width: 100%;
+		text-align: center;
+	}
+	.pdf a .img-wrapper {
+		min-height: 150px;
+	}
+	.img-wrapper img {
+		width: 100%;
+	}
+	.pdf-cat-inner { // To disable scroll for menu 
+		display: none;
+		text-align: center;
+	}
+	.fixme-button {
+		display: block;
+		cursor: pointer;
+		line-height: 40px;
+	}
+	.fixme {
+		margin-top: -18px;
+		background-color: white;
+	}
+	#pdfWrapper {
+		padding: 0px!important;
+	}
+	.container {
+		max-width: 100%!important;
+	}
+	/* large-image */
+	.vertical-center {
+		min-height: 0px;
+		padding-bottom: 40px;
+	}
+	.image-desc-wrapper {
 		height: 100%;
-    height: 100vh;
-}
-.large-image {
-	min-height: 0px;
-}
+		height: 100vh;
+	}
+	.large-image {
+		min-height: 0px;
+	}
 }
 
 
@@ -218,30 +219,30 @@
 @media screen and (max-width: 540px) {
 	/* Her kommer CSS for en meget sej løsning! */ 
 
-.work-arrows-mobile {
-	font-size: 0.6em;
-	line-height: 41px;
-}
+	.work-arrows-mobile {
+		font-size: 0.6em;
+		line-height: 41px;
+	}
 
-.h1.masthead-overskrift {
-    font-size: 2em;
-}
-.masthead-overskrift-ark {
-	font-size: 1.5em;
-}
-.overview-img-block {
-	width: 100%;
-	text-align: center;
-	min-height: 100%;
-	padding-bottom: 51%!important;
-}
+	.h1.masthead-overskrift {
+		font-size: 2em;
+	}
+	.masthead-overskrift-ark {
+		font-size: 1.5em;
+	}
+	.overview-img-block {
+		width: 100%;
+		text-align: center;
+		min-height: 100%;
+		padding-bottom: 51%!important;
+	}
 
-.overview-work {
-    width: 49%;
-    height: auto;
-    padding: 0;
-    margin: 0px 0px 35px 0;
-}
+	.overview-work {
+		width: 49%;
+		height: auto;
+		padding: 0;
+		margin: 0px 0px 35px 0;
+	}
 }
 
 
