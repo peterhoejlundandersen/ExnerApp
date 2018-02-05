@@ -51,3 +51,9 @@ $(window).scroll(function () {
   }	
 });
 </script>
+
+<%= text_field_tag 'name', number_with_delimiter(1831730, delimiter: ',', 
+																								 delimiter_pattern: /(\d+?)(?=(\d\d)+(\d)(?!\d))/ ), min: 0 %>
+
+
+
