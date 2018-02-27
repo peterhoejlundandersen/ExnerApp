@@ -36,8 +36,9 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
         <div class="work-arrows ar-hidden-md-down large-arrow-right" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
       </div>
     </div>
-		<div *ngIf="!image_loading && large_image.image_description" class="image-description">
-			<p class="text-center">{{large_image.image_description}}</p>
+		<div *ngIf="!image_loading && (large_image.image_description || large_image.photographer)" class="image-description">
+			<p class="text-center mb-0">Fotograf: {{large_image?.photographer}}</p>
+			<p class="text-center mb-0">{{large_image?.image_description}}</p>
 		</div>
   </div>
 
