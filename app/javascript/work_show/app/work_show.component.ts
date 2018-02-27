@@ -32,8 +32,8 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       <div class="image-desc-wrapper">
         <div src="#" *ngIf="image_loading" class="loading"></div>
         <img [hidden]="image_loading" (load)="onImageLoad()" [attr.src]="large_image.image.url" id="largeImage">
-        <div class="work-arrows ar-hidden-md-down large-arrow-left" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
-        <div class="work-arrows ar-hidden-md-down large-arrow-right" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
+        <div *ngIf="image_cats?.length > 1 || thumb_images.length > 1" class="work-arrows ar-hidden-md-down large-arrow-left" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
+        <div *ngIf="image_cats?.length > 1 || thumb_images.length > 1" class="work-arrows ar-hidden-md-down large-arrow-right" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
       </div>
     </div>
 		<div *ngIf="!image_loading && (large_image.image_description || large_image.photographer)" class="image-description">
@@ -42,15 +42,15 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 		</div>
   </div>
 
-	<div class="row next-prev-back-wrapper ar-hidden-md-up">
+  <div *ngIf="image_cats?.length > 1 || thumb_images.length > 1" class="row next-prev-back-wrapper ar-hidden-md-up">
     <div class="col-6 nav-link" (click)="changeLargeImage(image_index - 1)">
         <span class="pagination-arrows prev-work"></span>
 				<span>Forrige billede</span>
 		</div>
-			<div class="col-6 nav-link text-right" (click)="changeLargeImage(image_index + 1)">
-				<span>Næste billede</span>
-        <span class="pagination-arrows next-work"></span>
-		</div>
+    <div class="col-6 nav-link text-right" (click)="changeLargeImage(image_index + 1)">
+      <span>Næste billede</span>
+      <span class="pagination-arrows next-work"></span>
+    </div>
 	</div>
   <!-- work_info -->
   <div *ngIf="work_info || work_description" [class.show-info]="work_info_opened" class="row info-field-work">
