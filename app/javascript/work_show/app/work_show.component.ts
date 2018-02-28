@@ -37,8 +37,8 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       </div>
     </div>
 		<div *ngIf="!image_loading && (large_image.image_description || large_image.photographer)" class="image-description">
-			<p class="text-center mb-0">Fotograf: {{large_image?.photographer}}</p>
-			<p class="text-center mb-0">{{large_image?.image_description}}</p>
+			<p *ngIf="large_image.photographer" class="text-center mb-0">Fotograf: {{large_image?.photographer}}</p>
+			<p *ngIf="large_image.image_description" class="text-center mb-0">{{large_image?.image_description}}</p>
 		</div>
   </div>
 
