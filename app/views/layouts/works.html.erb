@@ -20,6 +20,7 @@
 
   <body>
     <div class="container no-padding-x">
+      <%= render 'cookies_eu/consent_banner', link: '/information-om-cookies', target: "_blank" unless params[:action] == 'information' %>
       <%= alert_notice_helper %>
 			<%= render partial: "admin/navbar" if user_signed_in? %>
       <%= render partial: "shared/masthead" %>

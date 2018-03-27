@@ -48,6 +48,7 @@ gem 'webpacker', '~> 3.0'
 gem 'derailed'
 gem 'normalize-rails'
 gem 'angular_rails_csrf' # Oh my fucking god - if only i knew
+gem 'cookies_eu'
 
 # Heroko tool for memory bloat
 gem 'scout_apm'

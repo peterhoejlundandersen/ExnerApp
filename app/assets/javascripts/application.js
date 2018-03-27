@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require rails-ujs
+//= require cookies_eu
 //= require cocoon
 //= require popper
 //= require bootstrap-sprockets

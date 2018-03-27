@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'errors/show'
 
+  get 'information-om-cookies' => 'static_pages#information'
+
   resources :texts
   get 'danmarkskort' => 'static_pages#danmarkskort'
 	get 'not-yet' => 'static_pages#not_yet', as: :not_yet

@@ -1,0 +1,43 @@
+@import 'imports/mixins';
+
+.cookies-eu.js-cookies-eu {
+    @include flex;
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    @include flex-direction(column);
+    background-color: rgba(255,255,255,0.8);
+    height: 100%;
+    left: 0;
+    width: 100%;
+    top: 0;
+    font-family: "LinLibertine";
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+}
+
+.cookies-eu-content-holder, .cookies-eu-button-holder {
+  font-family: "LinLibertine";
+  background-color: white;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  width: 400px;
+}
+.cookies-eu-content-holder {
+  text-align: left;
+  border: 20px;
+  box-sizing: border-box;
+  padding-top: 20px!important;
+
+}
+
+.cookies-eu .cookies-eu-button-holder {
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.cookies-eu-ok {
+  background-color: black!important;
+}

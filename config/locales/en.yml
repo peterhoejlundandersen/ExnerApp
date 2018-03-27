@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  cookies_eu:
+    cookies_text: "<strong>Velkommen til Inger og Johannes Exners hjemmeside</strong><br> Vi bruger cookies til Google Analytics, så vi kan følge med i hvor mange, der besøger siden. Derudover er det også interessant at se, hvilke værker, som oplever den største opmærksomhed. <br> Ved at trykke 'OK' nedenunder erklærer du dig enig i, at du accepterer vores brug af cookies. Det er nødvendigt for at bruge hjemmesiden."
+    learn_more: "Læs mere"
+    ok: "OK"

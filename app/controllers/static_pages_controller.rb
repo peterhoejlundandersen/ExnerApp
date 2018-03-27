@@ -1,6 +1,10 @@
 class StaticPagesController < ApplicationController
-	before_action :authenticate_user!, except: [:danmarkskort, :frontpage, :about, :get_geo_json]
+	before_action :authenticate_user!, except: [:information, :danmarkskort, :frontpage, :about, :get_geo_json]
 	layout "works", except: [:frontpage]
+
+  def information
+
+  end
 
 	def danmarkskort
 		if params[:id].nil?
@@ -51,6 +55,7 @@ class StaticPagesController < ApplicationController
 			redirect_to root_path, notice: "Noget gik galt!"
 		end
 	end
+
 	def update_frontpage_text
 		@text = FrontpageText.find(params[:id])
 		if @text.update(frontpage_text_params)
@@ -59,7 +64,6 @@ class StaticPagesController < ApplicationController
 			redirect_to root_path, notice: "Noget gik galt!"
 		end
 	end
-
 
 	private
 

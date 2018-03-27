@@ -19,14 +19,17 @@
  *= require videoes
  *= require about
  *= require font-awesome
+ *= require cookies_eu
  *= require dragula.min
  *= require_self
  */
+
 @import "bootstrap";
 @import 'imports/font_calls';  // Corbel, LinLibertine, Linux Libertine C
 @import 'imports/mixins';
 @import 'imports/leaflet';
 @import 'imports/mobile';
+@import 'imports/custom_cookie_design';
 
 .container-yield {
   min-height: 500px;

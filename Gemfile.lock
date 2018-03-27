@@ -91,6 +91,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    cookies_eu (1.6.3)
+      js_cookie_rails
     crass (1.0.3)
     derailed (0.1.0)
       derailed_benchmarks
@@ -175,6 +177,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    js_cookie_rails (2.1.4)
+      railties (>= 3.1)
     json (2.1.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -349,6 +353,7 @@ DEPENDENCIES
   carrierwave-imageoptimizer
   cocoon (~> 1.2, >= 1.2.10)
   coffee-rails (~> 4.2)
+  cookies_eu
   derailed
   devise (~> 4.3)
   dotenv-rails

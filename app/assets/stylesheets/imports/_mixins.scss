@@ -42,6 +42,13 @@
   flex-wrap: $value;
 }
 
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+     -moz-flex-direction: $direction;
+      -ms-flex-direction: $direction;
+          flex-direction: $direction;
+}
+
 @mixin justify-content($value: flex-start) {
   @if $value == flex-start {
     -webkit-box-pack: start;
