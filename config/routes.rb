@@ -45,9 +45,6 @@ Rails.application.routes.draw do
   resources :facts, except: [:show],  path: 'om/facts'
   get 'om/artikler' => 'about#artikler', as: :artikler
   get 'om/tidslinje' => 'about#tidslinje', as: :tidslinje
-  get 'om/haandtegninger' => 'about#haandtegninger', as: :haandtegninger
-  get 'om/livet-i-tre-huse' => 'about#trehuse', as: :tre_huse
-  get 'om/fotos' => 'about#fotos', as: :fotos
   ### END OM ###
 
   #FORSIDE TEKST
