@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <%= render 'cookies_eu/consent_banner', link: '/information-om-cookies', target: "_blank" unless params[:action] == 'information' %>
+    <%= render 'cookies_eu/consent_banner', link: '/information-om-cookies', target: "_blank" unless params[:action] == 'information' || user_signed_in? %>
     <%= yield %>
 
   </body>
