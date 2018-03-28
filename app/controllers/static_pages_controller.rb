@@ -3,10 +3,11 @@ class StaticPagesController < ApplicationController
 	layout "works", except: [:frontpage]
 
   def information
-
+    @meta_title = meta_title "Cookie information"
   end
 
 	def danmarkskort
+    @meta_title = meta_title "Danmarkskort"
 		if params[:id].nil?
 			data = get_geo_json MapInfo.all
 			@no_popup = true
@@ -36,7 +37,7 @@ class StaticPagesController < ApplicationController
 	end
 
 	def about
-		@header_title = "Om Inger & Johannes"
+		@meta_title = meta_title "Om"
 	end
 
 	def new_frontpage_text

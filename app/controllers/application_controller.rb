@@ -1,6 +1,16 @@
 class ApplicationController < ActionController::Base
 	before_action :authenticate_user!, only: :sorting_objects
   protect_from_forgery with: :exception
+  SITE_TITLE = "Inger og Johannes Exner"
+
+  def meta_title title
+    [title, SITE_TITLE].reject(&:empty?).join(" | ")
+  end
+
+  def deparameterize str
+    str.split("-").join("  ").humanize
+  end
+
 
   def sorting_objects
     params[:_json].each do |dataset|

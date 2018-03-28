@@ -3,6 +3,7 @@ class VideosController < ApplicationController
   layout 'works'
 
   def index
+    @meta_title = meta_title "Videoer"
     @videos = Video.all
     #@videos = Video.where(only_link: false)
   end

@@ -12,12 +12,14 @@ class PdfCategoriesController < ApplicationController
 				@cat_headline = "Intro"
 				@text = Text.last
 				@breadcrumb_child = {title: @cat_headline, path: "show_this_pdf_category_path('0')"}
+        @meta_title = meta_title "Johannes' tekster"
 			else
 				@pdf_cat = params[:kategori_id] == "0" ? PdfCategory.first : PdfCategory.friendly.find(params[:kategori_id])
 				@pdf_categories = PdfCategory.not_about
 				@pdfs = user_signed_in? ? @pdf_cat.pdfs : @pdf_cat.pdfs.where.not(show_not: true) # Hvis du er logget ind, så vis alle pdf'er
 				@cat_headline = @pdf_cat.title
 				@breadcrumb_child = {title: @cat_headline, path: "show_this_pdf_category_path('#{@pdf_cat.slug}')"}
+        @meta_title = meta_title @cat_headline
 			end
 			render 'index'
 		end

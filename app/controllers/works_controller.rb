@@ -22,6 +22,7 @@ class WorksController < ApplicationController
   end
 
   def index
+      @meta_title = meta_title deparameterize params[:vaerker_cat]
       if params[:noload] == "true" # Skal ikke vise nogle værker ved besøg af Design siden
         params[:vaerker_cat] = "design"
         set_design_categories params[:vaerker_cat], true #Setting @works, @categories, @category and @onload
@@ -52,6 +53,7 @@ class WorksController < ApplicationController
   end
 
   def design_index
+    @meta_title = meta_title deparameterize params[:vaerker_cat]
     @category = Category.find(params[:vaerker_cat])
     @category_id = "##{@category.id}"
     @works = @category.works
@@ -117,6 +119,7 @@ class WorksController < ApplicationController
   def show
     unless request.format == "json"
       @work = Work.friendly.find(params[:id])
+      @meta_title = meta_title @work.name
       unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
         @first_image_category = @work.image_categories.first
         category = @work.category

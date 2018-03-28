@@ -31,7 +31,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.where.not(id: [15, 18, 13, 21, 22, 23]) # Not design and om categories
-    @header_title = "Oversigt"
+    @meta_title = meta_title "Oversigt"
     logged_in = current_user
     default_categories = get_default_categories
     respond_to do |format|

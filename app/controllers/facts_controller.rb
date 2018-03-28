@@ -32,6 +32,7 @@ class FactsController < ApplicationController
   end
 
   def index
+    @meta_title = meta_title "Fakta"
     @fact = Fact.last
   end
 
