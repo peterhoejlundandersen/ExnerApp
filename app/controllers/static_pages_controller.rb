@@ -25,6 +25,7 @@ class StaticPagesController < ApplicationController
 
 
 	def frontpage
+    @meta_title = meta_title "Egen hjemmeside"
 		if FrontpageText.all.any?
 			@text = FrontpageText.last
 		else
