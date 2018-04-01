@@ -120,6 +120,7 @@ class WorksController < ApplicationController
     unless request.format == "json"
       @work = Work.friendly.find(params[:id])
       @meta_title = meta_title @work.name
+      @meta_description = @work.description
       unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
         @first_image_category = @work.image_categories.first
         category = @work.category
