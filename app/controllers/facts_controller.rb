@@ -1,6 +1,7 @@
 class FactsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   layout 'works'
+
   def index
     @meta_title = meta_title "Fakta"
     @meta_description = "Er en samling af information om uddannelse, arbejde, legater, bogudgivelser, tegnestuens historie og ejerforhold, film og priser."

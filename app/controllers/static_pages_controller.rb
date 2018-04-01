@@ -35,11 +35,6 @@ class StaticPagesController < ApplicationController
 			render layout: "frontpage"
 	end
 
-	def about
-		@meta_title = meta_title "Oms"
-    @meta_description = "Siden 'Om' indeholder Inger og Johannes' personlige tegninger, skitser og historier. Derudover er der i årenes løb blevet produceret en hel del film og artikler om arkitektparret, som også har hjemme her."
-	end
-
 	def new_frontpage_text
 		@text = FrontpageText.new()
 	end
