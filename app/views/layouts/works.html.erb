@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= @meta_title ? @meta_title : ApplicationController::SITE_TITLE %></title>
     <% if @meta_description.present? %>
-      <meta name="description" content="<%= strip_tags(@meta_description) %>" />
+      <meta name="description" content="<%= truncate(strip_tags(@meta_description), length: 159) %>" />
     <% end %>
     <meta name="keywords" content="<%= @seo_keywords %>" />
     <% if content_for? :head %>
