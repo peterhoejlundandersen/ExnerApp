@@ -4,8 +4,8 @@ class VideosController < ApplicationController
 
   def index
     @meta_title = meta_title "Videoer"
+    @meta_description = "Underneden finder du gamle og nyere videoer om arkitektparret. Nogle er egne optagelse, mens andre er lavet af professionelle produktioner såsom f.eks. TV2 Østjylland."
     @videos = Video.all
-    #@videos = Video.where(only_link: false)
   end
 
   def new
