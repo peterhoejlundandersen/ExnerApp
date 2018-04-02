@@ -9,6 +9,9 @@
 
 @import 'imports/font_calls';  // Corbel, LinLibertine, Linux Libertine C
 
+.hide-it {
+  display: none;
+}
 body, html {
 	width: 100%;
 	margin: 0!important;

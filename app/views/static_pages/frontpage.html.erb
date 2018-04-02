@@ -1,5 +1,7 @@
 <div class="indexbackground"><!-- billede -->
-   <img src="<%= image_url('inger-og-johannes-exner.jpg') %>" id="hiddenImage" hidden />
+  <%= image_tag 'inger-og-johannes-exner', id: "hiddenImage", class: "hide-it" %>
+
+  <%# <img src="<%= image_url('inger-og-johannes-exner.jpg') %1>" id="hiddenImage" hidden /> %>
 </div>
   <script>
     $("#hiddenImage").on('load', function() {
