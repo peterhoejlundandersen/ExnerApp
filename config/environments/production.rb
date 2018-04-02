@@ -5,6 +5,11 @@ Rails.application.configure do
   # Eager load code on boot. This eager loads most of Rails and
 	config.exceptions_app = self.routes
 
+  # DEVISE - TO USE HTTPS
+  config.to_prepare { Devise::SessionsController.force_ssl }
+  config.to_prepare { Devise::RegistrationsController.force_ssl }
+  config.to_prepare { Devise::PasswordsController.force_ssl }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
