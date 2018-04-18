@@ -259,7 +259,6 @@ export class WorkShowComponent implements OnInit {
 	}
 
   changeLargeImage = function(i) {
-    debugger;
     if (this.thumb_images[i] && this.large_image.id === this.thumb_images[i].id) { return; };// If the same image is clicked in the thumbnails that is shown
     this.image_loading = true;
     if (this.thumb_images[i]) { // If the index is inside the scope - normal change
