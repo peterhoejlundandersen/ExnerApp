@@ -123,6 +123,7 @@ class WorksController < ApplicationController
       @meta_description = @work.description if @work.description.present?
       unless @work.image_categories.first.nil?# Når et værk bliver oprettet uden billedekategori, så får den nil i .first
         @first_image_category = @work.image_categories.first
+        @meta_image_url = @first_image_category.images.first #used for facebook og:image tag
         category = @work.category
         @breadcrumb_parent = {title: category.name, path: "vaerker_path('#{category.slug}')"}
         @breadcrumb_child = {title: @work.name, path: "work_path('#{@work.friendly_id}')" }

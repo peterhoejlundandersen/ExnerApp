@@ -32,17 +32,17 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
       <div class="image-desc-wrapper">
         <div src="#" *ngIf="image_loading" class="loading"></div>
         <img [hidden]="image_loading" (load)="onImageLoad()" [attr.src]="large_image.image.url" id="largeImage">
-        <div *ngIf="image_cats?.length > 1 || thumb_images.length > 1" class="work-arrows ar-hidden-md-down large-arrow-left" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
-        <div *ngIf="image_cats?.length > 1 || thumb_images.length > 1" class="work-arrows ar-hidden-md-down large-arrow-right" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
+        <div *ngIf="image_cats?.length > 1 || thumb_images?.length > 1" class="work-arrows ar-hidden-md-down large-arrow-left" id="leftArrow" (click)="changeLargeImage(image_index - 1)"></div>
+        <div *ngIf="image_cats?.length > 1 || thumb_images?.length > 1" class="work-arrows ar-hidden-md-down large-arrow-right" id="rightArrow" (click)="changeLargeImage(image_index + 1)"></div>
       </div>
     </div>
-		<div *ngIf="!image_loading && (large_image.image_description || large_image.photographer)" class="image-description">
-			<p *ngIf="large_image.photographer" class="text-center mb-0">Fotograf: {{large_image?.photographer}}</p>
+		<div *ngIf="!image_loading && (large_image?.image_description || large_image?.photographer)" class="image-description">
 			<p *ngIf="large_image.image_description" class="text-center mb-0">{{large_image?.image_description}}</p>
+			<p *ngIf="large_image.photographer" class="text-center mb-0 fotografi-tekst">Foto: {{large_image?.photographer}}</p>
 		</div>
   </div>
 
-  <div *ngIf="image_cats?.length > 1 || thumb_images.length > 1" class="row next-prev-back-wrapper ar-hidden-md-up">
+  <div *ngIf="image_cats?.length > 1 || thumb_images?.length > 1" class="row next-prev-back-wrapper ar-hidden-md-up">
     <div class="col-6 nav-link" (click)="changeLargeImage(image_index - 1)">
         <span class="pagination-arrows prev-work"></span>
 				<span>Forrige billede</span>
@@ -83,7 +83,7 @@ import { DragulaService } from 'ng2-dragula/ng2-dragula';
 				</div>
 			</div>
 		</div>
-		<div *ngIf="image_cats.length < 2" class="nav-link hidden-md-up">
+		<div *ngIf="image_cats?.length < 2" class="nav-link hidden-md-up">
 			<div class="nav-link text-center">Alle</div>
 		</div>
 		<div *ngIf="!logged_in" class="image-cat-wrapper">
