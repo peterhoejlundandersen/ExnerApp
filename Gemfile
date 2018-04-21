@@ -13,6 +13,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
@@ -50,6 +51,5 @@ gem 'normalize-rails'
 gem 'angular_rails_csrf' # Oh my fucking god - if only i knew
 gem 'cookies_eu'
 gem 'sitemap_generator'
-
 # Heroko tool for memory bloat
 gem 'scout_apm'

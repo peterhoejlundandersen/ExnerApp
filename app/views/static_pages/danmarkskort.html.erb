@@ -20,7 +20,9 @@
 
 var map_data = <%= @json_data.html_safe %>;
 var mymap = L.map('danmarkskort', {
-	scrollWheelZoom: false // Så man ikke kan scrolle med musen!
+	scrollWheelZoom: true, // Så man ikke kan scrolle med musen!
+  touchZoom: true,
+  dragging: !L.Browser.mobile
 }).setView([55.861948, 10.624085], 7.6);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
