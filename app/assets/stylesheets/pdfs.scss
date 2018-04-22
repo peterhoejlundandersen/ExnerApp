@@ -26,13 +26,16 @@ $btn-size: 50px;
     border: 1px solid transparent;
     background-color: white;
     cursor: pointer;
-    font-size: 28px;
+    font-size: 38px;
+    line-height: 43px;
+    font-weight: 100;
     height: $btn-size;
     margin: 0 4px;
     text-align: center;
     width: $btn-size;
     @media screen and (max-width: $tablet) {
-      border: 1px solid black;
+      background-color: black;
+      color: white;
     }
     &:hover {
         background-color: lighten(black, 30%);
