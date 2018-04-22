@@ -12,7 +12,7 @@ require "action_cable/engine"
 require "sprockets/railtie"
 
 if Rails.env.development?
-	require "dotenv"
+require "dotenv"
 end
 # require "rails/test_unit/railtie"
 
@@ -22,18 +22,28 @@ Bundler.require(*Rails.groups)
 
 module ExnerApp
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+  # Initialize configuration defaults for originally generated Rails version.
+  config.load_defaults 5.1
 
 
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    # Så jeg kan loade fonts
+  config.assets.paths << Rails.root.join("app", "assets", "fonts")
+  # Så jeg kan loade fonts
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
-
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+  # To fix rails app No 'Access-Control-Allow-Origin'
+  Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'http://localhost:3000/'
+      resource '*',
+        headers: :any,
+        methods: %i(get post put patch delete options head)
+    end
   end
+
+# Settings in config/environments/* take precedence over those specified here.
+# Application configuration should go into files in config/initializers
+# -- all .rb files in that directory are automatically loaded.
+
+# Don't generate system test files.
+config.generators.system_tests = nil
+end
 end

@@ -2,12 +2,43 @@
 @import 'bootstrap';
 @import 'imports/font_calls';
 @import 'imports/mixins';
-@import 'imports/mixins';
 @import 'imports/arrows';
 
 body, html {
 	height: 100%;
 	width: 100%;
+}
+
+$btn-size: 50px;
+
+.zoom-btn-wrapper {
+  @include flex;
+  @include flex-direction(flex-end);
+  @include align-items(center);
+  @include justify-content(center);
+  bottom: 10px;
+  position: fixed;
+  right: 10px;
+  z-index: 99999;
+  .zoom-btn {
+    @include border-radius(100%);
+    @include transition(.4s ease-out all);
+    border: 1px solid transparent;
+    background-color: white;
+    cursor: pointer;
+    font-size: 28px;
+    height: $btn-size;
+    margin: 0 4px;
+    text-align: center;
+    width: $btn-size;
+    @media screen and (max-width: $tablet) {
+      border: 1px solid black;
+    }
+    &:hover {
+        background-color: lighten(black, 30%);
+        color: white;
+    }
+  }
 }
 
 .pdf-container {

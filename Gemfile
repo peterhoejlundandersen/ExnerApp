@@ -51,5 +51,6 @@ gem 'normalize-rails'
 gem 'angular_rails_csrf' # Oh my fucking god - if only i knew
 gem 'cookies_eu'
 gem 'sitemap_generator'
-# Heroko tool for memory bloat
-gem 'scout_apm'
+
+# To fix rails app No 'Access-Control-Allow-Origin' error 
+gem 'rack-cors', :require => 'rack/cors'

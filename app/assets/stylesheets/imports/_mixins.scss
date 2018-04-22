@@ -108,12 +108,13 @@
 }
 /* COLUMN END */
 
-@mixin calc($property, $expression) {
-  #{$property}: -moz-calc(#{$expression});
-  #{$property}: -webkit-calc(#{$expression});
-  #{$property}: calc(#{$expression});
+@mixin calc($property, $expression, $unit) {
+  #{$property}: -moz-calc(#{$expression})$unit;
+  #{$property}: -webkit-calc(#{$expression})$unit;
+  #{$property}: calc(#{$expression})$unit;
 }
 
+$tablet: 768px;
 $breakpoints: (
 "phone":        400px,
 "phone-wide":   480px,

@@ -1,11 +1,15 @@
-<% content_for :custom_calls do %>
-<% end %>
-
 <% content_for :title do %>
-	<title><%= "Johannes' værker | #{@header_title}" %></title>
+  <% if "andres-tekster" == params[:pdf_category_id] %>
+    <title><%= "Artikler af andre forfattere | #{@header_title}" %></title>
+  <% elsif "andres-tekster-andre-sprog" == params[:pdf_category_id] %>
+    <title><%= "Andre sprog | #{@header_title}" %></title>
+  <% else %>
+    <title><%= "Johannes' værker | #{@header_title}" %></title>
+  <% end %>
 <% end %>
 
 <%= javascript_pack_tag 'pdf_show' %>
+
 <span id="pdfId" data-path="<%= @pdf.file %>" hidden></span>
 
 <div class="back-button row remove-margin">
@@ -28,7 +32,7 @@
 </div>
 
 <div class="pdf-container">
-  <pdfjs-viewer src="<%= @pdf.file %>"></pdfjs-viewer>
+  <pdf-show></pdf-show>
 </div>
 
 

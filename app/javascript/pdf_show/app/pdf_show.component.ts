@@ -1,24 +1,39 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
 import { Http, HttpModule, Response, Headers, RequestOptions } from '@angular/http';
-import { pdfjsViewer } from "angular-pdfjs-viewer";
+
+const DEFAULT_ZOOM:number = 1;
 
 @Component({
-  selector: 'pdfjs-viewer',
-  template: `<pdfjs-viewer src="{{ pdf.src }}></pdfjs-viewer>`
+  selector: 'pdf-show',
+  template: ` 
+
+  <div class="zoom-btn-wrapper">
+    <span class="zoom-btn zoom-in" (click)="zoomIn()">+</span>
+    <span class="zoom-btn zoom-out" (click)="zoomOut()">-</span>
+  </div>
+  <pdf-viewer 
+    [src]="pdfSrc" 
+    [render-text]="true" 
+    style="display: block;" 
+    [fit-to-page]="true"
+    [zoom]="zoom_int"></pdf-viewer> `
 })
 
 export class PdfShowComponent implements OnInit {
-  pdf: Object
+  public pdfSrc: string;
+  public zoom_int: number = DEFAULT_ZOOM;
   
-  constructor(
-  private _http: Http,
-  ){ }
-
   ngOnInit() {
     var file_path = document.getElementById('pdfId').getAttribute('data-path');
-    console.log(file_path);
-    this.pdf = { src: "https://exnerbilleder.s3.eu-west-2.amazonaws.com/pdf/Kirkeforhold/1965.2%20Kirkebygningens%20indre%20og%20ydre%20enhed%20-%20Kirkebygning%20og%20teologi.pdf" }
+    this.pdfSrc  = file_path;
+  }
+
+  zoomIn = function() {
+    this.zoom_int += 0.1;
+  }
+  zoomOut = function() {
+    this.zoom_int -= 0.1;
   }
 }
 
