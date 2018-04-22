@@ -147,6 +147,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-pdfjs-viewer@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/angular-pdfjs-viewer/-/angular-pdfjs-viewer-2.0.1.tgz#2a7615729fd40bdff4d6f1de555c98e9a112e0c7"
+  dependencies:
+    bower "^1.8.2"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
@@ -929,6 +935,10 @@ boom@5.x.x:
 bootstrap@3:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+
+bower@^1.8.2:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/bower/-/bower-1.8.4.tgz#e7876a076deb8137f7d06525dc5e8c66db82f28a"
 
 brace-expansion@^1.1.7:
   version "1.1.8"

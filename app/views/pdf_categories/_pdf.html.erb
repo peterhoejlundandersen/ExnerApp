@@ -2,8 +2,8 @@
   <% if pdf.show_not %>
     <small>Bliver ikke vist til besøgende</small>
   <% end%>
-    <%= link_to pdf.file, target: "_blank" do %>
-    <%# <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do  GAMLE LINK TO TIL pdfs/show.html.erb %>
+    <%# <%= link_to pdf.file, target: "_blank" do %1> %>
+    <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
       <%= content_tag :div, (image_tag pdf.image.thumb.url), class:"img-wrapper" unless pdf.image.thumb.url.nil? %>
       <p class="pdf-title">
         <%= "#{pdf.date.strftime("%Y")} <br>".html_safe unless pdf.date.nil? %>
