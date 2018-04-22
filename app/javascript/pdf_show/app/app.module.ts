@@ -9,7 +9,7 @@ import { PdfShowComponent } from './pdf_show.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpModule
   ],
   bootstrap: [ PdfShowComponent ]
 })

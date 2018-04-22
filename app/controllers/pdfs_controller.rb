@@ -5,13 +5,13 @@ class PdfsController < ApplicationController
 
   def show
     pdf_viewer = "/pdfjs/web/viewer.html?file="
-    pdf = Pdf.friendly.find(params[:id])
-    @pdf_category = pdf.pdf_category
+    @pdf = Pdf.friendly.find(params[:id])
+    @pdf_category = @pdf.pdf_category
     pdfs = @pdf_category.pdfs.where.not(show_not: true)
-    @prev_pdf, @next_pdf = get_next_and_previous_pdf(pdfs, pdf)
-    @pdf_url = pdf_viewer + pdf.file
-    @pdf_file_url = pdf.file # For printinh
-    @header_title = pdf.title
+    @prev_pdf, @next_pdf = get_next_and_previous_pdf(pdfs, @pdf)
+    @pdf_url = pdf_viewer + @pdf.file
+    @pdf_file_url = @pdf.file # For printinh
+    @header_title = @pdf.title
   end
 
   def get_next_and_previous_pdf(pdfs, current_pdf)

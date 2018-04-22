@@ -7,7 +7,8 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.paths << Emoji.images_path
 # Add Yarn node_modules folder to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join('node_modules')
-Rails.application.config.assets.precompile += %w( works.scss frontpage.scss work_images.js works.js html.sortable.js pdfs font_calls about.scss, pdfs.scss)
+
+Rails.application.config.assets.precompile += %w( works.scss frontpage.scss work_images.js works.js html.sortable.js pdfs font_calls about.scss, pdfs.scss angular-pdfjs-viewer/bower_components/pdf.js-viewer/viewer.css angular-pdfjs-viewer/bower_components/pdf.js-viewer/pdf.js)
 
 Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path| # Subdirectories are added to images assets path
   Rails.application.config.assets.paths << path

@@ -1,20 +1,12 @@
+<% content_for :custom_calls do %>
+<% end %>
+
 <% content_for :title do %>
 	<title><%= "Johannes' værker | #{@header_title}" %></title>
 <% end %>
 
-<pdf-show></pdf-show>
 <%= javascript_pack_tag 'pdf_show' %>
-
-
-
-
-
-
-
-
-
-
-
+<span id="pdfId" data-path="<%= @pdf.file %>" hidden></span>
 
 <div class="back-button row remove-margin">
 	<div class="col-md-12 nav-link text-center">
@@ -35,8 +27,8 @@
 	</div>
 </div>
 
-<iframe src="<%= @pdf_url %>" class="pdf-iframe" frameborder="0" scrolling="no" crossorigin="anonymous">
-</iframe> 
-
-
+<div class="pdfjs"></div>
+<div class="pdf-container">
+  <pdfjs-viewer src="<%= @pdf.file %>"></pdfjs-viewer>
+</div>
 
