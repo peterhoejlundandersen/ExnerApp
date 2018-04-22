@@ -5,8 +5,8 @@
 	<title><%= "Johannes' værker | #{@header_title}" %></title>
 <% end %>
 
-<%= javascript_pack_tag 'pdf_show' %>
-<span id="pdfId" data-path="<%= @pdf.file %>" hidden></span>
+<%# <%= javascript_pack_tag 'pdf_show' %1> %>
+<%# <span id="pdfId" data-path="<%= @pdf.file %1>" hidden></span> %>
 
 <div class="back-button row remove-margin">
 	<div class="col-md-12 nav-link text-center">
@@ -27,8 +27,18 @@
 	</div>
 </div>
 
-<div class="pdfjs"></div>
 <div class="pdf-container">
+  <pdfs-wrapper></pdfs-wrapper>
   <pdfjs-viewer src="<%= @pdf.file %>"></pdfjs-viewer>
 </div>
+
+<script>
+  angular.module('app', ['pdfjsViewer']);
+
+  angular.module('app').controller('AppCtrl', function($scope) {
+      $scope.pdf = {
+        src: "<%= @pdf.file %>"
+      };
+  });
+</script>
 

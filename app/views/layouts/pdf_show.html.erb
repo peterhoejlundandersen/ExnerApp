@@ -14,8 +14,15 @@
     <% if content_for? :custom_calls %>
       <%= yield :custom_calls %>
     <% end %>
+
+    <%= javascript_include_tag "angular-pdfjs-viewer/bower_components/pdf.js-viewer/pdf.js" %>
+    <%= stylesheet_link_tag "angular-pdfjs-viewer/bower_components/pdf.js-viewer/viewer.css" %>
+    <%= javascript_include_tag "angular-pdfjs-viewer/bower_components/angular/angular.js" %>
+    <%= javascript_include_tag "angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js" %>
+
     <%= stylesheet_link_tag    "pdfs" %>
     <%= csrf_meta_tags %>
+
   </head>
   <body>
 		<div class="pdf-container">
