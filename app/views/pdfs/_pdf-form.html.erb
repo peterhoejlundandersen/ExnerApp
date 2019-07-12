@@ -7,16 +7,31 @@
 	</div>
 <div class="row mt-4">
   <div class="offset-md-2 col-md-8">
+    <h2>Oprettelse af artikel</h2>
+    <br>
     <%= form_for [@pdf_category, @pdf] do |f| %>
-      <div class="form-group text-center">
+      <div class="form-group">
+          "Andres tekster" og "Andres tekster - andet sprog" bliver vist under Om Inger og Johannes.<br>
+          De resterende bliver vist under Johannes' Tekster.
+          <br><br>
         <label class="btn btn-secondary">
-          Vælg kategori:
+          Vælg kategori: 
           <%= f.collection_select(:pdf_category_id, @categories, :id, :title) %>
         </label>
       </div>
       <hr>
+      <div class="form-field">
+        Her indsættes URL'en til den fil, der er blevet uploadet på Amazon. <br>
+        Midlertidig løsning.
+        <br><br>
+        <%= f.label :file, "Fil URL fra Amazon S3:" %>
+        <%= f.text_field :file, style: "width: 100%" %>
+      </div>
+      <hr>
       <%= image_tag @pdf.image.url if @pdf.image.url %>
       <div class="row"></div>
+      Vælg billede, som skal vises på oversigten. Skal være JPEG og mindre end 500 px i bredde.
+      <br><br>
       <label class="btn btn-primary" style="cursor: pointer;">
         <% if @pdf.image.url %>
           Upload nyt billede
@@ -25,13 +40,14 @@
         <% end %>
         <%= f.file_field :image, style: "display: none" %>
       </label>
+      <hr>
 
-      <div class="form-field text-center">
+      <div class="form-field">
         <%= f.label :title, "Titel:" %>
         <%= f.text_field :title, style: "width: 100%" %>
       </div>
       <hr>
-      <div class="form-field text-center">
+      <div class="form-field">
         <%= f.label :date, "Vælg år" %>
         <% if @pdf.date.nil? %>
           <%= f.select :date, (Date.today.year-70)..(Date.today.year), :selected => @pdf.date, :include_blank => '-intet-valgt-' %>
@@ -42,7 +58,9 @@
 
       <hr>
       <div class="form-field">
-        <%= f.label :show_not, "Vis ikke" %><br>
+        Ønsker du at fjerne artiklen for de besøgende?
+        <br>
+        <%= f.label :show_not, "Vis ikke" %>
         <%= f.check_box :show_not, {class: "form-control"}, "true", "false"  %>
       </div>
 
