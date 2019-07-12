@@ -1,7 +1,9 @@
 	<div class="text-center">
-		<%= link_to "Slet PDF", pdf_category_pdf_path(@pdf_category, @pdf),
-			method: :delete, class: "d-inline mb-4 btn btn-danger",
-			data: {confirm: "Er du sikker på, at du vil slette dette? Det kan IKKE laves om."} %>
+    <% if @pdf.id? %>
+      <%= link_to "Slet PDF", pdf_category_pdf_path(@pdf_category, @pdf),
+        method: :delete, class: "d-inline mb-4 btn btn-danger",
+        data: {confirm: "Er du sikker på, at du vil slette dette? Det kan IKKE laves om."} %>
+    <% end %>
 	</div>
 <div class="row mt-4">
   <div class="offset-md-2 col-md-8">

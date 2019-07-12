@@ -41,7 +41,10 @@ class PdfsController < ApplicationController
   end
 
   def new
-    @pdf_category = PdfCategory.find(params[:pdf_category_id])
+    binding.pry
+    # Hvorfor skal det skrives sådan her? Der må være noget galt med FriendlyId!
+    @categories = PdfCategory.all # To show all categories in select
+    @pdf_category = PdfCategory.where(slug: params[:pdf_category_id]).first
     @pdf = Pdf.new()
 		render 'new', layout: 'works'
   end
