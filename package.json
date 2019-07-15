@@ -1,6 +1,9 @@
 {
   "name": "ExnerApp",
   "private": true,
+  "engines": {
+    "node": "7.x"
+  },
   "dependencies": {
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.0.1",
