@@ -2,7 +2,7 @@
   "name": "ExnerApp",
   "private": true,
   "engines": {
-    "node": "7.x"
+    "node": "8.1.x"
   },
   "dependencies": {
     "@angular/common": "^5.2.0",
