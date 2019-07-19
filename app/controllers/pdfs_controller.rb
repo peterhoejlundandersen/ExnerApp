@@ -44,7 +44,7 @@ class PdfsController < ApplicationController
     # Hvorfor skal det skrives sådan her? Der må være noget galt med FriendlyId!
     @categories = PdfCategory.all # To show all categories in select
     # Always first pdfCategory - routes er lidt fucked up, når man skal oprette et nyt værk - den krævet et pdfs_category
-    # Gemmer den man vælger
+    # gemmer den man vælger
     @pdf_category = PdfCategory.first
     @pdf = Pdf.new()
 		render 'new', layout: 'works'
@@ -65,7 +65,7 @@ class PdfsController < ApplicationController
     @pdf = Pdf.new(pdf_params)
     @pdf.date = Time.new(params[:pdf][:date].to_i) unless params[:pdf][:date].empty?
     if @pdf.save
-      flash[:notice] = "Din artikel blev gemt"
+      flash[:notice] = "\"#{@pdf.title}\" blev gemt"
       redirect_to show_this_pdf_category_path(@pdf.pdf_category_id)
     else
       flash.now[:alert] = "Noget gik galt, prøv igen"
@@ -76,6 +76,6 @@ class PdfsController < ApplicationController
   private
 
   def pdf_params
-    params.require(:pdf).permit(:title, :pdf_category_id, :image, :show_not, :date)
+    params.require(:pdf).permit(:title, :pdf_category_id, :image, :show_not, :date, :file)
   end
 end
