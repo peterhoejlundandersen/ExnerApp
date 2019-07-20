@@ -1,0 +1,25 @@
+<center>
+<% flash.each do |key, value| %>
+  <div class="notice alert-<%= key %>"><b><%= value %></b></div>
+  <br>
+<% end %>
+
+<h6 class="text-center">Søg</h6>
+
+<%= form_tag(soeg_path, method: :get) do %>
+  <div class="info-beskrivelse">Søg efter værker og artikler</div><br>
+  <%= text_field_tag :q, params[:q] %><br>
+  <br>
+  <%= submit_tag 'Søg' %>
+<% end %>
+
+<% if @works.any? %>
+  <% @works.each do |work| %>
+    <hr>
+      <%= link_to work.name, work_path(work.id) %><br>
+      <small><%= work.category.name %></small><% binding.pry %><br>
+      <small><small><%= work.opening_year.nil? ?  "" : work.opening_year %></small></small>
+  <% end %>
+<% end %>
+
+</center>

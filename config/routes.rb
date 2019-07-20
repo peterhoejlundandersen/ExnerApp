@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'errors/show'
 
+  get 'soeg' => 'search#search'
+
   get 'information-om-cookies' => 'static_pages#information'
 
   resources :texts
