@@ -4,7 +4,6 @@ import { Http, HttpModule, Response, Headers, RequestOptions } from '@angular/ht
 import { ImageService } from './image.service';
 import { ImageNavigatorService } from './image_navigator.service';
 import { ImageCat } from './image_cat';
-
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component({

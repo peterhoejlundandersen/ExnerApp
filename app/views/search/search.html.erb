@@ -1,0 +1,19 @@
+<h1>Søg efter værker og artikler</h1>
+
+<%= form_for search_path, method: :get do |f| %>
+  <p>
+    <%= f.label "Søg" %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag "Søg", name: nil %>
+  </p>
+<% end %>
+
+<ul>
+  <% @works.each do |work| %>
+    <li>
+      <h3>
+        <%= work.title %>
+      </h3>
+    </li>
+  <% end %>
+</ul>

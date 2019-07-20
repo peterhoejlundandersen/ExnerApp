@@ -32,6 +32,10 @@ group :development do
   gem 'heroku-deflater'
 end
 
+# Search function
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
 gem 'fog-aws'

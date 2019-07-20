@@ -1,4 +1,8 @@
+require 'elasticsearch/model'
+
 class Work < ActiveRecord::Base
+  include Searchable
+
 	extend FriendlyId
 	friendly_id :name, use: :slugged
 	mount_uploader :overview_img, OverviewUploader
@@ -13,4 +17,15 @@ class Work < ActiveRecord::Base
 	accepts_nested_attributes_for :infos, allow_destroy: true
 
 	default_scope { order(position: :asc)}
+
+  # For concern Searchable in the top!
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :sagsnr
+      indexes :name
+      indexes :description
+      indexes :opening_year
+    end
+  end
 end
+
