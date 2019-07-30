@@ -1,7 +1,4 @@
-require 'elasticsearch/model'
-
 class Work < ActiveRecord::Base
-  include Searchable
 
 	extend FriendlyId
 	friendly_id :name, use: :slugged
@@ -18,14 +15,5 @@ class Work < ActiveRecord::Base
 
 	default_scope { order(position: :asc)}
 
-  # For concern Searchable in the top!
-  settings index: { number_of_shards: 1 } do
-    mappings dynamic: 'false' do
-      indexes :sagsnr
-      indexes :name
-      indexes :description
-      indexes :opening_year
-    end
-  end
 end
 

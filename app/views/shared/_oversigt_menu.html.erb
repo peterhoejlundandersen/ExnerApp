@@ -5,6 +5,8 @@
     %>
 		<%= link_to "Danmarkskort", danmarkskort_path(),
 			class: "menu-same-line nav-link #{active_helper? danmarkskort_path()}" %>
+		<%= link_to "Søg", soeg_path(),
+			class: "nav-link #{active_helper? soeg_path()}" %>
   </div>
   <div class="oversigt-menu">
     <%= link_to "Kirker og sognegårde", vaerker_path("Kirker og sognegårde".parameterize),

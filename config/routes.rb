@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   get 'errors/show'
 
-  #Search function
-  get 'search', to: 'search#search'
-
+  get 'soeg' => 'search#search'
 
   get 'information-om-cookies' => 'static_pages#information'
 

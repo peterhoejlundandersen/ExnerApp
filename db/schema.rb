@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114095428) do
+ActiveRecord::Schema.define(version: 20190730160735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20180114095428) do
     t.string "image"
     t.integer "position"
     t.boolean "show_not", default: false
+    t.integer "opening_year"
     t.index ["pdf_category_id"], name: "index_pdfs_on_pdf_category_id"
     t.index ["slug"], name: "index_pdfs_on_slug", unique: true
   end
