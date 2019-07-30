@@ -13,7 +13,8 @@
   <%= submit_tag 'Søg' %>
 <% end %>
 
-<% if @works.any? %>
+<% if !@works.nil? && @works.any? %>
+  <h2 class="pt-4 mt-4"><center>Resultat:</center></h2>
   <% @works.each do |work| %>
     <hr>
       <%= link_to work.name, work_path(work.id) %><br>
