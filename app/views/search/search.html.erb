@@ -28,10 +28,8 @@
   <h1 class="pt-4 mt-4"><center>Artikler:</center></h1>
   <% @articles.each do |pdf| %>
     <hr>
-    <%# <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %1> %>
-      <%# <%= content_tag :div, (image_tag pdf.image.thumb.url), class:"img-wrapper" unless pdf.image.thumb.url.nil? %1> %>
       <%= link_to pdf.title, pdf_category_pdf_path(pdf.pdf_category, pdf) %><br>
-      <small><%= pdf.pdf_category.title %></small><br>
+      <small><%= link_to pdf.pdf_category.title, show_this_pdf_category_path(pdf.pdf_category.friendly_id) %></small><br>
       <small><small><%= pdf.opening_year unless pdf.opening_year.nil? %></small></small>
     <%# <% end %1> %>
   <% end %>
