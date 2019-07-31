@@ -31,7 +31,6 @@
       <%= link_to pdf.title, pdf_category_pdf_path(pdf.pdf_category, pdf) %><br>
       <small><%= link_to pdf.pdf_category.title, show_this_pdf_category_path(pdf.pdf_category.friendly_id) %></small><br>
       <small><small><%= pdf.opening_year unless pdf.opening_year.nil? %></small></small>
-    <%# <% end %1> %>
   <% end %>
 
 <% end %>
