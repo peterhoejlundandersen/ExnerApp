@@ -1,7 +1,12 @@
 {
-  "0-c5b8de5eb42004ede838.chunk.js": "/packs/0-c5b8de5eb42004ede838.chunk.js",
-  "categories_index.js": "/packs/categories_index-11ce0fdb42f104e369c1.js",
-  "pdf_show.js": "/packs/pdf_show-1e67a7e1dc7fce3de078.js",
-  "work_show.js": "/packs/work_show-c169556ff8055c6031da.js",
-  "works_index.js": "/packs/works_index-b823a5c50b84298c6f8d.js"
+  "0-e0e7956ec9ccce4bf4ab.chunk.js": "/packs/0-e0e7956ec9ccce4bf4ab.chunk.js",
+  "0-e0e7956ec9ccce4bf4ab.chunk.js.map": "/packs/0-e0e7956ec9ccce4bf4ab.chunk.js.map",
+  "categories_index.js": "/packs/categories_index-61799e89fe7ab627344d.js",
+  "categories_index.js.map": "/packs/categories_index-61799e89fe7ab627344d.js.map",
+  "pdf_show.js": "/packs/pdf_show-2eb2253b38dd2e2a970e.js",
+  "pdf_show.js.map": "/packs/pdf_show-2eb2253b38dd2e2a970e.js.map",
+  "work_show.js": "/packs/work_show-d27b2ef4043775c3baa0.js",
+  "work_show.js.map": "/packs/work_show-d27b2ef4043775c3baa0.js.map",
+  "works_index.js": "/packs/works_index-911cfc31eb5edcd060c7.js",
+  "works_index.js.map": "/packs/works_index-911cfc31eb5edcd060c7.js.map"
 }

@@ -1,0 +1,27 @@
+[{
+  "id": 1,
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [10.016423,56.466837,]
+  },
+  "properties": {
+  	"color": "#111111",
+    "description": "Der var engang en kirke, den var smuk.",
+    "name": "Sct. Clements Kirke"
+  },
+},
+{
+  "id": 2,
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [11.016423,56.466837,]
+  },
+  "properties": {
+  	"color": "#111111",
+    "description": "Jeg er en anden kirke.",
+    "name": "Smuk kirke",
+    "link": "http://inger-exner.herokuapp.com/works/09-sct-clemens-kirke-4f736889-dad0-42fa-9dd8-ee0a9a66a465"
+  },
+}]
