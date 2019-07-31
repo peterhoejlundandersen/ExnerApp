@@ -33,8 +33,8 @@ group :development do
 end
 
 # Search function
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+# gem 'elasticsearch-model'
+# gem 'elasticsearch-rails'
 
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave'
