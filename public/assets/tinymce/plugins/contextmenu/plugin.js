@@ -1,1 +1,1 @@
-!function(n){"use strict";var o=tinymce.util.Tools.resolve("tinymce.PluginManager");!function e(){o.add("contextmenu",function(){n.console.warn("Context menu plugin is now built in to the core editor, please remove it from your editor configuration")})}()}(window);
+plugin-d27c2327d9189ca1ba598ab4be1af128e348284a313d70174bd5edd260342fa3.js
