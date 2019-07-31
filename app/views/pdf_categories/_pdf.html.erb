@@ -6,8 +6,9 @@
     <%= link_to pdf_category_pdf_path(pdf.pdf_category, pdf)  do %>
       <%= content_tag :div, (image_tag pdf.image.thumb.url), class:"img-wrapper" unless pdf.image.thumb.url.nil? %>
       <p class="pdf-title">
-        <%= "#{pdf.date.strftime("%Y")} <br>".html_safe unless pdf.date.nil? %>
-      <%= pdf.title %></p>
+        <%= pdf.opening_year unless pdf.opening_year.nil? %><br>
+        <%= pdf.title %>
+      </p>
     <% end %>
   <%= link_to "Rediger", edit_pdf_category_pdf_path(pdf.pdf_category, pdf), class: "btn btn-secondary" if user_signed_in? %>
 </div>
