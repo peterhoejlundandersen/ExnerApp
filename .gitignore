@@ -4,6 +4,7 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 # For secrets
+# Ignore encrypted secrets key file.
 config/secrets.yml.key
 
 # Ignore bundler config.
@@ -30,5 +31,3 @@ config/application.yml
 # git rm -r --cached . (Fjerner alt cached, så git add . kan starte forfra)/public/packs
 /public/packs-test
 
-# Ignore encrypted secrets key file.
-config/secrets.yml.key
