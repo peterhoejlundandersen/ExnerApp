@@ -2,6 +2,7 @@ class AboutController < ApplicationController
   layout 'works'
   before_action :set_parent_breadcrumb
 
+
   def index
     @meta_title = meta_title "Om"
     @meta_description = "Siden 'Om' indeholder Inger og Johannes' personlige tegninger, skitser og historier. Derudover er der i årenes løb blevet produceret en hel del film og artikler om arkitektparret, som også har hjemme her."
