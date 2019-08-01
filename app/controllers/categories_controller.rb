@@ -57,13 +57,13 @@ class CategoriesController < ApplicationController
   def get_default_categories
     default_categories =
 			{
-       image: view_context.image_path('johannes-tekster'),
+       image: view_context.image_path('johannes-tekster.png'),
        slug: "johannes-exners-tekster/0",
        name: "Johannes' tekster",
        id: 999 # For image load in angular
       },
       {
-       image: view_context.image_path('om-inger-og-johannes'),
+       image: view_context.image_path('om-inger-og-johannes.jpg'),
        slug: "om",
        name: "Om Inger og Johannes",
        id: 9999 # For image load in angular
